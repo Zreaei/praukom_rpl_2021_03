@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::create('verifikator', function (Blueprint $table) {
+            $table->char('id_verifikator', 6)->primary()->nullable(false);
+            $table->char('user', 6)->nullable(false);
+            $table->string('nama_verifikator', 50)->nullable(false);
+
+            $table->foreign('user')->references('id_user')->on('user')->cascadeOnDelete();
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('verifikator');
     }
 };
