@@ -27,34 +27,41 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layouts/app');
 });
-// Admin - home
-Route::get('/adminhome', [AdminController::class, 'home']);
+// Admin
+Route::get('/admin/home', [AdminController::class, 'home']);
 
-// Operator - home
+// Operator
 Route::get('/operator/home', [OperatorController::class, 'home']);
+Route::get('/operator/profile', [OperatorController::class, 'profile']);
+Route::get('/operator/siswa', [OperatorController::class, 'siswa']);
+Route::get('/operator/siswa/tambah',[OperatorController::class,'formTambah']);
+Route::post('/operator/siswa/simpan',[OperatorController::class,'simpan']);
+Route::get('/operator/siswa/edit/{id}',[OperatorController::class,'edit']);
+Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpan']);
+Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapus']);
 
-// Siswa - home
+// Siswa
 Route::get('/siswa/home', [SiswaController::class, 'home']);
 
-// Pbsekolah - home
+// Pbsekolah
 Route::get('/pbsekolah/home', [PbsekolahController::class, 'home']);
 
-// Pbiduka - home
+// Pbiduka
 Route::get('/pbiduka/home', [PbidukaController::class, 'home']);
 
-// Walas - home
+// Walas
 Route::get('/walas/home', [WalasController::class, 'home']);
 
-// Admkeu - home
+// Admkeu
 Route::get('/admkeu/home', [AdmkeuController::class, 'home']);
 
-// Wkhubin - home
+// Wkhubin
 Route::get('/wkhubin/home', [WkhubinController::class, 'home']);
 
-// Kaprog - home
+// Kaprog
 Route::get('/kaprog/home', [KaprogController::class, 'home']);
 
-// Verifikator - home
+// Verifikator
 Route::get('/verifikator/home', [VerifikatorController::class, 'home']);
 
 // Login
