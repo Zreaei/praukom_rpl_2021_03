@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+<<<<<<< HEAD
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SiswaController;
+=======
 use App\Http\Controllers\AdmkeuController;
 use App\Http\Controllers\KaprogController;
 use App\Http\Controllers\LoginController;
@@ -11,6 +15,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\VerifikatorController;
 use App\Http\Controllers\WalasController;
 use App\Http\Controllers\WkhubinController;
+>>>>>>> f78f40be80dd62250e4f1da0ef0ec3c5ae277252
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +32,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layouts/app');
 });
+<<<<<<< HEAD
 // Admin
 Route::get('/admin/home', [AdminController::class, 'home']);
+=======
+<<<<<<< HEAD
+
+// Route::get('/admin-home', [AdminController::class, 'index']);
+Route::get('/admin-home/data-op', [AdminController::class, 'operator']);
+Route::get('/admin-home/data-siswa', [AdminController::class, 'siswa']);
+=======
+// Admin - home
+Route::get('/adminhome', [AdminController::class, 'home']);
+>>>>>>> f78f40be80dd62250e4f1da0ef0ec3c5ae277252
+>>>>>>> 9dccaad0664ed0da198a9e7d4f37c62a6236da5c
 
 // Operator
 Route::get('/operator/home', [OperatorController::class, 'home']);

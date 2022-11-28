@@ -2,12 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminModel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function home() 
+    // public function index()
+    // {
+    //     $datot = User::all();
+    //     return view('admin.home', compact('datot'));
+    // }
+
+    public function operator()
     {
-        return view('admin.home');
+        $data = AdminModel::all();
+        return view('admin.data-op', compact('data'));
+    }
+
+    public function siswa()
+    {
+        return view('admin.data-siswa');
     }
 }
