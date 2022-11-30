@@ -66,8 +66,15 @@ Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']
 // Route::post('/siswa/edit/editsimpan',[SiswaController::class,'editsimpan']);
 // Route::get('/siswa/hapus/{id}',[SiswaController::class,'hapus']);
 
-// // Pbsekolah
-// Route::get('/pbsekolah/home', [PbsekolahController::class, 'home']);
+// Operator
+Route::get('/operator/home', [OperatorController::class, 'home']);
+Route::get('/operator/profile', [OperatorController::class, 'profile']);
+Route::get('/operator/siswa', [OperatorController::class, 'siswa']);
+Route::get('/operator/siswa/tambah',[OperatorController::class,'tambahSiswa']);
+Route::post('/operator/siswa/simpan',[OperatorController::class,'simpanSiswa']);
+Route::get('/operator/siswa/edit/{id}',[OperatorController::class,'editSiswa']);
+Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpanSiswa']);
+Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']);
 
 // // Pbiduka
 // Route::get('/pbiduka/home', [PbidukaController::class, 'home']);

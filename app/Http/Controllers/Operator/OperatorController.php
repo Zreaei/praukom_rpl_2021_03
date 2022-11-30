@@ -31,11 +31,11 @@ class OperatorController extends Controller
         ];
         return view('operator.siswa', $data);
     }
-    public function tambahSiswa()
+    public function tambahsiswa()
     {
         return view('operator.tambahSiswa');
     }
-    public function simpanSiswa(Request $request)
+    public function simpansiswa(Request $request)
     {
         try {
             $data = [
@@ -61,13 +61,13 @@ class OperatorController extends Controller
         }
     }
 
-    public function editSiswa($id = null)
+    public function editsiswa($id = null)
     {
 
         $edit = $this->siswaModel->find($id);
         return view('operator.editSiswa', $edit);
     }
-    public function editsimpanSiswa(Request $request)
+    public function editsimpansiswa(Request $request)
     {
         try {
             $data = [
@@ -103,9 +103,14 @@ class OperatorController extends Controller
             $e->getMessage();
         }
     }
+
     public function walas() 
     {
         return view('operator.walas');
+    }
+    public function admkeu() 
+    {
+        return view('operator.admkeu');
     }
     public function kaprog() 
     {

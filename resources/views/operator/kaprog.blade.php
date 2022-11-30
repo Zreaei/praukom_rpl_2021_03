@@ -8,13 +8,13 @@
                     NO
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    ID ADMKEU
+                    NIP KAPROG
                 </th>
                 <th scope="col" class="py-3 px-6">
                     ID USER
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    NAMA ADMKEU
+                    NAMA KAPROG
                 </th>
                 <th scope="col" class="py-3 px-6">
                     EDIT
@@ -30,13 +30,13 @@
                     no
                 </th>
                 <td class="py-4 px-6">
-                    id_admkeu
+                    nip_kaprog
                 </td>
                 <td class="py-4 px-6">
                     id_user
                 </td>
                 <td class="py-4 px-6">
-                    nama_admkeu
+                    nama_kaprog
                 </td>
                 <td class="py-4 px-6">
                     <a href="#" class="btn btn-yellow">Edit</a>
