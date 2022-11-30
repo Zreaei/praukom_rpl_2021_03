@@ -11,5 +11,5 @@ module.exports = {
       "semiblack": "#050C19"
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
