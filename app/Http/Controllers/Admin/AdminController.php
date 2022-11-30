@@ -23,10 +23,4 @@ class AdminController extends Controller
         $daftar = $this->OperatorModel::all();
         return view('admin.data-op.data-op', compact('daftar'));
     }
-
-    public function siswa()
-    {
-        return view('admin.data-siswa.data-siswa');
-    }
-
 }

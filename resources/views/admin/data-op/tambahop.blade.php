@@ -13,7 +13,7 @@
                     <input type="text" name="nama_operator" placeholder="nama" class="input input-bordered" />
                 </label>
                 <div class="pt-3 pb-3 grid justify-items-center">
-                    <a href="daftar-operator"><button type="submit" value="simpan" class="btn btn-success">Tambah</button></a>
+                    <a href="admin/data-op"><button type="submit" value="simpan" class="btn btn-success">Tambah</button></a>
                 </div>
             </div>
         </div>

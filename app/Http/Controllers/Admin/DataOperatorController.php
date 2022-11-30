@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\OperatorModel;
 use Exception;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class DataOperatorController extends Controller
             $insert = $this->OperatorModel->create($data);
             //Promise 
             if ($insert) {
-                return redirect('admin.data-op.data-op');
+                return redirect('admin/data-op');
             } else {
                 return "input data gagal";
             }
@@ -41,29 +42,29 @@ class DataOperatorController extends Controller
         }
     }
 
-    public function edit($id = null)
-    {
+//     public function edit($id = null)
+//     {
 
-        $edit = $this->OperatorModel->find($id);
-        return view('admin.data-op.editop', $edit);
-    }
+//         $edit = $this->OperatorModel->find($id);
+//         return view('admin.data-op.editop', $edit);
+//     }
     
-    public function editsimpan(Request $request)
-    {
-        try {
-            $data = [
-                'nama_operator'   => $request->input('nama_operator'),
-            ];
-            $upd = $this->OperatorModel
-                        ->where('id_operator', $request->input('id_operator'))
-                        ->update($data);
-            if($upd){
-                return redirect('admin.data-op.data-op');
-            }
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
+//     public function editsimpan(Request $request)
+//     {
+//         try {
+//             $data = [
+//                 'nama_operator'   => $request->input('nama_operator'),
+//             ];
+//             $upd = $this->OperatorModel
+//                         ->where('id_operator', $request->input('id_operator'))
+//                         ->update($data);
+//             if($upd){
+//                 return redirect('admin.data-op.data-op');
+//             }
+//         } catch (Exception $e) {
+//             return $e->getMessage();
+//         }
+//     }
 
     public function hapus($id=null){
         try{
@@ -71,7 +72,7 @@ class DataOperatorController extends Controller
                             ->where('id_operator',$id)
                             ->delete();
             if($hapus){
-                return redirect('admin.data-op.data-op');
+                return redirect('admin/data-op');
             }
         }catch(Exception $e){
             $e->getMessage();
