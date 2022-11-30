@@ -1,21 +1,21 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-<<<<<<< HEAD
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SiswaController;
-=======
-use App\Http\Controllers\AdmkeuController;
-use App\Http\Controllers\KaprogController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\OperatorController;
-use App\Http\Controllers\PbidukaController;
-use App\Http\Controllers\PbsekolahController;
-use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\VerifikatorController;
-use App\Http\Controllers\WalasController;
-use App\Http\Controllers\WkhubinController;
->>>>>>> f78f40be80dd62250e4f1da0ef0ec3c5ae277252
+use App\Http\Controllers\{
+    Admin\AdminController,
+    Siswa\SiswaController,
+    AdmKeu\AdmkeuController,
+    DataOperatorController,
+    Kaprog\KaprogController,
+    Operator\OperatorController,
+    PbIduka\PbidukaController,
+    PbSekolah\PbsekolahController,
+    Verifikator\VerifikatorController,
+    Walas\WalasController,
+    WkHubin\WkhubinController,
+    HomeController,
+    LoginController,
+};
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,43 +30,43 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts/app');
+    return view('login.login');
 });
-<<<<<<< HEAD
 
-// Route::get('/admin-home', [AdminController::class, 'index']);
-Route::get('/admin-home/data-op', [AdminController::class, 'operator']);
-Route::get('/admin-home/data-siswa', [AdminController::class, 'siswa']);
-=======
-// Admin - home
-Route::get('/adminhome', [AdminController::class, 'home']);
->>>>>>> f78f40be80dd62250e4f1da0ef0ec3c5ae277252
+// Admin
+Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/admin/data-op', [AdminController::class, 'operator']);
+Route::get('/admin/data-op/tambah',[DataOperatorController::class, 'tambahOpr']);
+Route::post('/admin/data-op/simpan',[DataOperatorController::class, 'simpan']);
+Route::get('/admin/edit/{id}',[DataOperatorController::class, 'edit']);
+Route::post('/admin/edit/simpanedit',[DataOperatorController::class,'simpanedit']);
+Route::get('/admin/hapus/{id}',[DataOperatorController::class,'hapus']);
 
-// Operator - home
+// Operator
 Route::get('/operator/home', [OperatorController::class, 'home']);
 
-// Siswa - home
+// Siswa
 Route::get('/siswa/home', [SiswaController::class, 'home']);
 
-// Pbsekolah - home
+// Pbsekolah
 Route::get('/pbsekolah/home', [PbsekolahController::class, 'home']);
 
-// Pbiduka - home
+// Pbiduka
 Route::get('/pbiduka/home', [PbidukaController::class, 'home']);
 
-// Walas - home
+// Walas
 Route::get('/walas/home', [WalasController::class, 'home']);
 
-// Admkeu - home
+// Admkeu
 Route::get('/admkeu/home', [AdmkeuController::class, 'home']);
 
-// Wkhubin - home
+// Wkhubin
 Route::get('/wkhubin/home', [WkhubinController::class, 'home']);
 
-// Kaprog - home
+// Kaprog
 Route::get('/kaprog/home', [KaprogController::class, 'home']);
 
-// Verifikator - home
+// Verifikator
 Route::get('/verifikator/home', [VerifikatorController::class, 'home']);
 
 // Login
