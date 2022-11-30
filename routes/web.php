@@ -35,6 +35,7 @@ Route::get('/operator/home', [OperatorController::class, 'home']);
 
 // Siswa - home
 Route::get('/siswa/home', [SiswaController::class, 'home']);
+Route::get('/siswa/profil', [SiswaController::class, 'profil']);
 
 // Pbsekolah - home
 Route::get('/pbsekolah/home', [PbsekolahController::class, 'home']);
