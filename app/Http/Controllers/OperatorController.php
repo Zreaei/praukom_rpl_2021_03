@@ -17,9 +17,6 @@ class OperatorController extends Controller
     {
         return view('operator.profile');
     }
-
-    // DATA SISWA
-
     protected $siswaModel;
     public function __construct()
     {
@@ -34,11 +31,11 @@ class OperatorController extends Controller
         ];
         return view('operator.siswa', $data);
     }
-    public function formTambah()
+    public function tambahSiswa()
     {
-        return view('siswa.tambahform');
+        return view('operator.tambahSiswa');
     }
-    public function simpan(Request $request)
+    public function simpanSiswa(Request $request)
     {
         try {
             $data = [
@@ -55,7 +52,7 @@ class OperatorController extends Controller
             $data['nis'] = $nis;
             $insert = $this->siswaModel->create($data);
             if ($insert) {
-                return redirect('siswa');
+                return redirect('operator.siswa');
             } else {
                 return "input data gagal";
             }
@@ -64,13 +61,13 @@ class OperatorController extends Controller
         }
     }
 
-    public function edit($id = null)
+    public function editSiswa($id = null)
     {
 
         $edit = $this->siswaModel->find($id);
-        return view('siswa.editform', $edit);
+        return view('operator.editSiswa', $edit);
     }
-    public function editsimpan(Request $request)
+    public function editsimpanSiswa(Request $request)
     {
         try {
             $data = [
@@ -94,20 +91,18 @@ class OperatorController extends Controller
         }
     }
 
-    public function hapus($id=null){
+    public function hapusSiswa($id=null){
         try{
             $hapus = $this->siswaModel
                             ->where('nis',$id)
                             ->delete();
             if($hapus){
-                return redirect('siswa');
+                return redirect('operator.siswa');
             }
         }catch(Exception $e){
             $e->getMessage();
         }
     }
-
-    
     public function walas() 
     {
         return view('operator.walas');
@@ -115,96 +110,6 @@ class OperatorController extends Controller
     public function kaprog() 
     {
         return view('operator.kaprog');
-    }
-
-
-    // DATA ADMKEU
-
-    protected $admkeuModel;
-    public function __construct()
-    {
-        $this->admkeuModel = new AdmkeuModel;
-    }
-    public function admkeu() 
-    {
-        return view('operator.admkeu');
-        $data = [
-            'title' => 'Daftar Admkeu',
-            'admkeu' => $this->admkeuModel->all()
-        ];
-        return view('operator.admkeu', $data);
-    }
-    public function formTambah()
-    {
-        return view('admkeu.tambahform');
-    }
-    public function simpan(Request $request)
-    {
-        try {
-            $data = [
-                'nis' => $request->input('nis'),
-                'id_user' => $request->input('id_user'),
-                'kelas' => $request->input('kelas'),
-                'nama_siswa' => $request->input('nama_siswa'),
-                'tempat_lahir' => $request->input('tempat_lahir'),
-                'tgl_lahir' => $request->input('tgl_lahir'),
-                'telp_siswa' => $request->input('telp_siswa')
-            ];
-
-            $nis = substr(md5(rand(0, 99999)), -4);
-            $data['nis'] = $nis;
-            $insert = $this->siswaModel->create($data);
-            if ($insert) {
-                return redirect('siswa');
-            } else {
-                return "input data gagal";
-            }
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
-    public function edit($id = null)
-    {
-
-        $edit = $this->siswaModel->find($id);
-        return view('siswa.editform', $edit);
-    }
-    public function editsimpan(Request $request)
-    {
-        try {
-            $data = [
-                'nis' => $request->input('nis'),
-                'id_user' => $request->input('id_user'),
-                'kelas' => $request->input('kelas'),
-                'nama_siswa' => $request->input('nama_siswa'),
-                'tempat_lahir' => $request->input('tempat_lahir'),
-                'tgl_lahir' => $request->input('tgl_lahir'),
-                'telp_siswa' => $request->input('telp_siswa')
-            ];
-
-            $upd = $this->siswaModel
-                        ->where('nis', $request->input('nis'))
-                        ->update($data);
-            if($upd){
-                return redirect('nis');
-            }
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
-    public function hapus($id=null){
-        try{
-            $hapus = $this->siswaModel
-                            ->where('nis',$id)
-                            ->delete();
-            if($hapus){
-                return redirect('siswa');
-            }
-        }catch(Exception $e){
-            $e->getMessage();
-        }
     }
     public function wkhubin() 
     {
