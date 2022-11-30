@@ -36,25 +36,26 @@ Route::get('/', function () {
 // Admin
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/admin/data-op', [AdminController::class, 'operator']);
-Route::get('/admin/data-op/tambah',[DataOperatorController::class, 'tambahOpr']);
-Route::post('/admin/data-op/simpan',[DataOperatorController::class, 'simpan']);
+Route::get('/admin/data-op/tambah', [AdminController::class, 'tambahOpr']);
+Route::post('/admin/data-op/simpan',[AdminController::class, 'simpan']);
+Route::get('/admin/hapus/{id}',[DataOperatorController::class,'hapus']);
 Route::get('/admin/edit/{id}',[DataOperatorController::class, 'edit']);
 Route::post('/admin/edit/simpanedit',[DataOperatorController::class,'simpanedit']);
-Route::get('/admin/hapus/{id}',[DataOperatorController::class,'hapus']);
+
 
 // // Admin - home
 // Route::get('/adminhome', [AdminController::class, 'home']);
 
 
-// // Operator
-// Route::get('/operator/home', [OperatorController::class, 'home']);
-// Route::get('/operator/profile', [OperatorController::class, 'profile']);
-// Route::get('/operator/siswa', [OperatorController::class, 'siswa']);
-// Route::get('/operator/siswa/tambah',[OperatorController::class,'tambahSiswa']);
-// Route::post('/operator/siswa/simpan',[OperatorController::class,'simpanSiswa']);
-// Route::get('/operator/siswa/edit/{id}',[OperatorController::class,'editSiswa']);
-// Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpanSiswa']);
-// Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']);
+// Operator
+Route::get('/operator/home', [OperatorController::class, 'home']);
+Route::get('/operator/profile', [OperatorController::class, 'profile']);
+Route::get('/operator/siswa', [OperatorController::class, 'siswa']);
+Route::get('/operator/siswa/tambah',[OperatorController::class,'tambahSiswa']);
+Route::post('/operator/siswa/simpan',[OperatorController::class,'simpanSiswa']);
+Route::get('/operator/siswa/edit/{id}',[OperatorController::class,'editSiswa']);
+Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpanSiswa']);
+Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']);
 
 // // Siswa
 // Route::get('/siswa/home', [SiswaController::class, 'home']);

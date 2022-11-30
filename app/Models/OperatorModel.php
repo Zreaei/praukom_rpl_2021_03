@@ -9,6 +9,7 @@ class OperatorModel extends Model
 {
     use HasFactory;
     protected $table = 'operator';
+    public $timestamps = false;     
     protected $primarykey = 'id_operator';
-    protected $fillable = ['id_operator','nama_operator'];
+    protected $fillable = ['id_operator','user','nama_operator'];
 }

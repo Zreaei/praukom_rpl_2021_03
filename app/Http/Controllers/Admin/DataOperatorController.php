@@ -30,6 +30,7 @@ class DataOperatorController extends Controller
 
             $id_operator = substr(md5(rand(0, 99999)), -4);
             $data['id_operator'] = $id_operator;
+            // $data['user'] = 'USR002';
             $insert = $this->OperatorModel->create($data);
             //Promise 
             if ($insert) {
@@ -42,29 +43,29 @@ class DataOperatorController extends Controller
         }
     }
 
-//     public function edit($id = null)
-//     {
+    public function edit($id = null)
+    {
 
-//         $edit = $this->OperatorModel->find($id);
-//         return view('admin.data-op.editop', $edit);
-//     }
+        $edit = $this->OperatorModel->find($id);
+        return view('admin.data-op.editop', $edit);
+    }
     
-//     public function editsimpan(Request $request)
-//     {
-//         try {
-//             $data = [
-//                 'nama_operator'   => $request->input('nama_operator'),
-//             ];
-//             $upd = $this->OperatorModel
-//                         ->where('id_operator', $request->input('id_operator'))
-//                         ->update($data);
-//             if($upd){
-//                 return redirect('admin.data-op.data-op');
-//             }
-//         } catch (Exception $e) {
-//             return $e->getMessage();
-//         }
-//     }
+    public function editsimpan(Request $request)
+    {
+        try {
+            $data = [
+                'nama_operator'   => $request->input('nama_operator'),
+            ];
+            $upd = $this->OperatorModel
+                        ->where('id_operator', $request->input('id_operator'))
+                        ->update($data);
+            if($upd){
+                return redirect('admin.data-op.data-op');
+            }
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
 
     public function hapus($id=null){
         try{
