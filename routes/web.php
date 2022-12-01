@@ -57,20 +57,15 @@ Route::get('/operator/siswa/edit/{id}',[OperatorController::class,'editSiswa']);
 Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpanSiswa']);
 Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']);
 
-<<<<<<< HEAD
-// Siswa - home
+// Siswa
 Route::get('/siswa/home', [SiswaController::class, 'home']);
 Route::get('/siswa/profil', [SiswaController::class, 'profil']);
-=======
-// // Siswa
-// Route::get('/siswa/home', [SiswaController::class, 'home']);
-// Route::get('/siswa', [SiswaController::class, 'siswa']);
-// Route::get('/siswa/tambah',[SiswaController::class,'formTambah']);
-// Route::post('/siswa/simpan',[SiswaController::class,'simpan']);
-// Route::get('/siswa/edit/{id}',[SiswaController::class,'edit']);
-// Route::post('/siswa/edit/editsimpan',[SiswaController::class,'editsimpan']);
-// Route::get('/siswa/hapus/{id}',[SiswaController::class,'hapus']);
->>>>>>> b178c8328dc50dbeae8ce2c386509dbb72b0b2e7
+Route::get('/siswa/pengajuan', [SiswaController::class, 'pengajuan']);
+Route::get('/siswa/tambah',[SiswaCoroller::class,'formTambah']);
+Route::post('/siswa/simpan',[SiswaController::class,'simpan']);
+Route::get('/siswa/edit/{id}',[SiswaController::class,'edit']);
+Route::post('/siswa/edit/editsimpan',[SiswaController::class,'editsimpan']);
+Route::get('/siswa/hapus/{id}',[SiswaController::class,'hapus']);
 
 // Operator
 Route::get('/operator/home', [OperatorController::class, 'home']);

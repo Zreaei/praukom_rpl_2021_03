@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Siswa;
 
+use App\Http\Controllers\Controller;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,5 +17,9 @@ class SiswaController extends Controller
     public function profil() 
     {
         return view('siswa.profil');
+    }
+    public function pengajuan() 
+    {
+        return view('siswa.pengajuan');
     }
 }
