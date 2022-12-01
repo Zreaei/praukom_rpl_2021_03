@@ -24,7 +24,7 @@ class OperatorController extends Controller
     }
     public function siswa() 
     {
-        return view('operator.siswa');
+       
         $data = [
             'title' => 'Daftar Siswa',
             'siswa' => $this->siswaModel->all()
