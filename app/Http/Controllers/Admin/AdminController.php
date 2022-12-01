@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\OperatorModel;
 use App\Http\Controllers\Controller;
+use App\Models\UserModel;
 use Exception;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    protected $UserModel;
     protected $OperatorModel;
+
     public function __construct()
     {
+        $this->UserModel = new UserModel;
         $this->OperatorModel = new OperatorModel;
     }
     
@@ -28,7 +32,8 @@ class AdminController extends Controller
 
     public function tambahOpr()
     {
-        return view('admin.data-op.tambahop');
+        $user = $this->UserModel::all();
+        return view('admin.data-op.tambahop', compact('user'));
     }
 
     public function simpan(Request $request)

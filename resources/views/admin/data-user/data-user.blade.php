@@ -10,6 +10,7 @@
             <th>Username</th>
             <th>Email</th>
             <th>Level</th>
+            <th>Opsi</th>
         </tr>
     </thead>
     @foreach ($dataUser as $item)
@@ -21,8 +22,8 @@
             <td><h1>{{ $item->email }}</h1></td>
             <td><h1>{{ $item->level }}</h1></td>
             <td>
-                <a href="edit/{{ $item->id_user }}"><button class="btn btn-warning">Update</button></a>
-                <a href="hapus/{{ $item->id_user }}"><button class="btn btn-error">Hapus</button></a>
+                <a href="data-user/edit/{{ $item->id_user }}"><button class="btn btn-warning">Edit</button></a>
+                <a href="data-user/hapus/{{ $item->id_user }}"><button class="btn btn-error">Hapus</button></a>
             </td>
         </tr>
     </tbody>

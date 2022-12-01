@@ -38,15 +38,17 @@ Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/admin/data-op', [AdminController::class, 'operator']);
 Route::get('/admin/data-op/tambah', [AdminController::class, 'tambahOpr']);
 Route::post('/admin/data-op/simpan',[AdminController::class, 'simpan']);
-Route::get('/admin/hapus/{id}',[AdminController::class,'hapus']);
-Route::get('/admin/edit/{id}',[AdminController::class, 'edit']);
-Route::post('/admin/edit/simpanedit',[AdminController::class,'simpanedit']);
+Route::get('/admin/data-op/hapus/{id}',[AdminController::class,'hapus']);
+Route::get('/admin/data-op/edit/{id}',[AdminController::class, 'edit']);
+Route::post('/admin/data-op/edit/simpanedit',[AdminController::class,'simpanedit']);
 
 // Admin - Kelola User
 Route::get('/admin/data-user',[UserController::class, 'user']);
 Route::get('/admin/data-user/tambah',[UserController::class, 'tambahUser']);
 Route::post('/admin/data-user/simpan',[UserController::class, 'simpan']);
-Route::get('/admin/hapus/{id}',[UserController::class, 'hapus']);
+Route::get('/admin/data-user/hapus/{id}',[UserController::class, 'hapus']);
+Route::get('/admin/data-user/edit/{id}',[UserController::class, 'edit']);
+Route::post('/admin/data-user/edit/simpanedit',[UserController::class,'simpanedit']);
 
 // Operator
 Route::get('/operator/home', [OperatorController::class, 'home']);
@@ -58,11 +60,10 @@ Route::get('/operator/siswa/edit/{id}',[OperatorController::class,'editSiswa']);
 Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpanSiswa']);
 Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']);
 
-<<<<<<< HEAD
 // Siswa - home
 Route::get('/siswa/home', [SiswaController::class, 'home']);
 Route::get('/siswa/profil', [SiswaController::class, 'profil']);
-=======
+
 // // Siswa
 // Route::get('/siswa/home', [SiswaController::class, 'home']);
 // Route::get('/siswa', [SiswaController::class, 'siswa']);
@@ -71,7 +72,7 @@ Route::get('/siswa/profil', [SiswaController::class, 'profil']);
 // Route::get('/siswa/edit/{id}',[SiswaController::class,'edit']);
 // Route::post('/siswa/edit/editsimpan',[SiswaController::class,'editsimpan']);
 // Route::get('/siswa/hapus/{id}',[SiswaController::class,'hapus']);
->>>>>>> b178c8328dc50dbeae8ce2c386509dbb72b0b2e7
+
 
 // // Pbiduka
 // Route::get('/pbiduka/home', [PbidukaController::class, 'home']);
