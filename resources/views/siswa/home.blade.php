@@ -1,27 +1,22 @@
 @extends('layouts.main')
 @section('container')
 
-
-<div class="flex gap-5">
-    <div class="w-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-        <div class="text-center">
-            <iconify-icon icon="healthicons:ui-user-profile" style="color: #1565c0;" width="100" height="100"></iconify-icon>
-        </div>
-        <div class="text-center">
-            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2">
-                Views
-            </a>
-        </div>
-    </div>
-    
-    <div class="w-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-        <div class="text-center">
-            <iconify-icon icon="healthicons:ui-user-profile" style="color: #1565c0;" width="100" height="100"></iconify-icon>
-        </div>
-        <div class="text-center">
-            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2">
-                Data Level
-            </a>
+<div class="container">
+    <div class="flex flex-wrap">
+        <div class="w-full self-center px-4 py-4">
+            <div class="max-w-sm rounded overflow-hidden shadow-lg bg-blue-500">
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                    <p class="text-gray-700 text-base">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                    </p>
+                </div>
+                <div class="px-6 pt-4 pb-2">
+                <button class="bg-orange-600 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-orange-800 hover:border-blue-500 rounded">
+                    Button
+                </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

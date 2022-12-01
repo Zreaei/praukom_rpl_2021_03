@@ -18,6 +18,39 @@ class OperatorController extends Controller
     {
         return view('operator.profile');
     }
+<<<<<<< HEAD
+=======
+    protected $siswaModel;
+    public function __construct()
+    {
+        $this->siswaModel = new SiswaModel;
+    }
+    public function siswa() 
+    {
+       
+        $data = [
+            'title' => 'Daftar Siswa',
+            'siswa' => $this->siswaModel->all()
+        ];
+        return view('operator.siswa', $data);
+    }
+    public function tambahsiswa()
+    {
+        return view('operator.tambahSiswa');
+    }
+    public function simpansiswa(Request $request)
+    {
+        try {
+            $data = [
+                'nis' => $request->input('nis'),
+                'id_user' => $request->input('id_user'),
+                'kelas' => $request->input('kelas'),
+                'nama_siswa' => $request->input('nama_siswa'),
+                'tempat_lahir' => $request->input('tempat_lahir'),
+                'tgl_lahir' => $request->input('tgl_lahir'),
+                'telp_siswa' => $request->input('telp_siswa')
+            ];
+>>>>>>> 7d4bddc17e9941b584cb3201b7522a771d9748e4
 
 
     // protected $siswaModel;
