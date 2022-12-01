@@ -7,6 +7,7 @@ use App\Http\Controllers\{
     AdmKeu\AdmkeuController,
     Kaprog\KaprogController,
     Operator\OperatorController,
+    Operator\DataAdmkeuController,
     PbIduka\PbidukaController,
     PbSekolah\PbsekolahController,
     Verifikator\VerifikatorController,
@@ -68,12 +69,18 @@ Route::get('/admin/hapus/{id}',[DataOperatorController::class,'hapus']);
 // Operator
 Route::get('/operator/home', [OperatorController::class, 'home']);
 Route::get('/operator/profile', [OperatorController::class, 'profile']);
-Route::get('/operator/siswa', [OperatorController::class, 'siswa']);
-Route::get('/operator/siswa/tambah',[OperatorController::class,'tambahSiswa']);
-Route::post('/operator/siswa/simpan',[OperatorController::class,'simpanSiswa']);
-Route::get('/operator/siswa/edit/{id}',[OperatorController::class,'editSiswa']);
-Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpanSiswa']);
-Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']);
+// Route::get('/operator/siswa', [OperatorController::class, 'siswa']);
+// Route::get('/operator/siswa/tambah',[OperatorController::class,'tambahSiswa']);
+// Route::post('/operator/siswa/simpan',[OperatorController::class,'simpanSiswa']);
+// Route::get('/operator/siswa/edit/{id}',[OperatorController::class,'editSiswa']);
+// Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpanSiswa']);
+// Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']);
+Route::get('/operator/admkeu', [DataAdmkeuController::class, 'admkeu']);
+Route::get('/operator/admkeu/tambah',[DataAdmkeuController::class,'tambahadmkeu']);
+Route::post('/operator/admkeu/simpan',[DataAdmkeuController::class,'simpanadmkeu']);
+Route::get('/operator/admkeu/edit/{id}',[DataAdmkeuController::class,'editadmkeu']);
+Route::post('/operator/admkeu/edit/editsimpan',[DataAdmkeuController::class,'editsimpanadmkeu']);
+Route::get('/operator/admkeu/hapus/{id}',[DataAdmkeuController::class,'hapusadmkeu']);
 
 // // Pbiduka
 // Route::get('/pbiduka/home', [PbidukaController::class, 'home']);
