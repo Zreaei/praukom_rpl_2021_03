@@ -6,7 +6,10 @@ module.exports = {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      "primary": "#2D5EBB",
+      "semiblack": "#050C19"
+    },
   },
   plugins: [require("daisyui")],
 }
