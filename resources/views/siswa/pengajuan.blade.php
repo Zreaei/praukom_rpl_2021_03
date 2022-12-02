@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('container')
 
+
 <div class="flex bg-gray-100">
     <div class="sidebar">
         <div class="bg-gradient-to-b from-blue-700 to-stone-900 h-screen p-5 pt-6 w-72 relative">
@@ -96,5 +97,68 @@
         
         </div>
     </div>
+  <!-- The button to open modal -->
+<label for="my-modal-5" class="btn">open modal</label>
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="my-modal-5" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box w-11/12 max-w-5xl">
+    <h3 class="font-bold text-lg text-white">Form Pengajuan</h3>
+    <div class="flex justify-center">
+        <div class="mb-3 xl:w-96">
+            <label for="exampleFormControlInput1" class="form-label inline-block mb-2 text-gray-700">Nama Siswa</label>
+            <input
+            type="text"
+            class="
+                form-control
+                block
+                w-full
+                px-3
+                py-1.5
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+            "
+            id="exampleFormControlInput1"
+            placeholder="Nama Siswa"
+            />
+
+            <label for="exampleFormControlInput1" class="form-label inline-block mb-2 text-gray-700">NIS</label>
+            <input
+            type="number"
+            class="
+                form-control
+                block
+                w-full
+                px-3
+                py-1.5
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+            "
+            id="exampleFormControlInput1"
+            placeholder="NIS"
+            />
+        </div>
+    </div>
+    <div class="modal-action">
+      <label for="my-modal-5" class="btn">Yay!</label>
+    </div>
+  </div>
 </div>
 @endsection

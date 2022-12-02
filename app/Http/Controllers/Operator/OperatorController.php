@@ -18,8 +18,6 @@ class OperatorController extends Controller
     {
         return view('operator.profile');
     }
-<<<<<<< HEAD
-=======
     protected $siswaModel;
     public function __construct()
     {
@@ -50,7 +48,6 @@ class OperatorController extends Controller
                 'tgl_lahir' => $request->input('tgl_lahir'),
                 'telp_siswa' => $request->input('telp_siswa')
             ];
->>>>>>> 7d4bddc17e9941b584cb3201b7522a771d9748e4
 
 
     // protected $siswaModel;
