@@ -3,45 +3,52 @@
 namespace App\Http\Controllers\Operator;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserModel;
 use App\Models\AdmkeuModel;
-use Error;
 use Exception;
 use Illuminate\Http\Request;
 
 class DataAdmkeuController extends Controller
 {
-    protected $admkeuModel;
+    protected $AdmkeuModel;
+    protected $UserModel;
+    
     public function __construct()
     {
-        $this->admkeuModel = new AdmkeuModel;
+        $this->UserModel = new UserModel;
+        $this->AdmkeuModel = new AdmkeuModel;
     }
-    public function admkeu() 
+
+    public function admkeu()
     {
-        
-        $data = [
-            'title' => 'Daftar Admkeu',
-            'admkeu' => $this->admkeuModel->all()
-        ];
-        return view('operator.admkeu', $data);
+        $dataAdmkeu = $this->AdmkeuModel::all();
+        return view('operator.admkeu.admkeu', compact('dataAdmkeu'));
     }
-    public function tambahadmkeu()
+
+    public function tambahAdmkeu()
     {
-        return view('operator.tambahadmkeu');
+        $dataUser = $this->UserModel::all();
+        return view('operator.admkeu.tambahadmkeu', compact('dataUser'));
     }
-    public function simpanadmkeu(Request $request)
+
+    public function simpan(Request $request)
     {
         try {
             $data = [
-                'id_admkeu' => $request->input('id_admkeu'),
-                'id_user' => $request->input('id_user'),
-                'nama_admkeu' => $request->input('id_user')
+                '' => $request->input('username'),
+                'password' => $request->input('password'),
+                'email' => $request->input('email'),
+                'level' => $request->input('level'),
+                // dd($request->all())
             ];
 
-            $nis = substr(md5(rand(0, 99999)), -4);
-            $data['id_admkeu'] = $id_admkeu;
-            $insert = $this->admkeuModel->create($data);
+            $id_user = substr(md5(rand(0, 99999)), -4);
+            // $id_user = 'USR001';
+            $data['id_user'] = $id_user;
+            $insert = $this->UserModel->create($data);
+            //Promise 
             if ($insert) {
-                return redirect('operator.admkeu');
+                return redirect('admin/data-user');
             } else {
                 return "input data gagal";
             }
@@ -50,39 +57,68 @@ class DataAdmkeuController extends Controller
         }
     }
 
-    public function editadmkeu($id = null)
+    public function edit($id = null)
     {
 
-        $edit = $this->admkeuModel->find($id);
-        return view('operator.editadmkeu', $edit);
+        $edit = $this->UserModel->find($id);
+        // echo json_encode($edit);
+        return view('data-user.edituser', $edit);
     }
-    public function editsimpanadmkeu(Request $request)
+    public function simpanedit(Request $request)
     {
         try {
             $data = [
-                'id_admkeu' => $request->input('id_admkeu'),
-                'id_user' => $request->input('id_user'),
-                'nama_admkeu' => $request->input('id_user')
+                'username'   => $request->input('username'),
+                'password' => $request->input('password'),
+                'email' => $request->input('email'),
+                'level' => $request->input('level'),
             ];
-
-            $upd = $this->admkeuModel
-                        ->where('id_admkeu', $request->input('id_admkeu'))
+            $upd = $this->UserModel
+                        ->where('id_user', $request->input('id_user'))
                         ->update($data);
             if($upd){
-                return redirect('id_admkeu');
+                return redirect('admin/data-user');
             }
         } catch (Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function hapusadmkeu($id=null){
+    // public function edit($id = null)
+    // {
+    //     $edit = $this->UserModel->find($id);
+    //     echo json_encode($edit);
+    //     dd($edit);
+    //     return view('admin.data-user.edituser', $edit);
+    // }
+    
+    // public function simpanedit(Request $request)
+    // {
+    //     try {
+    //         $data = [
+    //             'username' => $request->input('username'),
+    //             'password' => $request->input('password'),
+    //             'email' => $request->input('email'),
+    //             'level' => $request->input('level'),
+    //         ];
+    //         $upd = $this->UserModel
+    //                     ->where('id_user', $request->input('id_user'))
+    //                     ->update($data);
+    //         if($upd){
+    //             return redirect('admin/data-user');
+    //         }
+    //     } catch (Exception $e) {
+    //         return $e->getMessage();
+    //     }
+    // }
+
+    public function hapus($id=null){
         try{
-            $hapus = $this->admkeuModel
-                            ->where('id_admkeu',$id)
+            $hapus = $this->UserModel
+                            ->where('id_user',$id)
                             ->delete();
             if($hapus){
-                return redirect('operator.admkeu');
+                return redirect('admin/data-user');
             }
         }catch(Exception $e){
             $e->getMessage();

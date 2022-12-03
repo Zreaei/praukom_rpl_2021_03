@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\OperatorModel;
 use App\Http\Controllers\Controller;
+use App\Models\OperatorModel;
 use App\Models\UserModel;
 use Exception;
 use Illuminate\Http\Request;
@@ -63,8 +63,8 @@ class AdminController extends Controller
     public function edit($id = null)
     {
 
-        $edit = $this->OperatorModel->find($id);
-        return view('admin.data-op.editop', $edit);
+        $edit = $this->OperatorModel($id);
+        return view('admin.data-op.editop', compact ('edit'));
     }
     
     public function editsimpan(Request $request)

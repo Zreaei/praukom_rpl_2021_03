@@ -62,8 +62,15 @@ class UserController extends Controller
 
         $edit = $this->UserModel->find($id);
         // echo json_encode($edit);
-        return view('data-user.edituser', $edit);
+        return view('admin.data-user.edituser', $edit);
     }
+
+    public function editlevel()
+    {
+        $level = $this->LevelModel::all();
+        return view('admin.data-user.edituser', compact('level'));
+    }
+
     public function simpanedit(Request $request)
     {
         try {
@@ -83,34 +90,6 @@ class UserController extends Controller
             return $e->getMessage();
         }
     }
-
-    // public function edit($id = null)
-    // {
-    //     $edit = $this->UserModel->find($id);
-    //     echo json_encode($edit);
-    //     dd($edit);
-    //     return view('admin.data-user.edituser', $edit);
-    // }
-    
-    // public function simpanedit(Request $request)
-    // {
-    //     try {
-    //         $data = [
-    //             'username' => $request->input('username'),
-    //             'password' => $request->input('password'),
-    //             'email' => $request->input('email'),
-    //             'level' => $request->input('level'),
-    //         ];
-    //         $upd = $this->UserModel
-    //                     ->where('id_user', $request->input('id_user'))
-    //                     ->update($data);
-    //         if($upd){
-    //             return redirect('admin/data-user');
-    //         }
-    //     } catch (Exception $e) {
-    //         return $e->getMessage();
-    //     }
-    // }
 
     public function hapus($id=null){
         try{

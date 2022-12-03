@@ -9,5 +9,5 @@ class AdminModel extends Model
 {
     use HasFactory;
     protected $table = 'operator';
-    protected $primarykey = 'id_operator';
+    protected $primaryKey = 'id_operator';
 }
