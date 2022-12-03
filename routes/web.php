@@ -3,6 +3,7 @@
 use App\Http\Controllers\{
     Admin\AdminController,
     Admin\UserController,
+    Admin\DataOperatorController,
     Siswa\SiswaController,
     Operator\OperatorController,
     AdmKeu\AdmkeuController,
@@ -36,12 +37,14 @@ Route::get('/', function () {
 
 // Admin
 Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/admin/data-op', [AdminController::class, 'operator']);
-Route::get('/admin/data-op/tambah', [AdminController::class, 'tambahOpr']);
-Route::post('/admin/data-op/simpan',[AdminController::class, 'simpan']);
-Route::get('/admin/data-op/hapus/{id}',[AdminController::class,'hapus']);
-Route::get('/admin/data-op/edit/{id}',[AdminController::class, 'edit']);
-Route::post('/admin/data-op/edit/simpanedit',[AdminController::class,'simpanedit']);
+
+// Admin - Kelola Operator
+Route::get('/admin/data-op', [DataOperatorController::class, 'operator']);
+Route::get('/admin/data-op/tambah', [DataOperatorController::class, 'tambahOpr']);
+Route::post('/admin/data-op/simpan',[DataOperatorController::class, 'simpan']);
+Route::get('/admin/data-op/hapus/{id}',[DataOperatorController::class,'hapus']);
+Route::get('/admin/data-op/edit/{id}',[DataOperatorController::class, 'edit']);
+Route::post('/admin/data-op/edit/simpanedit',[DataOperatorController::class,'simpanedit']);
 
 // Admin - Kelola User
 Route::get('/admin/data-user',[UserController::class, 'user']);

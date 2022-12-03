@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class OperatorModel extends Model
 {
     use HasFactory;
-    protected $table = 'operator';
-    public $timestamps = false;     
+    protected $table = 'operator';  
+    protected $softDelete = false;
+    public $timestamps = false;
     protected $primaryKey = 'id_operator';
-    protected $fillable = ['id_operator','user','nama_operator'];
+    public $incrementing = false;
+    public $keyType = 'string';
+    protected $fillable = ['id_operator','nama_operator','user'];
 }
