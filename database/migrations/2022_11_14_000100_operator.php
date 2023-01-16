@@ -18,7 +18,7 @@ return new class extends Migration
             $table->char('user', 6)->nullable(false);
             $table->string('nama_operator', 50)->nullable(false);
 
-            // $table->foreign('user')->references('id_user')->on('user')->cascadeOnDelete();
+            $table->foreign('user')->references('id_user')->on('user')->cascadeOnDelete();
         });
     }
 
