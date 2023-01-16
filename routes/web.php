@@ -3,10 +3,11 @@
 use App\Http\Controllers\{
     Admin\AdminController,
     Admin\UserController,
+    Admin\DataOperatorController,
     Siswa\SiswaController,
+    Operator\OperatorController,
     AdmKeu\AdmkeuController,
     Kaprog\KaprogController,
-    Operator\OperatorController,
     Operator\DataAdmkeuController,
     Operator\DataWkhubinController,
     Operator\DataKaprogController,
@@ -42,19 +43,24 @@ Route::get('/', function () {
 
 // Admin
 Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/admin/data-op', [AdminController::class, 'operator']);
-Route::get('/admin/data-op/tambah', [AdminController::class, 'tambahOpr']);
-Route::post('/admin/data-op/simpan',[AdminController::class, 'simpan']);
-Route::get('/admin/hapus/{id}',[AdminController::class,'hapus']);
-Route::get('/admin/edit/{id}',[AdminController::class, 'edit']);
-Route::post('/admin/edit/simpanedit',[AdminController::class,'simpanedit']);
+
+// Admin - Kelola Operator
+Route::get('/admin/data-op', [DataOperatorController::class, 'operator']);
+Route::get('/admin/data-op/tambah', [DataOperatorController::class, 'tambahOpr']);
+Route::post('/admin/data-op/simpan',[DataOperatorController::class, 'simpan']);
+Route::get('/admin/data-op/hapus/{id}',[DataOperatorController::class,'hapus']);
+Route::get('/admin/data-op/edit/{id}',[DataOperatorController::class, 'edit']);
+Route::post('/admin/data-op/edit/simpanedit',[DataOperatorController::class,'simpanedit']);
 
 // Admin - Kelola User
 Route::get('/admin/data-user',[UserController::class, 'user']);
 Route::get('/admin/data-user/tambah',[UserController::class, 'tambahUser']);
 Route::post('/admin/data-user/simpan',[UserController::class, 'simpan']);
-Route::get('/admin/hapus/{id}',[UserController::class, 'hapus']);
+Route::get('/admin/data-user/hapus/{id}',[UserController::class, 'hapus']);
+Route::get('/admin/data-user/edit/{id}',[UserController::class, 'edit']);
+Route::post('/admin/data-user/edit/simpanedit',[UserController::class,'simpanedit']);
 
+<<<<<<< HEAD
 // Operator - Dashboard
 Route::get('/operator/home', [OperatorController::class, 'home']);
 Route::get('/operator/profile', [OperatorController::class, 'profile']);
@@ -122,6 +128,36 @@ Route::get('/operator/verifikator/hapus/{id}',[DataVerifikatorController::class,
 // Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpanSiswa']);
 // Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']);
 
+=======
+// Operator
+Route::get('/operator', [OperatorController::class, 'index']);
+Route::get('/operator/admkeu', [OperatorController::class, 'admkeu']);
+Route::get('/operator/admkeu/tambah', [OperatorController::class, 'tambahadmkeu']);
+Route::post('/operator/admkeu/simpan',[OperatorController::class, 'simpan']);
+Route::get('/operator/admkeu/hapus/{id}',[OperatorController::class,'hapus']);
+Route::get('/operator/admkeu/edit/{id}',[OperatorController::class, 'edit']);
+Route::post('/operator/admkeu/edit/simpanedit',[OperatorController::class,'simpanedit']);
+
+// // Operator
+// Route::get('/operator/home', [OperatorController::class, 'home']);
+// Route::get('/operator/profile', [OperatorController::class, 'profile']);
+// // Route::get('/operator/siswa', [OperatorController::class, 'siswa']);
+// // Route::get('/operator/siswa/tambah',[OperatorController::class,'tambahSiswa']);
+// // Route::post('/operator/siswa/simpan',[OperatorController::class,'simpanSiswa']);
+// // Route::get('/operator/siswa/edit/{id}',[OperatorController::class,'editSiswa']);
+// // Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpanSiswa']);
+// // Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']);
+// Route::get('/operator/admkeu', [OperatorController::class, 'admkeu']);
+// Route::get('/operator/admkeu/tambah',[OperatorController::class,'tambahadmkeu']);
+// Route::post('/operator/admkeu/simpan',[OperatorController::class,'simpanadmkeu']);
+// Route::get('/operator/admkeu/edit/{id}',[OperatorController::class,'editadmkeu']);
+// Route::post('/operator/admkeu/edit/editsimpan',[OperatorController::class,'editsimpanadmkeu']);
+// Route::get('/operator/admkeu/hapus/{id}',[OperatorController::class,'hapusadmkeu']);
+
+// Siswa - home
+Route::get('/siswa/home', [SiswaController::class, 'home']);
+Route::get('/siswa/profil', [SiswaController::class, 'profil']);
+>>>>>>> 7f1c43734efdea184a45248cb6cf85f885867646
 
 // // Siswa
 // Route::get('/siswa/home', [SiswaController::class, 'home']);

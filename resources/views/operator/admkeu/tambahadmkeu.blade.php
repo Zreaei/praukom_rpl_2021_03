@@ -1,13 +1,20 @@
 @extends('layouts.main')
+<<<<<<< HEAD
 @section('title', 'admkeu')
 @section('container')
 
 <form action=" {{ url("/operator/admkeu/tambah/tambahsimpan") }} " method="POST" enctype="multipart/form-data">
+=======
+@section('container')
+
+<form method="POST" action="simpan">
+>>>>>>> 7f1c43734efdea184a45248cb6cf85f885867646
     @csrf
     <div class="pt-36">
         <div class="form-control border border-zinc-900 rounded w-1/4 mx-auto">
             <div class="mx-auto">
                 <label class="label">
+<<<<<<< HEAD
                     <span class="label-text mx-auto">FORM TAMBAH DATA</span>
                 </label>
                 <label class="input-group input-group-vertical">
@@ -45,6 +52,27 @@
                 </label>
                 <div class="pt-3 pb-3 grid justify-items-center">
                     <button type="submit" class="btn btn-success">TAMBAH ADM KEUANGAN</button>
+=======
+                    <span class="label-text mx-auto">Tambah admkeu</span>
+                </label>
+                <label class="input-group">
+                    <span class="pr-8">Nama</span>
+                    <input type="text" name="nama_admkeu" placeholder="nama" class="input input-bordered" />
+                </label>
+                <div class="form-control">
+                    <label class="input-group">
+                        <span class="pr-8">User</span>
+                        <select class="select select-bordered" name="user">
+                            <option value="default">None</option>
+                            @foreach ($user as $item)
+                                <option value="{{ $item->id_user }}">{{ $item->username }}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                </div>
+                <div class="pt-3 pb-3 grid justify-items-center">
+                    <button type="submit" value="simpan" class="btn btn-success">Tambah</button>
+>>>>>>> 7f1c43734efdea184a45248cb6cf85f885867646
                 </div>
             </div>
         </div>

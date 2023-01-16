@@ -38,10 +38,12 @@ class UserController extends Controller
                 'username' => $request->input('username'),
                 'password' => $request->input('password'),
                 'email' => $request->input('email'),
+                'level' => $request->input('level'),
                 // dd($request->all())
             ];
 
             $id_user = substr(md5(rand(0, 99999)), -4);
+            // $id_user = 'USR001';
             $data['id_user'] = $id_user;
             $insert = $this->UserModel->create($data);
             //Promise 
@@ -55,29 +57,39 @@ class UserController extends Controller
         }
     }
 
-    // public function edit($id = null)
-    // {
+    public function edit($id = null)
+    {
 
-    //     $edit = $this->UserModel->find($id);
-    //     return view('admin.data-op.editop', $edit);
-    // }
-    
-    // public function editsimpan(Request $request)
-    // {
-    //     try {
-    //         $data = [
-    //             'nama_operator'   => $request->input('nama_operator'),
-    //         ];
-    //         $upd = $this->UserModel
-    //                     ->where('id_user', $request->input('id_user'))
-    //                     ->update($data);
-    //         if($upd){
-    //             return redirect('admin.data-op.data-op');
-    //         }
-    //     } catch (Exception $e) {
-    //         return $e->getMessage();
-    //     }
-    // }
+        $edit = $this->UserModel->find($id);
+        // echo json_encode($edit);
+        return view('admin.data-user.edituser', $edit);
+    }
+
+    public function editlevel()
+    {
+        $level = $this->LevelModel::all();
+        return view('admin.data-user.edituser', compact('level'));
+    }
+
+    public function simpanedit(Request $request)
+    {
+        try {
+            $data = [
+                'username'   => $request->input('username'),
+                'password' => $request->input('password'),
+                'email' => $request->input('email'),
+                'level' => $request->input('level'),
+            ];
+            $upd = $this->UserModel
+                        ->where('id_user', $request->input('id_user'))
+                        ->update($data);
+            if($upd){
+                return redirect('admin/data-user');
+            }
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
 
     public function hapus($id=null){
         try{

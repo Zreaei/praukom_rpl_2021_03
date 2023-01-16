@@ -10,14 +10,20 @@
                     <span class="label-text mx-auto">Tambah Operator</span>
                 </label>
                 <label class="input-group">
-                    <span class="pr-8">user</span>
-                    <input type="text" name="user" placeholder="user" class="input input-bordered" />
-                </label>
-                <label class="input-group">
                     <span class="pr-8">Nama</span>
                     <input type="text" name="nama_operator" placeholder="nama" class="input input-bordered" />
                 </label>
-                
+                <div class="form-control">
+                    <label class="input-group">
+                        <span class="pr-8">User</span>
+                        <select class="select select-bordered" name="user">
+                            <option value="default">None</option>
+                            @foreach ($user as $item)
+                                <option value="{{ $item->id_user }}">{{ $item->username }}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                </div>
                 <div class="pt-3 pb-3 grid justify-items-center">
                     <button type="submit" value="simpan" class="btn btn-success">Tambah</button>
                 </div>
