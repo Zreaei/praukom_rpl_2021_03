@@ -3,13 +3,24 @@
 namespace App\Http\Controllers\Operator;
 
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
+use Error;
+=======
 use App\Models\AdmkeuModel;
 use App\Models\UserModel;
+>>>>>>> 7f1c43734efdea184a45248cb6cf85f885867646
 use Exception;
 use Illuminate\Http\Request;
 
 class OperatorController extends Controller
 {
+<<<<<<< HEAD
+    public function home()
+    {
+        return view('operator.home');
+    }
+}
+=======
     protected $UserModel;
     protected $AdmkeuModel;
 
@@ -283,3 +294,4 @@ class OperatorController extends Controller
 //         return view('operator.prakerin');
 //     }
 // }
+>>>>>>> 7f1c43734efdea184a45248cb6cf85f885867646
