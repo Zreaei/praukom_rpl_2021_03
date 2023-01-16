@@ -3,36 +3,36 @@
 namespace App\Http\Controllers\Operator;
 
 use App\Http\Controllers\Controller;
-use App\Models\AdmkeuModel;
+use App\Models\WalasModel;
 use App\Models\UserModel;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DataAdmkeuController extends Controller
+class DataWalasController extends Controller
 {
-    protected $AdmkeuModel, $UserModel;
+    protected $WalasModel, $UserModel;
     public function __construct()
     {
-        $this->AdmkeuModel = new AdmkeuModel();
+        $this->WalasModel = new WalasModel();
         $this->UserModel = new UserModel();
     }
-    public function admkeu() 
+    public function walas() 
     {
-        $admkeu = DB::table('adm_keuangan')
-            ->join('user', 'user.id_user', '=', 'adm_keuangan.user')
+        $walas = DB::table('walas')
+            ->join('user', 'user.id_user', '=', 'walas.user')
             ->join('level_user', 'level_user.id_level', '=', 'user.level')
             ->get();
 
-            return view('operator.admkeu.admkeu')->with('admkeu', $admkeu);
+            return view('operator.walas.walas')->with('walas', $walas);
     }
-    public function tambahadmkeu()
+    public function tambahwalas()
     {
-        $admkeu = $this->AdmkeuModel::all();
-        return view('operator.admkeu.tambahadmkeu', compact('admkeu'));
+        $walas = $this->WalasModel::all();
+        return view('operator.walas.tambahwalas', compact('walas'));
     }
-    public function simpanadmkeu(Request $request)
+    public function simpanwalas(Request $request)
     {
         $request->validate([
             'id_user' => 'required',
@@ -40,9 +40,9 @@ class DataAdmkeuController extends Controller
             'username' => 'required',
             'password' => 'required',
             'email' => 'required',
-            'id_admkeu' => 'required',
+            'nip_walas' => 'required',
             'user' => 'required',
-            'nama_admkeu' => 'required',
+            'nama_walas' => 'required',
         ]);
 
         $user = [
@@ -53,42 +53,42 @@ class DataAdmkeuController extends Controller
             'email' => $request->email
         ];
 
-        $admkeu = [
-            'id_admkeu' => $request->id_admkeu,
+        $walas = [
+            'nip_walas' => $request->nip_walas,
             'user' => $request->user,
-            'nama_admkeu' => $request->nama_admkeu
+            'nama_walas' => $request->nama_walas
         ];
             try {
                 $id_user = $this->UserModel->create($user);
-                $admkeu['id_user'] = $id_user;
-                $this->AdmkeuModel->create($admkeu);                
-                return redirect('/operator/admkeu')->with('sukses', 'Data berhasil ditambah');
+                $walas['id_user'] = $id_user;
+                $this->WalasModel->create($walas);                
+                return redirect('/operator/walas')->with('sukses', 'Data berhasil ditambah');
             } catch (\Throwable $th) {
-                return redirect('/operator/admkeu')->with('error', 'Data gagal ditambah');
+                return redirect('/operator/walas')->with('error', 'Data gagal ditambah');
             }
     }
-    public function editadmkeu($id = null)
+    public function editwalas($id = null)
     {
-        $edit = $this->AdmkeuModel->find($id);
-        return view('operator.admkeu.editadmkeu', $edit);
+        $edit = $this->WalasModel->find($id);
+        return view('operator.walas.editwalas', $edit);
     }
-    public function editsimpanadmkeu(Request $request)
+    public function editsimpanwalas(Request $request)
     {
         try {
             $data = [
-                'nama_admkeu' => $request->input('nama_admkeu')
+                'nama_walas' => $request->input('nama_walas')
             ];
 
-            $upd = $this->AdmkeuModel
-                        ->where('id_admkeu', $request->input('id_admkeu'))
+            $upd = $this->WalasModel
+                        ->where('nip_walas', $request->input('nip_walas'))
                         ->update($data);
             if($upd){
-                return redirect('/operator/admkeu');
+                return redirect('/operator/walas');
             }
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         } finally {
-            return redirect('/operator/admkeu');
+            return redirect('/operator/walas');
         }
     }
 
@@ -97,7 +97,7 @@ class DataAdmkeuController extends Controller
         try{
             $hapususer = $this->UserModel->where('id_user',$id)->delete();
             if($hapususer){
-                return redirect('/operator/admkeu');
+                return redirect('/operator/walas');
             }
         } catch(Exception $e){
             return back()->with('error', $e->getMessage());

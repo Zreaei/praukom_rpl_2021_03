@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class AdmkeuModel extends Model
 {
@@ -14,6 +15,5 @@ class AdmkeuModel extends Model
     protected $primaryKey = 'id_admkeu';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['id_admkeu','id_user','nama_admkeu'];
-
+    protected $fillable = ['id_admkeu','user','nama_admkeu'];
 }

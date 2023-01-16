@@ -3,36 +3,36 @@
 namespace App\Http\Controllers\Operator;
 
 use App\Http\Controllers\Controller;
-use App\Models\AdmkeuModel;
+use App\Models\WkhubinModel;
 use App\Models\UserModel;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DataAdmkeuController extends Controller
+class DataWkhubinController extends Controller
 {
-    protected $AdmkeuModel, $UserModel;
+    protected $WkhubinModel, $UserModel;
     public function __construct()
     {
-        $this->AdmkeuModel = new AdmkeuModel();
+        $this->WkhubinModel = new WkhubinModel();
         $this->UserModel = new UserModel();
     }
-    public function admkeu() 
+    public function wkhubin() 
     {
-        $admkeu = DB::table('adm_keuangan')
-            ->join('user', 'user.id_user', '=', 'adm_keuangan.user')
+        $wkhubin = DB::table('waka_hubin')
+            ->join('user', 'user.id_user', '=', 'waka_hubin.user')
             ->join('level_user', 'level_user.id_level', '=', 'user.level')
             ->get();
 
-            return view('operator.admkeu.admkeu')->with('admkeu', $admkeu);
+            return view('operator.wkhubin.wkhubin')->with('wkhubin', $wkhubin);
     }
-    public function tambahadmkeu()
+    public function tambahwkhubin()
     {
-        $admkeu = $this->AdmkeuModel::all();
-        return view('operator.admkeu.tambahadmkeu', compact('admkeu'));
+        $wkhubin = $this->WkhubinModel::all();
+        return view('operator.wkhubin.tambahwkhubin', compact('wkhubin'));
     }
-    public function simpanadmkeu(Request $request)
+    public function simpanwkhubin(Request $request)
     {
         $request->validate([
             'id_user' => 'required',
@@ -40,9 +40,9 @@ class DataAdmkeuController extends Controller
             'username' => 'required',
             'password' => 'required',
             'email' => 'required',
-            'id_admkeu' => 'required',
+            'nip_wkhubin' => 'required',
             'user' => 'required',
-            'nama_admkeu' => 'required',
+            'nama_wkhubin' => 'required',
         ]);
 
         $user = [
@@ -53,42 +53,42 @@ class DataAdmkeuController extends Controller
             'email' => $request->email
         ];
 
-        $admkeu = [
-            'id_admkeu' => $request->id_admkeu,
+        $wkhubin = [
+            'nip_wkhubin' => $request->nip_wkhubin,
             'user' => $request->user,
-            'nama_admkeu' => $request->nama_admkeu
+            'nama_wkhubin' => $request->nama_wkhubin
         ];
             try {
                 $id_user = $this->UserModel->create($user);
-                $admkeu['id_user'] = $id_user;
-                $this->AdmkeuModel->create($admkeu);                
-                return redirect('/operator/admkeu')->with('sukses', 'Data berhasil ditambah');
+                $wkhubin['id_user'] = $id_user;
+                $this->WkhubinModel->create($wkhubin);                
+                return redirect('/operator/wkhubin')->with('sukses', 'Data berhasil ditambah');
             } catch (\Throwable $th) {
-                return redirect('/operator/admkeu')->with('error', 'Data gagal ditambah');
+                return redirect('/operator/wkhubin')->with('error', 'Data gagal ditambah');
             }
     }
-    public function editadmkeu($id = null)
+    public function editwkhubin($id = null)
     {
-        $edit = $this->AdmkeuModel->find($id);
-        return view('operator.admkeu.editadmkeu', $edit);
+        $edit = $this->WkhubinModel->find($id);
+        return view('operator.wkhubin.editwkhubin', $edit);
     }
-    public function editsimpanadmkeu(Request $request)
+    public function editsimpanwkhubin(Request $request)
     {
         try {
             $data = [
-                'nama_admkeu' => $request->input('nama_admkeu')
+                'nama_wkhubin' => $request->input('nama_wkhubin')
             ];
 
-            $upd = $this->AdmkeuModel
-                        ->where('id_admkeu', $request->input('id_admkeu'))
+            $upd = $this->WkhubinModel
+                        ->where('nip_wkhubin', $request->input('nip_wkhubin'))
                         ->update($data);
             if($upd){
-                return redirect('/operator/admkeu');
+                return redirect('/operator/wkhubin');
             }
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         } finally {
-            return redirect('/operator/admkeu');
+            return redirect('/operator/wkhubin');
         }
     }
 
@@ -97,7 +97,7 @@ class DataAdmkeuController extends Controller
         try{
             $hapususer = $this->UserModel->where('id_user',$id)->delete();
             if($hapususer){
-                return redirect('/operator/admkeu');
+                return redirect('/operator/wkhubin');
             }
         } catch(Exception $e){
             return back()->with('error', $e->getMessage());

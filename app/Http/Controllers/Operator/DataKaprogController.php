@@ -3,36 +3,36 @@
 namespace App\Http\Controllers\Operator;
 
 use App\Http\Controllers\Controller;
-use App\Models\AdmkeuModel;
+use App\Models\KaprogModel;
 use App\Models\UserModel;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DataAdmkeuController extends Controller
+class DataKaprogController extends Controller
 {
-    protected $AdmkeuModel, $UserModel;
+    protected $KaprogModel, $UserModel;
     public function __construct()
     {
-        $this->AdmkeuModel = new AdmkeuModel();
+        $this->KaprogModel = new KaprogModel();
         $this->UserModel = new UserModel();
     }
-    public function admkeu() 
+    public function kaprog() 
     {
-        $admkeu = DB::table('adm_keuangan')
-            ->join('user', 'user.id_user', '=', 'adm_keuangan.user')
+        $kaprog = DB::table('kaprog')
+            ->join('user', 'user.id_user', '=', 'kaprog.user')
             ->join('level_user', 'level_user.id_level', '=', 'user.level')
             ->get();
 
-            return view('operator.admkeu.admkeu')->with('admkeu', $admkeu);
+            return view('operator.kaprog.kaprog')->with('kaprog', $kaprog);
     }
-    public function tambahadmkeu()
+    public function tambahkaprog()
     {
-        $admkeu = $this->AdmkeuModel::all();
-        return view('operator.admkeu.tambahadmkeu', compact('admkeu'));
+        $kaprog = $this->KaprogModel::all();
+        return view('operator.kaprog.tambahkaprog', compact('kaprog'));
     }
-    public function simpanadmkeu(Request $request)
+    public function simpankaprog(Request $request)
     {
         $request->validate([
             'id_user' => 'required',
@@ -40,9 +40,9 @@ class DataAdmkeuController extends Controller
             'username' => 'required',
             'password' => 'required',
             'email' => 'required',
-            'id_admkeu' => 'required',
+            'nip_kaprog' => 'required',
             'user' => 'required',
-            'nama_admkeu' => 'required',
+            'nama_kaprog' => 'required',
         ]);
 
         $user = [
@@ -53,42 +53,42 @@ class DataAdmkeuController extends Controller
             'email' => $request->email
         ];
 
-        $admkeu = [
-            'id_admkeu' => $request->id_admkeu,
+        $kaprog = [
+            'nip_kaprog' => $request->nip_kaprog,
             'user' => $request->user,
-            'nama_admkeu' => $request->nama_admkeu
+            'nama_kaprog' => $request->nama_kaprog
         ];
             try {
                 $id_user = $this->UserModel->create($user);
-                $admkeu['id_user'] = $id_user;
-                $this->AdmkeuModel->create($admkeu);                
-                return redirect('/operator/admkeu')->with('sukses', 'Data berhasil ditambah');
+                $kaprog['id_user'] = $id_user;
+                $this->KaprogModel->create($kaprog);                
+                return redirect('/operator/kaprog')->with('sukses', 'Data berhasil ditambah');
             } catch (\Throwable $th) {
-                return redirect('/operator/admkeu')->with('error', 'Data gagal ditambah');
+                return redirect('/operator/kaprog')->with('error', 'Data gagal ditambah');
             }
     }
-    public function editadmkeu($id = null)
+    public function editkaprog($id = null)
     {
-        $edit = $this->AdmkeuModel->find($id);
-        return view('operator.admkeu.editadmkeu', $edit);
+        $edit = $this->KaprogModel->find($id);
+        return view('operator.kaprog.editkaprog', $edit);
     }
-    public function editsimpanadmkeu(Request $request)
+    public function editsimpankaprog(Request $request)
     {
         try {
             $data = [
-                'nama_admkeu' => $request->input('nama_admkeu')
+                'nama_kaprog' => $request->input('nama_kaprog')
             ];
 
-            $upd = $this->AdmkeuModel
-                        ->where('id_admkeu', $request->input('id_admkeu'))
+            $upd = $this->KaprogModel
+                        ->where('nip_kaprog', $request->input('nip_kaprog'))
                         ->update($data);
             if($upd){
-                return redirect('/operator/admkeu');
+                return redirect('/operator/kaprog');
             }
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         } finally {
-            return redirect('/operator/admkeu');
+            return redirect('/operator/kaprog');
         }
     }
 
@@ -97,7 +97,7 @@ class DataAdmkeuController extends Controller
         try{
             $hapususer = $this->UserModel->where('id_user',$id)->delete();
             if($hapususer){
-                return redirect('/operator/admkeu');
+                return redirect('/operator/kaprog');
             }
         } catch(Exception $e){
             return back()->with('error', $e->getMessage());

@@ -11,5 +11,10 @@ module.exports = {
       "semiblack": "#050C19"
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui")
+  ],
+  daisyui: {
+    themes: ["luxury"]
+  }
 }
