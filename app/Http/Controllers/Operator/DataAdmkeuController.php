@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Operator;
 use App\Http\Controllers\Controller;
 use App\Models\UserModel;
 use App\Models\AdmkeuModel;
-use Error;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,13 +30,13 @@ class DataAdmkeuController extends Controller
             return view('operator.admkeu.admkeu')->with('admkeu', $admkeu);
     }
 
-    public function tambahAdmkeu()
+    public function tambahadmkeu()
     {
         $admkeu = $this->AdmkeuModel::all();
         return view('operator.admkeu.tambahadmkeu', compact('admkeu'));
     }
 
-    public function simpan(Request $request)
+    public function simpanadmkeu(Request $request)
     {
         $request->validate([
             'id_user' => 'required',
@@ -77,7 +76,7 @@ class DataAdmkeuController extends Controller
         $edit = $this->AdmkeuModel->find($id);
         return view('operator.admkeu.editadmkeu', $edit);
     }
-    public function simpanedit(Request $request)
+    public function editsimpanadmkeu(Request $request)
     {
         try {
             $data = [

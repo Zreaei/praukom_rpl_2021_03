@@ -10,11 +10,10 @@ class AdmkeuModel extends Model
 {
     use HasFactory;
     protected $table = 'adm_keuangan';
-    // protected $softDelete = false;
+    protected $softDelete = false;
     public $timestamps = false;
     protected $primaryKey = 'id_admkeu';
-    // public $incrementing = false;
-    // public $keyType = 'string';
-    protected $fillable = ['id_admkeu','id_user','nama_admkeu'];
-
+    public $incrementing = false;
+    public $keyType = 'string';
+    protected $fillable = ['id_admkeu','user','nama_admkeu'];
 }
