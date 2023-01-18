@@ -25,7 +25,7 @@
                     <label class="input-group">
                         <span class="pr-8">Level</span>
                         <select class="select select-bordered" name="level">
-                            <option value="default">None</option>
+                            <option value="default">Choose Level</option>
                             @foreach ($level as $item)
                                 <option value="{{ $item->id_level }}">{{ $item->nama_level }}</option>
                             @endforeach

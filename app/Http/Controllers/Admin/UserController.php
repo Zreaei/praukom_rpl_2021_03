@@ -7,6 +7,8 @@ use App\Models\UserModel;
 use App\Models\LevelModel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -17,6 +19,12 @@ class UserController extends Controller
     {
         $this->UserModel = new UserModel;
         $this->LevelModel = new LevelModel;
+    }
+    
+    public function level()
+    {
+        $dataLevel = $this->LevelModel::all();
+        return view('admin.data-level.data-level', compact('dataLevel'));
     }
 
     public function user()
@@ -34,20 +42,29 @@ class UserController extends Controller
     public function simpan(Request $request)
     {
         try {
-            $data = [
+        //     $data = [
+        //         'username' => $request->input('username'),
+        //         'password' => $request->input('password'),
+        //         'email' => $request->input('email'),
+        //         'level' => $request->input('level'),
+        //         // dd($request->all())
+        //     ];
+            $id_user = DB::select('SELECT newiduser() AS id_user');
+            $array = Arr::pluck($id_user, 'id_user');
+            $kode_baru = Arr::get($array, '0');
+            $tambah_user = DB::table('user')->insert([
+                'id_user' => $kode_baru,
                 'username' => $request->input('username'),
                 'password' => $request->input('password'),
                 'email' => $request->input('email'),
                 'level' => $request->input('level'),
-                // dd($request->all())
-            ];
-
-            $id_user = substr(md5(rand(0, 99999)), -4);
+            ]);
+            // $id_user = substr(md5(rand(0, 99999)), -4);
             // $id_user = 'USR001';
-            $data['id_user'] = $id_user;
-            $insert = $this->UserModel->create($data);
+            // $data['id_user'] = $id_user;
+            // $insert = $this->UserModel->create($data);
             //Promise 
-            if ($insert) {
+            if ($tambah_user) {
                 return redirect('admin/data-user');
             } else {
                 return "input data gagal";
@@ -61,24 +78,26 @@ class UserController extends Controller
     {
 
         $edit = $this->UserModel->find($id);
+        $level = $this->LevelModel::all();
         // echo json_encode($edit);
-        return view('admin.data-user.edituser', $edit);
+        return view('admin.data-user.edituser', compact('edit','level'));
     }
 
-    public function editlevel()
-    {
-        $level = $this->LevelModel::all();
-        return view('admin.data-user.edituser', compact('level'));
-    }
+    // public function editlevel()
+    // {
+    //     $level = $this->LevelModel::all();
+    //     return view('admin.data-user.edituser', compact('level'));
+    // }
 
     public function simpanedit(Request $request)
     {
         try {
             $data = [
-                'username'   => $request->input('username'),
+                'username' => $request->input('username'),
                 'password' => $request->input('password'),
                 'email' => $request->input('email'),
                 'level' => $request->input('level'),
+                // dd($request->all())
             ];
             $upd = $this->UserModel
                         ->where('id_user', $request->input('id_user'))

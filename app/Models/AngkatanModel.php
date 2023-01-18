@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Hash;
 
-class UserModel extends Model
+class AngkatanModel extends Model
 {
     use HasFactory;
-    protected $table = 'user'; 
+    protected $table = 'angkatan';
     protected $softDelete = false;
     public $timestamps = false;
-    protected $primaryKey = 'id_user';
+    protected $primaryKey = 'id_angkatan';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['id_user','level','username','password','email'];
+    protected $fillable = ['id_angkatan','tahun_angkatan'];
 }

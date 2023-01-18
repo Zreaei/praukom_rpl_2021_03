@@ -7,6 +7,8 @@ use App\Models\OperatorModel;
 use App\Models\UserModel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class DataOperatorController extends Controller
 {
@@ -34,18 +36,27 @@ class DataOperatorController extends Controller
     public function simpan(Request $request)
     {
         try {
-            $data = [
-                'user' => $request->input('user'),
-                // 'user' => substr(md5(rand(0, 99999)), -4),
-                'nama_operator' => $request->input('nama_operator'),
-                // dd($request->all())
-            ];
+            // $data = [
+            //     'user' => $request->input('user'),
+            //     // 'user' => substr(md5(rand(0, 99999)), -4),
+            //     'nama_operator' => $request->input('nama_operator'),
+            //     // dd($request->all())
+            // ];
          
-            $id_operator = substr(md5(rand(0, 99999)), -4);
-            $data['id_operator'] = $id_operator;
-            $insert = $this->OperatorModel->create($data);
-            //Promise 
-            if ($insert) {
+            // $id_operator = substr(md5(rand(0, 99999)), -4);
+            // $data['id_operator'] = $id_operator;
+            // $insert = $this->OperatorModel->create($data);
+            // //Promise 
+            $id_operator = DB::select('SELECT newidoperator() AS id_operator');
+            $array = Arr::pluck($id_operator, 'id_operator');
+            $kode_baru = Arr::get($array, '0');
+            $tambah_opr = DB::table('operator')->insert([
+                'id_operator' => $kode_baru,
+                'nama_operator' => $request->input('nama_operator'),
+                'user' => $request->input('user'),
+            ]);
+
+            if ($tambah_opr) {
                 return redirect('admin/data-op');
             } else {
                 return ('input data gagal');
