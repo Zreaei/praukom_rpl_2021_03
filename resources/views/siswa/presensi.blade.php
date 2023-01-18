@@ -4,7 +4,7 @@
 
 <div class="flex bg-gray-100">
     <aside class="w-64" aria-label="Sidebar">
-    <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 h-screen bg-gradient-to-b from-blue-700 to-stone-900">
+    <div class="px-3 py-4 overflow-y-auto bg-gray-50 h-screen bg-gradient-to-b from-blue-700 to-stone-900">
         <ul class="space-y-2">
             <h3 class="font-bold text-orange-400 text-2xl pl-7 mb-10">ONE<span class="block">PRAKTIK.in</span></h3>
             <li>
@@ -71,9 +71,6 @@
                                         No
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        ID Presensi
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                                         Status
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-white px-6 py-4">
@@ -99,9 +96,9 @@
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {{ $no++ }}
                                         </td>
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        {{-- <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {{ $item->id_agenda }}
-                                        </td>
+                                        </td> --}}
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {{ $item->status_agenda }}
                                         </td>

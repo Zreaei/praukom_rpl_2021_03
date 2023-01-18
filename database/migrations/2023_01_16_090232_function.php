@@ -118,6 +118,48 @@ return new class extends Migration
             RETURN id_baru;
             END"
         );
+
+        DB::unprepared("DROP FUNCTION IF EXISTS newidpengajuan");
+        DB::unprepared(
+            "CREATE FUNCTION newidpengajuan()
+            RETURNS char(6)
+            BEGIN
+            DECLARE id_lama CHAR(6);
+            DECLARE id_baru CHAR(6);
+            DECLARE ambil_angka INT;
+            DECLARE hasil CHAR(6);
+            SELECT MAX(id_surat) INTO id_lama FROM surat_pengajuan;
+            IF (id_lama IS NOT NULL) THEN 
+                SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
+                SET hasil = LPAD(ambil_angka,3,0);
+                SET id_baru = CONCAT('PNJ',hasil);
+            ELSE
+                SET id_baru = 'PNJ001';
+            END IF;
+            RETURN id_baru;
+            END"
+        );
+
+        DB::unprepared("DROP FUNCTION IF EXISTS newidagenda");
+        DB::unprepared(
+            "CREATE FUNCTION newidagenda()
+            RETURNS char(6)
+            BEGIN
+            DECLARE id_lama CHAR(6);
+            DECLARE id_baru CHAR(6);
+            DECLARE ambil_angka INT;
+            DECLARE hasil CHAR(6);
+            SELECT MAX(id_agenda) INTO id_lama FROM agenda;
+            IF (id_lama IS NOT NULL) THEN 
+                SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
+                SET hasil = LPAD(ambil_angka,3,0);
+                SET id_baru = CONCAT('PRS',hasil);
+            ELSE
+                SET id_baru = 'PRS001';
+            END IF;
+            RETURN id_baru;
+            END"
+        );
     }
 
     /**

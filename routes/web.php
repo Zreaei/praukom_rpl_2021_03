@@ -67,12 +67,13 @@ Route::post('/admin/data-op/simpan',[DataOperatorController::class, 'simpan']);
 Route::get('/admin/data-op/hapus/{id}',[DataOperatorController::class,'hapus']);
 Route::get('/admin/data-op/edit/{id}',[DataOperatorController::class, 'edit']);
 Route::post('/admin/data-op/edit/simpanedit',[DataOperatorController::class,'simpanedit']);
-// Operator - Dashboard
-Route::get('/operator/home', [OperatorController::class, 'home']);
-Route::get('/operator/profile', [OperatorController::class, 'profile']);
 
 // Admin - Kelola Angkatan
 Route::get('/admin/data-angkatan', [DataAngkatanController::class, 'angkatan']);
+
+// Operator - Dashboard
+Route::get('/operator/home', [OperatorController::class, 'home']);
+Route::get('/operator/profile', [OperatorController::class, 'profile']);
 
 // Operator - Kelola Wkhubin
 Route::get('/operator/wkhubin', [DataWkhubinController::class, 'wkhubin']);

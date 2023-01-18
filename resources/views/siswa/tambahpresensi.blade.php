@@ -56,33 +56,6 @@
                     <form action="{{ route('siswa.simpanpresensi') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('PUT') }}
-
-                        <div class="">
-                        <label for="idpresensi" class="form-label inline-block font-semibold text-white">ID Presensi</label>
-                        <input
-                        type="text"
-                        name="id_agenda"
-                        class="
-                            form-control
-                            block
-                            w-full
-                            px-3
-                            py-1.5
-                            text-base
-                            font-normal
-                            text-gray-700
-                            bg-white bg-clip-padding
-                            border border-solid border-gray-300
-                            rounded
-                            transition
-                            ease-in-out
-                            m-0
-                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                        "
-                        id="idpresensi"
-                        placeholder="ID Presensi"
-                        />
-                        </div>
                         <div class="">
                         <label for="statusabsen" class="form-label inline-block font-semibold text-white">Status</label>
                         <select name="status_agenda" class="form-select w-full px-3 py-1.5 rounded 

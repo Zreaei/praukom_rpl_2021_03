@@ -4,7 +4,7 @@
 <div class="flex bg-gray-100">
     <div class="sidebar">
         <div class="bg-gradient-to-b from-blue-700 to-stone-900 h-screen p-5 pt-6 w-72 relative">
-            <h3 class="text-base font-bold text-orange-400 text-2xl pl-7">ONE<span class="block">PRAKTIK.in</span></h3>
+            <h3 class="font-bold text-orange-400 text-2xl pl-7">ONE<span class="block">PRAKTIK.in</span></h3>
             <div class="pt-10 text-center text-xl text-white">Profile</div>
             <div class="pt-10 text-center text-xl text-white">Pengajuan</div>
             <div class="pt-10 text-center text-xl text-white">Prakerin</div>
@@ -18,7 +18,7 @@
         <div class="bg-gradient-to-r from-blue-700 to-stone-900 h-52 rounded-lg ">
             <div class="grid grid-rows-3 grid-flow-col gap-4">
                 <div class="row-span-3 p-6 "><img class=" w-40 h-40 rounded-full" src="{{ asset('img/people.jpg')}}"></div>
-                <div class="col-span-2 p-10 text-base  pl-28 font-bold text-white text-5xl"><h3>John Doe</h3></div>
+                <div class="col-span-2 p-10 pl-28 font-bold text-white text-5xl"><h3>John Doe</h3></div>
                 <div class="row-span-2 col-span-2 text-2xl font-bold text-white"><span class="bg-gradient-to-b from-orange-500 to-red-500 px-44 py-2 rounded-lg ">SISWA</span></div>
             </div>
         </div>

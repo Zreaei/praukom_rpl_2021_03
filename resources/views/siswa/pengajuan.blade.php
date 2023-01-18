@@ -5,7 +5,7 @@
 <div class="flex bg-gray-100">
     
     <aside class="w-64" aria-label="Sidebar">
-    <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 h-screen bg-gradient-to-b from-blue-700 to-stone-900">
+    <div class="px-3 py-4 overflow-y-auto bg-gray-50 h-screen bg-gradient-to-b from-blue-700 to-stone-900">
         <ul class="space-y-2">
             <h3 class="font-bold text-orange-400 text-2xl pl-7 mb-10">ONE<span class="block">PRAKTIK.in</span></h3>
             <li>
@@ -70,9 +70,6 @@
                                 <tr class="bg-blue-700">
                                     <th scope="col" class="text-sm font-medium text-white px-2 py-4">
                                         No
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        ID Pengajuan
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                                         Tanggal Pengajuan
