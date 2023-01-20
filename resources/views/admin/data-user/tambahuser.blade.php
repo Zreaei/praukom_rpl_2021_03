@@ -10,20 +10,20 @@
                     <span class="label-text mx-auto">Tambah User</span>
                 </label>
                 <label class="input-group">
-                    <span class="pr-8">Username</span>
+                    <span class="pr-8 bg-white">Username</span>
                     <input type="text" name="username" placeholder="username" class="input input-bordered" required />
                 </label>
                 <label class="input-group">
-                    <span class="pr-8">Password</span>
+                    <span class="pr-8 bg-white">Password</span>
                     <input type="text" name="password" placeholder="password" class="input input-bordered" required />
                 </label>
                 <label class="input-group">
-                    <span class="pr-8">Email</span>
+                    <span class="pr-8 bg-white">Email</span>
                     <input type="email" name="email" placeholder="email" class="input input-bordered" required />
                 </label>
                 <div class="form-control">
                     <label class="input-group">
-                        <span class="pr-8">Level</span>
+                        <span class="pr-8 bg-white">Level</span>
                         <select class="select select-bordered" name="level">
                             <option value="default">Choose Level</option>
                             @foreach ($level as $item)

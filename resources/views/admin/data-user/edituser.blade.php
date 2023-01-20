@@ -10,19 +10,19 @@
                     <span class="label-text mx-auto">Edit Operator</span>
                 </label>
                 <label class="input-group">
-                    <span class="pr-8">username</span>
+                    <span class="pr-8 bg-white">username</span>
                     <input type="text" name="username" placeholder="username" value="{{ $edit->username }}" class="input input-bordered"/>
                 </label>
                 <label class="input-group">
-                    <span class="pr-8">password</span>
+                    <span class="pr-8 bg-white">password</span>
                     <input type="text" name="password" placeholder="password" value="{{ $edit->password }}" class="input input-bordered" />
                 </label>
                 <label class="input-group">
-                    <span class="pr-8">email</span>
+                    <span class="pr-8 bg-white">email</span>
                     <input type="text" name="email" placeholder="email" value="{{ $edit->email }}" class="input input-bordered" />
                 </label>
                 <label class="input-group">
-                    <span class="pr-8">Level</span>
+                    <span class="pr-8 bg-white">Level</span>
                     <select class="select select-bordered" name="level">
                         <option value="default">Choose Level</option>
                         @foreach ($level as $item)

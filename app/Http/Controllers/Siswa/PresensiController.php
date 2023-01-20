@@ -42,13 +42,6 @@ class PresensiController extends Controller
         $id_agenda = DB::select('SELECT newidagenda() AS id_agenda');
         $array = Arr::pluck($id_agenda, 'id_agenda');
         $kode_baru = Arr::get($array, '0');
-        $tambah_agenda = DB::table('agenda')->insert([
-            'id_agenda' => $kode_baru,
-            'status_agenda' => $request->input('status_agenda'),
-            'keterangan_agenda' => $request->input('keterangan_agenda'),
-            'tgl_agenda' => $request->input('tgl_agenda'),
-        ]);
-
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $extention = $file->getClientOriginalExtension();
@@ -56,6 +49,14 @@ class PresensiController extends Controller
             $file->move('storage/img/', $filename);
             $presensi->foto = $filename;
         }
+        $tambah_agenda = DB::table('agenda')->insert([
+            'id_agenda' => $kode_baru,
+            'status_agenda' => $request->input('status_agenda'),
+            'keterangan_agenda' => $request->input('keterangan_agenda'),
+            'tgl_agenda' => $request->input('tgl_agenda'),
+            'foto' => $presensi->foto,
+            
+        ]);
 
         if ($tambah_agenda) {
             return redirect('siswa/presensi');
@@ -70,7 +71,7 @@ class PresensiController extends Controller
         //     $file->move('storage/img/', $filename);
         //     $presensi->foto = $filename;
         // }
-        $presensi->save();
+        
         // return redirect('/siswa/presensi')->with('Success', 'Data Berhasil disimpan');
     }
 

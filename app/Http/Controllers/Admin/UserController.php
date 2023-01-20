@@ -21,17 +21,17 @@ class UserController extends Controller
         $this->LevelModel = new LevelModel;
     }
     
-    public function level()
-    {
-        $dataLevel = $this->LevelModel::all();
-        return view('admin.data-level.data-level', compact('dataLevel'));
-    }
-
     public function user()
     {
         $dataUser = $this->UserModel::all();
         return view('admin.data-user.data-user', compact('dataUser'));
     }
+
+    public function level()
+        {
+            $dataLevel = $this->LevelModel::all();
+            return view('admin.data-level.data-level', compact('dataLevel'));
+        }
 
     public function tambahUser()
     {
@@ -110,7 +110,7 @@ class UserController extends Controller
         }
     }
 
-    public function hapus($id=null){
+    public function hapus($id = null){
         try{
             $hapus = $this->UserModel
                             ->where('id_user',$id)

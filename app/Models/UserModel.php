@@ -12,7 +12,7 @@ class UserModel extends Model
     protected $table = 'user'; 
     protected $softDelete = false;
     public $timestamps = false;
-    protected $primarykey = 'id_user';
+    protected $primaryKey = 'id_user';
     public $incrementing = false;
     public $keyType = 'string';
     protected $fillable = ['id_user','level','username','password','email'];
