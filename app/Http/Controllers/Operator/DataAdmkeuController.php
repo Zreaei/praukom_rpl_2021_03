@@ -20,6 +20,13 @@ class DataAdmkeuController extends Controller
         $this->AdmkeuModel = new AdmkeuModel;
     }
 
+    private function generateKodeUser(): string
+    {
+        return collect(DB::select('SELECT generate_new_kode_user() AS new_kode_user'))
+        ->firstOrFail()
+        ->new_kode_user;
+    }
+
     public function admkeu()
     {
         $admkeu = DB::table('adm_keuangan')
@@ -38,34 +45,25 @@ class DataAdmkeuController extends Controller
 
     public function simpanadmkeu(Request $request)
     {
-        $request->validate([
-            'id_user' => 'required',
-            'level' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'email' => 'required',
-            'id_admkeu' => 'required',
-            'user' => 'required',
-            'nama_admkeu' => 'required',
+
+        $validated = $request->validate([
+            'datalevel' => 'required',
+            'datausername' => 'required',
+            'datapassword' => 'required',
+            'dataemail' => 'required',
+            'datafoto_user' => 'required',
+            'datanama_admkeu' => 'required',
         ]);
 
-        $user = [
-            'id_user' => $request->id_user,
-            'level' => $request->level,
-            'username' => $request->username,
-            'password' => $request->password,
-            'email' => $request->email
-        ];
-
-        $admkeu = [
-            'id_admkeu' => $request->id_admkeu,
-            'user' => $request->user,
-            'nama_admkeu' => $request->nama_admkeu
-        ];
             try {
-                $id_user = $this->UserModel->create($user);
-                $admkeu['id_user'] = $id_user;
-                $this->AdmkeuModel->create($admkeu);                
+                $tambah_user = DB::select('CALL procedure_insert_admkeu(?,?,?,?,?,?)', [
+                    $validated['datalevel'],
+                    $validated['datausername'],
+                    $validated['datapassword'],
+                    $validated['dataemail'],
+                    $validated['datafoto_user'],
+                    $validated['datanama_admkeu']
+                ]);
                 return redirect('/operator/admkeu')->with('sukses', 'Data berhasil ditambah');
             } catch (\Throwable $th) {
                 return redirect('/operator/admkeu')->with('error', 'Data gagal ditambah');

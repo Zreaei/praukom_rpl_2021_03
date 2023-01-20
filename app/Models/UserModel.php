@@ -15,5 +15,5 @@ class UserModel extends Model
     protected $primarykey = 'id_user';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['id_user','level','username','password','email'];
+    protected $fillable = ['id_user','level','username','password','email','foto_user'];
 }
