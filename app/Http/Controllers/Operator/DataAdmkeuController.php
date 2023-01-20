@@ -13,7 +13,7 @@ class DataAdmkeuController extends Controller
 {
     protected $AdmkeuModel;
     protected $UserModel;
-    
+
     public function __construct()
     {
         $this->UserModel = new UserModel;
@@ -56,6 +56,7 @@ class DataAdmkeuController extends Controller
         ]);
 
             try {
+<<<<<<< HEAD
                 $tambah_user = DB::select('CALL procedure_insert_admkeu(?,?,?,?,?,?)', [
                     $validated['datalevel'],
                     $validated['datausername'],
@@ -64,6 +65,11 @@ class DataAdmkeuController extends Controller
                     $validated['datafoto_user'],
                     $validated['datanama_admkeu']
                 ]);
+=======
+                $id_user = $this->UserModel->create($user);
+                $admkeu['id_user'] = $id_user;
+                $this->AdmkeuModel->create($admkeu);
+>>>>>>> 75c752711d91d00ef6a6dd8af2d014c76b667d08
                 return redirect('/operator/admkeu')->with('sukses', 'Data berhasil ditambah');
             } catch (\Throwable $th) {
                 return redirect('/operator/admkeu')->with('error', 'Data gagal ditambah');

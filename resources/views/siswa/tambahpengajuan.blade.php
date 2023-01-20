@@ -4,7 +4,7 @@
     <aside class="w-64" aria-label="Sidebar">
     <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 h-screen bg-gradient-to-b from-blue-700 to-stone-900">
         <ul class="space-y-2">
-            <h3 class="text-base font-bold text-orange-400 text-2xl pl-7 mb-10">ONE<span class="block">PRAKTIK.in</span></h3>
+            <h3 class="font-bold text-orange-400 text-2xl pl-7 mb-10">ONE<span class="block">PRAKTIK.in</span></h3>
             <li>
                 <a href="{{ route('siswa.pengajuan') }}" class="flex items-center p-2 text-xl font-bold text-white rounded-lg hover:bg-blue-600 ">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" /><path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" /></svg>
@@ -56,33 +56,6 @@
                     <form action="{{ route('siswa.simpanpengajuan') }}" method="POST">
                         @csrf
                         {{ method_field('PUT') }}
-
-                        <div class="">
-                        <label for="idpengajuan" class="form-label inline-block font-semibold text-white">ID Pengajuan</label>
-                        <input
-                        type="text"
-                        name="id_surat"
-                        class="
-                            form-control
-                            block
-                            w-full
-                            px-3
-                            py-1.5
-                            text-base
-                            font-normal
-                            text-gray-700
-                            bg-white bg-clip-padding
-                            border border-solid border-gray-300
-                            rounded
-                            transition
-                            ease-in-out
-                            m-0
-                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                        "
-                        id="idpengajuan"
-                        placeholder="ID Pengajuan"
-                        />
-                        </div>
                         <div class="">
                         <label for="tglpengajuan" class="form-label inline-block font-semibold text-white">Tanggal Pengajuan</label>
                         <input

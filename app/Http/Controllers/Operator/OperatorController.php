@@ -13,21 +13,15 @@ class OperatorController extends Controller
     {
         return view('operator.home');
     }
-<<<<<<< HEAD
     public function profile() 
     {
         return view('operator.profile');
     }
     protected $siswaModel;
-=======
-}
-<<<<<<< HEAD
-=======
-=======
+
     protected $UserModel;
     protected $AdmkeuModel;
 
->>>>>>> 844d1b5c9919d052d3f3fb061b00fb399a1769ac
     public function __construct()
     {
         $this->UserModel = new UserModel;
@@ -60,7 +54,6 @@ class OperatorController extends Controller
                 'nama_admkeu' => $request->input('nama_admkeu'),
                 // dd($request->all())
             ];
-<<<<<<< HEAD
 
 
     // protected $siswaModel;
@@ -153,7 +146,6 @@ class OperatorController extends Controller
     public function walas() 
     {
         return view('operator.walas');
-=======
          
             $id_admkeu = substr(md5(rand(0, 99999)), -4);
             $data['id_admkeu'] = $id_admkeu;
@@ -167,7 +159,6 @@ class OperatorController extends Controller
         } catch (Exception $e) {
             return $e->getMessage();
         }
->>>>>>> 844d1b5c9919d052d3f3fb061b00fb399a1769ac
     }
 
     public function edit($id = null)
@@ -393,5 +384,8 @@ class OperatorController extends Controller
 //         return view('operator.prakerin');
 //     }
 // }
+<<<<<<< HEAD
+=======
 >>>>>>> 7f1c43734efdea184a45248cb6cf85f885867646
 >>>>>>> fa92ed8a3085a82df6c78761a261cc15a479d1ee
+>>>>>>> 8747634743302a68be79d37f50e0b1ddc0a25fb7

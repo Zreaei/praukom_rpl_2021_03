@@ -6,21 +6,13 @@ use App\Models\PengajuanModel;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 
 class SiswaController extends Controller
 {
-    //
-    // public function home() 
-    // {
-    //     return view('siswa.home');
-    // }
-    // public function profil() 
-    // {
-    //     return view('siswa.profil');
-    // }
-    // protected $PengajuanModel;
+    protected $PengajuanModel;
     public function __construct()
     {
         $this->PengajuanModel = new PengajuanModel;
@@ -28,40 +20,65 @@ class SiswaController extends Controller
     public function pengajuan()
     {
         //menampilkan seluruh pengajuan
-        $pengajuan = DB::select('SELECT * from surat_pengajuan');
-        return view('siswa.pengajuan',compact('pengajuan'));
+        $pengajuan = DB::select('SELECT * from pengajuan');
+        return view('siswa.pengajuan', compact('pengajuan'));
     }
     public function tambahpengajuan()
     {
         return view('siswa.tambahpengajuan');
     }
-    
+
     public function simpan(Request $request)
     {
-        $pengajuan = DB::select('SELECT * from surat_pengajuan');
+        $pengajuan = DB::select('SELECT * from pengajuan');
         $pengajuan = new PengajuanModel();
-        $pengajuan->id_surat = $request->id_surat;
-        $pengajuan->tanggal_pengajuan = $request->tanggal_pengajuan;
-        $pengajuan->nama_perusahaan = $request->nama_perusahaan;
-        $pengajuan->alamat_perusahaan = $request->alamat_perusahaan;
-        $pengajuan->pimpinan_perusahaan = $request->pimpinan_perusahaan;
-        $pengajuan->telp_perusahaan = $request->telp_perusahaan;
-        $pengajuan->save();
-        return redirect('/siswa/pengajuan')->with('Success', 'Data Berhasil disimpan');
+
+
+        $id_pengajuan = DB::select('SELECT newidpengajuan() AS id_pengajuan');
+        $array = Arr::pluck($id_pengajuan, 'id_pengajuan');
+        $kode_baru = Arr::get($array, '0');
+
+        $siswa = DB::table('siswa')
+            ->join('siswa', 'siswa.nis', '=', 'pengajuan.siswa')
+            ->get();
+        $tambah_pengajuan = DB::table('pengajuan')->insert([
+            'id_pengajuan' => $kode_baru,
+            'siswa' => $request->input('siswa'),
+            'keterangan_agenda' => $request->input('keterangan_agenda'),
+            'tgl_agenda' => $request->input('tgl_agenda'),
+
+        ]);
+        if ($tambah_pengajuan) {
+            return redirect('siswa/pengajuan');
+        } else {
+            return "input data gagal";
+        }
+        // $pengajuan->siswa = $request->siswa;
+        // $pengajuan->iduka = $request->iduka;
+        // $pengajuan->adm_keuangan = $request->adm_keuangan;
+        // $pengajuan->waka_hubin = $request->waka_hubin;
+        // $pengajuan->kaprog = $request->kaprog;
+        // $pengajuan->walas = $request->walas;
+        // $pengajuan->tgl_pengajuan = $request->tgl_pengajuan;
+        // $pengajuan->konfirmasi_admkeu = $request->konfirmasi_admkeu;
+        // $pengajuan->konfirmasi_wkhubin = $request->konfirmasi_wkhubin;
+        // $pengajuan->konfirmasi_kaprog = $request->konfirmasi_kaprog;
+        // $pengajuan->konfirmasi_walas = $request->konfirmasi_walas;
+        // $pengajuan->save();
+        // return redirect('/siswa/pengajuan')->with('Success', 'Data Berhasil disimpan');
     }
+
 
     public function editpengajuan($id)
     {
         $pengajuan = PengajuanModel::whereIdSurat($id)->first();
         return view('siswa.editpengajuan', compact('pengajuan'));
-        
     }
     public function editsimpan(Request $request, $id)
     {
         $pengajuan = PengajuanModel::findorfail($id);
         $pengajuan->update($request->all());
         return redirect('/siswa/pengajuan')->with('success', 'Data Berhasil diupdate');
-        
     }
 
     public function hapus($id)
@@ -88,17 +105,17 @@ class SiswaController extends Controller
 
 
 
-        // try{
-        //     $hapus = $this->PengajuanModel
-        //                     ->where('id_surat',$id)
-        //                     ->delete();
-        //     if($hapus){
-        //         return redirect('siswa');
-        //     }
-        // }catch(Exception $e){
-        //     $e->getMessage();
-        // }
-   
+    // try{
+    //     $hapus = $this->PengajuanModel
+    //                     ->where('id_surat',$id)
+    //                     ->delete();
+    //     if($hapus){
+    //         return redirect('siswa');
+    //     }
+    // }catch(Exception $e){
+    //     $e->getMessage();
+    // }
+
     // public function tambah(Request $request)
     // {
     //     $request->validate([
