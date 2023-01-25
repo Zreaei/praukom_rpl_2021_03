@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\DB;
 class SiswaController extends Controller
 {
     //
-    // public function home() 
+    // public function home()
     // {
     //     return view('siswa.home');
     // }
-    // public function profil() 
+    // public function profil()
     // {
     //     return view('siswa.profil');
     // }
-    // protected $PengajuanModel;
+    protected $PengajuanModel;
     public function __construct()
     {
         $this->PengajuanModel = new PengajuanModel;
@@ -28,17 +28,17 @@ class SiswaController extends Controller
     public function pengajuan()
     {
         //menampilkan seluruh pengajuan
-        $pengajuan = DB::select('SELECT * from surat_pengajuan');
-        return view('siswa.pengajuan',compact('pengajuan'));
+        $pengajuan = DB::select('SELECT * from pengajuan');
+        return view('siswa.pengajuan', compact('pengajuan'));
     }
     public function tambahpengajuan()
     {
         return view('siswa.tambahpengajuan');
     }
-    
+
     public function simpan(Request $request)
     {
-        $pengajuan = DB::select('SELECT * from surat_pengajuan');
+        $pengajuan = DB::select('SELECT * from pengajuan');
         $pengajuan = new PengajuanModel();
         $pengajuan->id_surat = $request->id_surat;
         $pengajuan->tanggal_pengajuan = $request->tanggal_pengajuan;
@@ -54,14 +54,12 @@ class SiswaController extends Controller
     {
         $pengajuan = PengajuanModel::whereIdSurat($id)->first();
         return view('siswa.editpengajuan', compact('pengajuan'));
-        
     }
     public function editsimpan(Request $request, $id)
     {
         $pengajuan = PengajuanModel::findorfail($id);
         $pengajuan->update($request->all());
         return redirect('/siswa/pengajuan')->with('success', 'Data Berhasil diupdate');
-        
     }
 
     public function hapus($id)
@@ -88,17 +86,17 @@ class SiswaController extends Controller
 
 
 
-        // try{
-        //     $hapus = $this->PengajuanModel
-        //                     ->where('id_surat',$id)
-        //                     ->delete();
-        //     if($hapus){
-        //         return redirect('siswa');
-        //     }
-        // }catch(Exception $e){
-        //     $e->getMessage();
-        // }
-   
+    // try{
+    //     $hapus = $this->PengajuanModel
+    //                     ->where('id_surat',$id)
+    //                     ->delete();
+    //     if($hapus){
+    //         return redirect('siswa');
+    //     }
+    // }catch(Exception $e){
+    //     $e->getMessage();
+    // }
+
     // public function tambah(Request $request)
     // {
     //     $request->validate([

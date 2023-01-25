@@ -25,6 +25,7 @@ use App\Http\Controllers\{
     Verifikator\VerifikatorController,
     Walas\WalasController,
     WkHubin\WkhubinController,
+    WkHubin\DataPengajuanController,
     HomeController,
     LoginController,
 };
@@ -58,15 +59,15 @@ Route::get('/admin/data-user/tambah', [UserController::class, 'tambahUser']);
 Route::post('/admin/data-user/simpan', [UserController::class, 'simpan']);
 Route::get('/admin/data-user/hapus/{id}', [UserController::class, 'hapus']);
 Route::get('/admin/data-user/edit/{id}', [UserController::class, 'edit']);
-Route::post('/admin/data-user/edit/simpanedit', [UserController::class,'simpanedit']);
+Route::post('/admin/data-user/edit/simpanedit', [UserController::class, 'simpanedit']);
 
 // Admin - Kelola Operator
 Route::get('/admin/data-op', [DataOperatorController::class, 'operator']);
 Route::get('/admin/data-op/tambah', [DataOperatorController::class, 'tambahOpr']);
 Route::post('/admin/data-op/simpan', [DataOperatorController::class, 'simpan']);
-Route::get('/admin/data-op/hapus/{id}', [DataOperatorController::class,'hapus']);
+Route::get('/admin/data-op/hapus/{id}', [DataOperatorController::class, 'hapus']);
 Route::get('/admin/data-op/edit/{id}', [DataOperatorController::class, 'edit']);
-Route::post('/admin/data-op/edit/simpanedit', [DataOperatorController::class,'simpanedit']);
+Route::post('/admin/data-op/edit/simpanedit', [DataOperatorController::class, 'simpanedit']);
 
 // Admin - Kelola Angkatan
 Route::get('/admin/data-angkatan', [DataAngkatanController::class, 'angkatan']);
@@ -74,7 +75,7 @@ Route::get('/admin/data-angkatan/tambah', [DataAngkatanController::class, 'tamba
 Route::post('/admin/data-angkatan/simpan', [DataAngkatanController::class, 'simpan']);
 Route::get('/admin/data-angkatan/hapus/{id}', [DataAngkatanController::class, 'hapus']);
 Route::get('/admin/data-angkatan/edit/{id}', [DataAngkatanController::class, 'edit']);
-Route::post('/admin/data-angkatan/edit/simpanedit',[DataAngkatanController::class,'simpanedit']);
+Route::post('/admin/data-angkatan/edit/simpanedit', [DataAngkatanController::class, 'simpanedit']);
 
 // Admin - Kelola Jurusan
 Route::get('/admin/data-jurusan', [DataJurusanController::class, 'jurusan']);
@@ -82,7 +83,7 @@ Route::get('/admin/data-jurusan/tambah', [DataJurusanController::class, 'tambahJ
 Route::post('/admin/data-jurusan/simpan', [DataJurusanController::class, 'simpan']);
 Route::get('/admin/data-jurusan/hapus/{id}', [DataJurusanController::class, 'hapus']);
 Route::get('/admin/data-jurusan/edit/{id}', [DataJurusanController::class, 'edit']);
-Route::post('/admin/data-jurusan/edit/simpanedit',[DataJurusanController::class,'simpanedit']);
+Route::post('/admin/data-jurusan/edit/simpanedit', [DataJurusanController::class, 'simpanedit']);
 
 // Operator - Dashboard
 Route::get('/operator/home', [OperatorController::class, 'home']);
@@ -90,51 +91,51 @@ Route::get('/operator/profile', [OperatorController::class, 'profile']);
 
 // Operator - Kelola Wkhubin
 Route::get('/operator/wkhubin', [DataWkhubinController::class, 'wkhubin']);
-Route::get('/operator/wkhubin/tambah',[DataWkhubinController::class,'tambahwkhubin']);
-Route::post('/operator/wkhubin/tambah/tambahsimpan',[DataWkhubinController::class,'simpanwkhubin']);
-Route::get('/operator/wkhubin/edit/{id}',[DataWkhubinController::class,'editwkhubin']);
-Route::post('/operator/wkhubin/edit/editsimpan',[DataWkhubinController::class,'editsimpanwkhubin']);
-Route::get('/operator/wkhubin/hapus/{id}',[DataWkhubinController::class,'hapususer']);
+Route::get('/operator/wkhubin/tambah', [DataWkhubinController::class, 'tambahwkhubin']);
+Route::post('/operator/wkhubin/tambah/tambahsimpan', [DataWkhubinController::class, 'simpanwkhubin']);
+Route::get('/operator/wkhubin/edit/{id}', [DataWkhubinController::class, 'editwkhubin']);
+Route::post('/operator/wkhubin/edit/editsimpan', [DataWkhubinController::class, 'editsimpanwkhubin']);
+Route::get('/operator/wkhubin/hapus/{id}', [DataWkhubinController::class, 'hapususer']);
 
 // Operator - Kelola Pbsekolah
 Route::get('/operator/pbsekolah', [DataPbsekolahController::class, 'pbsekolah']);
-Route::get('/operator/pbsekolah/tambah',[DataPbsekolahController::class,'tambahpbsekolah']);
-Route::post('/operator/pbsekolah/tambah/tambahsimpan',[DataPbsekolahController::class,'simpanpbsekolah']);
-Route::get('/operator/pbsekolah/edit/{id}',[DataPbsekolahController::class,'editpbsekolah']);
-Route::post('/operator/pbsekolah/edit/editsimpan',[DataPbsekolahController::class,'editsimpanpbsekolah']);
-Route::get('/operator/pbsekolah/hapus/{id}',[DataPbsekolahController::class,'hapususer']);
+Route::get('/operator/pbsekolah/tambah', [DataPbsekolahController::class, 'tambahpbsekolah']);
+Route::post('/operator/pbsekolah/tambah/tambahsimpan', [DataPbsekolahController::class, 'simpanpbsekolah']);
+Route::get('/operator/pbsekolah/edit/{id}', [DataPbsekolahController::class, 'editpbsekolah']);
+Route::post('/operator/pbsekolah/edit/editsimpan', [DataPbsekolahController::class, 'editsimpanpbsekolah']);
+Route::get('/operator/pbsekolah/hapus/{id}', [DataPbsekolahController::class, 'hapususer']);
 
 // Operator - Kelola Pbiduka
 Route::get('/operator/pbiduka', [DataPbidukaController::class, 'pbiduka']);
-Route::get('/operator/pbiduka/tambah',[DataPbidukaController::class,'tambahpbiduka']);
-Route::post('/operator/pbiduka/tambah/tambahsimpan',[DataPbidukaController::class,'simpanpbiduka']);
-Route::get('/operator/pbiduka/edit/{id}',[DataPbidukaController::class,'editpbiduka']);
-Route::post('/operator/pbiduka/edit/editsimpan',[DataPbidukaController::class,'editsimpanpbiduka']);
-Route::get('/operator/pbiduka/hapus/{id}',[DataPbidukaController::class,'hapususer']);
+Route::get('/operator/pbiduka/tambah', [DataPbidukaController::class, 'tambahpbiduka']);
+Route::post('/operator/pbiduka/tambah/tambahsimpan', [DataPbidukaController::class, 'simpanpbiduka']);
+Route::get('/operator/pbiduka/edit/{id}', [DataPbidukaController::class, 'editpbiduka']);
+Route::post('/operator/pbiduka/edit/editsimpan', [DataPbidukaController::class, 'editsimpanpbiduka']);
+Route::get('/operator/pbiduka/hapus/{id}', [DataPbidukaController::class, 'hapususer']);
 
 // Operator - Kelola Kaprog
 Route::get('/operator/kaprog', [DataKaprogController::class, 'kaprog']);
-Route::get('/operator/kaprog/tambah',[DataKaprogController::class,'tambahkaprog']);
-Route::post('/operator/kaprog/tambah/tambahsimpan',[DataKaprogController::class,'simpankaprog']);
-Route::get('/operator/kaprog/edit/{id}',[DataKaprogController::class,'editkaprog']);
-Route::post('/operator/kaprog/edit/editsimpan',[DataKaprogController::class,'editsimpankaprog']);
-Route::get('/operator/kaprog/hapus/{id}',[DataKaprogController::class,'hapususer']);
+Route::get('/operator/kaprog/tambah', [DataKaprogController::class, 'tambahkaprog']);
+Route::post('/operator/kaprog/tambah/tambahsimpan', [DataKaprogController::class, 'simpankaprog']);
+Route::get('/operator/kaprog/edit/{id}', [DataKaprogController::class, 'editkaprog']);
+Route::post('/operator/kaprog/edit/editsimpan', [DataKaprogController::class, 'editsimpankaprog']);
+Route::get('/operator/kaprog/hapus/{id}', [DataKaprogController::class, 'hapususer']);
 
 // Operator - Kelola Walas
 Route::get('/operator/walas', [DataWalasController::class, 'walas']);
-Route::get('/operator/walas/tambah',[DataWalasController::class,'tambahwalas']);
-Route::post('/operator/walas/tambah/tambahsimpan',[DataWalasController::class,'simpanwalas']);
-Route::get('/operator/walas/edit/{id}',[DataWalasController::class,'editwalas']);
-Route::post('/operator/walas/edit/editsimpan',[DataWalasController::class,'editsimpanwalas']);
-Route::get('/operator/walas/hapus/{id}',[DataWalasController::class,'hapususer']);
+Route::get('/operator/walas/tambah', [DataWalasController::class, 'tambahwalas']);
+Route::post('/operator/walas/tambah/tambahsimpan', [DataWalasController::class, 'simpanwalas']);
+Route::get('/operator/walas/edit/{id}', [DataWalasController::class, 'editwalas']);
+Route::post('/operator/walas/edit/editsimpan', [DataWalasController::class, 'editsimpanwalas']);
+Route::get('/operator/walas/hapus/{id}', [DataWalasController::class, 'hapususer']);
 
 // Operator - Kelola Verifikator
 Route::get('/operator/verifikator', [DataVerifikatorController::class, 'verifikator']);
-Route::get('/operator/verifikator/tambah',[DataVerifikatorController::class,'tambahverifikator']);
-Route::post('/operator/verifikator/tambah/tambahsimpan',[DataVerifikatorController::class,'simpanverifikator']);
-Route::get('/operator/verifikator/edit/{id}',[DataVerifikatorController::class,'editverifikator']);
-Route::post('/operator/verifikator/edit/editsimpan',[DataVerifikatorController::class,'editsimpanverifikator']);
-Route::get('/operator/verifikator/hapus/{id}',[DataVerifikatorController::class,'hapususer']);
+Route::get('/operator/verifikator/tambah', [DataVerifikatorController::class, 'tambahverifikator']);
+Route::post('/operator/verifikator/tambah/tambahsimpan', [DataVerifikatorController::class, 'simpanverifikator']);
+Route::get('/operator/verifikator/edit/{id}', [DataVerifikatorController::class, 'editverifikator']);
+Route::post('/operator/verifikator/edit/editsimpan', [DataVerifikatorController::class, 'editsimpanverifikator']);
+Route::get('/operator/verifikator/hapus/{id}', [DataVerifikatorController::class, 'hapususer']);
 
 // Route::get('/operator/siswa', [OperatorController::class, 'siswa']);
 // Route::get('/operator/siswa/tambah',[OperatorController::class,'tambahSiswa']);
@@ -147,10 +148,10 @@ Route::get('/operator/verifikator/hapus/{id}',[DataVerifikatorController::class,
 Route::get('/operator', [OperatorController::class, 'index']);
 Route::get('/operator/admkeu', [OperatorController::class, 'admkeu']);
 Route::get('/operator/admkeu/tambah', [OperatorController::class, 'tambahadmkeu']);
-Route::post('/operator/admkeu/simpan',[OperatorController::class, 'simpan']);
-Route::get('/operator/admkeu/hapus/{id}',[OperatorController::class,'hapus']);
-Route::get('/operator/admkeu/edit/{id}',[OperatorController::class, 'edit']);
-Route::post('/operator/admkeu/edit/simpanedit',[OperatorController::class,'simpanedit']);
+Route::post('/operator/admkeu/simpan', [OperatorController::class, 'simpan']);
+Route::get('/operator/admkeu/hapus/{id}', [OperatorController::class, 'hapus']);
+Route::get('/operator/admkeu/edit/{id}', [OperatorController::class, 'edit']);
+Route::post('/operator/admkeu/edit/simpanedit', [OperatorController::class, 'simpanedit']);
 
 // // Operator
 // Route::get('/operator/home', [OperatorController::class, 'home']);
@@ -225,3 +226,5 @@ Route::get('/siswa/hapus/{id}', [PresensiController::class, 'hapus']);
 // Route::get('/login', [VerifikatorController::class, 'login']);
 
 // // Route::get('/adminhome', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/wkhubin/pengajuan', [DataPengajuanController::class, 'pengajuan']);
