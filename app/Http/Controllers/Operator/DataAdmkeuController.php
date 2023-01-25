@@ -13,7 +13,7 @@ class DataAdmkeuController extends Controller
 {
     protected $AdmkeuModel;
     protected $UserModel;
-    
+
     public function __construct()
     {
         $this->UserModel = new UserModel;
@@ -65,7 +65,7 @@ class DataAdmkeuController extends Controller
             try {
                 $id_user = $this->UserModel->create($user);
                 $admkeu['id_user'] = $id_user;
-                $this->AdmkeuModel->create($admkeu);                
+                $this->AdmkeuModel->create($admkeu);
                 return redirect('/operator/admkeu')->with('sukses', 'Data berhasil ditambah');
             } catch (\Throwable $th) {
                 return redirect('/operator/admkeu')->with('error', 'Data gagal ditambah');

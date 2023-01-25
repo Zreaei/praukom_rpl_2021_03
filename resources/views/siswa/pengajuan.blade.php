@@ -3,7 +3,7 @@
 
 
 <div class="flex bg-gray-100">
-    
+
     <aside class="w-64" aria-label="Sidebar">
     <div class="px-3 py-4 overflow-y-auto bg-gray-50 h-screen bg-gradient-to-b from-blue-700 to-stone-900">
         <ul class="space-y-2">
@@ -44,7 +44,7 @@
                 <span class="ml-3 ">Logout</span>
                 </a>
             </li>
-           
+
         </ul>
     </div>
     </aside>
@@ -64,7 +64,7 @@
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden rounded-lg">
-                        
+
                             <table class="min-w-full text-center rounded-box">
                             <thead class="border-b">
                                 <tr class="bg-blue-700">
@@ -78,21 +78,12 @@
                                         Nama Perusahaan
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        Alamat Perusahaan
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        Pimpinan Perusahaan
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        No.Tlp Perusahaan
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                                         Aksi
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php 
+                            <?php
                                 $no = 1;
                             ?>
                                 @foreach ($pengajuan as $ajuan)
@@ -101,7 +92,7 @@
                                             {{ $no++ }}
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $ajuan->id_surat }}
+                                            {{ $ajuan->id_pengajuan }}
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {{ $ajuan->tanggal_pengajuan }}
@@ -160,11 +151,11 @@
                 </div>
                 </div>
             </div>
-            
+
             </div>
         </div>
     </div>
-  
+
 
 <!-- Put this part before </body> tag
 <input type="checkbox" id="tambah-pengajuan" class="modal-toggle" />
@@ -209,7 +200,7 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="grid grid-cols-2 gap-x-96">
                 <div class="form-group w-96">
                     <label for="nis" class="form-label inline-block font-semibold text-white">NIS</label>
@@ -236,7 +227,7 @@
                     placeholder="NIS"
                     />
                 </div>
-                
+
                 <div class="form-group w-96 pl-10">
                     <label for="namakelas" class="form-label inline-block font-semibold text-white">Nama Kelas</label>
                     <select class="select form-control block xl:w-96" id="namakelas">
@@ -245,7 +236,7 @@
                         <option>B</option>
                         <option>C</option>
                     </select>
-                </div>   
+                </div>
             </div>
             <div class="grid grid-cols-2 gap-x-96">
                 <div class="form-group w-96">
@@ -341,8 +332,8 @@
                     />
                 </div>
             </div>
-            
-            
+
+
             <div class="grid grid-cols-2 gap-x-96">
                 <div class="form-group w-96">
                     <label for="namaiduka" class="form-label inline-block font-semibold text-white">Nama Perusahaan</label>
@@ -473,7 +464,7 @@
                     />
                 </div>
             </div>
-           
+
         </div>
     </div>
     <div class="modal-action">

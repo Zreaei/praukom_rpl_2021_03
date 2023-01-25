@@ -24,7 +24,7 @@ return new class extends Migration
             DECLARE ambil_angka INT;
             DECLARE hasil CHAR(6);
             SELECT MAX(id_user) INTO id_lama FROM user;
-            IF (id_lama IS NOT NULL) THEN 
+            IF (id_lama IS NOT NULL) THEN
                 SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
                 SET hasil = LPAD(ambil_angka,3,0);
                 SET id_baru = CONCAT('USR',hasil);
@@ -45,7 +45,7 @@ return new class extends Migration
             DECLARE ambil_angka INT;
             DECLARE hasil CHAR(6);
             SELECT MAX(id_operator) INTO id_lama FROM operator;
-            IF (id_lama IS NOT NULL) THEN 
+            IF (id_lama IS NOT NULL) THEN
                 SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
                 SET hasil = LPAD(ambil_angka,3,0);
                 SET id_baru = CONCAT('OPR',hasil);
@@ -66,7 +66,7 @@ return new class extends Migration
             DECLARE ambil_angka INT;
             DECLARE hasil CHAR(6);
             SELECT MAX(id_jurusan) INTO id_lama FROM jurusan;
-            IF (id_lama IS NOT NULL) THEN 
+            IF (id_lama IS NOT NULL) THEN
                 SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
                 SET hasil = LPAD(ambil_angka,3,0);
                 SET id_baru = CONCAT('JRS',hasil);
@@ -87,7 +87,7 @@ return new class extends Migration
             DECLARE ambil_angka INT;
             DECLARE hasil CHAR(6);
             SELECT MAX(id_kelas) INTO id_lama FROM kelas;
-            IF (id_lama IS NOT NULL) THEN 
+            IF (id_lama IS NOT NULL) THEN
                 SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
                 SET hasil = LPAD(ambil_angka,3,0);
                 SET id_baru = CONCAT('KLS',hasil);
@@ -108,7 +108,7 @@ return new class extends Migration
             DECLARE ambil_angka INT;
             DECLARE hasil CHAR(6);
             SELECT MAX(id_angkatan) INTO id_lama FROM angkatan;
-            IF (id_lama IS NOT NULL) THEN 
+            IF (id_lama IS NOT NULL) THEN
                 SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
                 SET hasil = LPAD(ambil_angka,3,0);
                 SET id_baru = CONCAT('AKT',hasil);
@@ -128,8 +128,8 @@ return new class extends Migration
             DECLARE id_baru CHAR(6);
             DECLARE ambil_angka INT;
             DECLARE hasil CHAR(6);
-            SELECT MAX(id_surat) INTO id_lama FROM surat_pengajuan;
-            IF (id_lama IS NOT NULL) THEN 
+            SELECT MAX(id_pengajuan) INTO id_lama FROM pengajuan;
+            IF (id_lama IS NOT NULL) THEN
                 SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
                 SET hasil = LPAD(ambil_angka,3,0);
                 SET id_baru = CONCAT('PNJ',hasil);
@@ -150,7 +150,7 @@ return new class extends Migration
             DECLARE ambil_angka INT;
             DECLARE hasil CHAR(6);
             SELECT MAX(id_agenda) INTO id_lama FROM agenda;
-            IF (id_lama IS NOT NULL) THEN 
+            IF (id_lama IS NOT NULL) THEN
                 SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
                 SET hasil = LPAD(ambil_angka,3,0);
                 SET id_baru = CONCAT('PRS',hasil);
