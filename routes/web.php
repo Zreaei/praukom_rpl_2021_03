@@ -85,6 +85,14 @@ Route::get('/admin/data-jurusan/hapus/{id}', [DataJurusanController::class, 'hap
 Route::get('/admin/data-jurusan/edit/{id}', [DataJurusanController::class, 'edit']);
 Route::post('/admin/data-jurusan/edit/simpanedit', [DataJurusanController::class, 'simpanedit']);
 
+// Admin - Kelola Kelas
+Route::get('/admin/data-kelas', [DataKelasController::class, 'kelas']);
+Route::get('/admin/data-kelas/tambah', [DataKelasController::class, 'tambahKelas']);
+Route::post('/admin/data-kelas/simpan', [DataKelasController::class, 'simpan']);
+Route::get('/admin/data-kelas/hapus/{id}', [DataKelasController::class, 'hapus']);
+Route::get('/admin/data-kelas/edit/{id}', [DataKelasController::class, 'edit']);
+Route::post('/admin/data-kelas/edit/simpanedit',[DataKelasController::class,'simpanedit']);
+
 // Operator - Dashboard
 Route::get('/operator/home', [OperatorController::class, 'home']);
 Route::get('/operator/profile', [OperatorController::class, 'profile']);

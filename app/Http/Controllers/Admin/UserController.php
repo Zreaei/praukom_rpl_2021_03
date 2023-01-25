@@ -23,15 +23,18 @@ class UserController extends Controller
     
     public function user()
     {
-        $dataUser = $this->UserModel::all();
+        // $dataUser = $this->UserModel::all();
+        $dataUser = DB::table('user')
+        ->join('level_user', 'level_user.id_level', '=', 'user.level')
+        ->get(); 
         return view('admin.data-user.data-user', compact('dataUser'));
     }
 
     public function level()
-        {
-            $dataLevel = $this->LevelModel::all();
-            return view('admin.data-level.data-level', compact('dataLevel'));
-        }
+    {
+        $dataLevel = $this->LevelModel::all();
+        return view('admin.data-level.data-level', compact('dataLevel'));
+    }
 
     public function tambahUser()
     {

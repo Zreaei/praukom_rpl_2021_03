@@ -21,7 +21,7 @@
                 <td class="text-center bg-white"><h1>{{ $item->id_user }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->username }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->email }}</h1></td>
-                <td class="text-center bg-white"><h1>{{ $item->level }}</h1></td>
+                <td class="text-center bg-white"><h1>{{ $item->nama_level }}</h1></td>
                 <td class="text-center bg-white">
                     <a href="data-user/edit/{{ $item->id_user }}"><button class="btn btn-warning">Edit</button></a>
                     <a href="data-user/hapus/{{ $item->id_user }}"><button class="btn btn-error">Hapus</button></a>

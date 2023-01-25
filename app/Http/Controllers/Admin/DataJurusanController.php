@@ -23,7 +23,9 @@ class DataJurusanController extends Controller
 
     public function jurusan()
     {
-        $dataJurusan = $this->JurusanModel::all();
+        $dataJurusan = DB::table('jurusan') 
+        ->join('kaprog', 'kaprog.nip_kaprog', '=', 'jurusan.kaprog')
+        ->get(); 
         return view('admin.data-jurusan.data-jurusan', compact('dataJurusan'));
     }
 

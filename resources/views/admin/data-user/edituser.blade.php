@@ -7,7 +7,7 @@
         <div class="form-control border border-zinc-900 rounded w-1/4 mx-auto">
             <div class="mx-auto">
                 <label class="label">
-                    <span class="label-text mx-auto">Edit Operator</span>
+                    <span class="label-text mx-auto">Edit User</span>
                 </label>
                 <label class="input-group">
                     <span class="pr-8 bg-white">username</span>
@@ -29,7 +29,6 @@
                             <option value="{{ $item->id_level }}">{{ $item->nama_level }}</option>
                         @endforeach
                     </select>
-                    <input type="hidden" name="id_user" value="{{ $edit->id_user }}" />
                 </label>
                 <div class="pt-3 pb-3 grid justify-items-center">
                     <button type="submit" value="simpan" class="btn btn-success">Simpan</button></a>
