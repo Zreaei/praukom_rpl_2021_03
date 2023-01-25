@@ -19,7 +19,7 @@
             <!-- row 1 -->
             <tr>
                 <td class="text-center bg-white"><h1>{{ $item->id_jurusan }}</h1></td>
-                <td class="text-center bg-white"><h1>{{ $item->kaprog }}</h1></td>
+                <td class="text-center bg-white"><h1>{{ $item->nama_kaprog }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->bidang_keahlian }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->program_keahlian }}</h1></td>
                 <td class="text-center bg-white">
