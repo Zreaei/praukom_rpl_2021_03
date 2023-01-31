@@ -69,11 +69,6 @@ class DataAdmkeuController extends Controller
                 return redirect('/operator/admkeu')->with('error', 'Data gagal ditambah');
             }
     }
-    // public function editadmkeu($id = null)
-    // {
-    //     $edit = $this->AdmkeuModel->find($id);
-    //     return view('operator.admkeu.editadmkeu', $edit);
-    // }
 
     public function editadmkeu(AdmkeuModel $admkeu)
     {
@@ -113,6 +108,19 @@ class DataAdmkeuController extends Controller
             return redirect('/operator/admkeu');
         }
         // dd($edit_user);
+    }
+
+    public function detailadmkeu(AdmkeuModel $admkeu)
+    {
+        $detail = DB::table('adm_keuangan')
+            ->join('user', 'user.id_user', '=', 'adm_keuangan.user')
+            ->join('level_user', 'level_user.id_level', '=', 'user.level')
+            ->select('adm_keuangan.*', 'user.*', 'level_user.*')
+            ->where('id_admkeu', '=', $admkeu->id_admkeu)
+            ->get();
+
+
+            return view('operator.admkeu.detailadmkeu', ["detail" => $detail]);
     }
 
     public function hapususer($id = null)
