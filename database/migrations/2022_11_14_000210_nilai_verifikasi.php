@@ -14,6 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nilai_verifikasi', function (Blueprint $table) {
+            $table->engine = 'innodb';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_general_ci';
             $table->char('id_nilaiverif', 6)->primary()->nullable(false);
             $table->char('verifikasi', 6)->nullable(false);
             $table->char('verifikator', 6)->nullable(false);

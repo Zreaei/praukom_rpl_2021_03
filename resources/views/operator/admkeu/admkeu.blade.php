@@ -176,11 +176,7 @@
 <div class="alert alert-danger">
     {{ session('error') }}
 </div>
-<<<<<<< HEAD
 @endif -->
-=======
-@endif
->>>>>>> 75c752711d91d00ef6a6dd8af2d014c76b667d08
 
 
 @endsection

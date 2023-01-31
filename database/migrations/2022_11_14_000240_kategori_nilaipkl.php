@@ -14,6 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kategori_nilaipkl', function (Blueprint $table) {
+            $table->engine = 'innodb';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_general_ci';
             $table->char('id_kat_nilaipkl', 6)->primary()->nullable(false);
             $table->char('jurusan', 6)->nullable(false);
             $table->char('nilai_pkl', 6)->nullable(false);

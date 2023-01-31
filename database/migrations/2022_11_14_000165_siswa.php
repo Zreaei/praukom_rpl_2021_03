@@ -14,6 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('siswa', function (Blueprint $table) {
+            $table->engine = 'innodb';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_general_ci';
             $table->char('nis', 9)->primary()->nullable(false);
             $table->char('user', 6)->nullable(false);
             $table->char('kelas', 6)->nullable(false);
