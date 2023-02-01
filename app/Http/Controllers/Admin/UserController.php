@@ -20,6 +20,12 @@ class UserController extends Controller
         $this->UserModel = new UserModel;
         $this->LevelModel = new LevelModel;
     }
+
+    public function level()
+    {
+        $dataLevel = $this->LevelModel::all();
+        return view('admin.data-level.data-level', compact('dataLevel'));
+    }
     
     public function user()
     {
@@ -28,12 +34,6 @@ class UserController extends Controller
         ->join('level_user', 'level_user.id_level', '=', 'user.level')
         ->get(); 
         return view('admin.data-user.data-user', compact('dataUser'));
-    }
-
-    public function level()
-    {
-        $dataLevel = $this->LevelModel::all();
-        return view('admin.data-level.data-level', compact('dataLevel'));
     }
 
     public function tambahUser()
