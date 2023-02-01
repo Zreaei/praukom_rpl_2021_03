@@ -56,7 +56,6 @@ class DataAdmkeuController extends Controller
         ]);
 
             try {
-<<<<<<< HEAD
                 $tambah_user = DB::select('CALL procedure_insert_admkeu(?,?,?,?,?,?)', [
                     $validated['datalevel'],
                     $validated['datausername'],
@@ -65,39 +64,63 @@ class DataAdmkeuController extends Controller
                     $validated['datafoto_user'],
                     $validated['datanama_admkeu']
                 ]);
-=======
-                $id_user = $this->UserModel->create($user);
-                $admkeu['id_user'] = $id_user;
-                $this->AdmkeuModel->create($admkeu);
->>>>>>> 75c752711d91d00ef6a6dd8af2d014c76b667d08
                 return redirect('/operator/admkeu')->with('sukses', 'Data berhasil ditambah');
             } catch (\Throwable $th) {
                 return redirect('/operator/admkeu')->with('error', 'Data gagal ditambah');
             }
     }
-    public function editadmkeu($id = null)
+
+    public function editadmkeu(AdmkeuModel $admkeu)
     {
-        $edit = $this->AdmkeuModel->find($id);
-        return view('operator.admkeu.editadmkeu', $edit);
+        $edit = DB::table('adm_keuangan')
+            ->join('user', 'user.id_user', '=', 'adm_keuangan.user')
+            ->join('level_user', 'level_user.id_level', '=', 'user.level')
+            ->select('adm_keuangan.*', 'user.*', 'level_user.*')
+            ->where('id_admkeu', '=', $admkeu->id_admkeu)
+            ->get();
+
+
+            return view('operator.admkeu.editadmkeu', ["edit" => $edit]);
     }
     public function editsimpanadmkeu(Request $request)
     {
-        try {
-            $data = [
-                'nama_admkeu' => $request->input('nama_admkeu')
-            ];
+        $validated = $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'email' => 'required',
+            'foto_user' => 'required',
+            'nama_admkeu' => 'required',
+        ]);
 
-            $upd = $this->AdmkeuModel
-                        ->where('id_admkeu', $request->input('id_admkeu'))
-                        ->update($data);
-            if($upd){
-                return redirect('/operator/admkeu');
-            }
+            try {
+                $edit_user = DB::select('CALL procedure_update_admkeu(?,?,?,?,?,?,?)', [
+                    $request->user,
+                    $validated['username'],
+                    $validated['password'],
+                    $validated['email'],
+                    $validated['foto_user'],
+                    $request->id_admkeu,
+                    $validated['nama_admkeu']
+                ]);
         } catch (Exception $e) {
-            return back()->with('error', $e->getMessage());
+            return $e->getMessage();
         } finally {
             return redirect('/operator/admkeu');
         }
+        // dd($edit_user);
+    }
+
+    public function detailadmkeu(AdmkeuModel $admkeu)
+    {
+        $detail = DB::table('adm_keuangan')
+            ->join('user', 'user.id_user', '=', 'adm_keuangan.user')
+            ->join('level_user', 'level_user.id_level', '=', 'user.level')
+            ->select('adm_keuangan.*', 'user.*', 'level_user.*')
+            ->where('id_admkeu', '=', $admkeu->id_admkeu)
+            ->get();
+
+
+            return view('operator.admkeu.detailadmkeu', ["detail" => $detail]);
     }
 
     public function hapususer($id = null)

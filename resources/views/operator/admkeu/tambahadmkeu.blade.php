@@ -11,17 +11,8 @@
                     <span class="label-text mx-auto">FORM TAMBAH DATA</span>
                 </label>
                 <label class="input-group input-group-vertical">
-                    <span class="pr-8">NAMA LEVEL : ADM KEUANGAN</span>
-                    <input type="text" name="datalevel" value="LVL007" placeholder="ADM KEUANGAN" class="input input-bordered" readonly/>
+                    <input type="hidden" name="datalevel" value="LVL007" class="input input-bordered"/>
                 </label>
-                <!-- <label class="input-group input-group-vertical">
-                    <span class="pr-8">ID USER</span>
-                    <input type="text" name="id_user" placeholder="Masukkan ID USER" class="input input-bordered" required/>
-                </label>
-                <label class="input-group input-group-vertical">
-                    <span class="pr-8">ID USER</span>
-                    <input type="text" name="user" placeholder="Konfirmasi ID USER" class="input input-bordered" required/>
-                </label> -->
                 <label class="input-group input-group-vertical">
                     <span class="pr-8">USERNAME</span>
                     <input type="text" name="datausername" placeholder="Masukkan Username" class="input input-bordered" required/>
@@ -38,10 +29,6 @@
                     <span class="pr-8">FOTO</span>
                     <input type="text" name="datafoto_user" placeholder="Masukkan Foto" class="input input-bordered" required/>
                 </label>
-                <!-- <label class="input-group input-group-vertical">
-                    <span class="pr-8">ID ADMKEU</span>
-                    <input type="text" name="id_admkeu" placeholder="Masukkan ID ADMKEU" class="input input-bordered" required/>
-                </label> -->
                 <label class="input-group input-group-vertical">
                     <span class="pr-8">NAMA LENGKAP</span>
                     <input type="text" name="datanama_admkeu" placeholder="Masukkan Nama Lengkap" class="input input-bordered" required/>
