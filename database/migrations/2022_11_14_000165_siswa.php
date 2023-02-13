@@ -21,7 +21,7 @@ return new class extends Migration
             $table->char('user', 6)->nullable(false);
             $table->char('kelas', 6)->nullable(false);
             $table->string('nama_siswa', 50)->nullable(false);
-            $table->string('tempat_lahir', 100)->nullable(false);
+            $table->string('tempat_lahir', 255)->nullable(false);
             $table->date('tgl_lahir')->nullable(false);
             $table->string('telp_siswa', 20)->nullable(false);
 

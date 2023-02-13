@@ -152,7 +152,7 @@ Route::post('/operator/admkeu/tambah/tambahsimpan', [DataAdmkeuController::class
 Route::get('/operator/admkeu/edit/{admkeu}', [DataAdmkeuController::class, 'editadmkeu']);
 Route::put('/operator/admkeu/edit/editsimpan', [DataAdmkeuController::class, 'editsimpanadmkeu']);
 Route::get('/operator/admkeu/detail/{admkeu}', [DataAdmkeuController::class, 'detailadmkeu']);
-Route::get('/operator/admkeu/hapus/{id}', [DataAdmkeuController::class, 'hapususer']);
+Route::get('/operator/admkeu/hapus/{id}', [DataAdmkeuController::class, 'hapusadmkeu']);
 
 // Route::get('/operator/siswa', [OperatorController::class, 'siswa']);
 // Route::get('/operator/siswa/tambah',[OperatorController::class,'tambahSiswa']);

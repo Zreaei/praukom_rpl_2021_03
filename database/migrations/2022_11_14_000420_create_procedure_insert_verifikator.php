@@ -15,16 +15,16 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::unprepared("DROP PROCEDURE IF EXISTS procedure_insert_admkeu");
+        DB::unprepared("DROP PROCEDURE IF EXISTS procedure_insert_verifikator");
         DB::unprepared(
-          "CREATE PROCEDURE procedure_insert_admkeu(datalevel CHAR(6), datausername VARCHAR(50), datapassword VARCHAR(50), dataemail VARCHAR(50), datafoto_user VARCHAR(60), datanama_admkeu VARCHAR(50))
+          "CREATE PROCEDURE procedure_insert_verifikator(datalevel CHAR(6), datausername VARCHAR(50), datapassword VARCHAR(255), dataemail VARCHAR(50), datafoto_user VARCHAR(255), datanip_verifikator VARCHAR(20), datanama_verifikator VARCHAR(50))
                 BEGIN
                 DECLARE kodeuser CHAR(6);
-                DECLARE kodeadmkeu CHAR(6);
+                DECLARE kodeverifikator CHAR(6);
                 SELECT generate_new_kode_user() INTO kodeuser;
-                SELECT generate_new_kode_admkeu() INTO kodeadmkeu;
+                SELECT generate_new_kode_verifikator() INTO kodeverifikator;
                 INSERT INTO user (id_user, level, username, password, email, foto_user) VALUES(kodeuser, datalevel, datausername, datapassword, dataemail, datafoto_user);
-                INSERT INTO adm_keuangan (id_admkeu, user, nama_admkeu) VALUES(kodeadmkeu, kodeuser, datanama_admkeu);
+                INSERT INTO verifikator (id_verifikator, user, nip_verifikator, nama_verifikator) VALUES(kodeverifikator, kodeuser, datanip_verifikator, datanama_verifikator);
           END;"
         );
     }
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('procedure_insert_admkeu');
+        Schema::dropIfExists('procedure_insert_verifikator');
     }
 };

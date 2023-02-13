@@ -13,18 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nilai_pkl', function (Blueprint $table) {
+        Schema::create('kegiatan', function (Blueprint $table) {
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
-            $table->char('id_nilaipkl', 6)->primary()->nullable(false);
+            $table->char('id_kegiatan', 6)->primary()->nullable(false);
             $table->char('prakerin', 6)->nullable(false);
-            $table->char('pb_iduka', 6)->nullable(false);
-            $table->tinyInteger('jml_nilaipkl')->nullable(false);
-            $table->string('predikat_nilaipkl', 2)->nullable();
+            $table->string('foto_kegiatan', 255)->nullable(false);
+            $table->text('keterangan_kegiatan')->nullable(false);
+            $table->date('tgl_kegiatan')->nullable(false);
+            $table->time('jam_masuk')->nullable(false);
+            $table->time('jam_keluar')->nullable(false);
 
             $table->foreign('prakerin')->references('id_prakerin')->on('prakerin')->cascadeOnDelete();
-            $table->foreign('pb_iduka')->references('nik')->on('pb_iduka')->cascadeOnDelete();
         });
     }
 
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nilai_pkl');
+        Schema::dropIfExists('presensi');
     }
 };
