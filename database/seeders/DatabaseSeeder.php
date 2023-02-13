@@ -28,7 +28,16 @@ class DatabaseSeeder extends Seeder
         // $this->call($seeders);
 
         $this->call([
-            LevelSeeder::class
+            LevelSeeder::class,
+            UserSeeder::class,
+            WkhubinSeeder::class,
+            WalasSeeder::class,
+            AngkatanSeeder::class,
+            KaprogSeeder::class,
+            JurusanSeeder::class,
+            KelasSeeder::class,
+            SiswaSeeder::class,
+            AdmkeuSeeder::class
         ]);
 
     }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Models\PresensiModel;
+use App\Models\PrakerinModel;
+use App\Models\PbidukaModel;
+use App\Models\PbsekolahModel;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,15 +16,21 @@ use Illuminate\Support\Facades\DB;
 class PresensiController extends Controller
 {
     protected $PresensiModel;
+    protected $PrakerinModel;
+    protected $PbidukaModel;
+    protected $PbsekolahModel;
 
     public function __construct()
     {
         $this->PresensiModel = new PresensiModel;
+        $this->PrakerinModel = new PrakerinModel;
+        $this->PbidukaModel = new PbidukaModel;
+        $this->PbsekolahModel = new PbsekolahModel;
     }
     public function presensi()
     {
         //menampilkan seluruh presensi
-        $presensi = DB::select('SELECT * from agenda');
+        $presensi = DB::select('SELECT * from presensi');
         return view('siswa.presensi',compact('presensi'));
     }
 
@@ -34,11 +43,6 @@ class PresensiController extends Controller
     {
         $presensi = DB::select('SELECT * from agenda');
         $presensi = new PresensiModel();
-        // $presensi->id_agenda = $request->id_agenda;
-        // $presensi->status_agenda = $request->status_agenda;
-        // $presensi->keterangan_agenda = $request->keterangan_agenda;
-        // $presensi->tgl_agenda = $request->tgl_agenda;
-
         $id_agenda = DB::select('SELECT newidagenda() AS id_agenda');
         $array = Arr::pluck($id_agenda, 'id_agenda');
         $kode_baru = Arr::get($array, '0');
@@ -49,7 +53,7 @@ class PresensiController extends Controller
             $file->move('storage/img/', $filename);
             $presensi->foto = $filename;
         }
-        $tambah_agenda = DB::table('agenda')->insert([
+        $tambah_presensi = DB::table('agenda')->insert([
             'id_agenda' => $kode_baru,
             'status_agenda' => $request->input('status_agenda'),
             'keterangan_agenda' => $request->input('keterangan_agenda'),
@@ -58,7 +62,7 @@ class PresensiController extends Controller
             
         ]);
 
-        if ($tambah_agenda) {
+        if ($tambah_presensi) {
             return redirect('siswa/presensi');
         } else {
             return "input data gagal";

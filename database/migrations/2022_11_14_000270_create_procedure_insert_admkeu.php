@@ -17,7 +17,13 @@ return new class extends Migration
     {
         DB::unprepared("DROP PROCEDURE IF EXISTS procedure_insert_admkeu");
         DB::unprepared(
-          "CREATE PROCEDURE procedure_insert_admkeu(datalevel CHAR(6), datausername VARCHAR(50), datapassword VARCHAR(50), dataemail VARCHAR(50), datafoto_user VARCHAR(60), datanama_admkeu VARCHAR(50))
+          "CREATE PROCEDURE procedure_insert_admkeu(
+            datalevel CHAR(6), 
+            datausername VARCHAR(50), 
+            datapassword VARCHAR(50), 
+            dataemail VARCHAR(50), 
+            datafoto_user VARCHAR(60), 
+            datanama_admkeu VARCHAR(50))
                 BEGIN
                 DECLARE kodeuser CHAR(6);
                 DECLARE kodeadmkeu CHAR(6);

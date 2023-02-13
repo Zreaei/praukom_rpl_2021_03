@@ -23,6 +23,10 @@ return new class extends Migration
             $table->char('pb_sekolah', 18)->nullable(false);
             $table->date('tgl_presensi')->nullable(false);
             $table->string('keterangan_presensi', 50)->nullable();
+            $table->string('foto_kegiatan', 60)->nullable();
+            $table->string('keterangan_kegiatan', 50)->nullable();
+            $table->time('jam_masuk')->nullable();
+            $table->time('jam_keluar')->nullable();
             $table->enum('status_presensi', ['hadir', 'sakit', 'izin', 'alfa'])->nullable(false);
             $table->enum('konfirmasi_pbsekolah', ['terima', 'tolak'])->nullable();
             $table->enum('konfirmasi_pbiduka', ['terima', 'tolak'])->nullable();
