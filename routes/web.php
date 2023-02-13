@@ -7,6 +7,7 @@ use App\Http\Controllers\{
     Admin\DataJurusanController,
     Admin\DataKelasController,
     Admin\DataAngkatanController,
+    Admin\DataSiswaController,
     Siswa\SiswaController,
     Siswa\PengajuanController,
     Siswa\PresensiController,
@@ -92,6 +93,14 @@ Route::post('/admin/data-kelas/simpan', [DataKelasController::class, 'simpan']);
 Route::get('/admin/data-kelas/hapus/{id}', [DataKelasController::class, 'hapus']);
 Route::get('/admin/data-kelas/edit/{id}', [DataKelasController::class, 'edit']);
 Route::post('/admin/data-kelas/edit/simpanedit',[DataKelasController::class,'simpanedit']);
+
+// Admin - Kelola Siswa
+Route::get('/admin/data-siswa', [DataSiswaController::class, 'siswa']);
+Route::get('/admin/data-siswa/tambah', [DataSiswaController::class, 'tambahSiswa']);
+Route::post('/admin/data-siswa/simpan', [DataSiswaController::class, 'simpan']);
+Route::get('/admin/data-siswa/hapus/{id}', [DataSiswaController::class, 'hapus']);
+Route::get('/admin/data-siswa/edit/{id}', [DataSiswaController::class, 'edit']);
+Route::post('/admin/data-siswa/edit/simpanedit',[DataSiswaController::class,'simpanedit']);
 
 // Operator - Dashboard
 Route::get('/operator/home', [OperatorController::class, 'home']);
@@ -188,6 +197,7 @@ Route::put('/siswa/simpan', [SiswaController::class, 'simpan'])->name('siswa.sim
 Route::get('/siswa/editpengajuan/{id}', [SiswaController::class, 'editpengajuan']);
 Route::put('/siswa/editsimpanpengajuan/{id}', [SiswaController::class, 'editsimpan']);
 Route::get('/siswa/hapuspengajuan/{id}', [SiswaController::class, 'hapus']);
+
 // Siswa - presensi
 Route::get('/siswa/presensi', [PresensiController::class, 'presensi'])->name('siswa.presensi');
 Route::get('/siswa/tambahpresensi', [PresensiController::class, 'tambahpresensi'])->name('siswa.tambahpresensi');

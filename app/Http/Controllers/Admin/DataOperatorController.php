@@ -29,7 +29,10 @@ class DataOperatorController extends Controller
 
     public function tambahOpr()
     {
-        $user = $this->UserModel::all();
+        // $user = $this->UserModel::all();
+        $user = DB::table('user')
+        ->join('level_user', 'level_user.id_level', '=', 'user.level')
+        ->get(); 
         return view('admin.data-op.tambahop', compact('user'));
     }
 

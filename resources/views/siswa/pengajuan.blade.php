@@ -50,7 +50,7 @@
     </aside>
     <div class="container">
 
-        <div class="p-7 w-full justify-center items-center ">
+        <div class="p-7 w-full justify-center items-center">
             <!-- <div class="bg-gradient-to-r from-blue-700 to-stone-900 h-52 rounded-lg "> -->
             <div class="grid gird-cols-2">
                 <h3 class="text-2xl font-bold text-blue-700">DATA PENGAJUAN</h3>
