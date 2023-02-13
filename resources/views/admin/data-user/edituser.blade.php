@@ -30,6 +30,9 @@
                         @endforeach
                     </select>
                 </label>
+                <label class="input-group">
+                    <input type="hidden" name="id_user" placeholder="id_user" value="{{ $edit->id_user }}" class="input input-bordered" />
+                </label>
                 <div class="pt-3 pb-3 grid justify-items-center">
                     <button type="submit" value="simpan" class="btn btn-success">Simpan</button></a>
                 </div>

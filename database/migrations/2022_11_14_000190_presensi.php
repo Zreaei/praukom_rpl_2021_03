@@ -20,7 +20,7 @@ return new class extends Migration
             $table->char('id_presensi', 6)->primary()->nullable(false);
             $table->char('prakerin', 6)->nullable(false);
             $table->char('pb_iduka', 16)->nullable(false);
-            $table->char('pb_sekolah', 18)->nullable(false);
+            $table->char('pb_sekolah', 6)->nullable(false);
             $table->date('tgl_presensi')->nullable(false);
             $table->string('keterangan_presensi', 50)->nullable();
             $table->string('foto_kegiatan', 60)->nullable();
@@ -32,8 +32,8 @@ return new class extends Migration
             $table->enum('konfirmasi_pbiduka', ['terima', 'tolak'])->nullable();
 
             $table->foreign('prakerin')->references('id_prakerin')->on('prakerin')->cascadeOnDelete();
-            $table->foreign('pb_iduka')->references('nik_pbiduka')->on('pb_iduka')->cascadeOnDelete();
-            $table->foreign('pb_sekolah')->references('nip_pbsekolah')->on('pb_sekolah')->cascadeOnDelete();
+            $table->foreign('pb_iduka')->references('nik')->on('pb_iduka')->cascadeOnDelete();
+            $table->foreign('pb_sekolah')->references('id_pbsekolah')->on('pb_sekolah')->cascadeOnDelete();
         });
     }
 

@@ -19,6 +19,7 @@ class KaprogSeeder extends Seeder
     public function run()
     {
         $kaprog = [
+<<<<<<< HEAD
         [
             'nip_kaprog' => '123456781234567891',
             'user' => 'USR005',
@@ -28,5 +29,16 @@ class KaprogSeeder extends Seeder
 
                 DB::table('kaprog')->insert($kaprog);
                                             
+=======
+            [
+            'id_kaprog' => 'KPR001',
+            'user' => 'USR009',
+            'nip_kaprog' => '1009',
+            'nama_kaprog' => 'nama kaprog'
+            ]
+        ];
+
+        DB::table('kaprog')->insert($kaprog);
+>>>>>>> 7be6b6171398e8469cc955736142442135385b55
     }
 }

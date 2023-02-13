@@ -20,7 +20,7 @@ return new class extends Migration
             $table->char('id_prakerin', 6)->primary()->nullable(false);
             $table->char('pengajuan', 6)->nullable(false);
             $table->char('siswa', 9)->nullable(false);
-            $table->char('monitoring', 6)->nullable(false);
+            $table->char('monitoring', 6)->nullable();
             $table->enum('status_prakerin', ['belum', 'sudah'])->nullable();
             $table->date('tgl_mulai')->nullable();
             $table->date('tgl_selesai')->nullable();

@@ -59,7 +59,7 @@
                     FOTO
                 </th>
                 <td class="px-6 py-4">
-                    {{ $detail[0]->foto_user }}
+                <img src="{{ asset('storage/' . $detail[0]->foto_user) }}" id="gambar" alt="Foto Agenda" style="width:100px">
                 </td>
             </tr>
         </tbody>
@@ -71,5 +71,5 @@
             </div>
         </div>
     </div>
-
+  
 @endsection

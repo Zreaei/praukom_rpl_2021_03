@@ -19,12 +19,12 @@ return new class extends Migration
             $table->collation = 'utf8mb4_general_ci';
             $table->char('id_kelas', 6)->primary()->nullable(false);
             $table->char('jurusan', 6)->nullable(false);
-            $table->char('walas', 18)->nullable(false);
+            $table->char('walas', 6)->nullable(false);
             $table->char('angkatan', 6)->nullable(false);
             $table->char('tingkatan', 2)->nullable(false);
             $table->string('nama_kelas', 1)->nullable();
 
-            $table->foreign('walas')->references('nip_walas')->on('walas')->cascadeOnDelete();
+            $table->foreign('walas')->references('id_walas')->on('walas')->cascadeOnDelete();
             $table->foreign('angkatan')->references('id_angkatan')->on('angkatan')->cascadeOnDelete();
             $table->foreign('jurusan')->references('id_jurusan')->on('jurusan')->cascadeOnDelete();
         });

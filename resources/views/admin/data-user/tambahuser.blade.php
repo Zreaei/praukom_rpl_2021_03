@@ -4,26 +4,26 @@
 <form method="POST" action="simpan">
     @csrf
     <div class="pt-36">
-        <div class="form-control border border-zinc-900 rounded w-1/4 mx-auto">
+        <div class="form-control border border-zinc-900 rounded w-1/3 mx-auto">
             <div class="mx-auto">
                 <label class="label">
                     <span class="label-text mx-auto">Tambah User</span>
                 </label>
-                <label class="input-group">
-                    <span class="pr-8 bg-white">Username</span>
+                <label class="input-group m-5">
+                    <span class="pr-3.5 bg-white">Username</span>
                     <input type="text" name="username" placeholder="username" class="input input-bordered" required />
                 </label>
-                <label class="input-group">
-                    <span class="pr-8 bg-white">Password</span>
+                <label class="input-group m-5">
+                    <span class="pr-5 bg-white">Password</span>
                     <input type="text" name="password" placeholder="password" class="input input-bordered" required />
                 </label>
-                <label class="input-group">
-                    <span class="pr-8 bg-white">Email</span>
+                <label class="input-group m-5">
+                    <span class="pr-12 bg-white">Email</span>
                     <input type="email" name="email" placeholder="email" class="input input-bordered" required />
                 </label>
-                <div class="form-control">
-                    <label class="input-group">
-                        <span class="pr-8 bg-white">Level</span>
+                <div class="form-control m-5">
+                    <label class="input-group pl-3">
+                        <span class="pr-12 bg-white">Level</span>
                         <select class="select select-bordered" name="level">
                             <option value="default">Choose Level</option>
                             @foreach ($level as $item)

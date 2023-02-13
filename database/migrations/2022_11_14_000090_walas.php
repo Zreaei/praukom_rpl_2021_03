@@ -17,8 +17,9 @@ return new class extends Migration
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
-            $table->char('nip_walas', 18)->primary()->nullable(false);
+            $table->char('id_walas', 6)->primary()->nullable(false);
             $table->char('user', 6)->nullable(false);
+            $table->string('nip_walas', 20)->nullable(false);
             $table->string('nama_walas', 50)->nullable(false);
 
             $table->foreign('user')->references('id_user')->on('user')->cascadeOnDelete();

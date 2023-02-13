@@ -19,7 +19,7 @@
                         <select class="select select-bordered" name="user">
                             <option value="default">None</option>
                             @foreach ($user as $item)
-                                <option value="{{ $item->id_user }}">{{ $item->username }}</option>
+                                <option value="{{ $item->id_user }}">{{ $item->username }} - {{ $item->nama_level }}</option>
                             @endforeach
                         </select>
                     </label>

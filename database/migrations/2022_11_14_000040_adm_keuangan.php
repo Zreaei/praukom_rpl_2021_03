@@ -19,7 +19,6 @@ return new class extends Migration
             $table->collation = 'utf8mb4_general_ci';
             $table->char('id_admkeu', 6)->primary()->nullable(false);
             $table->char('user', 6)->nullable(false);
-            $table->string('nama_admkeu', 50)->nullable(false);
 
             $table->foreign('user')->references('id_user')->on('user')->cascadeOnDelete();
         });

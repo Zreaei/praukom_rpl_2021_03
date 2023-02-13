@@ -39,6 +39,33 @@ class DatabaseSeeder extends Seeder
             SiswaSeeder::class,
             AdmkeuSeeder::class
         ]);
+        $this->call([
+            UserSeeder::class
+        ]);
+        $this->call([
+            AdminSeeder::class
+        ]);
+        $this->call([
+            OperatorSeeder::class
+        ]);
+        $this->call([
+            AdmkeuSeeder::class
+        ]);
+        $this->call([
+            WalasSeeder::class
+        ]);
+        $this->call([
+            KaprogSeeder::class
+        ]);
+        $this->call([
+            JurusanSeeder::class
+        ]);
+        $this->call([
+            AngkatanSeeder::class
+        ]);
+        $this->call([
+            KelasSeeder::class
+        ]);
 
     }
 }

@@ -11,12 +11,20 @@
     </div>
     <div class="flex justify-center">
 
+<<<<<<< HEAD
         <div class="px-28 py-7 w-full justify-center items-center ">
             <div class="flex justify-between">
                 <div>
                     <h3 class="text-2xl font-bold text-[#2D5EBB]">DATA PENGAJUAN</h3>
                 </div>
                 <div>
+=======
+        <div class="p-7 w-full justify-center items-center">
+            <!-- <div class="bg-gradient-to-r from-blue-700 to-stone-900 h-52 rounded-lg "> -->
+            <div class="grid gird-cols-2">
+                <h3 class="text-2xl font-bold text-blue-700">DATA PENGAJUAN</h3>
+                <div class="flex justify-end">
+>>>>>>> 7be6b6171398e8469cc955736142442135385b55
                     <!-- The button to open modal -->
                     <label for="tambah-pengajuan" class="btn bg-[#417EF2] hover:bg-[#2D5EBB] text-[#ffffff] font-bold py-2 px-4 border-b-4 border-[#2D5EBB] hover:border-[#417EF2] rounded text-lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" /></svg></label>
                 </div>

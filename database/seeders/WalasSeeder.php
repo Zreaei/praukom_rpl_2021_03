@@ -19,6 +19,7 @@ class WalasSeeder extends Seeder
     public function run()
     {
         $walas = [
+<<<<<<< HEAD
         [
             'nip_walas' => '327503275032750872',
             'user' => 'USR002',
@@ -28,5 +29,16 @@ class WalasSeeder extends Seeder
 
                 DB::table('walas')->insert($walas);
                                             
+=======
+            [
+            'id_walas' => 'WLS001',
+            'user' => 'USR006',
+            'nip_walas' => '1006',
+            'nama_walas' => 'nama walas'
+            ]
+        ];
+
+        DB::table('walas')->insert($walas);
+>>>>>>> 7be6b6171398e8469cc955736142442135385b55
     }
 }

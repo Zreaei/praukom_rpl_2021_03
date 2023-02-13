@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('container')
 
-<div class="w-2/3 rounded mt-10 border-slate-500 mx-auto">
+<div class="w-1/2 rounded mt-10 border-slate-500 mx-auto">
     <div class="overflow-x-auto">
         <table class="table w-full">
         <!-- head -->
