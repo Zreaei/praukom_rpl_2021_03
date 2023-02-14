@@ -48,26 +48,16 @@ class PengajuanController extends Controller
         $admkeu = $this->AdmkeuModel::all();
         $wkhubin = $this->WkhubinModel::all();
         $kaprog = $this->KaprogModel::all();
-        $walas = $this->WalasModel::all(); 
+        $walas = $this->WalasModel::all();
         $pengajuan = DB::table('pengajuan')
         ->join('iduka', 'iduka.id_iduka', '=', 'pengajuan.iduka')
         ->join('siswa', 'siswa.nis', '=', 'pengajuan.siswa')
         ->select('pengajuan.*', 'iduka.*', 'siswa.*')
         ->get();
-        return view('siswa.pengajuan',compact('pengajuan','siswa','admkeu','wkhubin','kaprog','walas'), ["edit" => $pengajuan])->with('pengajuan', $pengajuan);
+        return view('siswa.pengajuan', compact('pengajuan','siswa','admkeu','wkhubin','kaprog','walas'), ["edit" => $pengajuan]);
     }
-    // public function tambahpengajuan()
-    // {
-    //     $pengajuan = $this->PengajuanModel::all();
-    //     $siswa = $this->SiswaModel::all();
-    //     $admkeu = $this->AdmkeuModel::all();
-    //     $wkhubin = $this->WkhubinModel::all();
-    //     $kaprog = $this->KaprogModel::all();
-    //     $walas = $this->WalasModel::all();
-    //     return view("siswa.tambahpengajuan",  compact('pengajuan','siswa','admkeu','wkhubin','kaprog','walas'));
-    // }
 
-    public function simpanpengajuan(Request $request)
+    public function tambahpengajuan(Request $request)
     {
         $validated = $request->validate([
             'datanamaiduka' => 'required',
@@ -95,6 +85,18 @@ class PengajuanController extends Controller
                     $validated['datawalas'],
                     $validated['datatglpengajuan']
                 ]);
+                // if ($tambah_pengajuan){
+                //     flash()->options([
+                //         'timeout' => 3000, // 3 seconds
+                //         'position' => 'top-center',
+                //     ])->addSuccess('Data berhasil disimpan.');
+                //     return redirect('/siswa/pengajuan');
+                // }else
+                //     return "input data gagal";
+                // } catch (\Exception $e) {
+                // return  $e->getMessage();
+                // }
+
                 return redirect('/siswa/pengajuan')->with('sukses', 'Data berhasil ditambah');
             } catch (\Throwable $th) {
                 return redirect('/siswa/pengajuan')->with('error', 'Data gagal ditambah');
@@ -116,7 +118,7 @@ class PengajuanController extends Controller
 
 
     // }
-    public function editsimpan(Request $request)
+    public function editpengajuan(Request $request)
     {
         $validated = $request->validate([
             'nama_iduka' => 'required',

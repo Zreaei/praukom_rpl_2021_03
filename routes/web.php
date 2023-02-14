@@ -192,10 +192,9 @@ Route::get('/siswa/profil', [SiswaController::class, 'profil']);
 
 // Siswa - pengajuan
 Route::get('/siswa/pengajuan', [PengajuanController::class, 'pengajuan','tambahpengajuan'])->name('siswa.pengajuan');
-Route::get('/siswa/tambahpengajuan', [PengajuanController::class, 'tambahpengajuan'])->name('siswa.tambahpengajuan');
-Route::post('/siswa/simpanpengajuan', [PengajuanController::class, 'simpanpengajuan'])->name('siswa.simpanpengajuan');
-Route::get('/siswa/editpengajuan/{pengajuan}', [PengajuanController::class, 'editpengajuan'])->name('siswa.editpengajuan');
-Route::put('/siswa/editsimpanpengajuan', [PengajuanController::class, 'editsimpan'])->name('siswa.editsimpanpengajuan');
+Route::post('/siswa/simpanpengajuan', [PengajuanController::class, 'tambahpengajuan'])->name('siswa.simpanpengajuan');
+// Route::get('/siswa/editpengajuan/{pengajuan}', [PengajuanController::class, 'editpengajuan'])->name('siswa.editpengajuan');
+Route::put('/siswa/editsimpanpengajuan', [PengajuanController::class, 'editpengajuan'])->name('siswa.editsimpanpengajuan');
 Route::get('/siswa/hapuspengajuan/{id}', [PengajuanController::class, 'hapus']);
 
 // Siswa - presensi

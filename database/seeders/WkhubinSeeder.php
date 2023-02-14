@@ -20,6 +20,7 @@ class WkhubinSeeder extends Seeder
     {
         $wkhubin = [
         [
+            'id_wkhubin' => '123456',
             'nip_wkhubin' => '098765432112345678',
             'user' => 'USR004',
             'nama_wkhubin' => 'Aulll',

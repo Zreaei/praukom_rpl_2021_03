@@ -11,20 +11,12 @@
     </div>
     <div class="flex justify-center">
 
-<<<<<<< HEAD
         <div class="px-28 py-7 w-full justify-center items-center ">
             <div class="flex justify-between">
                 <div>
                     <h3 class="text-2xl font-bold text-[#2D5EBB]">DATA PENGAJUAN</h3>
                 </div>
                 <div>
-=======
-        <div class="p-7 w-full justify-center items-center">
-            <!-- <div class="bg-gradient-to-r from-blue-700 to-stone-900 h-52 rounded-lg "> -->
-            <div class="grid gird-cols-2">
-                <h3 class="text-2xl font-bold text-blue-700">DATA PENGAJUAN</h3>
-                <div class="flex justify-end">
->>>>>>> 7be6b6171398e8469cc955736142442135385b55
                     <!-- The button to open modal -->
                     <label for="tambah-pengajuan" class="btn bg-[#417EF2] hover:bg-[#2D5EBB] text-[#ffffff] font-bold py-2 px-4 border-b-4 border-[#2D5EBB] hover:border-[#417EF2] rounded text-lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" /></svg></label>
                 </div>
@@ -99,7 +91,7 @@
                             <td class="text-sm font-medium leading-5 text-center [#ffffff]space-no-wrap ">
                                 <div class="flex justify-center">
                                     <div class="px-4 py-4">
-                                        <label for="edit-pengajuan" class="text-[#2D5EBB] hover:text-opacity-50">
+                                        <label for="edit-pengajuan{{$ajuan->id_pengajuan}}" class="text-[#2D5EBB] hover:text-opacity-50">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                                         </label>
@@ -116,8 +108,10 @@
                                                     </a>
                                                 </div> -->
                                     <div class="px-4 py-4">
-                                        <a href="/siswa/hapuspengajuan/{{$ajuan->id_iduka}}"><svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#FF0808] hover:text-opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></a>
+                                        <label for="delete{{ $ajuan->id_iduka }}" class="text-[#FF0808] hover:text-opacity-50">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                        </label>
                                     </div>
                                 </div>
                             </td>
@@ -182,18 +176,21 @@
                                 <select class="select select-bordered bg-[#ffffff]" name="datawkhubin">
                                     <option disabled selected>Pilih Nama Waka Hubin</option>
                                     @foreach ($wkhubin as $item)
-                                        <option value="{{ $item->nip_wkhubin }}">{{ $item->nama_wkhubin }}</option>
+                                        <option value="{{ $item->id_wkhubin }}">{{ $item->nama_wkhubin }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-control w-full max-w-sm ">
-                                <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Nama Admin Keuangan</span></label>
+                            @foreach ($admkeu as $item)
+                                <input type="hidden"  name="dataadmkeu" value="{{ $item->id_admkeu }}" />
+                            @endforeach
+                                <!-- <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Nama Admin Keuangan</span></label>
                                 <select class="select select-bordered bg-[#ffffff]" name="dataadmkeu">
                                     <option disabled selected>Pilih Nama Admin Keuangan</option>
                                     @foreach ($admkeu as $item)
-                                        <option value="{{ $item->id_admkeu }}">{{ $item->nama_admkeu }}</option>
+                                        <option value="{{ $item->id_admkeu }}"></option>
                                     @endforeach
-                                </select>
+                                </select> -->
                             </div>
                         </div>
 
@@ -203,7 +200,7 @@
                                 <select class="select select-bordered bg-[#ffffff]" name="datakaprog">
                                     <option disabled selected>Pilih Nama Kepala Program</option>
                                     @foreach ($kaprog as $item)
-                                        <option value="{{ $item->nip_kaprog }}">{{ $item->nama_kaprog }}</option>
+                                        <option value="{{ $item->id_kaprog }}">{{ $item->nama_kaprog }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -212,7 +209,7 @@
                                 <select class="select select-bordered bg-[#ffffff]" name="datawalas">
                                     <option disabled selected>Pilih Nama Wali Kelas</option>
                                     @foreach ($walas as $item)
-                                        <option value="{{ $item->nip_walas }}">{{ $item->nama_walas }}</option>
+                                        <option value="{{ $item->id_walas }}">{{ $item->nama_walas }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -231,58 +228,82 @@
 
            
             <!-- Modal Edit Pengajuan -->
-            <input type="checkbox" id="edit-pengajuan" class="modal-toggle" />
+            @foreach ($pengajuan as $edit)
+            <input type="checkbox" id="edit-pengajuan{{$edit->id_pengajuan}}" class="modal-toggle" />
             <div class="modal">
                 <div class="modal-box w-11/12 max-w-2xl bg-[#2D5EBB]">
-                    <label for="edit-pengajuan" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
+                    <label for="edit-pengajuan{{$edit->id_pengajuan}}" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
                     <h3 class="text-lg font-bold text-[#ffffff] text-center">EDIT DATA PENGAJUAN</h3>
                 
                     <form action="{{ route('siswa.editsimpanpengajuan') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    @foreach ($pengajuan as $edit)
+                    
                     
                         <div class=" mt-2">
                             <div class="form-control w-full max-w-full">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Tanggal Pengajuan</span></label>
-                                <input type="date" name="tgl_pengajuan" value="{{ $edit->tgl_pengajuan }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
+                                <input type="date" name="tgl_pengajuan" value="{{ old('tgl_pengajuan', $edit->tgl_pengajuan) }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
+                                <input type="hidden"  name="id_pengajuan" value="{{$edit->id_pengajuan}}" />
+                                <input type="hidden"  name="id_iduka" value="{{$edit->id_iduka }}" />
                             </div>
                         </div>
 
                         <div class="flex justify-between mt-2">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Nama Perusahaan</span></label>
-                                <input type="text" name="nama_iduka" value="{{ $edit->nama_iduka }}" placeholder="Nama Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="text" name="nama_iduka" value="{{ old('nama_iduka', $edit->nama_iduka ) }}" placeholder="Nama Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Pimpinan Perusahaan</span></label>
-                                <input type="text" name="pimpinan_iduka" value="{{ $edit->pimpinan_iduka }}" placeholder="Pimpinan Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="text" name="pimpinan_iduka" value="{{ old('pimpinan_iduka', $edit->pimpinan_iduka  ) }}" placeholder="Pimpinan Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                         </div>
 
                         <div class="flex justify-between mt-2">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Alamat Perusahaan</span></label>
-                                <input type="text" name="alamat_iduka" value="{{ $edit->alamat_iduka }}" placeholder="Alamat Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="text" name="alamat_iduka" value="{{ old('alamat_iduka', $edit->alamat_iduka) }}"  placeholder="Alamat Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Telp Perusahaan</span></label>
-                                <input type="number" name="telp_iduka" value="{{ $edit->telp_iduka }}" placeholder="Telp Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
-                                <input type="hidden" name="id_pengajuan" value="{{ $edit->id_pengajuan }}" />
-                                <input type="hidden" name="id_iduka" value="{{ $edit->id_iduka }}" />
+                                <input type="number" name="telp_iduka" value="{{ old('telp_iduka', $edit->telp_iduka) }}" placeholder="Telp Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                         </div>
                         <div>
                             <button type="submit" class="btn bg-gradient-to-b from-[#FFA434] to-[#D24E16] w-full mt-3 ">
-                                SUBMIT
+                                SUBMIT 
                             </button>
                         </div>
                     </form>    
-                @endforeach 
                 </div>
             </div> 
-        
-       
+            @endforeach
+
+            <!-- Modal Hapus Pengajuan -->
+            @foreach($pengajuan as $hapus)
+            <input type="checkbox" id="delete{{ $hapus->id_iduka }}" class="modal-toggle" />
+            <div class="modal">
+                <div class="modal-box w-11/12 max-w-2xl bg-white">
+                    <svg fill="none" class="text-[#E63946] w-1/4 mx-auto" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
+                    </svg>
+                    <div class="text-center">
+                    <h3 class="font-bold text-2xl">Anda yakin ingin menghapus ?</h3>
+                    </div>
+                    <div class="flex justify-center pt-4 gap-x-20 gap-y-3">
+                        <label for="delete{{ $hapus->id_iduka }}" class="btn btn-ghost btn-base bg-[#2D5EBB] w-36 text-white text-base hover:bg-[#2D5EBB] hover:bg-opacity-70">Cancel</label>
+                        <label class="btn btn-ghost btn-base bg-[#E63946] w-36 text-white text-base hover:bg-[#E63946] hover:bg-opacity-70">
+                            <a href="/siswa/hapuspengajuan/{{$hapus->id_iduka}}">
+                                Delete
+                            </a>
+                        </label>
+                    </div>
+                        
+                </div>
+            </div> 
+            @endforeach
+    
         </div>
     </div>
 
