@@ -28,7 +28,7 @@ use App\Http\Controllers\{
     WkHubin\WkhubinController,
     WkHubin\DataPengajuanController,
     HomeController,
-    LoginController,
+    Login\LoginController,
 };
 
 use Illuminate\Support\Facades\Route;
@@ -45,14 +45,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login.login');
-});
+    return view('welcome.welcome');
+})->name('home');
+
+// Login - Register Siswa(Operator Only)
+Route::get('/register', [LoginController::class, 'register'])->name('register');
+Route::post('/register', [LoginController::class, 'register_action'])->name('register.action');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'login_action'])->name('login.action');
 
 // Admin
 Route::get('/admin', [AdminController::class, 'index']);
 
 // Admin - Data Level
-Route::get('admin/data-level', [UserController::class, 'level']);
+Route::get('/admin/data-level', [UserController::class, 'level']);
 
 // Admin - Kelola User
 Route::get('/admin/data-user', [UserController::class, 'user']);
