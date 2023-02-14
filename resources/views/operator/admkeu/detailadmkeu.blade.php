@@ -6,12 +6,12 @@
 
 
 <div class="pt-36">
-        <div class="form-control border border-zinc-900 rounded w-1/4 mx-auto">
+        <div class="form-control rounded w-1/4 mx-auto">
             <div class="mx-auto">
                 <label class="label">
                     <span class="label-text mx-auto">DETAIL DATA</span>
                 </label>
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left ">
         <tbody>
             <tr class="border-b border-gray-200 dark:border-gray-700">
