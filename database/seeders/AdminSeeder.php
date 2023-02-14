@@ -21,7 +21,7 @@ class AdminSeeder extends Seeder
         $admin = [
             [
             'id_admin' => 'ADM001',
-            'user' => 'USR001',
+            'user' => 'USR007',
             ]
         ];
 

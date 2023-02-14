@@ -19,14 +19,15 @@ class WalasSeeder extends Seeder
     public function run()
     {
         $walas = [
-            [
-            'id_walas' => 'WLS001',
-            'user' => 'USR006',
-            'nip_walas' => '1006',
-            'nama_walas' => 'nama walas'
-            ]
-        ];
+        [
+            'id_walas' => '763586',
+            'nip_walas' => '327503275032750872',
+            'user' => 'USR002',
+            'nama_walas' => 'satria',
+            ],
+            ];
 
-        DB::table('walas')->insert($walas);
+                DB::table('walas')->insert($walas);
+                                            
     }
 }

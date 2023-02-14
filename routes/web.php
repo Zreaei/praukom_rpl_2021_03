@@ -187,24 +187,31 @@ Route::get('/operator/admkeu/hapus/{id}', [DataAdmkeuController::class, 'hapusad
 // Route::get('/operator/admkeu/hapus/{id}',[OperatorController::class,'hapusadmkeu']);
 
 // Siswa - home
-Route::get('/siswa/home', [SiswaController::class, 'home']);
+Route::get('/siswa/home', [SiswaController::class, 'home'])->name('siswa.home');
 Route::get('/siswa/profil', [SiswaController::class, 'profil']);
 
 // Siswa - pengajuan
-Route::get('/siswa/pengajuan', [SiswaController::class, 'pengajuan'])->name('siswa.pengajuan');
-Route::get('/siswa/tambahpengajuan', [SiswaController::class, 'tambahpengajuan'])->name('siswa.tambahpengajuan');
-Route::put('/siswa/simpan', [SiswaController::class, 'simpan'])->name('siswa.simpanpengajuan');
-Route::get('/siswa/editpengajuan/{id}', [SiswaController::class, 'editpengajuan']);
-Route::put('/siswa/editsimpanpengajuan/{id}', [SiswaController::class, 'editsimpan']);
-Route::get('/siswa/hapuspengajuan/{id}', [SiswaController::class, 'hapus']);
+Route::get('/siswa/pengajuan', [PengajuanController::class, 'pengajuan','tambahpengajuan'])->name('siswa.pengajuan');
+Route::post('/siswa/simpanpengajuan', [PengajuanController::class, 'tambahpengajuan'])->name('siswa.simpanpengajuan');
+// Route::get('/siswa/editpengajuan/{pengajuan}', [PengajuanController::class, 'editpengajuan'])->name('siswa.editpengajuan');
+Route::put('/siswa/editsimpanpengajuan', [PengajuanController::class, 'editpengajuan'])->name('siswa.editsimpanpengajuan');
+Route::get('/siswa/hapuspengajuan/{id}', [PengajuanController::class, 'hapus']);
 
 // Siswa - presensi
 Route::get('/siswa/presensi', [PresensiController::class, 'presensi'])->name('siswa.presensi');
 Route::get('/siswa/tambahpresensi', [PresensiController::class, 'tambahpresensi'])->name('siswa.tambahpresensi');
 Route::put('/siswa/simpanpresensi', [PresensiController::class, 'simpanpresensi'])->name('siswa.simpanpresensi');
 Route::get('/siswa/editpresensi/{id}', [PresensiController::class, 'editpresensi']);
-Route::put('/siswa/editsimpan/{id}', [presensiController::class, 'editsimpan']);
-Route::get('/siswa/hapus/{id}', [PresensiController::class, 'hapus']);
+Route::put('/siswa/editsimpanpresensi/{id}', [presensiController::class, 'editsimpan']);
+Route::get('/siswa/hapuspresensi/{id}', [PresensiController::class, 'hapus']);
+
+// Siswa - prakerin
+Route::get('/siswa/prakerin', [PrakerinController::class, 'prakerin'])->name('siswa.prakerin');
+Route::get('/siswa/tambahprakerin', [PrakerinController::class, 'tambahprakerin'])->name('siswa.tambahprakerin');
+Route::put('/siswa/simpanprakerin', [PrakerinController::class, 'simpanprakerin'])->name('siswa.simpanprakerin');
+Route::get('/siswa/editprakerin/{id}', [PrakerinController::class, 'editprakerin'])->name('siswa.editprakerin');;
+Route::put('/siswa/editsimpanprakerin/{id}', [prakerinController::class, 'editsimpan']);
+Route::get('/siswa/hapusprakerin/{id}', [PrakerinController::class, 'hapus']);
 
 // // Siswa
 // Route::get('/siswa/home', [SiswaController::class, 'home']);

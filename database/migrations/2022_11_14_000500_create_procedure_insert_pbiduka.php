@@ -17,7 +17,13 @@ return new class extends Migration
     {
         DB::unprepared("DROP PROCEDURE IF EXISTS procedure_insert_pbiduka");
         DB::unprepared(
-          "CREATE PROCEDURE procedure_insert_pbiduka(datalevel CHAR(6), datausername VARCHAR(50), datapassword VARCHAR(255), dataemail VARCHAR(50), datafoto_user VARCHAR(255), datanik CHAR(16), datanama_pbiduka VARCHAR(50), datatelp_pbiduka VARCHAR(20))
+          "CREATE PROCEDURE procedure_insert_pbiduka(
+            datalevel CHAR(6), 
+            datausername VARCHAR(50), 
+            datapassword VARCHAR(50), 
+            dataemail VARCHAR(50), 
+            datafoto_user VARCHAR(60), 
+            datanama_admkeu VARCHAR(50))
                 BEGIN
                 DECLARE kodeuser CHAR(6);
                 SELECT generate_new_kode_user() INTO kodeuser;

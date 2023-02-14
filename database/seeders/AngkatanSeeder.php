@@ -19,12 +19,13 @@ class AngkatanSeeder extends Seeder
     public function run()
     {
         $angkatan = [
-            [
+        [
             'id_angkatan' => 'AKT001',
-            'tahun_angkatan' => '2020/2021'
-            ]
-        ];
+            'tahun_angkatan' => '2023',
+            ],
+            ];
 
-        DB::table('angkatan')->insert($angkatan);
+                DB::table('angkatan')->insert($angkatan);
+                                            
     }
 }

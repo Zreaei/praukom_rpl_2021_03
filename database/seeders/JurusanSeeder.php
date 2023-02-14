@@ -19,14 +19,15 @@ class JurusanSeeder extends Seeder
     public function run()
     {
         $jurusan = [
-            [
+        [
             'id_jurusan' => 'JRS001',
-            'kaprog' => 'KPR001',
-            'bidang_keahlian' => 'IT',
-            'program_keahlian' => 'Rekayasa Perangkat Lunak'
-            ]
-        ];
+            'kaprog' => '987654',
+            'bidang_keahlian' => 'it',
+            'program_keahlian' => 'rpl',
+            ],
+            ];
 
-        DB::table('jurusan')->insert($jurusan);
+                DB::table('jurusan')->insert($jurusan);
+                                            
     }
 }

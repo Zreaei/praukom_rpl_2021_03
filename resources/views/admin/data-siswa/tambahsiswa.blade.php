@@ -17,7 +17,7 @@
                     <span class="pr-8">User</span>
                     <select class="select select-bordered" name="user">
                         <option value="default">Pilih User</option>
-                        @foreach ($user as $item)
+                        @foreach ($dataSiswa as $item)
                             <option value="{{ $item->id_user }}">{{ $item->username }}</option>
                         @endforeach
                     </select>
@@ -26,8 +26,8 @@
                     <span class="pr-8">Kelas</span>
                     <select class="select select-bordered" name="kelas">
                         <option value="default">Pilih Kelas</option>
-                        @foreach ($kelas as $item)
-                            <option value="{{ $item->id_kelas }}">{{ $item->nama_kelas }}</option>
+                        @foreach ($dataSiswa as $item)
+                            <option value="{{ $item->id_kelas }}">{{ $item->tingkatan }} {{ $item->program_keahlian }} {{ $item->nama_kelas }} (Angkatan : {{ $item->tahun_angkatan }})</option>
                         @endforeach
                     </select>  
                 </label>

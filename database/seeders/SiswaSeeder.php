@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 // use Illuminate\Support\Str;
 
-class KelasSeeder extends Seeder
+class SiswaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,18 +18,19 @@ class KelasSeeder extends Seeder
      */
     public function run()
     {
-        $kelas = [
+        $siswa = [
         [
-            'id_kelas' => 'KLS001',
-            'jurusan' => 'JRS001',
-            'walas' => '763586',
-            'angkatan' => 'AKT001',
-            'tingkatan' => 'X',
-            'nama_kelas' => 'A',
+            'nis' => '327584763',
+            'user' => 'USR001',
+            'kelas' => 'KLS001',
+            'nama_siswa' => 'Danar',
+            'tempat_lahir' => 'Bekasi',
+            'tgl_lahir' => '2005-11-22',
+            'telp_siswa' => '087874588726'
             ],
             ];
 
-                DB::table('kelas')->insert($kelas);
+                DB::table('siswa')->insert($siswa);
                                             
     }
 }
