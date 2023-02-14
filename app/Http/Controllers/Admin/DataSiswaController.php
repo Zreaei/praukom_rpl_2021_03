@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\SiswaModel;
-use App\Models\UserModel;
-use App\Models\KelasModel;
+use App\Models\{UserModel, KelasModel, JurusanModel, AngkatanModel};
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +14,16 @@ class DataSiswaController extends Controller
     protected $SiswaModel;
     protected $UserModel;
     protected $KelasModel;
+    protected $JurusanModel;
+    protected $AngkatanModel;
 
     public function __construct()   
     {
         $this->SiswaModel = new SiswaModel;
         $this->UserModel = new UserModel;
         $this->KelasModel = new KelasModel;
+        $this->JurusanModel = new JurusanModel;
+        $this->AngkatanModel = new AngkatanModel;
     }
 
     public function siswa()
@@ -33,9 +36,18 @@ class DataSiswaController extends Controller
 
     public function tambahSiswa()
     {
-        $user = $this->UserModel::all();
-        $kelas = $this->KelasModel::all();
-        return view('admin.data-siswa.tambahsiswa', compact('user','kelas'));
+        // $user = $this->UserModel::all();
+        // $kelas = $this->KelasModel::all();
+        // return view('admin.data-siswa.tambahsiswa', compact('user','kelas'));
+
+        $dataSiswa = DB::table('siswa')
+        ->join('user', 'user.id_user', '=', 'siswa.user')
+        ->join('kelas', 'kelas.id_kelas', '=', 'siswa.kelas')
+        ->join('jurusan', 'jurusan.id_jurusan', '=', 'kelas.jurusan')
+        ->join('angkatan', 'angkatan.id_angkatan', '=', 'kelas.angkatan')
+        ->get();
+
+        return view('admin.data-siswa.tambahsiswa')->with('dataSiswa', $dataSiswa);
     }
 
     public function simpan(Request $request)

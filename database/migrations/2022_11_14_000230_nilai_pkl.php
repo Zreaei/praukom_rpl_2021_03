@@ -19,12 +19,12 @@ return new class extends Migration
             $table->collation = 'utf8mb4_general_ci';
             $table->char('id_nilaipkl', 6)->primary()->nullable(false);
             $table->char('prakerin', 6)->nullable(false);
-            $table->char('pb_iduka', 16)->nullable(false);
+            $table->char('pb_iduka', 6)->nullable(false);
             $table->tinyInteger('jml_nilaipkl')->nullable(false);
             $table->string('predikat_nilaipkl', 2)->nullable();
 
             $table->foreign('prakerin')->references('id_prakerin')->on('prakerin')->cascadeOnDelete();
-            $table->foreign('pb_iduka')->references('nik_pbiduka')->on('pb_iduka')->cascadeOnDelete();
+            $table->foreign('pb_iduka')->references('nik')->on('pb_iduka')->cascadeOnDelete();
         });
     }
 

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Operator;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserModel;
-use App\Models\AdmkeuModel;
+use App\Models\{UserModel, AdmkeuModel};
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\{DB, Hash, Storage};
 
 class DataAdmkeuController extends Controller
 {
@@ -18,13 +17,6 @@ class DataAdmkeuController extends Controller
     {
         $this->UserModel = new UserModel;
         $this->AdmkeuModel = new AdmkeuModel;
-    }
-
-    private function generateKodeUser(): string
-    {
-        return collect(DB::select('SELECT generate_new_kode_user() AS new_kode_user'))
-        ->firstOrFail()
-        ->new_kode_user;
     }
 
     public function admkeu()
@@ -39,35 +31,39 @@ class DataAdmkeuController extends Controller
 
     public function tambahadmkeu()
     {
-        $admkeu = $this->AdmkeuModel::all();
-        return view('operator.admkeu.tambahadmkeu', compact('admkeu'));
+        return view('operator.admkeu.tambahadmkeu');
     }
 
     public function simpanadmkeu(Request $request)
     {
 
-        $validated = $request->validate([
-            'datalevel' => 'required',
-            'datausername' => 'required',
-            'datapassword' => 'required',
-            'dataemail' => 'required',
-            'datafoto_user' => 'required',
-            'datanama_admkeu' => 'required',
-        ]);
+        $request->validate(
+            [
+                'level' => 'required',
+                'username' => 'required',
+                'password' => 'required',
+                'email' => 'required',
+                'foto_user' => 'required',
+                'nama_admkeu' => 'required'
+            ]
+        );
 
-            try {
-                $tambah_user = DB::select('CALL procedure_insert_admkeu(?,?,?,?,?,?)', [
-                    $validated['datalevel'],
-                    $validated['datausername'],
-                    $validated['datapassword'],
-                    $validated['dataemail'],
-                    $validated['datafoto_user'],
-                    $validated['datanama_admkeu']
-                ]);
-                return redirect('/operator/admkeu')->with('sukses', 'Data berhasil ditambah');
-            } catch (\Throwable $th) {
-                return redirect('/operator/admkeu')->with('error', 'Data gagal ditambah');
-            }
+        $img = $request->file('foto_user')->store('img');
+        $pass = Hash::make($request->input('password'));
+
+        DB::insert("CALL procedure_insert_admkeu(
+            :datalevel, :datausername, :datapassword, :dataemail, :datafoto_user, :datanama_admkeu)",
+            [
+                'datalevel' => $request->level,
+                'datausername' => $request->username,
+                'datapassword' => $pass,
+                'dataemail' => $request->email,
+                'datafoto_user' => $img,
+                'datanama_admkeu' => $request->nama_admkeu
+            ]
+        );
+
+        return redirect('/operator/admkeu')->with('sukses', 'Data berhasil ditambah');
     }
 
     public function editadmkeu(AdmkeuModel $admkeu)
@@ -82,32 +78,36 @@ class DataAdmkeuController extends Controller
 
             return view('operator.admkeu.editadmkeu', ["edit" => $edit]);
     }
+
     public function editsimpanadmkeu(Request $request)
     {
-        $validated = $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-            'email' => 'required',
-            'foto_user' => 'required',
-            'nama_admkeu' => 'required',
-        ]);
+        $request->validate(
+            [
+                'username' => 'required',
+                'password' => 'required',
+                'email' => 'required',
+                'foto_user' => 'required',
+                'nama_admkeu' => 'required'
+            ]
+        );
 
-            try {
-                $edit_user = DB::select('CALL procedure_update_admkeu(?,?,?,?,?,?,?)', [
-                    $request->user,
-                    $validated['username'],
-                    $validated['password'],
-                    $validated['email'],
-                    $validated['foto_user'],
-                    $request->id_admkeu,
-                    $validated['nama_admkeu']
-                ]);
-        } catch (Exception $e) {
-            return $e->getMessage();
-        } finally {
-            return redirect('/operator/admkeu');
-        }
-        // dd($edit_user);
+        $img = $request->file('foto_user')->store('img');
+        $pass = Hash::make($request->input('password'));
+
+        DB::select("CALL procedure_update_admkeu(?,?,?,?,?,?,?)",
+            [
+                $request->user,
+                $request->username,
+                $pass,
+                $request->email,
+                $img,
+                $request->id_admkeu,
+                $request->nama_admkeu
+            ]
+        );
+
+        return redirect('/operator/admkeu')->with('sukses', 'Data berhasil diubah');
+
     }
 
     public function detailadmkeu(AdmkeuModel $admkeu)
@@ -123,11 +123,14 @@ class DataAdmkeuController extends Controller
             return view('operator.admkeu.detailadmkeu', ["detail" => $detail]);
     }
 
-    public function hapususer($id = null)
+    public function hapusadmkeu($id = null)
     {
         try{
-            $hapususer = $this->UserModel->where('id_user',$id)->delete();
-            if($hapususer){
+            $hapusadmkeu = $this->UserModel->where('id_user',$id)->delete();
+            if($user->foto_user) {
+                Storage::delete($user->foto_user);
+            }
+            if($hapusadmkeu){
                 return redirect('/operator/admkeu');
             }
         } catch(Exception $e){

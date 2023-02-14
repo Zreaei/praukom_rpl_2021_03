@@ -24,7 +24,9 @@
                 </label>
                 <label class="input-group input-group-vertical">
                     <span class="pr-8">FOTO</span>
-                    <input type="text" name="foto_user" value="{{ $edit[0]->foto_user }}" class="input input-bordered" required/>
+                    <img class="img-preview object-scale-down">
+                    <input type="file" name="foto_user" value="{{ $edit[0]->foto_user }}" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="foto_user" onchange="previewImage()" required/>
+                    <!-- <input type="text" name="foto_user" value="{{ $edit[0]->foto_user }}" class="input input-bordered" required/> -->
                 </label>
                 <label class="input-group input-group-vertical">
                     <span class="pr-8">NAMA LENGKAP</span>
@@ -45,5 +47,22 @@
         </div>
     </div>
 </form>
+
+<script>
+    function previewImage() {
+        const image = document.querySelector('#foto_user');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
+    
+</script>
 
 @endsection

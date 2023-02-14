@@ -18,14 +18,11 @@ return new class extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
             $table->char('id_monitoring', 6)->primary()->nullable(false);
-            $table->char('pb_sekolah', 18)->nullable(false);
-            $table->char('operator', 6)->nullable(false);
+            $table->char('pb_sekolah', 6)->nullable(false);
             $table->date('tgl_monitoring')->nullable(false);
-            $table->string('laporan_monitoring', 60)->nullable(false);
-            $table->enum('konfirmasi_operator', ['terima', 'tolak'])->nullable();
+            $table->string('laporan_monitoring', 255)->nullable(false);
 
-            $table->foreign('pb_sekolah')->references('nip_pbsekolah')->on('pb_sekolah')->cascadeOnDelete();
-            $table->foreign('operator')->references('id_operator')->on('operator')->cascadeOnDelete();
+            $table->foreign('pb_sekolah')->references('id_pbsekolah')->on('pb_sekolah')->cascadeOnDelete();
         });
     }
 

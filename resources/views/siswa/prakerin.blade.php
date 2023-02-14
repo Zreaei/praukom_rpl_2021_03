@@ -52,81 +52,85 @@
         <div class="p-7 w-full justify-center items-center ">
             <!-- <div class="bg-gradient-to-r from-blue-700 to-stone-900 h-52 rounded-lg "> -->
             <div class="grid gird-cols-2">
-                <h3 class="text-2xl font-bold text-blue-700">DATA PRESENSI</h3>
+                <h3 class="text-2xl font-bold text-blue-700">DATA PRAKERIN</h3>
                 <div class="flex justify-end">
                     <!-- The button to open modal -->
-                    <a href="{{ route('siswa.tambahpresensi') }}" class="btn btn-primary bg-blue-700 text-white hover:bg-blue-900 font-bold rounded-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" /></svg></a>
+                    <a href="{{ route('siswa.tambahprakerin') }}" class="btn btn-ghost btn-sm btn-circle text-white bg-danar hover:bg-white hover:text-danar absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" /></svg></a>
                 </div>
             </div>
-            <!-- Table pengajuan -->
-            <div class="flex flex-col">
-                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="overflow-hidden rounded-lg">
-                        
-                            <table class="min-w-full text-center rounded-box">
-                            <thead class="border-b">
-                                <tr class="bg-blue-700">
-                                    <th scope="col" class="text-sm font-medium text-white px-2 py-4">
-                                        No
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        ID Presensi
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        Status
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        Keterangan
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        Tanggal
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        Foto
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                                        Aksi
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php 
-                                $no = 1;
-                            ?>
-                                @foreach ($presensi as $item)
-                                    <tr class="border-b bg-white boder-gray-900">
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $no++ }}
-                                        </td>
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $item->id_agenda }}
-                                        </td>
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $item->status_agenda }}
-                                        </td>
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $item->keterangan_agenda }}
-                                        </td>
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $item->tgl_agenda }}
-                                        </td>
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            <img src="{{ asset('storage/img/' . $item->foto) }}" id="gambar" alt="Foto Agenda" style="width:100px">
-                                        </td>
-                                        <!-- icon Aksi -->
-                                        <td class="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200 ">
-                                            <div class="flex justify-center">
-                                                <div class="px-4 py-4">
-                                                    <a href="/siswa/editpresensi/{{$item->id_agenda}}" class="text-indigo-600 hover:text-indigo-900">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                                                        stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                    </svg>
-                                                    </a>
-                                                </div>
-                                                <div class="px-4 py-4">
+            <!-- Table prakerin -->
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+                <table class="w-full text-sm text-left text-white">
+                    <!-- head -->
+                    <thead class="text-xs text-center uppercase bg-[#2D5EBB]">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 ">
+                                No
+                            </th>
+                            <th scope="col" class="px-6 py-3 ">
+                                Pengajuan
+                            </th>
+                            <th scope="col" class="px-6 py-3 ">
+                                Tanggal Mulai
+                            </th> 
+                            <th scope="col" class="px-6 py-3 ">
+                                Tanggal Selesai
+                            </th>
+                            <th scope="col" class="px-6 py-3 ">
+                                Lama Prakerin
+                            </th>
+                            <th scope="col" class="px-6 py-3 ">
+                                Status Prakerin
+                            </th>
+                            <th scope="col" class="px-6 py-3 ">
+                                Monitoring
+                            </th>
+                            <th scope="col" class="px-6 py-3 ">
+                                Aksi
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $no = 1;
+                    ?>
+                        @foreach ($prakerin as $a)
+                        <tr class="bg-white ">
+                            <td class="text-sm text-item font-semibold px-6 py-4 text-center">
+                                {{ $no++ }}
+                            </td>
+                            <td class="text-sm text-item font-semibold px-6 py-4 text-center">
+                                {{ $a->pengajuan }}
+                            </td>
+                            <td class="text-sm text-item font-semibold px-6 py-4 text-center">
+                                {{ $a->tgl_mulai }}
+                            </td>
+                            <td class="text-sm text-item font-semibold px-6 py-4 text-center">
+                                {{ $a->tgl_selesai }}
+                            </td>
+                           <td class="text-sm text-item font-semibold px-6 py-4 text-center">
+                                {{ $ajuan->pimpinan_iduka }}
+                            </td>
+                            <td class="text-sm text-item font-semibold px-6 py-4 text-center">
+                                {{ $ajuan->alamat_iduka }}
+                            </td>
+                            <td class="text-sm text-item font-semibold px-6 py-4 text-center">
+                                {{ $ajuan->telp_iduka }}
+                            </td>
+                            <td class="text-sm text-item font-semibold px-6 py-4 text-center">
+                                <button type="button" class="text-white bg-cyan hover:bg-opacity-50 focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Lihat</button>          
+                            </td>
+                            <!-- icon Aksi -->
+                            
+                            <td class="text-sm font-medium leading-5 text-center whitespace-no-wrap ">
+                                <div class="flex justify-center">
+                                    <div class="px-4 py-4">
+                                        <label for="edit-pengajuan" class="text-danar hover:text-opacity-50">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                                        </label>
+                                    </div>
+                                                <!-- <div class="px-4 py-4">
                                                     <a href="#" class="text-gray-600 hover:text-gray-900">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                                                         stroke="currentColor">
@@ -136,25 +140,18 @@
                                                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                     </svg>
                                                     </a>
-                                                </div>
-                                                <div class="px-4 py-4">
-                                                    <a href="/siswa/hapus/{{$item->id_agenda}}"><svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600 hover:text-red-800"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                    </svg></a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                            </table>
-                        </form>
-                    </div>
-                    </div>
-                </div>
-                </div>
+                                                </div> -->
+                                    <div class="px-4 py-4">
+                                        <a href="/siswa/hapuspengajuan/{{$ajuan->id_iduka}}"><svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-merah hover:text-opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></a>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
             
             </div>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->char('id_iduka', 6)->primary()->nullable(false);
             $table->string('nama_iduka', 50)->nullable(false);
             $table->string('pimpinan_iduka', 50)->nullable(false);
-            $table->string('alamat_iduka', 50)->nullable(false);
+            $table->string('alamat_iduka', 255)->nullable(false);
             $table->string('telp_iduka', 20)->nullable(false);
         });
     }

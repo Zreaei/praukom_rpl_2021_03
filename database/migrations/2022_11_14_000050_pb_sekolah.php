@@ -17,8 +17,9 @@ return new class extends Migration
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
-            $table->char('nip_pbsekolah', 18)->primary()->nullable(false);
+            $table->char('id_pbsekolah', 6)->primary()->nullable(false);
             $table->char('user', 6)->nullable(false);
+            $table->string('nip_pbsekolah', 20)->nullable(false);
             $table->string('nama_pbsekolah', 50)->nullable(false);
             $table->string('telp_pbsekolah', 20)->nullable(false);
 

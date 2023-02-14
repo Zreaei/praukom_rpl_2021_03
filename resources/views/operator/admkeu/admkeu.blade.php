@@ -118,7 +118,7 @@
                                             {{ $item->email }}
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $item->foto_user }}
+                                            <img src="{{ asset('storage/' . $item->foto_user) }}" id="gambar" alt="Foto" style="width:100px">
                                         </td>
                                         <!-- icon Aksi -->
                                         <td class="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-gray-200 ">

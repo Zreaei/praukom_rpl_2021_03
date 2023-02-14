@@ -17,7 +17,7 @@ return new class extends Migration
     {
         DB::unprepared("DROP PROCEDURE IF EXISTS procedure_update_admkeu");
         DB::unprepared(
-          "CREATE PROCEDURE procedure_update_admkeu(datauser CHAR(6), datausername VARCHAR(50), datapassword VARCHAR(50), dataemail VARCHAR(50), datafoto_user VARCHAR(60), dataadmkeu CHAR(6), datanama_admkeu VARCHAR(50))
+          "CREATE PROCEDURE procedure_update_admkeu(datauser CHAR(6), datausername VARCHAR(50), datapassword VARCHAR(255), dataemail VARCHAR(50), datafoto_user VARCHAR(60), dataadmkeu CHAR(6), datanama_admkeu VARCHAR(50))
                 BEGIN
                 UPDATE user SET username = datausername, password = datapassword, email = dataemail, foto_user = datafoto_user
                 WHERE id_user = datauser;

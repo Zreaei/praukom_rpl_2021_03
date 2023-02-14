@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PresensiModel extends Model
 {
     use HasFactory;
-    protected $table = 'agenda';
+    protected $table = 'presensi';
     protected $softDelete = false;
     public $timestamps = false;
-    protected $primaryKey = 'id_agenda';
+    protected $primaryKey = 'id_presensi';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['id_agenda','status_agenda','keterangan_agenda','tgl_agenda','foto'];
+    protected $fillable = ['id_presensi','prakerin','pb_iduka','pb_sekolah','tgl_presensi','keterangan_presensi','foto_kegiatan','keterangan_kegiatan','jam_masuk','jam_keluar','status_presensi','konfirmasi_pbsekolah','konfirmasi_pbiduka'];
 }

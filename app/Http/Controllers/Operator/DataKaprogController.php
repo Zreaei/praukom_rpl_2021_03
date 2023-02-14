@@ -3,22 +3,23 @@
 namespace App\Http\Controllers\Operator;
 
 use App\Http\Controllers\Controller;
-use App\Models\KaprogModel;
-use App\Models\UserModel;
-use Error;
+use App\Models\{UserModel, KaprogModel};
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\{DB, Hash, Storage};
 
 class DataKaprogController extends Controller
 {
-    protected $KaprogModel, $UserModel;
+    protected $KaprogModel;
+    protected $UserModel;
+
     public function __construct()
     {
-        $this->KaprogModel = new KaprogModel();
-        $this->UserModel = new UserModel();
+        $this->UserModel = new UserModel;
+        $this->KaprogModel = new KaprogModel;
     }
-    public function kaprog() 
+
+    public function kaprog()
     {
         $kaprog = DB::table('kaprog')
             ->join('user', 'user.id_user', '=', 'kaprog.user')
@@ -27,76 +28,112 @@ class DataKaprogController extends Controller
 
             return view('operator.kaprog.kaprog')->with('kaprog', $kaprog);
     }
+
     public function tambahkaprog()
     {
-        $kaprog = $this->KaprogModel::all();
-        return view('operator.kaprog.tambahkaprog', compact('kaprog'));
+        return view('operator.kaprog.tambahkaprog');
     }
+
     public function simpankaprog(Request $request)
     {
-        $request->validate([
-            'id_user' => 'required',
-            'level' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'email' => 'required',
-            'nip_kaprog' => 'required',
-            'user' => 'required',
-            'nama_kaprog' => 'required',
-        ]);
 
-        $user = [
-            'id_user' => $request->id_user,
-            'level' => $request->level,
-            'username' => $request->username,
-            'password' => $request->password,
-            'email' => $request->email
-        ];
+        $request->validate(
+            [
+                'level' => 'required',
+                'username' => 'required',
+                'password' => 'required',
+                'email' => 'required',
+                'foto_user' => 'required',
+                'nip_kaprog' => 'required',
+                'nama_kaprog' => 'required'
+            ]
+        );
 
-        $kaprog = [
-            'nip_kaprog' => $request->nip_kaprog,
-            'user' => $request->user,
-            'nama_kaprog' => $request->nama_kaprog
-        ];
-            try {
-                $id_user = $this->UserModel->create($user);
-                $kaprog['id_user'] = $id_user;
-                $this->KaprogModel->create($kaprog);                
-                return redirect('/operator/kaprog')->with('sukses', 'Data berhasil ditambah');
-            } catch (\Throwable $th) {
-                return redirect('/operator/kaprog')->with('error', 'Data gagal ditambah');
-            }
+        $img = $request->file('foto_user')->store('img');
+        $pass = Hash::make($request->input('password'));
+
+        DB::insert("CALL procedure_insert_kaprog(
+            :datalevel, :datausername, :datapassword, :dataemail, :datafoto_user, :datanip_kaprog, :datanama_kaprog)",
+            [
+                'datalevel' => $request->level,
+                'datausername' => $request->username,
+                'datapassword' => $pass,
+                'dataemail' => $request->email,
+                'datafoto_user' => $img,
+                'datanip_kaprog' =>$request->nip_kaprog,
+                'datanama_kaprog' => $request->nama_kaprog
+            ]
+        );
+
+        return redirect('/operator/kaprog')->with('sukses', 'Data berhasil ditambah');
     }
-    public function editkaprog($id = null)
+
+    public function editkaprog(KaprogModel $kaprog)
     {
-        $edit = $this->KaprogModel->find($id);
-        return view('operator.kaprog.editkaprog', $edit);
+        $edit = DB::table('kaprog')
+            ->join('user', 'user.id_user', '=', 'kaprog.user')
+            ->join('level_user', 'level_user.id_level', '=', 'user.level')
+            ->select('kaprog.*', 'user.*', 'level_user.*')
+            ->where('id_kaprog', '=', $kaprog->id_kaprog)
+            ->get();
+
+
+            return view('operator.kaprog.editkaprog', ["edit" => $edit]);
     }
+
     public function editsimpankaprog(Request $request)
     {
-        try {
-            $data = [
-                'nama_kaprog' => $request->input('nama_kaprog')
-            ];
+        $request->validate(
+            [
+                'username' => 'required',
+                'password' => 'required',
+                'email' => 'required',
+                'foto_user' => 'required',
+                'nip_kaprog' => 'required',
+                'nama_kaprog' => 'required'
+            ]
+        );
 
-            $upd = $this->KaprogModel
-                        ->where('nip_kaprog', $request->input('nip_kaprog'))
-                        ->update($data);
-            if($upd){
-                return redirect('/operator/kaprog');
-            }
-        } catch (Exception $e) {
-            return back()->with('error', $e->getMessage());
-        } finally {
-            return redirect('/operator/kaprog');
-        }
+        $img = $request->file('foto_user')->store('img');
+        $pass = Hash::make($request->input('password'));
+
+        DB::select("CALL procedure_update_kaprog(?,?,?,?,?,?,?)",
+            [
+                $request->user,
+                $request->username,
+                $pass,
+                $request->email,
+                $img,
+                $request->id_kaprog,
+                $request->nama_kaprog
+            ]
+        );
+
+        return redirect('/operator/kaprog')->with('sukses', 'Data berhasil diubah');
+
     }
 
-    public function hapususer($id = null)
+    public function detailkaprog(KaprogModel $kaprog)
+    {
+        $detail = DB::table('kaprog')
+            ->join('user', 'user.id_user', '=', 'kaprog.user')
+            ->join('level_user', 'level_user.id_level', '=', 'user.level')
+            ->select('kaprog.*', 'user.*', 'level_user.*')
+            ->where('id_kaprog', '=', $kaprog->id_kaprog)
+            ->get();
+
+
+            return view('operator.kaprog.detailkaprog', ["detail" => $detail]);
+    }
+
+    public function hapuskaprog($id = null)
     {
         try{
-            $hapususer = $this->UserModel->where('id_user',$id)->delete();
-            if($hapususer){
+            $hapuskaprog = $this->UserModel->where('id_user',$id)->delete();
+            if($user->foto_user) {
+                Storage::delete($user->foto_user);
+            }
+            if($hapuskaprog){
                 return redirect('/operator/kaprog');
             }
         } catch(Exception $e){
