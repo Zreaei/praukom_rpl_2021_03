@@ -32,12 +32,6 @@ class UserController extends Controller
         return view('admin.data-user.data-user', compact('dataUser','level'));
     }
 
-    // public function tambahUser()
-    // {
-    //     $level = $this->LevelModel::all();
-    //     return view('admin.data-user.tambahuser', compact('level'));
-    // }
-
     public function simpan(Request $request)
     {
         try {
@@ -64,7 +58,7 @@ class UserController extends Controller
             // $insert = $this->UserModel->create($data);
             //Promise 
             if ($tambah_user) {
-                return "Data Ditambah!";
+                return redirect('admin/data-user');
             } else {
                 return "input data gagal";
             }

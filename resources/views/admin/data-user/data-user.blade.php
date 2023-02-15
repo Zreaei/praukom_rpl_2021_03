@@ -39,7 +39,7 @@
     </div>
     <div class="m-3 text-center">
         {{-- Modal Button --}}
-        <label for="my-modal-4" class="btn">open modal</label>
+        <label for="my-modal-4" class="btn">Tambah User</label>
 
         {{-- Modal --}}
         <input type="checkbox" id="my-modal-4" class="modal-toggle" />
@@ -47,7 +47,7 @@
             <label class="modal-box relative" for="">
                 <h3 class="text-lg font-bold">Tambah User</h3>
                 <p class="py-4">
-                    <form method="POST" action="simpan">
+                    <form method="POST" action="data-user/simpan">
                         @csrf
                         <div class="">
                             <div class="form-control mx-auto">
