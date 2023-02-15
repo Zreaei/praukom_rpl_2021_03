@@ -14,5 +14,5 @@ class OperatorModel extends Model
     protected $primaryKey = 'id_operator';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['id_operator','nama_operator','user'];
+    protected $fillable = ['id_operator','user'];
 }

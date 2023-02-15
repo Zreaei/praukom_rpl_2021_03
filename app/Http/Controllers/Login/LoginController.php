@@ -54,6 +54,7 @@ class LoginController extends Controller
         $request->validate([
             'username' => 'required',
             'password' => 'required',
+            // dd($request->all())
         ]);
 
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password]))

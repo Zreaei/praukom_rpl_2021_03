@@ -30,14 +30,17 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LevelSeeder::class,
             UserSeeder::class,
-            WkhubinSeeder::class,
-            WalasSeeder::class,
-            AngkatanSeeder::class,
-            KaprogSeeder::class,
-            JurusanSeeder::class,
-            KelasSeeder::class,
-            SiswaSeeder::class,
-            AdmkeuSeeder::class
+            AdmkeuSeeder::class,
+            AdminSeeder::class,
+            OperatorSeeder::class,
+            // UserSeeder::class,
+            // WkhubinSeeder::class,
+            // WalasSeeder::class,
+            // AngkatanSeeder::class,
+            // KaprogSeeder::class,
+            // JurusanSeeder::class,
+            // KelasSeeder::class,
+            // SiswaSeeder::class,
         ]);
         // $this->call([
         //     AdminSeeder::class

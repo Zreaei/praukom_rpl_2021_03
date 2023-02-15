@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,27 +21,22 @@ class UserController extends Controller
         $this->UserModel = new UserModel;
         $this->LevelModel = new LevelModel;
     }
-
-    public function level()
-    {
-        $dataLevel = $this->LevelModel::all();
-        return view('admin.data-level.data-level', compact('dataLevel'));
-    }
     
     public function user()
     {
         // $dataUser = $this->UserModel::all();
+        $level = $this->LevelModel::all();
         $dataUser = DB::table('user')
         ->join('level_user', 'level_user.id_level', '=', 'user.level')
         ->get(); 
-        return view('admin.data-user.data-user', compact('dataUser'));
+        return view('admin.data-user.data-user', compact('dataUser','level'));
     }
 
-    public function tambahUser()
-    {
-        $level = $this->LevelModel::all();
-        return view('admin.data-user.tambahuser', compact('level'));
-    }
+    // public function tambahUser()
+    // {
+    //     $level = $this->LevelModel::all();
+    //     return view('admin.data-user.tambahuser', compact('level'));
+    // }
 
     public function simpan(Request $request)
     {
@@ -58,7 +54,7 @@ class UserController extends Controller
             $tambah_user = DB::table('user')->insert([
                 'id_user' => $kode_baru,
                 'username' => $request->input('username'),
-                'password' => $request->input('password'),
+                'password' => Hash::make($request->input('password')),
                 'email' => $request->input('email'),
                 'level' => $request->input('level'),
             ]);
@@ -68,7 +64,7 @@ class UserController extends Controller
             // $insert = $this->UserModel->create($data);
             //Promise 
             if ($tambah_user) {
-                return redirect('admin/data-user');
+                return "Data Ditambah!";
             } else {
                 return "input data gagal";
             }
@@ -97,7 +93,7 @@ class UserController extends Controller
         try {
             $data = [
                 'username' => $request->input('username'),
-                'password' => $request->input('password'),
+                'password' => Hash::make($request->input('password')),
                 'email' => $request->input('email'),
                 'level' => $request->input('level'),
                 // dd($request->all())

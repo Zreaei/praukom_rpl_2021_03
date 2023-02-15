@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-// use App\Models\LevelModel;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
-// use Illuminate\Support\Str;
 
 class OperatorSeeder extends Seeder
 {
@@ -18,11 +15,12 @@ class OperatorSeeder extends Seeder
      */
     public function run()
     {
-        $operator = [
+        $operator = 
+        [
             [
-            'id_operator' => 'OPR001',
-            'user' => 'USR002',
-            ]
+                'id_operator' => 'OPR001',
+                'user' => 'USR002',
+            ],
         ];
 
         DB::table('operator')->insert($operator);

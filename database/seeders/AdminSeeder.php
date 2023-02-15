@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-// use App\Models\LevelModel;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
-// use Illuminate\Support\Str;
 
 class AdminSeeder extends Seeder
 {
@@ -18,11 +15,12 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $admin = [
+        $admin = 
+        [
             [
-            'id_admin' => 'ADM001',
-            'user' => 'USR007',
-            ]
+                'id_admin' => 'ADM001',
+                'user' => 'USR001',
+            ],
         ];
 
         DB::table('admin')->insert($admin);

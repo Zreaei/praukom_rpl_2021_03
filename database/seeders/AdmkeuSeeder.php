@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-// use App\Models\LevelModel;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
-// use Illuminate\Support\Str;
 
 class AdmkeuSeeder extends Seeder
 {
@@ -18,21 +15,15 @@ class AdmkeuSeeder extends Seeder
      */
     public function run()
     {
-         $admkeu = [
+        $admkeu = 
         [
-            'id_admkeu' => 'ADK001',
-<<<<<<< HEAD
-            'user' => 'USR007',
-            'nama_admkeu' =>'ADM Keuangan 1'
-            ]
-        ];
-=======
-            'user' => 'USR004',
+            [
+                'id_admkeu' => 'ADK001',
+                'user' => 'USR003',
+                'nama_admkeu' => 'Danar'
             ],
-            ];
->>>>>>> c8945567d95d712e72d237feaae0d6a85a0a3c25
+        ];
 
-                DB::table('adm_keuangan')->insert($admkeu);
-                                            
+        DB::table('adm_keuangan')->insert($admkeu);
     }
 }
