@@ -70,15 +70,17 @@ class LoginController extends Controller
             } else if ($user->level === 'LVL004') {
                 return redirect()->intended('/pbsekolah');
             } else if ($user->level === 'LVL005') {
-                return redirect()->intended('/pbsekolah');
+                return redirect()->intended('/pbiduka');
             } else if ($user->level === 'LVL006') {
-                return redirect()->intended('/pbsekolah');
+                return redirect()->intended('/walas');
             } else if ($user->level === 'LVL007') {
-                return redirect()->intended('/pbsekolah');
+                return redirect()->intended('/admkeu');
             } else if ($user->level === 'LVL008') {
-                return redirect()->intended('/pbsekolah');
+                return redirect()->intended('/wkhubin');
             } else if ($user->level === 'LVL009') {
-                return redirect()->intended('/pbsekolah');
+                return redirect()->intended('/kaprog');
+            } else if ($user->level === 'LVL010') {
+                return redirect()->intended('/verifikator');
             }
             // return redirect()->intended('/');
         }

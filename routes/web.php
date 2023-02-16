@@ -65,8 +65,7 @@ Route::get('/admin/data-level', [DataLevelController::class, 'level']);
 Route::get('/admin/data-user', [UserController::class, 'user']);
 Route::post('/admin/data-user/simpan', [UserController::class, 'simpan']);
 Route::get('/admin/data-user/hapus/{id}', [UserController::class, 'hapus']);
-Route::get('/admin/data-user/edit/{id}', [UserController::class, 'edit']);
-Route::post('/admin/data-user/edit/simpanedit', [UserController::class, 'simpanedit']);
+Route::post('/admin/data-user/simpanedit', [UserController::class, 'simpanedit']);
 
 // Admin - Kelola Operator
 Route::get('/admin/data-op', [DataOperatorController::class, 'operator']);
