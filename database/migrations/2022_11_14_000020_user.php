@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('username', 50)->unique()->nullable(false);
             $table->string('password', 255)->nullable(false);
             $table->string('email', 50)->nullable(false);
-            $table->string('foto_user', 255)->nullable(false);
+            $table->string('foto_user', 255)->nullable(true);
 
             $table->foreign('level')->references('id_level')->on('level_user')->cascadeOnDelete();
         });

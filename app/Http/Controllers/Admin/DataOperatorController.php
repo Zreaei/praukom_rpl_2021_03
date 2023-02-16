@@ -23,16 +23,16 @@ class DataOperatorController extends Controller
 
     public function operator()
     {
-        $daftar = $this->OperatorModel::all();
-        return view('admin.data-op.data-op', compact('daftar'));
+        $dataOp = DB::table('operator')
+        ->join('user', 'user.id_user', '=', 'operator.user')
+        ->get();
+        return view('admin.data-op.data-op', compact('dataOp'));
     }
 
     public function tambahOpr()
     {
         // $user = $this->UserModel::all();
-        $user = DB::table('user')
-        ->join('level_user', 'level_user.id_level', '=', 'user.level')
-        ->get(); 
+        $user = DB::table('user')->get(); 
         return view('admin.data-op.tambahop', compact('user'));
     }
 
@@ -55,7 +55,6 @@ class DataOperatorController extends Controller
             $kode_baru = Arr::get($array, '0');
             $tambah_opr = DB::table('operator')->insert([
                 'id_operator' => $kode_baru,
-                'nama_operator' => $request->input('nama_operator'),
                 'user' => $request->input('user'),
             ]);
 

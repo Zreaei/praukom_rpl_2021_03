@@ -8,6 +8,7 @@ use App\Http\Controllers\{
     Admin\DataKelasController,
     Admin\DataAngkatanController,
     Admin\DataSiswaController,
+    Admin\DataAdmkuController,
     Siswa\SiswaController,
     Siswa\PengajuanController,
     Siswa\PresensiController,
@@ -28,9 +29,9 @@ use App\Http\Controllers\{
     WkHubin\WkhubinController,
     WkHubin\DataPengajuanController,
     HomeController,
-    LoginController,
+    Login\LoginController,
 };
-
+use App\Http\Controllers\Admin\DataLevelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,18 +46,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login.login');
-});
+    return view('welcome.welcome');
+})->name('home');
+
+// Login - Register Siswa(Operator Only)
+Route::get('/register', [LoginController::class, 'register'])->name('register');
+Route::post('/register', [LoginController::class, 'register_action'])->name('register.action');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'login_action'])->name('login.action');
 
 // Admin
-Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/admin', [AdminController::class, 'index'])->name('home');
 
 // Admin - Data Level
-Route::get('admin/data-level', [UserController::class, 'level']);
+Route::get('/admin/data-level', [DataLevelController::class, 'level']);
 
 // Admin - Kelola User
 Route::get('/admin/data-user', [UserController::class, 'user']);
-Route::get('/admin/data-user/tambah', [UserController::class, 'tambahUser']);
 Route::post('/admin/data-user/simpan', [UserController::class, 'simpan']);
 Route::get('/admin/data-user/hapus/{id}', [UserController::class, 'hapus']);
 Route::get('/admin/data-user/edit/{id}', [UserController::class, 'edit']);
@@ -101,6 +107,9 @@ Route::post('/admin/data-siswa/simpan', [DataSiswaController::class, 'simpan']);
 Route::get('/admin/data-siswa/hapus/{id}', [DataSiswaController::class, 'hapus']);
 Route::get('/admin/data-siswa/edit/{id}', [DataSiswaController::class, 'edit']);
 Route::post('/admin/data-siswa/edit/simpanedit',[DataSiswaController::class,'simpanedit']);
+
+// Admin - Kelola Admku
+Route::get('/admin/data-admku', [DataAdmkuController::class, 'admku']);
 
 // Operator - Dashboard
 Route::get('/operator/home', [OperatorController::class, 'home'])->name('operator.home');
