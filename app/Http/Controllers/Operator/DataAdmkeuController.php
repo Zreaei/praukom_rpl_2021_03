@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\{UserModel, AdmkeuModel};
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{DB, Hash, Storage};
+use Illuminate\Support\Facades\{DB, Hash};
+use Illuminate\Support\Facades\Storage;
 
 class DataAdmkeuController extends Controller
 {
@@ -75,7 +76,6 @@ class DataAdmkeuController extends Controller
             ->where('id_admkeu', '=', $admkeu->id_admkeu)
             ->get();
 
-
             return view('operator.admkeu.editadmkeu', ["edit" => $edit]);
     }
 
@@ -92,6 +92,9 @@ class DataAdmkeuController extends Controller
         );
 
         $img = $request->file('foto_user')->store('img');
+        if($request->fotoLama) {
+            Storage::delete($request->fotoLama);
+        }
         $pass = Hash::make($request->input('password'));
 
         DB::select("CALL procedure_update_admkeu(?,?,?,?,?,?,?)",
@@ -126,10 +129,16 @@ class DataAdmkeuController extends Controller
     public function hapusadmkeu($id = null)
     {
         try{
-            $hapusadmkeu = $this->UserModel->where('id_user',$id)->delete();
+            
+        $user = $this->UserModel->where('id_user',$id)->first();
+        
+        $hapusadmkeu = $this->UserModel->where('id_user',$id)->delete();
+            
+            
             if($user->foto_user) {
                 Storage::delete($user->foto_user);
             }
+            
             if($hapusadmkeu){
                 return redirect('/operator/admkeu');
             }
@@ -137,4 +146,17 @@ class DataAdmkeuController extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
+
+    // public function hapusadmkeu(Request $request)
+    // {
+    //     $user_id = $request->input('delete_user_id');
+    //     $user = UserModel::find($user_id);
+
+    //     if($user->foto_user) {
+    //         Storage::delete($user->foto_user);
+    //     }
+
+    //     $user->delete();
+    //     return redirect('/operator/admkeu');
+    // }
 }

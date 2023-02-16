@@ -62,7 +62,7 @@
                 </label>
                 <label class="input-group input-group-vertical">
                     <span class="pr-8">PASSWORD</span>
-                    <input type="text" name="password" placeholder="Masukkan Password" class="input input-bordered" required/>
+                    <input type="password" name="password" placeholder="Masukkan Password" class="input input-bordered" required/>
                 </label>
                 <label class="input-group input-group-vertical">
                     <span class="pr-8">EMAIL</span>

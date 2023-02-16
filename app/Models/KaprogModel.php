@@ -12,8 +12,8 @@ class KaprogModel extends Model
     protected $table = 'kaprog';
     protected $softDelete = false;
     public $timestamps = false;
-    protected $primaryKey = 'nip_kaprog';
+    protected $primaryKey = 'id_kaprog';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['nip_kaprog','nama_kaprog','user'];
+    protected $fillable = ['id_kaprog','nip_kaprog','nama_kaprog','user'];
 }
