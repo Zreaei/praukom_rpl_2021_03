@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-class PbsekolahModel extends Model
+class KegiatanModel extends Model
 {
     use HasFactory;
-    protected $table = 'pb_sekolah';
+    protected $table = 'kegiatan';
     protected $softDelete = false;
     public $timestamps = false;
-    protected $primaryKey = 'id_pbsekolah';
+    protected $primaryKey = 'id_kegiatan';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['id_pbsekolah','nip_pbsekolah','nama_pbsekolah','telp_pbsekolah','user'];
+    protected $fillable = ['id_kegiatan','prakerin','foto_kegiatan','keterangan_kegiatan','tgl_kegiatan','jam_masuk','jam_keluar'];
 }

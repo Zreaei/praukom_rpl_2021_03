@@ -43,7 +43,6 @@ class PengajuanController extends Controller
     }
     public function pengajuan()
     {
-        $pengajuan = $this->PengajuanModel::all();
         $siswa = $this->SiswaModel::all();
         $admkeu = $this->AdmkeuModel::all();
         $wkhubin = $this->WkhubinModel::all();

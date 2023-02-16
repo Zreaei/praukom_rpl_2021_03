@@ -14,5 +14,5 @@ class PresensiModel extends Model
     protected $primaryKey = 'id_presensi';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['id_presensi','prakerin','pb_iduka','pb_sekolah','tgl_presensi','keterangan_presensi','foto_kegiatan','keterangan_kegiatan','jam_masuk','jam_keluar','status_presensi','konfirmasi_pbsekolah','konfirmasi_pbiduka'];
+    protected $fillable = ['id_presensi','prakerin','pb_iduka','pb_sekolah','tgl_presensi','keterangan_presensi','status_presensi','konfirmasi_pbsekolah','konfirmasi_pbiduka'];
 }

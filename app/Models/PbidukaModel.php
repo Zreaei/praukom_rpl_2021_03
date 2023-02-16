@@ -12,8 +12,8 @@ class PbidukaModel extends Model
     protected $table = 'pb_iduka';
     protected $softDelete = false;
     public $timestamps = false;
-    protected $primaryKey = 'nik_pbiduka';
+    protected $primaryKey = 'nik';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['nik_pbiduka','nama_pbiduka','telp_pbiduka','user'];
+    protected $fillable = ['nik','user','nama_pbiduka','telp_pbiduka'];
 }

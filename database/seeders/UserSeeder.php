@@ -76,7 +76,15 @@ class UserSeeder extends Seeder
                                     'email' => 'Operator@1',
                                     'foto_user' => 'Operator',
                                     ],
-                                    ];
+                                    [
+                                        'id_user' => 'USR008',
+                                        'level' => 'LVL004',
+                                        'username' => 'pbsekolah',
+                                        'password' => 'pbsekolah1',
+                                        'email' => 'pbsekolah@1',
+                                        'foto_user' => 'pbsekolah',
+                                        ],
+                                        ];
 
                         DB::table('user')->insert($user);
                                             

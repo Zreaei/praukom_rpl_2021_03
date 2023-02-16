@@ -8,9 +8,11 @@ use App\Http\Controllers\{
     Admin\DataKelasController,
     Admin\DataAngkatanController,
     Admin\DataSiswaController,
-    Siswa\SiswaController,
     Siswa\PengajuanController,
+    Siswa\SiswaController,
     Siswa\PresensiController,
+    Siswa\PrakerinController,
+    Siswa\KegiatanController,
     Operator\OperatorController,
     AdmKeu\AdmkeuController,
     Kaprog\KaprogController,
@@ -193,17 +195,20 @@ Route::get('/siswa/profil', [SiswaController::class, 'profil']);
 // Siswa - pengajuan
 Route::get('/siswa/pengajuan', [PengajuanController::class, 'pengajuan','tambahpengajuan'])->name('siswa.pengajuan');
 Route::post('/siswa/simpanpengajuan', [PengajuanController::class, 'tambahpengajuan'])->name('siswa.simpanpengajuan');
-// Route::get('/siswa/editpengajuan/{pengajuan}', [PengajuanController::class, 'editpengajuan'])->name('siswa.editpengajuan');
 Route::put('/siswa/editsimpanpengajuan', [PengajuanController::class, 'editpengajuan'])->name('siswa.editsimpanpengajuan');
 Route::get('/siswa/hapuspengajuan/{id}', [PengajuanController::class, 'hapus']);
 
 // Siswa - presensi
 Route::get('/siswa/presensi', [PresensiController::class, 'presensi'])->name('siswa.presensi');
-Route::get('/siswa/tambahpresensi', [PresensiController::class, 'tambahpresensi'])->name('siswa.tambahpresensi');
-Route::put('/siswa/simpanpresensi', [PresensiController::class, 'simpanpresensi'])->name('siswa.simpanpresensi');
-Route::get('/siswa/editpresensi/{id}', [PresensiController::class, 'editpresensi']);
-Route::put('/siswa/editsimpanpresensi/{id}', [presensiController::class, 'editsimpan']);
+Route::post('/siswa/simpanpresensi', [PresensiController::class, 'tambahpresensi'])->name('siswa.simpanpresensi');
+Route::post('/siswa/editsimpanpresensi', [PresensiController::class, 'editpresensi'])->name('siswa.editsimpanpresensi');
 Route::get('/siswa/hapuspresensi/{id}', [PresensiController::class, 'hapus']);
+
+// Siswa - kegiatan
+Route::get('/siswa/kegiatan', [KegiatanController::class, 'kegiatan'])->name('siswa.kegiatan');
+Route::post('/siswa/simpankegiatan', [KegiatanController::class, 'tambahkegiatan'])->name('siswa.simpankegiatan');
+Route::post('/siswa/editsimpankegiatan', [KegiatanController::class, 'editkegiatan'])->name('siswa.editsimpankegiatan');
+Route::get('/siswa/hapuskegiatan/{id}', [KegiatanController::class, 'hapus']);
 
 // Siswa - prakerin
 Route::get('/siswa/prakerin', [PrakerinController::class, 'prakerin'])->name('siswa.prakerin');

@@ -1,6 +1,9 @@
 @extends('layouts.main')
 @section('container')
 <div class="flex bg-gray-100">
+    <!-- <td class="text-sm text-item font-semibold px-6 py-4 text-center">
+                                <img src="{{ asset('storage/img/' . $item->foto) }}" id="gambar" alt="Foto Agenda" style="width:100px">
+                            </td> -->
     <aside class="w-64" aria-label="Sidebar">
     <div class="px-3 py-4 overflow-y-auto bg-gray-50 h-screen bg-gradient-to-b from-danar to-kahfi">
         <ul class="space-y-2">

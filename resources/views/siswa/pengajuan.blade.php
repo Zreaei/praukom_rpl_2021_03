@@ -92,7 +92,7 @@
                                 <div class="flex justify-center">
                                     <div class="px-4 py-4">
                                         <label for="edit-pengajuan{{$ajuan->id_pengajuan}}" class="text-[#2D5EBB] hover:text-opacity-50">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                                         </label>
                                     </div>
@@ -109,7 +109,7 @@
                                                 </div> -->
                                     <div class="px-4 py-4">
                                         <label for="delete{{ $ajuan->id_iduka }}" class="text-[#FF0808] hover:text-opacity-50">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                         </label>
                                     </div>
@@ -134,7 +134,7 @@
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">NIS</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="datasiswa">
+                                <select class="select select-bordered bg-[#ffffff]" name="datasiswa" require>
                                     <option disabled selected>Pilih NIS</option>
                                     @foreach ($siswa as $item)
                                         <option value="{{ $item->nis }}">{{ $item->nis }}</option>
@@ -143,29 +143,29 @@
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Tanggal Pengajuan</span></label>
-                                <input type="date" name="datatglpengajuan" placeholder="Type here" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="date" name="datatglpengajuan" placeholder="Type here" class="input input-bordered w-full max-w-sm bg-[#ffffff]" require/>
                             </div>
                         </div>
 
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Nama Perusahaan</span></label>
-                                <input type="text" name="datanamaiduka" placeholder="Nama Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="text" name="datanamaiduka" placeholder="Nama Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" require />
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Pimpinan Perusahaan</span></label>
-                                <input type="text" name="datapimpinaniduka" placeholder="Pimpinan Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="text" name="datapimpinaniduka" placeholder="Pimpinan Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" require/>
                             </div>
                         </div>
 
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Alamat Perusahaan</span></label>
-                                <input type="text" name="dataalamatiduka" placeholder="Alamat Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="text" name="dataalamatiduka" placeholder="Alamat Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]"require />
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Telp Perusahaan</span></label>
-                                <input type="number" name="datatelpiduka" placeholder="Telp Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="number" name="datatelpiduka" placeholder="Telp Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" require/>
                             </div>
                         </div>
 
@@ -173,7 +173,7 @@
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Nama Waka Hubin</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="datawkhubin">
+                                <select class="select select-bordered bg-[#ffffff]" name="datawkhubin" require>
                                     <option disabled selected>Pilih Nama Waka Hubin</option>
                                     @foreach ($wkhubin as $item)
                                         <option value="{{ $item->id_wkhubin }}">{{ $item->nama_wkhubin }}</option>
@@ -182,7 +182,7 @@
                             </div>
                             <div class="form-control w-full max-w-sm ">
                             @foreach ($admkeu as $item)
-                                <input type="hidden"  name="dataadmkeu" value="{{ $item->id_admkeu }}" />
+                                <input type="hidden"  name="dataadmkeu" value="{{ $item->id_admkeu }}"require />
                             @endforeach
                                 <!-- <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Nama Admin Keuangan</span></label>
                                 <select class="select select-bordered bg-[#ffffff]" name="dataadmkeu">
@@ -197,7 +197,7 @@
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Nama Kepala Program</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="datakaprog">
+                                <select class="select select-bordered bg-[#ffffff]" name="datakaprog" require>
                                     <option disabled selected>Pilih Nama Kepala Program</option>
                                     @foreach ($kaprog as $item)
                                         <option value="{{ $item->id_kaprog }}">{{ $item->nama_kaprog }}</option>
@@ -206,7 +206,7 @@
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">Nama Wali Kelas</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="datawalas">
+                                <select class="select select-bordered bg-[#ffffff]" name="datawalas" require>
                                     <option disabled selected>Pilih Nama Wali Kelas</option>
                                     @foreach ($walas as $item)
                                         <option value="{{ $item->id_walas }}">{{ $item->nama_walas }}</option>
@@ -243,31 +243,31 @@
                         <div class=" mt-2">
                             <div class="form-control w-full max-w-full">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Tanggal Pengajuan</span></label>
-                                <input type="date" name="tgl_pengajuan" value="{{ old('tgl_pengajuan', $edit->tgl_pengajuan) }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                                <input type="hidden"  name="id_pengajuan" value="{{$edit->id_pengajuan}}" />
-                                <input type="hidden"  name="id_iduka" value="{{$edit->id_iduka }}" />
+                                <input type="date" name="tgl_pengajuan" value="{{ old('tgl_pengajuan', $edit->tgl_pengajuan) }}"require placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
+                                <input type="hidden"  name="id_pengajuan" value="{{$edit->id_pengajuan}}" require/>
+                                <input type="hidden"  name="id_iduka" value="{{$edit->id_iduka }}" require/>
                             </div>
                         </div>
 
                         <div class="flex justify-between mt-2">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Nama Perusahaan</span></label>
-                                <input type="text" name="nama_iduka" value="{{ old('nama_iduka', $edit->nama_iduka ) }}" placeholder="Nama Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="text" name="nama_iduka" value="{{ old('nama_iduka', $edit->nama_iduka ) }}"require placeholder="Nama Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Pimpinan Perusahaan</span></label>
-                                <input type="text" name="pimpinan_iduka" value="{{ old('pimpinan_iduka', $edit->pimpinan_iduka  ) }}" placeholder="Pimpinan Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="text" name="pimpinan_iduka" value="{{ old('pimpinan_iduka', $edit->pimpinan_iduka  ) }}"require placeholder="Pimpinan Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                         </div>
 
                         <div class="flex justify-between mt-2">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Alamat Perusahaan</span></label>
-                                <input type="text" name="alamat_iduka" value="{{ old('alamat_iduka', $edit->alamat_iduka) }}"  placeholder="Alamat Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="text" name="alamat_iduka" value="{{ old('alamat_iduka', $edit->alamat_iduka) }}"require  placeholder="Alamat Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Telp Perusahaan</span></label>
-                                <input type="number" name="telp_iduka" value="{{ old('telp_iduka', $edit->telp_iduka) }}" placeholder="Telp Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="number" name="telp_iduka" value="{{ old('telp_iduka', $edit->telp_iduka) }}"require placeholder="Telp Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                         </div>
                         <div>

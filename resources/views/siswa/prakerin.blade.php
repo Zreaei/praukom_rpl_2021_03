@@ -100,7 +100,7 @@
                                 {{ $no++ }}
                             </td>
                             <td class="text-sm text-item font-semibold px-6 py-4 text-center">
-                                {{ $a->pengajuan }}
+                                {{ $a->id_pengajuan }}
                             </td>
                             <td class="text-sm text-item font-semibold px-6 py-4 text-center">
                                 {{ $a->tgl_mulai }}
