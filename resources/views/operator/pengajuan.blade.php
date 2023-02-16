@@ -57,7 +57,7 @@
                     <?php
                     $no = 1;
                     ?>
-                        @foreach ($pbsekolah as $item)
+                        @foreach ($user as $item)
                         <tr class="bg-[#ffffff] text-[#000000]">
                             <td class="text-sm text-item font-semibold px-7 py-4 text-center">
                                 {{ $no++ }}
@@ -86,10 +86,10 @@
                             <td class="text-sm font-medium leading-5 text-center [#ffffff]space-no-wrap ">
                                 <div class="flex justify-center">
                                     <div class="px-4 py-4">
-                                    <a href="/operator/editpbsekolah/{{ $item->id_pbsekolah }}" class="text-indigo-600 hover:text-indigo-900">
+                                        <label for="edit{{$item->id_pbsekolah}}" class="text-[#2D5EBB] hover:text-opacity-50">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                                    </a>
+                                        </label>
                                     </div>
                                     <div class="px-4 py-4">
                                         <label for="detail{{$item->id_pbsekolah}}" class="text-[#2D5EBB] hover:text-opacity-50">
@@ -117,76 +117,15 @@
                 </table>
             </div>
 
-            <!-- Modal Tambah User -->
-           
-            <input type="checkbox" id="tambah" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box w-11/12 max-w-2xl bg-[#2D5EBB]">
-                    <label for="tambah" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
-                    <h3 class="text-lg font-bold text-[#ffffff] text-center">TAMBAH DATA PEMBIMBING SEKOLAH</h3>
-                    <form action="{{ route('operator.simpanpbsekolah') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                        <input type="hidden" name="level" value="LVL004"/>
-                        <div class="flex justify-between mt-1">
-                            <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">NIP</span></label>
-                                <input type="text" name="nip_pbsekolah" placeholder="Masukkan NIP" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
-                            </div>
-                            <div class="form-control w-full max-w-sm">
-                                <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">NAMA LENGKAP</span></label>
-                                <input type="text" name="nama_pbsekolah" placeholder="Masukkan Nama Lengkap" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between mt-1">
-                            <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">USERNAME</span></label>
-                                <input type="text" name="username" placeholder="Masukkan Username" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
-                            </div>
-                            <div class="form-control w-full max-w-sm">
-                                <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">PASSWORD</span></label>
-                                <input type="password" name="password" placeholder="Masukkan Password" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between mt-1">
-                            <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">EMAIL</span></label>
-                                <input type="email" name="email" placeholder="Masukkan Username" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
-                            </div>
-                            <div class="form-control w-full max-w-sm">
-                            <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">NOMOR TELEPON</span></label>
-                                <input type="number" name="telp_pbsekolah" placeholder="Masukkan Nomor" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between mt-1">
-                            <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">FOTO</span></label>
-                                <img class="img-preview h-full w-full">
-                                <input type="file" name="foto_user" placeholder="Masukkan Foto" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="foto_user" onchange="previewImage()" required/>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <button type="submit" class="btn bg-gradient-to-b from-[#FFA434] to-[#D24E16] w-full mt-3 ">
-                                SUBMIT
-                            </button>
-                        </div>
-                    </form>
-                    
-                </div>
-            </div>
-            
             <!-- Modal Detail User -->
 
-            @foreach ($pbsekolah as $detail)
+            @foreach ($user as $detail)
             <input type="checkbox" id="detail{{$detail->id_pbsekolah}}" class="modal-toggle" />
             <div class="modal">
                 <div class="modal-box w-11/12 max-w-2xl bg-[#2D5EBB]">
                     <label for="detail{{$detail->id_pbsekolah}}" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
                         <div class="flex justify-between mt-2 mb-5">
-                            <div class="form-control w-full max-w-sm mr-2">
+                            <div class="form-control w-full max-w-sm mr-2 item-center">
                                 <img src="{{ asset('storage/' . $detail->foto_user) }}">
                             </div>
                         </div>
@@ -239,49 +178,7 @@
                 </div>
             @endforeach
 
-            <!-- Modal Hapus User -->
-
-            @foreach($pbsekolah as $item)
-            <input type="checkbox" id="delete{{ $item->id_user }}" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box w-11/12 max-w-2xl bg-white">
-                    <svg fill="none" class="text-[#E63946] w-1/4 mx-auto" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
-                    </svg>
-                    <div class="text-center">
-                    <h3 class="font-bold text-2xl">Anda yakin ingin menghapus ?</h3>
-                    </div>
-                    <div class="flex justify-center pt-4 gap-x-20 gap-y-3">
-                        <label for="delete{{ $item->id_user }}" class="btn btn-ghost btn-base bg-[#2D5EBB] w-36 text-white text-base hover:bg-[#2D5EBB] hover:bg-opacity-70">Batal</label>
-                        <label class="btn btn-ghost btn-base bg-[#E63946] w-36 text-white text-base hover:bg-[#E63946] hover:bg-opacity-70">
-                            <a href="/operator/hapuspbsekolah/{{ $item->id_user}}">
-                                Hapus
-                            </a>
-                        </label>
-                    </div>
-                        
-                </div>
-            </div> 
-            @endforeach
-    
         </div>
     </div>
-
-
-    <script>
-    function previewImage() {
-            const image = document.querySelector('#foto_user');
-            const imgPreview = document.querySelector('.img-preview');
-
-        imgPreview.style.display = 'block';
-
-        const oFReader = new FileReader();
-        oFReader.readAsDataURL(image.files[0]);
-
-        oFReader.onload = function(oFREvent) {
-            imgPreview.src = oFREvent.target.result;
-        }
-    }
-    </script>
 
 @endsection

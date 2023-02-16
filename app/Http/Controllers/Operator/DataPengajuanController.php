@@ -8,27 +8,24 @@ use App\Models\UserModel;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{DB, Hash};
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\{DB, Hash, Storage};
 
 class DataPbsekolahController extends Controller
 {
-    protected $PbsekolahModel;
-    protected $UserModel;
-
+    protected $PbsekolahModel, $UserModel;
     public function __construct()
     {
-        $this->UserModel = new UserModel;
-        $this->PbsekolahModel = new PbsekolahModel;
+        $this->PbsekolahModel = new PbsekolahModel();
+        $this->UserModel = new UserModel();
     }
     public function pbsekolah() 
     {
-        $pbsekolah = DB::table('pb_sekolah')
+        $user = DB::table('pb_sekolah')
             ->join('user', 'user.id_user', '=', 'pb_sekolah.user')
             ->join('level_user', 'level_user.id_level', '=', 'user.level')
             ->get();
 
-            return view('operator.pbsekolah.pbsekolah')->with('pbsekolah', $pbsekolah);
+            return view('operator.pbsekolah.pbsekolah')->with('user', $user);
     }
     // public function tambahpbsekolah()
     // {
@@ -43,14 +40,14 @@ class DataPbsekolahController extends Controller
                 'username' => 'required',
                 'password' => 'required',
                 'email' => 'required',
-                'foto_user' => 'required',
+                'tambahfoto_user' => 'required',
                 'nip_pbsekolah' => 'required',
                 'nama_pbsekolah' => 'required',
                 'telp_pbsekolah' => 'required'
             ]
         );
 
-        $img = $request->file('foto_user')->store('img');
+        $img = $request->file('tambahfoto_user')->store('img');
         $pass = Hash::make($request->input('password'));
 
         DB::insert("CALL procedure_insert_pbsekolah(
@@ -69,40 +66,27 @@ class DataPbsekolahController extends Controller
 
         return redirect('/operator/pbsekolah')->with('sukses', 'Data berhasil ditambah');
     }
-
-    public function editpbsekolah(PbsekolahModel $pbsekolah)
-    {
-        $edit = DB::table('pb_sekolah')
-            ->join('user', 'user.id_user', '=', 'pb_sekolah.user')
-            ->join('level_user', 'level_user.id_level', '=', 'user.level')
-            ->select('pb_sekolah.*', 'user.*', 'level_user.*')
-            ->where('id_pbsekolah', '=', $pbsekolah->id_pbsekolah)
-            ->get();
-
-            return view('operator.pbsekolah.editpbsekolah', ["edit" => $edit]);
-    }
-
-    public function editsimpanpbsekolah(Request $request)
+    public function editpbsekolah(Request $request)
     {
         $request->validate(
             [
                 'username' => 'required',
                 'password' => 'required',
                 'email' => 'required',
-                'foto_user' => 'required',
+                'editfoto_user' => 'required',
                 'nip_pbsekolah' => 'required',
                 'nama_pbsekolah' => 'required',
                 'telp_pbsekolah' => 'required'
             ]
         );
 
-        $img = $request->file('foto_user')->store('img');
+        $img = $request->file('editfoto_user')->store('img');
         if($request->fotoLama) {
             Storage::delete($request->fotoLama);
         }
         $pass = Hash::make($request->input('password'));
 
-        DB::select("CALL procedure_update_pbsekolah(?,?,?,?,?,?,?,?,?)",
+        $edit = DB::select("CALL procedure_update_pbsekolah(?,?,?,?,?,?,?,?,?)",
             [
                 $request->user,
                 $request->username,
@@ -116,21 +100,23 @@ class DataPbsekolahController extends Controller
             ]
         );
 
+        ddd($edit);
+
         return redirect('/operator/pbsekolah')->with('sukses', 'Data berhasil diubah');
 
     }
 
-    // public function detailpbsekolah(PbsekolahModel $pbsekolah)
-    // {
-    //     $user = DB::table('pb_sekolah')
-    //         ->join('user', 'user.id_user', '=', 'pb_sekolah.user')
-    //         ->join('level_user', 'level_user.id_level', '=', 'user.level')
-    //         ->select('pb_sekolah.*', 'user.*', 'level_user.*')
-    //         ->where('id_pbsekolah', '=', $pbsekolah->id_pbsekolah)
-    //         ->get();
+    public function detailpbsekolah(PbsekolahModel $pbsekolah)
+    {
+        $user = DB::table('pb_sekolah')
+            ->join('user', 'user.id_user', '=', 'pb_sekolah.user')
+            ->join('level_user', 'level_user.id_level', '=', 'user.level')
+            ->select('pb_sekolah.*', 'user.*', 'level_user.*')
+            ->where('id_pbsekolah', '=', $pbsekolah->id_pbsekolah)
+            ->get();
 
-    //         return view('operator.pbsekolah.detailpbsekolah', ["user" => $user]);
-    // }
+            return view('operator.pbsekolah.detailpbsekolah', ["user" => $user]);
+    }
 
     public function hapuspbsekolah($id = null)
     {

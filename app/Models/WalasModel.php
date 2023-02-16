@@ -12,8 +12,8 @@ class WalasModel extends Model
     protected $table = 'walas';
     protected $softDelete = false;
     public $timestamps = false;
-    protected $primaryKey = 'nip_walas';
+    protected $primaryKey = 'id_walas';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['nip_walas','nama_walas','user'];
+    protected $fillable = ['id_walas','nip_walas','nama_walas','user'];
 }

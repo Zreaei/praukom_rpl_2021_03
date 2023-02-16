@@ -12,8 +12,8 @@ class PbsekolahModel extends Model
     protected $table = 'pb_sekolah';
     protected $softDelete = false;
     public $timestamps = false;
-    protected $primaryKey = 'nip_pbsekolah';
+    protected $primaryKey = 'id_pbsekolah';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['nip_pbsekolah','nama_pbsekolah','telp_pbsekolah','user'];
+    protected $fillable = ['id_pbsekolah','nip_pbsekolah','nama_pbsekolah','telp_pbsekolah','user'];
 }

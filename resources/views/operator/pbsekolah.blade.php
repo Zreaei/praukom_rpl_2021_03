@@ -57,7 +57,7 @@
                     <?php
                     $no = 1;
                     ?>
-                        @foreach ($pbsekolah as $item)
+                        @foreach ($user as $item)
                         <tr class="bg-[#ffffff] text-[#000000]">
                             <td class="text-sm text-item font-semibold px-7 py-4 text-center">
                                 {{ $no++ }}
@@ -86,10 +86,10 @@
                             <td class="text-sm font-medium leading-5 text-center [#ffffff]space-no-wrap ">
                                 <div class="flex justify-center">
                                     <div class="px-4 py-4">
-                                    <a href="/operator/editpbsekolah/{{ $item->id_pbsekolah }}" class="text-indigo-600 hover:text-indigo-900">
+                                        <label for="edit{{$item->id_pbsekolah}}" class="text-[#2D5EBB] hover:text-opacity-50">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                                    </a>
+                                        </label>
                                     </div>
                                     <div class="px-4 py-4">
                                         <label for="detail{{$item->id_pbsekolah}}" class="text-[#2D5EBB] hover:text-opacity-50">
@@ -163,8 +163,8 @@
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">FOTO</span></label>
-                                <img class="img-preview h-full w-full">
-                                <input type="file" name="foto_user" placeholder="Masukkan Foto" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="foto_user" onchange="previewImage()" required/>
+                                <img class="img-previewtambah object-scale-down">
+                                <input type="file" name="tambahfoto_user" placeholder="Masukkan Foto" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="tambahfoto_user" onchange="previewImageTambah()" required/>
                             </div>
                         </div>
                         
@@ -177,16 +177,87 @@
                     
                 </div>
             </div>
-            
+
+
+
+           
+            <!-- Modal Edit User -->
+
+            @foreach ($user as $edit)
+            <input type="checkbox" id="edit{{$edit->id_pbsekolah}}" class="modal-toggle" />
+            <div class="modal">
+                <div class="modal-box w-11/12 max-w-2xl bg-[#2D5EBB]">
+                    <label for="edit{{$edit->id_pbsekolah}}" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
+                    <h3 class="text-lg font-bold text-[#ffffff] text-center">EDIT DATA PEMBIMBING SEKOLAH</h3>
+                
+                    <form action="{{ route('operator.editsimpanpbsekolah') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                        <input type="hidden"  name="id_pbsekolah" value="{{$edit->id_pbsekolah}}" />
+                        <input type="hidden"  name="user" value="{{$edit->user }}" />
+
+                        <div class="flex justify-between mt-2">
+                            <div class="form-control w-full max-w-sm mr-2">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">NIP</span></label>
+                                <input type="text" name="NIP" value="{{ old('nip_pbsekolah', $edit->nip_pbsekolah ) }}" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
+                            </div>
+                            <div class="form-control w-full max-w-sm">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">NAMA LENGKAP</span></label>
+                                <input type="text" name="nama_pbsekolah" value="{{ old('nama_pbsekolah', $edit->nama_pbsekolah ) }}" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between mt-2">
+                            <div class="form-control w-full max-w-sm mr-2">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">USERNAME</span></label>
+                                <input type="text" name="username" value="{{ old('username', $edit->username) }}" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
+                            </div>
+                            <div class="form-control w-full max-w-sm">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">PASSWORD</span></label>
+                                <input type="password" name="password" value="{{ old('password', $edit->password) }}" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between mt-2">
+                            <div class="form-control w-full max-w-sm mr-2">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">EMAIL</span></label>
+                                <input type="email" name="email" value="{{ old('email', $edit->email) }}" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
+                            </div>
+                            <div class="form-control w-full max-w-sm">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">NOMOR TELEPON</span></label>
+                                <input type="number" name="telp_pbsekolah" value="{{ old('telp_pbsekolah', $edit->telp_pbsekolah) }}" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between mt-2">
+                            <div class="form-control w-full max-w-sm mr-2">
+                            <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">FOTO</span></label>
+                                <input type="hidden" name="fotoLama" value="{{ $edit->foto_user }}" />
+                                <img src="{{ asset('storage/' . $edit->foto_user) }}" class="img-previewedit object-scale-down">
+                                <input type="file" name="editfoto_user" value="{{ $edit->foto_user }}" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="editfoto_user" onchange="previewImageEdit()" required/>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn bg-gradient-to-b from-[#FFA434] to-[#D24E16] w-full mt-3 ">
+                                SUBMIT 
+                            </button>
+                        </div>
+                    </form>    
+                </div>
+                </div>
+            @endforeach
+
             <!-- Modal Detail User -->
 
-            @foreach ($pbsekolah as $detail)
+            @foreach ($user as $detail)
             <input type="checkbox" id="detail{{$detail->id_pbsekolah}}" class="modal-toggle" />
             <div class="modal">
                 <div class="modal-box w-11/12 max-w-2xl bg-[#2D5EBB]">
                     <label for="detail{{$detail->id_pbsekolah}}" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
                         <div class="flex justify-between mt-2 mb-5">
-                            <div class="form-control w-full max-w-sm mr-2">
+                            <div class="form-control w-full max-w-sm mr-2 item-center">
                                 <img src="{{ asset('storage/' . $detail->foto_user) }}">
                             </div>
                         </div>
@@ -241,7 +312,7 @@
 
             <!-- Modal Hapus User -->
 
-            @foreach($pbsekolah as $item)
+            @foreach($user as $item)
             <input type="checkbox" id="delete{{ $item->id_user }}" class="modal-toggle" />
             <div class="modal">
                 <div class="modal-box w-11/12 max-w-2xl bg-white">
@@ -269,10 +340,24 @@
 
 
     <script>
-    function previewImage() {
-            const image = document.querySelector('#foto_user');
-            const imgPreview = document.querySelector('.img-preview');
+    function previewImageTambah() {
+            const image = document.querySelector('#tambahfoto_user');
+            const imgPreview = document.querySelector('.img-previewtambah');
 
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
+
+    function previewImageEdit() {
+            const image = document.querySelector('#editfoto_user');
+            const imgPreview = document.querySelector('.img-previewedit');
+            
         imgPreview.style.display = 'block';
 
         const oFReader = new FileReader();
