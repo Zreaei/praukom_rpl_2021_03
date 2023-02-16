@@ -29,7 +29,48 @@
                 <td class="text-center bg-white"><h1>{{ $item->email }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->nama_level }}</h1></td>
                 <td class="text-center bg-white">
-                    <a href="data-user/edit/{{ $item->id_user }}"><button class="btn btn-warning">Edit</button></a>
+                        {{-- Modal Button --}}
+                        <label for="modal-edit" class="btn btn-warning">
+                            <a href="data-user/edit/{{ $item->id_user }}">Edit</a>
+                        </label>
+                        
+                        {{-- Modal --}}
+                        <input type="checkbox" id="modal-edit" class="modal-toggle" />
+                        <label for="modal-edit" class="modal cursor-pointer">
+                            <label class="modal-box relative" for=""modal-edit>
+                                <h3 class="text-lg font-bold">Edit User</h3>
+                                <p class="py-4">
+                                    <form method="POST" action="simpanedit">
+                                        @csrf
+                                        <div class="form-control">
+                                            <div class="mx-auto">
+                                                <label class="input-group">
+                                                    <span class="pr-8 bg-white">username</span>
+                                                    <input type="text" name="username" placeholder="username" value="{{ $item->username }}" class="input input-bordered"/>
+                                                </label>
+                                                <label class="input-group">
+                                                    <span class="pr-8 bg-white">password</span>
+                                                    <input type="password" name="password" placeholder="password" value="{{ $item->password }}" class="input input-bordered" />
+                                                </label>
+                                                <label class="input-group">
+                                                    <span class="pr-8 bg-white">email</span>
+                                                    <input type="text" name="email" placeholder="email" value="{{ $item->email }}" class="input input-bordered" />
+                                                </label>
+                                                <label class="input-group">
+                                                    <input type="hidden" name="level" placeholder="level" value="{{ $item->level }}" class="input input-bordered" />
+                                                </label>
+                                                <label class="input-group">
+                                                    <input type="hidden" name="id_user" placeholder="id_user" value="{{ $item->id_user }}" class="input input-bordered" />
+                                                </label>
+                                                <div class="pt-3 pb-3 grid justify-items-center">
+                                                    <button type="submit" value="simpan" class="btn btn-success">Simpan</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </p>
+                            </label> 
+                        </label>
                     <a href="data-user/hapus/{{ $item->id_user }}"><button class="btn btn-error">Hapus</button></a>
                 </td>
             </tr>
@@ -39,13 +80,13 @@
     </div>
     <div class="m-3 text-center">
         {{-- Modal Button --}}
-        <label for="my-modal-4" class="btn">Tambah User</label>
+        <label for="modal-tambah" class="btn btn-success">Tambah User</label>
 
         {{-- Modal --}}
-        <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-        <label for="my-modal-4" class="modal cursor-pointer">
-            <label class="modal-box relative" for="">
-                <h3 class="text-lg font-bold">Tambah User</h3>
+        <input type="checkbox" id="modal-tambah" class="modal-toggle" />
+        <label for="modal-tambah" class="modal cursor-pointer">
+            <label class="modal-box relative bg-[#2D5EBB]" for="modal-tambah">
+                <h3 class="text-lg font-bold text-white">Tambah User</h3>
                 <p class="py-4">
                     <form method="POST" action="data-user/simpan">
                         @csrf

@@ -69,39 +69,31 @@ class UserController extends Controller
 
     public function edit($id = null)
     {
-
         $edit = $this->UserModel->find($id);
-        $level = $this->LevelModel::all();
         // echo json_encode($edit);
-        return view('admin.data-user.edituser', compact('edit','level'));
+        return view('admin.data-user.data-user', compact('edit'));
     }
 
-    // public function editlevel()
+    // public function simpanedit(Request $request)
     // {
-    //     $level = $this->LevelModel::all();
-    //     return view('admin.data-user.edituser', compact('level'));
+    //     try {
+    //         $data = [
+    //             'username' => $request->input('username'),
+    //             'password' => Hash::make($request->input('password')),
+    //             'email' => $request->input('email'),
+    //             'level' => $request->input('level'),
+    //             // dd($request->all())
+    //         ];
+    //         $upd = $this->UserModel
+    //                     ->where('id_user', $request->input('id_user'))
+    //                     ->update($data);
+    //         if($upd){
+    //             return redirect('admin/data-user');
+    //         }
+    //     } catch (Exception $e) {
+    //         return $e->getMessage();
+    //     }
     // }
-
-    public function simpanedit(Request $request)
-    {
-        try {
-            $data = [
-                'username' => $request->input('username'),
-                'password' => Hash::make($request->input('password')),
-                'email' => $request->input('email'),
-                'level' => $request->input('level'),
-                // dd($request->all())
-            ];
-            $upd = $this->UserModel
-                        ->where('id_user', $request->input('id_user'))
-                        ->update($data);
-            if($upd){
-                return redirect('admin/data-user');
-            }
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
 
     public function hapus($id = null){
         try{
