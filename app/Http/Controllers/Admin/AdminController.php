@@ -10,15 +10,6 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    protected $UserModel;
-    protected $OperatorModel;
-
-    public function __construct()
-    {
-        $this->UserModel = new UserModel;
-        $this->OperatorModel = new OperatorModel;
-    }
-    
     public function index()
     {
         return view('admin.home');

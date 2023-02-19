@@ -11,4 +11,10 @@ class LevelModel extends Model
     protected $table = 'level_user';  
     protected $primarykey = 'id_level';
     protected $fillable = ['id_level','nama_level'];
+
+    public function user(){
+
+        // kalo relasi hasmany itu satu table memiliki one to many
+        return $this->hasMany(User::class, 'level', 'level');
+    }
 }

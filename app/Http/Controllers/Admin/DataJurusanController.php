@@ -23,22 +23,11 @@ class DataJurusanController extends Controller
 
     public function jurusan()
     {
-        $dataJurusan = DB::table('jurusan') 
-        ->join('kaprog', 'kaprog.nip_kaprog', '=', 'jurusan.kaprog')
-        ->get(); 
-        return view('admin.data-jurusan.data-jurusan', compact('dataJurusan'));
-    }
-
-    // public function kaprog()
-    // {
-    //     $kaprog = $this->KaprogModel::all();
-    //     return view('admin.data-jurusan.data-jurusan', compact('dataJurusan'));
-    // }
-
-    public function tambahJurusan()
-    {
         $kaprog = $this->KaprogModel::all();
-        return view('admin.data-jurusan.tambahjurusan', compact('kaprog'));
+        $dataJurusan = DB::table('jurusan') 
+        ->join('kaprog', 'kaprog.id_kaprog', '=', 'jurusan.kaprog')
+        ->get(); 
+        return view('admin.data-jurusan.data-jurusan', compact('dataJurusan','kaprog'));
     }
 
     public function simpan(Request $request)
@@ -52,6 +41,7 @@ class DataJurusanController extends Controller
                 'bidang_keahlian' => $request->input('bidang_keahlian'),
                 'program_keahlian' => $request->input('program_keahlian'),
                 'kaprog' => $request->input('kaprog'),
+                // dd($request->all())
             ]);
             if ($tambah_jurusan) {
                 return redirect('admin/data-jurusan');
@@ -63,14 +53,14 @@ class DataJurusanController extends Controller
         }
     }
 
-    public function edit($id = null)
-    {
+    // public function edit($id = null)
+    // {
 
-        $edit = $this->JurusanModel->find($id);
-        $kaprog = $this->KaprogModel::all();
-        // echo json_encode($edit);
-        return view('admin.data-jurusan.editjurusan', compact('edit','kaprog'));
-    }
+    //     $edit = $this->JurusanModel->find($id);
+    //     $kaprog = $this->KaprogModel::all();
+    //     // echo json_encode($edit);
+    //     return view('admin.data-jurusan.editjurusan', compact('edit','kaprog'));
+    // }
 
     public function simpanedit(Request $request)
     {
