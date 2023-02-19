@@ -15,5 +15,5 @@ class VerifikatorModel extends Model
     protected $primaryKey = 'id_verifikator';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['id_verifikator','nama_verifikator','user'];
+    protected $fillable = ['id_verifikator','nip_verifikator','nama_verifikator','user'];
 }

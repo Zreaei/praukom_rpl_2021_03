@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class KegiatanController extends Controller
@@ -27,9 +28,8 @@ class KegiatanController extends Controller
         $prakerin = $this->PrakerinModel::all();
         $kegiatan = DB::table('kegiatan') 
         ->join('prakerin', 'prakerin.id_prakerin', '=', 'kegiatan.prakerin')
-        ->select('kegiatan.*')
         ->get();    
-        return view('siswa.kegiatan', compact('kegiatan','prakerin'),["edit" => $kegiatan]);
+        return view('siswa.kegiatan', compact('kegiatan','prakerin'));
     }
     
     public function tambahkegiatan(Request $request)
@@ -39,25 +39,19 @@ class KegiatanController extends Controller
             $id_kegiatan = DB::select('SELECT generate_new_id_kegiatan() AS id_kegiatan');
             $array = Arr::pluck($id_kegiatan, 'id_kegiatan');
             $kode_baru = Arr::get($array, '0');
-            if ($request->hasFile('foto_kegiatan')) {
-                    $file = $request->file('foto_kegiatan');
-                    $extention = $file->getClientOriginalExtension();
-                    $filename = time() . '.' . $extention;
-                    $file->move('storage', $filename);
-                    $kegiatan->foto_kegiatan = $filename;
-            };
+            $img = $request->file('foto_kegiatan')->store('img');
             $tambah_kegiatan = DB::table('kegiatan')->insert([
                 'id_kegiatan' => $kode_baru,
                 'prakerin' => $request->input('prakerin'),
-                'foto_kegiatan' => $request->input('foto_kegiatan'),
+                'foto_kegiatan' => $img,
                 'keterangan_kegiatan' => $request->input('keterangan_kegiatan'),
                 'tgl_kegiatan' => $request->input('tgl_kegiatan'),
                 'jam_masuk' => $request->input('jam_masuk'),
                 'jam_keluar' => $request->input('jam_keluar'),
                 
             ]);
-            // $img = $request->file('foto_kegiatan')->store('img');
             if ($tambah_kegiatan) {
+                sweetalert()->addSuccess('Data Kegiatan Berhasil Ditambah!');
                 return redirect('/siswa/kegiatan');
             } else {
                 return "input data gagal";
@@ -67,20 +61,35 @@ class KegiatanController extends Controller
         }
             
     }
-    public function editkegiatan(Request $request)
+    public function editkegiatan(KegiatanModel $kegiatan)
+    {
+        $edit = DB::table('kegiatan')
+            ->join('prakerin', 'prakerin.id_prakerin', '=', 'kegiatan.prakerin')
+            ->select('kegiatan.*')
+            ->where('id_kegiatan', '=', $kegiatan->id_kegiatan)
+            ->get();
+
+            return view('siswa.editkegiatan', ["edit" => $edit]);
+    }
+    public function editsimpankegiatan(Request $request)
     {
         try {
+            $img = $request->file('foto_kegiatan')->store('img');
+            if($request->fotoLama) {
+                Storage::delete($request->fotoLama);
+            }
             $data = [
                 'tgl_kegiatan' => $request->input('tgl_kegiatan'),
                 'jam_masuk' => $request->input('jam_masuk'),
                 'jam_keluar' => $request->input('jam_keluar'),
                 'keterangan_kegiatan' => $request->input('keterangan_kegiatan'),
-                'foto_kegiatan' => $request->input('foto_kegiatan'),
+                'foto_kegiatan' => $img,
             ];
             $upd = $this->KegiatanModel
                         ->where('id_kegiatan', $request->input('id_kegiatan'))
                         ->update($data);
             if($upd){
+                sweetalert()->addSuccess('Data Kegiatan Berhasil Diedit!');
                 return redirect('/siswa/kegiatan');
             }else{
                 return 'danar biji';
@@ -98,15 +107,12 @@ class KegiatanController extends Controller
                             ->where('id_kegiatan',$id)
                             ->delete();
             if($hapus){
+                sweetalert()->addSuccess('Data Kegiatan Berhasil Dihapus!');
                 return redirect('/siswa/kegiatan');
             }
         }catch(Exception $e){
             $e->getMessage();
         }
     }
-
-        // $presensi = PresensiModel::findorfail($id);
-        // $presensi->delete();
-        // return redirect('/siswa/presensi')->with('success', 'Data Berhasil dihapus');
     
 }

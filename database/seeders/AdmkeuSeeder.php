@@ -22,6 +22,7 @@ class AdmkeuSeeder extends Seeder
         [
             'id_admkeu' => 'ADK001',
             'user' => 'USR004',
+            'nama_admkeu' => 'sri',
             ],
             ];
 

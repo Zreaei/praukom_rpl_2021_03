@@ -12,8 +12,8 @@ class WkhubinModel extends Model
     protected $table = 'waka_hubin';
     protected $softDelete = false;
     public $timestamps = false;
-    protected $primaryKey = 'nip_wkhubin';
+    protected $primaryKey = 'id_wkhubin';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['nip_wkhubin','nama_wkhubin','user'];
+    protected $fillable = ['id_wkhubin','nip_wkhubin','nama_wkhubin','user'];
 }

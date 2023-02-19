@@ -20,9 +20,9 @@ class WalasSeeder extends Seeder
     {
         $walas = [
         [
-            'id_walas' => '763586',
-            'nip_walas' => '327503275032750872',
-            'user' => 'USR002',
+            'id_walas' => '123666',
+            'nip_walas' => '098765432112345699',
+            'user' => 'USR004',
             'nama_walas' => 'satria',
             ],
             ];

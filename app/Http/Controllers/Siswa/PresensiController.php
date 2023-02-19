@@ -57,6 +57,7 @@ class PresensiController extends Controller
                 
             ]);
             if ($tambah_presensi) {
+                sweetalert()->addSuccess('Data Presensi Berhasil Ditambah!');
                 return redirect('/siswa/presensi');
             } else {
                 return "input data gagal";
@@ -97,9 +98,10 @@ class PresensiController extends Controller
                         ->where('id_presensi', $request->input('id_presensi'))
                         ->update($data);
             if($upd){
+                sweetalert()->addSuccess('Data Presensi Berhasil Diedit!');
                 return redirect('/siswa/presensi');
             }else{
-                return 'danar biji';
+                return 'data gagal di edit';
             }
         } catch (Exception $e) {
             return $e->getMessage();
@@ -114,6 +116,7 @@ class PresensiController extends Controller
                             ->where('id_presensi',$id)
                             ->delete();
             if($hapus){
+                sweetalert()->addSuccess('Data Presensi Berhasil Dihapus!');
                 return redirect('/siswa/presensi');
             }
         }catch(Exception $e){

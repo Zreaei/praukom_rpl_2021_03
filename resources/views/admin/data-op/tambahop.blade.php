@@ -9,10 +9,10 @@
                 <label class="label">
                     <span class="label-text mx-auto">Tambah Operator</span>
                 </label>
-                <label class="input-group">
+                {{-- <label class="input-group">
                     <span class="pr-8">Nama</span>
                     <input type="text" name="nama_operator" placeholder="nama" class="input input-bordered" />
-                </label>
+                </label> --}}
                 <div class="form-control">
                     <label class="input-group">
                         <span class="pr-8">User</span>

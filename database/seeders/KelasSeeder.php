@@ -22,7 +22,7 @@ class KelasSeeder extends Seeder
         [
             'id_kelas' => 'KLS001',
             'jurusan' => 'JRS001',
-            'walas' => '763586',
+            'walas' => '123666',
             'angkatan' => 'AKT001',
             'tingkatan' => 'X',
             'nama_kelas' => 'A',

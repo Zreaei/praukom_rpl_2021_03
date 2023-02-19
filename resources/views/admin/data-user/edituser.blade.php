@@ -15,20 +15,14 @@
                 </label>
                 <label class="input-group">
                     <span class="pr-8 bg-white">password</span>
-                    <input type="text" name="password" placeholder="password" value="{{ $edit->password }}" class="input input-bordered" />
+                    <input type="password" name="password" placeholder="password" value="{{ $edit->password }}" class="input input-bordered" />
                 </label>
                 <label class="input-group">
                     <span class="pr-8 bg-white">email</span>
                     <input type="text" name="email" placeholder="email" value="{{ $edit->email }}" class="input input-bordered" />
                 </label>
                 <label class="input-group">
-                    <span class="pr-8 bg-white">Level</span>
-                    <select class="select select-bordered" name="level">
-                        <option value="default">Choose Level</option>
-                        @foreach ($level as $item)
-                            <option value="{{ $item->id_level }}">{{ $item->nama_level }}</option>
-                        @endforeach
-                    </select>
+                    <input type="hidden" name="level" placeholder="level" value="{{ $edit->level }}" class="input input-bordered" />
                 </label>
                 <label class="input-group">
                     <input type="hidden" name="id_user" placeholder="id_user" value="{{ $edit->id_user }}" class="input input-bordered" />

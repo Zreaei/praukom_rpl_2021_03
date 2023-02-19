@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdmKeu;
 
-use App\Models\AdmkeuModel;
-use Error;
-use Exception;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdmkeuController extends Controller
 {
     //
+   public function profile() 
+   {
+        return view("admkeu.profile");
+   }
 }

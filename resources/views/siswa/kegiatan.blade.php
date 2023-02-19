@@ -60,8 +60,10 @@
                                 {{ $no++ }}
                             </td>
                             <td class="text-sm text-item font-semibold px-7 py-4 text-center">
-                                <img src="{{ asset('storage' . $item->foto_kegiatan) }}" id="foto_kegiatan" alt="Foto Presensi" style="width:100px">
-                            </td> 
+                                <label for="image{{ $item->id_kegiatan }}" type="button" class="text-[#ffffff] bg-[#09C4FF] hover:bg-opacity-50 focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5">
+                                    <span>Lihat</span>         
+                                </label>
+                            </td>
                             <td class="text-sm text-item font-semibold px-7 py-4 text-center">
                                 {{ $item->keterangan_kegiatan }}
                             </td>
@@ -79,10 +81,10 @@
                             <td class="text-sm font-medium leading-5 text-center [#ffffff]space-no-wrap ">
                                 <div class="flex justify-center">
                                     <div class="px-4 py-4">
-                                        <label for="edit-kegiatan{{$item->id_kegiatan}}" class="text-[#2D5EBB] hover:text-opacity-50">
+                                        <a href="/siswa/editkegiatan/{{ $item->id_kegiatan }}" class="text-[#2D5EBB] hover:text-opacity-50">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                                        </label>
+                                        </a>
                                     </div>
                                     <div class="px-4 py-4">
                                         <label for="delete{{ $item->id_kegiatan }}" class="text-[#FF0808] hover:text-opacity-50">
@@ -104,12 +106,12 @@
                 <div class="modal-box w-11/12 max-w-2xl bg-[#2D5EBB]">
                     <label for="tambah-kegiatan" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
                     <h3 class="text-lg font-bold text-[#ffffff] text-center">TAMBAH DATA KEGIATAN</h3>
-                    <form action="{{ route('siswa.simpankegiatan') }}" method="POST">
+                    <form action="{{ route('siswa.simpankegiatan') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Prakerin</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="prakerin">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Prakerin</span></label>
+                                <select class="select select-bordered bg-[#ffffff]" name="prakerin" required>
                                     <option disabled selected>Pilih Prakerin</option>
                                     @foreach ($prakerin as $item)
                                         <option value="{{ $item->id_prakerin }}">{{ $item->id_prakerin }}</option>
@@ -117,30 +119,31 @@
                                 </select>
                             </div>
                             <div class="form-control w-full max-w-sm">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Tanggal Kegiatan</span></label>
-                                <input type="date" name="tgl_kegiatan" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Kegiatan</span></label>
+                                <input type="date" name="tgl_kegiatan" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
                             </div>
                         </div>
                         
                         <div class="flex justify-start mt-1">
                             <div class="form-control w-36 max-w-lg mr-1">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Jam Masuk</span></label>
-                                <input type="time" name="jam_masuk" placeholder="Type here" class="input input-bordered w-36 max-w-lg bg-[#ffffff]" />
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Jam Masuk</span></label>
+                                <input type="time" name="jam_masuk"required placeholder="Type here" class="input input-bordered w-36 max-w-lg bg-[#ffffff]" />
                             </div>
                             <div class="form-control w-36 max-w-lg ml-4">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Jam Keluar</span></label>
-                                <input type="time" name="jam_keluar" placeholder="Type here" class="input input-bordered w-36 max-w-lg bg-[#ffffff]" />
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Jam Keluar</span></label>
+                                <input type="time" name="jam_keluar"  required placeholder="Type here" class="input input-bordered w-36 max-w-lg bg-[#ffffff]" />
                             </div>
-                            <div class="form-control w-full max-w-sm ml-3">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Keterangan Kegiatan</span></label>
-                                <input type="text" name="keterangan_kegiatan" placeholder="kegiatan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                            <div class="form-control w-full max-w-sm ml-2">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Keterangan Kegiatan</span></label>
+                                <input  type="text" name="keterangan_kegiatan"required placeholder="kegiatan" class="input input-bordered w-full max-w-sm bg-[#ffffff] " />
                             </div>
                         </div>
 
                         <div>
                             <div class="form-control w-full max-w-full">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Foto Kegiatan</span></label>
-                                <input type="file" name="foto_kegiatan" placeholder="masukan foto" class="input input-bordered w-full max-w-2xl bg-[#ffffff] px-4 py-2" />
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Foto Kegiatan</span></label>
+                                <img class="img-preview h-full w-full">
+                                <input type="file" name="foto_kegiatan" required placeholder="masukan foto" class="input input-bordered w-full max-w-2xl bg-[#ffffff] px-4 py-2" id="foto_kegiatan" onchange="previewImage()" required />
                             </div>
                         </div>
 
@@ -153,59 +156,23 @@
                     
                 </div>
             </div>
-            <!-- Modal Edit Kegiatan -->
-            @foreach ($kegiatan as $edit)
-            <input type="checkbox" id="edit-kegiatan{{$edit->id_kegiatan}}" class="modal-toggle" />
+
+            <!-- IMG -->
+
+            @foreach ($kegiatan as $image)
+            <input type="checkbox" id="image{{$image->id_kegiatan}}" class="modal-toggle" />
             <div class="modal">
-                <div class="modal-box w-11/12 max-w-2xl bg-[#2D5EBB]">
-                    <label for="edit-kegiatan{{$edit->id_kegiatan}}" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
-                    <h3 class="text-lg font-bold text-[#ffffff] text-center">EDIT DATA KEGIATAN</h3>
-                
-                    <form action="{{ route('siswa.editsimpankegiatan') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('POST')
-                    
-                    
-                        <div class=" mt-2">
-                            <div class="form-control w-full max-w-full">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Tanggal Kegiatan</span></label>
-                                <input type="date" name="tgl_kegiatan" value="{{ old('tgl_kegiatan', $edit->tgl_kegiatan) }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                                <input type="hidden"  name="id_kegiatan" value="{{$edit->id_kegiatan}}" />
+                <div class="modal-box w-full max-w-2xl bg-[#2D5EBB]">
+                    <label for="image{{$image->id_kegiatan}}" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
+                        <div class="flex justify-between">
+                            <div class="form-control w-full max-w-2xl p-3">
+                                <img src="{{ asset('storage/' . $image->foto_kegiatan) }}" class="rounded-lg">
                             </div>
                         </div>
-
-                        <div class="flex justify-start mt-1">
-                            <div class="form-control w-36 max-w-lg">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Jam Masuk</span></label>
-                                <input type="time" name="jam_masuk" value="{{ old('jam_masuk', $edit->jam_masuk) }}" placeholder="Type here" class="input input-bordered w-36 max-w-lg bg-[#ffffff]" />
-                            </div>
-                            <div class="form-control w-36 max-w-lg ml-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Jam Keluar</span></label>
-                                <input type="time" name="jam_keluar" value="{{ old('jam_keluar', $edit->jam_keluar) }}" placeholder="Type here" class="input input-bordered w-36 max-w-lg bg-[#ffffff]" />
-                            </div>
-                            <div class="form-control w-full max-w-sm ml-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Keterangan</span></label>
-                                <input type="text" name="keterangan_kegiatan" value="{{ old('keterangan_kegiatan', $edit->keterangan_kegiatan) }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between mt-2">
-                            <div class="form-control w-full max-w-2xl">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Foto Kegiatan</span></label>
-                                <input type="file" name="foto_kegiatan" src="{{ asset('img') . $edit->foto_kegiatan }}" placeholder="masukan foto" class="input input-bordered w-full max-w-2xl bg-[#ffffff] px-4 py-2" />
-                            </div>
-                        </div>
-
-                        <div>
-                            <button type="submit" class="btn bg-gradient-to-b from-[#FFA434] to-[#D24E16] w-full mt-3 ">
-                                SUBMIT 
-                            </button>
-                        </div>
-                    </form>    
                 </div>
-            </div> 
+            </div>
             @endforeach
-
+            
             <!-- Modal Hapus Kegiatan -->
             @foreach($kegiatan as $hapus)
             <input type="checkbox" id="delete{{ $hapus->id_kegiatan }}" class="modal-toggle" />
@@ -219,8 +186,8 @@
                     </div>
                     <div class="flex justify-center pt-4 gap-x-20 gap-y-3">
                         <label for="delete{{ $hapus->id_kegiatan }}" class="btn btn-ghost btn-base bg-[#2D5EBB] w-36 text-white text-base hover:bg-[#2D5EBB] hover:bg-opacity-70">Cancel</label>
-                        <label class="btn btn-ghost btn-base bg-[#E63946] w-36 text-white text-base hover:bg-[#E63946] hover:bg-opacity-70">
                             <a href="/siswa/hapuskegiatan/{{$hapus->id_kegiatan}}">
+                            <label class="btn btn-ghost btn-base bg-[#E63946] w-36 text-white text-base hover:bg-[#E63946] hover:bg-opacity-70">
                                 Delete
                             </a>
                         </label>
@@ -231,5 +198,20 @@
             @endforeach
         </div>
     </div>
-  
+    <script>
+    function previewImage() {
+            const image = document.querySelector('#foto_kegiatan');
+            const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
+
+    </script>
 @endsection

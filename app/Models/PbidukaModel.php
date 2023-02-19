@@ -15,5 +15,5 @@ class PbidukaModel extends Model
     protected $primaryKey = 'nik';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['nik','user','nama_pbiduka','telp_pbiduka'];
+    protected $fillable = ['nik','nama_pbiduka','telp_pbiduka','user'];
 }

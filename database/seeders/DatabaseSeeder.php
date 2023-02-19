@@ -39,7 +39,9 @@ class DatabaseSeeder extends Seeder
             SiswaSeeder::class,
             AdmkeuSeeder::class,
             PbsekolahSeeder::class,
-            MonitoringSeeder::class
+            PbidukaSeeder::class,
+            MonitoringSeeder::class,
+            VerifikatorSeeder::class
         ]);
         // $this->call([
         //     AdminSeeder::class

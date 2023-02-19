@@ -15,7 +15,7 @@
                 </label>
                 <label class="input-group m-5">
                     <span class="pr-5 bg-white">Password</span>
-                    <input type="text" name="password" placeholder="password" class="input input-bordered" required />
+                    <input type="password" name="password" placeholder="password" class="input input-bordered" required />
                 </label>
                 <label class="input-group m-5">
                     <span class="pr-12 bg-white">Email</span>

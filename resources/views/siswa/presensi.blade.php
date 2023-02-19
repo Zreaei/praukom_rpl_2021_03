@@ -22,7 +22,7 @@
                 </div>
             </div>
             <!-- Table presensi -->
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+            <div class="overflow-x-auto shadow-md sm:rounded-lg mt-5">
                 <table class="w-full text-sm text-left text-[#ffffff]">
                     <!-- head -->
                     <thead class="text-xs text-center uppercase bg-[#2D5EBB]">
@@ -59,8 +59,44 @@
                             <td class="text-sm text-item font-semibold px-7 py-4 text-center">
                                 {{ $item->tgl_presensi }}
                             </td>
-                            <td class="text-sm text-item font-semibold px-7 py-4 text-center">
-                                {{ $item->status_presensi}}
+                            <td class="text-sm text-item font-semibold px-5 py-4 text-center">
+                                @switch($item->status_presensi)
+                                @case('hadir')
+                                <span class="rounded-lg bg-success px-5 py-3 text-white font-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-6 h-6 text-white"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                    Hadir
+                                </span>
+                                @break
+
+                                @case('sakit')
+                                <span class="rounded-lg bg-warning px-5 py-3 text-white font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-6 h-6 text-white"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" /></svg>
+                                    Sakit
+                                </span>
+                                @break
+                                
+                                @case('izin')
+                                <span class="rounded-lg bg-sky-600 px-5 py-3 text-white font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-6 h-6 text-white mr-2"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clip-rule="evenodd" /></svg>
+                                    Izin
+                                </span>
+                                @break
+
+                                @case('alfa')
+                                <span class="rounded-lg bg-red-700 px-5 py-3 text-white font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-6 h-6 text-white mr-2"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>
+                                    Alfa
+                                </span>
+                                @break
+                                @endswitch
+
+
+
+
+
+
+
+                                <!-- {{ $item->status_presensi}} -->
                             </td>
                             <td class="text-sm text-item font-semibold px-7 py-4 text-center">
                                 {{ $item->keterangan_presensi}}
@@ -102,8 +138,8 @@
                     @csrf
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Prakerin</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="prakerin">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Prakerin</span></label>
+                                <select class="select select-bordered bg-[#ffffff]" name="prakerin" required>
                                     <option disabled selected>Pilih Prakerin</option>
                                     @foreach ($prakerin as $item)
                                         <option value="{{ $item->id_prakerin }}">{{ $item->pengajuan }}</option>
@@ -111,24 +147,24 @@
                                 </select>
                             </div>
                             <div class="form-control w-full max-w-sm">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Tanggal Presensi</span></label>
-                                <input type="date" name="tgl_presensi" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Presensi</span></label>
+                                <input type="date" name="tgl_presensi" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
                             </div>
                         </div>
                         
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Pembimbing Perusahaan</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="pb_iduka">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Pembimbing Perusahaan</span></label>
+                                <select class="select select-bordered bg-[#ffffff]" name="pb_iduka" required>
                                     <option disabled selected>Pilih Pembimbing Perusahaan</option>
                                     @foreach ($pbiduka as $item)
                                         <option value="{{ $item->nik }}">{{ $item->nama_pbiduka }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Pembimbing Sekolah</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="pb_sekolah">
+                            <div class="form-control w-full max-w-sm">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Pembimbing Sekolah</span></label>
+                                <select class="select select-bordered bg-[#ffffff]" name="pb_sekolah" required>
                                     <option disabled selected>Pilih Pembimbing Sekolah</option>
                                     @foreach ($pbsekolah as $item)
                                         <option value="{{ $item->id_pbsekolah }}">{{ $item->nama_pbsekolah }}</option>
@@ -139,17 +175,18 @@
 
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Status</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="status_presensi">
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Status</span></label>
+                                <select class="select select-bordered bg-[#ffffff]" name="status_presensi" required>
                                     <option disabled selected>Pilih Status Presensi</option>
-                                        <option value="Sakit" class="form-control col-8">Sakit</option>
-                                        <option value="Izin" class="form-control col-8">Izin</option>
-                                        <option value="Hadir" class="form-control col-8">Hadir</option>
+                                        <option value="sakit" class="form-control col-8">Sakit</option>
+                                        <option value="izin" class="form-control col-8">Izin</option>
+                                        <option value="hadir" class="form-control col-8">Hadir</option>
+                                        <option value="alfa" class="form-control col-8">Alfa</option>
                                 </select>
                             </div>
                             <div class="form-control w-full max-w-sm">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Keterangan</span></label>
-                                <input type="text" name="keterangan_presensi" placeholder="Jika Hadir diisi -" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Keterangan</span></label>
+                                <input type="text" name="keterangan_presensi" required placeholder="Jika Hadir diisi -" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                         </div>
 
@@ -177,25 +214,25 @@
                     
                         <div class=" mt-2">
                             <div class="form-control w-full max-w-full">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Tanggal Presensi</span></label>
-                                <input type="date" name="tgl_presensi" value="{{ old('tgl_presensi', $edit->tgl_presensi) }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                                <input type="hidden"  name="id_presensi" value="{{$edit->id_presensi}}" />
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Presensi</span></label>
+                                <input type="date" name="tgl_presensi" required value="{{ old('tgl_presensi', $edit->tgl_presensi) }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
+                                <input type="hidden"  name="id_presensi" required value="{{$edit->id_presensi}}" />
                             </div>
                         </div>
 
                         <div class="flex justify-between mt-2">
                             <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Status</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="status_presensi"  value="{{ old('status_presensi', $edit->status_presensi) }}">
-                                        <option class="form-control col-8" value="{{ old('status_presensi', $edit->status_presensi) }}"> {{ old('status_presensi', $edit->status_presensi) }} </option>
-                                        <option class="form-control col-8" value="Sakit" {{ $edit->status_presensi == 'Sakit' ? 'selected' : '' }} >Sakit</option>
-                                        <option class="form-control col-8" value="Izin" {{  $edit->status_presensi == 'Izin' ? 'selected' : '' }}>Izin</option>
-                                        <option class="form-control col-8" value="Hadir" {{  $edit->status_presensi == 'Hadir' ? 'selected' : '' }}>Hadir</option>
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Status</span></label>
+                                <select class="select select-bordered bg-[#ffffff]" name="status_presensi" required  value="{{ old('status_presensi', $edit->status_presensi) }}">
+                                        <option class="form-control col-8" value="sakit" {{ $edit->status_presensi == 'sakit' ? 'selected' : '' }} >Sakit</option>
+                                        <option class="form-control col-8" value="izin" {{  $edit->status_presensi == 'izin' ? 'selected' : '' }}>Izin</option>
+                                        <option class="form-control col-8" value="hadir" {{  $edit->status_presensi == 'hadir' ? 'selected' : '' }}>Hadir</option>
+                                        <option class="form-control col-8" value="alfa" {{  $edit->status_presensi == 'alfa' ? 'selected' : '' }}>Alfa</option>
                                 </select>
                             </div>
                             <div class="form-control w-full max-w-sm">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Keterangan</span></label>
-                                <input type="text" name="keterangan_presensi" value="{{ old('keterangan_presensi', $edit->keterangan_presensi  ) }}" placeholder="Jika Hadir diisi -" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Keterangan</span></label>
+                                <input type="text" name="keterangan_presensi"required value="{{ old('keterangan_presensi', $edit->keterangan_presensi  ) }}" placeholder="Jika Hadir diisi -" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                         </div>
 
@@ -222,8 +259,8 @@
                     </div>
                     <div class="flex justify-center pt-4 gap-x-20 gap-y-3">
                         <label for="delete{{ $hapus->id_presensi }}" class="btn btn-ghost btn-base bg-[#2D5EBB] w-36 text-white text-base hover:bg-[#2D5EBB] hover:bg-opacity-70">Cancel</label>
-                        <label class="btn btn-ghost btn-base bg-[#E63946] w-36 text-white text-base hover:bg-[#E63946] hover:bg-opacity-70">
                             <a href="/siswa/hapuspresensi/{{$hapus->id_presensi}}">
+                            <label class="btn btn-ghost btn-base bg-[#E63946] w-36 text-white text-base hover:bg-[#E63946] hover:bg-opacity-70">
                                 Delete
                             </a>
                         </label>
