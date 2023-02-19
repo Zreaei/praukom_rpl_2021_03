@@ -87,7 +87,7 @@
                                         <input type="email" name="email" placeholder="email" class="input input-bordered" />
                                     </label>
                                     <div class="form-control m-5">
-                                        <label class="input-group pl-3">
+                                        <label class="input-group justify-center">
                                             <span class="pr-12 bg-white">Level</span>
                                             <select class="select select-bordered" name="level">
                                                 <option value="default">Pilih Level</option>
@@ -157,7 +157,7 @@
         @foreach($dataUser as $hapus)
         <input type="checkbox" id="modal-hapus{{ $hapus->id_user }}" class="modal-toggle" />
         <div class="modal">
-            <div class="modal-box w-11/12 max-w-2xl bg-white">
+            <div class="modal-box w-11/12 max-w-xl bg-white">
                 <svg fill="none" class="text-[#E63946] w-1/4 mx-auto" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z">
                     </path>
@@ -166,8 +166,8 @@
                     <h3 class="font-bold text-2xl">Anda yakin ingin menghapus ?</h3>
                 </div>
                 <div class="flex justify-center pt-4 gap-x-20 gap-y-3">
-                    <label for="modal-hapus{{ $hapus->id_user }}" class="btn btn-ghost btn-base bg-[#2D5EBB] w-36 text-white text-base hover:bg-[#2D5EBB] hover:bg-opacity-70">Cancel</label>
-                    <label class="btn btn-ghost btn-base bg-[#E63946] w-36 text-white text-base hover:bg-[#E63946] hover:bg-opacity-70">
+                    <label for="modal-hapus{{ $hapus->id_user }}" class="btn btn-ghost btn-base bg-[#2D5EBB] w-28 text-white text-base hover:bg-[#2D5EBB] hover:bg-opacity-70">Cancel</label>
+                    <label class="btn btn-ghost btn-base bg-[#E63946] w-28 text-white text-base hover:bg-[#E63946] hover:bg-opacity-70">
                         <a href="data-user/hapus/{{ $hapus->id_user }}">
                             Delete
                         </a>

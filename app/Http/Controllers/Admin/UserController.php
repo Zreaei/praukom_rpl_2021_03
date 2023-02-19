@@ -34,53 +34,58 @@ class UserController extends Controller
 
     public function simpan(Request $request)
     {
-            // $data = [
-            //     'username' => $request->input('username'),
-            //     'password' => $request->input('password'),
-            //     'email' => $request->input('email'),
-            //     'level' => $request->input('level'),
-            //     // dd($request->all())
-            // ];
+        // $data = [
+        //     'username' => $request->input('username'),
+        //     'password' => $request->input('password'),
+        //     'email' => $request->input('email'),
+        //     'level' => $request->input('level'),
+        //     // dd($request->all())
+        // ];
 
-            $validasi = $request->validate([
-                'username' => 'required|unique:user',
-                'password' => 'required',
-                'email' => 'required',
-                'level' => 'required',
-            ]);
+        $validasi = $request->validate([
+            'username' => 'required|unique:user',
+            'password' => 'required',
+            'email' => 'required',
+            'level' => 'required',
+        ]);
 
-            if ($validasi) {
-                    $id_user = DB::select('SELECT newiduser() AS id_user');
-                    $array = Arr::pluck($id_user, 'id_user');
-                    $kode_baru = Arr::get($array, '0');
-                    $tambah_user = DB::table('user')->insert([
-                    'id_user' => $kode_baru,
-                    'username' => $request->input('username'),
-                    'password' => Hash::make($request->input('password')),
-                    'email' => $request->input('email'),
-                    'level' => $request->input('level'),
-                ]);
+        if ($validasi) {
+            $id_user = DB::select('SELECT newiduser() AS id_user');
+            $array = Arr::pluck($id_user, 'id_user');
+            $kode_baru = Arr::get($array, '0');
+            $tambah_user = DB::table('user')->insert([
+            'id_user' => $kode_baru,
+            'username' => $request->input('username'),
+            'password' => Hash::make($request->input('password')),
+            'email' => $request->input('email'),
+            'level' => $request->input('level'),
+        ]);
 
-                 //Promise 
-                if ($tambah_user) {
-                    sweetalert()->addSuccess('User Berhasil Ditambah');
-                    return redirect('admin/data-user');
-                } else {
-                    sweetalert()->addSuccess('User Gagal Ditambah');
-                    return redirect('admin/data-user');
-                }
+        //Promise 
+        if ($tambah_user) {
+            sweetalert()->addSuccess('User Berhasil Ditambah');
+            return redirect('admin/data-user');
+        } else {
+            sweetalert()->addSuccess('User Gagal Ditambah');
+            return redirect('admin/data-user');
+        }
 
-            } else {
-                sweetalert()->addSuccess('User Gagal Ditambah');
-                return redirect('admin/data-user');
-            }
-            
-           
+        } else {
+            sweetalert()->addSuccess('User Gagal Ditambah');
+            return redirect('admin/data-user');
+        }
     }
 
     public function simpanedit(Request $request)
     {
-        try {
+        $validasi = $request->validate([
+            'username' => 'required|unique:user',
+            'password' => 'required',
+            'email' => 'required',
+            'level' => 'required',
+        ]);
+
+        if($validasi) {
             $data = [
                 'username' => $request->input('username'),
                 'password' => Hash::make($request->input('password')),
@@ -94,9 +99,10 @@ class UserController extends Controller
             if($upd){
                 sweetalert()->addSuccess('User Berhasil Di Edit');
                 return redirect('admin/data-user');
+            } else {
+                sweetalert()->addSuccess('User Gagal Di Edit');
+                return redirect('admin/data-user');
             }
-        } catch (Exception $e) {
-            return $e->getMessage();
         }
     }
 

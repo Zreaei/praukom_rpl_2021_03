@@ -22,32 +22,24 @@ class DataSiswaController extends Controller
         $this->SiswaModel = new SiswaModel;
         $this->UserModel = new UserModel;
         $this->KelasModel = new KelasModel;
-        $this->JurusanModel = new JurusanModel;
-        $this->AngkatanModel = new AngkatanModel;
+        // $this->JurusanModel = new JurusanModel;
+        // $this->AngkatanModel = new AngkatanModel;
     }
 
     public function siswa()
     {
+        $user = $this->UserModel::all();
+        $kelas = $this->KelasModel::all();   
+        // $jurusan = $this->JurusanModel::all();
+        // $angkatan = $this->AngkatanModel::all();
         $dataSiswa = DB::table('siswa') 
-        // ->join('kaprog', 'kaprog.nip_kaprog', '=', 'jurusan.kaprog')
-        ->get(); 
-        return view('admin.data-siswa.data-siswa', compact('dataSiswa'));
-    }
-
-    public function tambahSiswa()
-    {
-        // $user = $this->UserModel::all();
-        // $kelas = $this->KelasModel::all();
-        // return view('admin.data-siswa.tambahsiswa', compact('user','kelas'));
-
-        $dataSiswa = DB::table('siswa')
         ->join('user', 'user.id_user', '=', 'siswa.user')
         ->join('kelas', 'kelas.id_kelas', '=', 'siswa.kelas')
         ->join('jurusan', 'jurusan.id_jurusan', '=', 'kelas.jurusan')
         ->join('angkatan', 'angkatan.id_angkatan', '=', 'kelas.angkatan')
-        ->get();
-
-        return view('admin.data-siswa.tambahsiswa')->with('dataSiswa', $dataSiswa);
+        ->get(); 
+        // return view('admin.data-siswa.data-siswa', compact('dataSiswa','user','kelas','jurusan','angkatan'));
+        return view('admin.data-siswa.data-siswa', compact('dataSiswa','user','kelas'));
     }
 
     public function simpan(Request $request)
@@ -75,15 +67,15 @@ class DataSiswaController extends Controller
         }
     }
 
-    public function edit($id = null)
-    {
+    // public function edit($id = null)
+    // {
 
-        $edit = $this->SiswaModel->find($id);
-        $user = $this->UserModel::all();
-        $kelas = $this->KelasModel::all();
-        // echo json_encode($edit);
-        return view('admin.data-siswa.editsiswa', compact('edit','user','kelas'));
-    }
+    //     $edit = $this->SiswaModel->find($id);
+    //     $user = $this->UserModel::all();
+    //     $kelas = $this->KelasModel::all();
+    //     // echo json_encode($edit);
+    //     return view('admin.data-siswa.editsiswa', compact('edit','user','kelas'));
+    // }
 
     public function simpanedit(Request $request)
     {

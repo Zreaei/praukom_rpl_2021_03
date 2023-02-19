@@ -55,11 +55,16 @@ class LoginController extends Controller
             'username' => 'required',
             'password' => 'required',
             // dd($request->all())
-        ]);
+        ],
+            [
+                'username.required' => 'Username tidak boleh kosong!',
+                'password.required' => 'Password tidak boleh kosong!',
+            ]
+        );
 
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password]))
         {
-            // $request->session()->regenerate();
+            $request->session()->regenerate();
             $user = Auth::user();
             if ($user->level === 'LVL001') { 
                 return redirect()->intended('/admin');
@@ -82,8 +87,19 @@ class LoginController extends Controller
             } else if ($user->level === 'LVL010') {
                 return redirect()->intended('/verifikator');
             }
-            // return redirect()->intended('/');
+            return redirect()->intended('/login');
         }
-        return back()->withErrors(['password' => 'Wrong Username or Password!']);
+        return back()->withErrors(['username' => 'Username atau password anda salah!']);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/login');
     }
 }

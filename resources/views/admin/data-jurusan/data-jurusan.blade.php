@@ -29,8 +29,16 @@
                 <td class="text-center bg-white"><h1>{{ $item->bidang_keahlian }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->program_keahlian }}</h1></td>
                 <td class="text-center bg-white">
-                    <a href="data-jurusan/edit/{{ $item->id_jurusan }}"><button class="btn btn-warning">Edit</button></a>
-                    <a href="data-jurusan/hapus/{{ $item->id_jurusan }}"><button class="btn btn-error">Hapus</button></a>
+                    <label for="modal-edit{{ $item->id_jurusan }}" class="btn btn-warning hover:text-opacity-50 justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                    </label>
+                    <label for="modal-hapus{{ $item->id_jurusan }}" class="btn btn-error hover:text-opacity-50 justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </label>
                 </td>
             </tr>
         </tbody>
@@ -39,8 +47,122 @@
     </div>
     <div>
         <div class="m-3 text-center">
-            <a href="data-jurusan/tambah"><button class="btn btn-success">Tambah</button></a>
+            {{-- Modal Button --}}
+            <label for="modal-tambah" class="btn btn-success hover:text-opacity-50">Tambah User</label>
+
+            {{-- Modal Tambah --}}
+            <input type="checkbox" id="modal-tambah" class="modal-toggle" />
+            <div class="modal">
+                <div class="modal-box relative bg-[#2D5EBB]">
+                    <label for="modal-tambah" class="btn btn-ghost btn-xl btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2">✕</label>
+                    <h3 class="text-lg font-bold text-white">Tambah Jurusan</h3>
+                    <p class="py-4">
+                        <form method="POST" action="data-jurusan/simpan">
+                            @csrf
+                            <div class="">
+                                <div class="form-control mx-auto">
+                                    <div class="mx-auto">
+                                        <label class="input-group m-5">
+                                            <span class="pr-8">Bidang Keahlian</span>
+                                            <input type="text" name="bidang_keahlian" placeholder="Bidang Keahlian" class="input input-bordered" />
+                                        </label>
+                                        <label class="input-group m-5">
+                                            <span class="pr-5">Program Keahlian</span>
+                                            <input type="text" name="program_keahlian" placeholder="Program Keahlian" class="input input-bordered" />
+                                        </label>
+                                        <div class="form-control m-5">
+                                            <label class="input-group justify-center">
+                                                <span class="pr-12">Nama Kaprog</span>
+                                                <select class="select select-bordered" name="kaprog">
+                                                    <option value="default">Nama Kaprog</option>
+                                                    @foreach ($kaprog as $item)
+                                                        <option value="{{ $item->id_kaprog }}">{{ $item->nama_kaprog }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div class="pt-3 pb-3 grid justify-items-center">
+                                            <button type="submit" value="simpan" class="btn btn-success hover:text-opacity-50">Tambah</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </p>
+                </div>
+            </div>
         </div>
+    </div>
+
+    {{-- Modal Edit --}}
+    <div class="text-center">
+        @foreach ($dataJurusan as $edit)
+        <input type="checkbox" id="modal-edit{{ $edit->id_jurusan }}" class="modal-toggle" />
+        <div class="modal">
+            <div class="modal-box relative bg-[#2D5EBB]">
+                <label for="modal-edit{{ $edit->id_jurusan }}" class="btn btn-ghost btn-xl btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2">✕</label>
+                <h3 class="text-lg font-bold text-center text-white">Edit Jurusan</h3>
+                <p class="py-4">
+                    <form method="POST" action="data-jurusan/simpanedit">
+                        @csrf
+                        <div class="form-control">
+                            <div class="mx-auto">
+                                <label class="input-group m-5">
+                                    <span class="pr-8 bg-white">Bidang Keahlian</span>
+                                    <input type="text" name="bidang_keahlian" placeholder="Bidang Keahlian" value="{{ $edit->bidang_keahlian }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group m-5">
+                                    <span class="pr-5 bg-white">Program Keahlian</span>
+                                    <input type="text" name="program_keahlian" placeholder="Program Keahlian" value="{{ $edit->program_keahlian }}" class="input input-bordered" />
+                                </label>
+                                <div class="form-control m-5">
+                                    <label class="input-group justify-center">
+                                        <span class="pr-12 bg-white">Nama Kaprog</span>
+                                        <select class="select select-bordered" name="kaprog">
+                                            <option value="default">Nama Kaprog</option>
+                                            @foreach ($kaprog as $item)
+                                                <option value="{{ $item->id_kaprog }}">{{ $item->nama_kaprog }}</option>
+                                            @endforeach
+                                        </select>
+                                        <input type="hidden" name="id_jurusan" value="{{ $edit->id_jurusan }}" />
+                                    </label>
+                                </div>
+                                <div class="pt-3 pb-3 grid justify-items-center">
+                                    <button type="submit" value="simpan" class="btn btn-success">Simpan</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </p>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+    {{-- Modal Hapus --}}
+    <div>
+        @foreach($dataJurusan as $hapus)
+        <input type="checkbox" id="modal-hapus{{ $hapus->id_jurusan }}" class="modal-toggle" />
+        <div class="modal">
+            <div class="modal-box w-11/12 max-w-xl bg-white">
+                <svg fill="none" class="text-[#E63946] w-1/4 mx-auto" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z">
+                    </path>
+                </svg>
+                <div class="text-center">
+                    <h3 class="font-bold text-2xl">Anda yakin ingin menghapus ?</h3>
+                </div>
+                <div class="flex justify-center pt-4 gap-x-20 gap-y-3">
+                    <label for="modal-hapus{{ $hapus->id_jurusan }}" class="btn btn-ghost btn-base bg-[#2D5EBB] w-28 text-white text-base hover:bg-[#2D5EBB] hover:bg-opacity-70">Cancel</label>
+                    <label class="btn btn-ghost btn-base bg-[#E63946] w-28 text-white text-base hover:bg-[#E63946] hover:bg-opacity-70">
+                        <a href="data-jurusan/hapus/{{ $hapus->id_jurusan }}">
+                            Delete
+                        </a>
+                    </label>
+                </div>
+            </div>
+        </div> 
+        @endforeach
     </div>
 </div>
 
