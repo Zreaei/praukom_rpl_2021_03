@@ -7,7 +7,7 @@
     </a>
 </div>
 
-{{-- <div class="fixed">
+<div class="fixed">
     @auth
         <span class="mx-5 transition">
             {{Auth::user()->username}}
@@ -15,7 +15,7 @@
             {{Auth::user()->level_user->nama_level}}
         </span>
     @endauth
-</div> --}}
+</div>
 
 <div class="text-center flex">
     <div class="mx-auto">

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\SiswaModel;
-use App\Models\{UserModel, KelasModel, JurusanModel, AngkatanModel};
+use App\Models\{UserModel, KelasModel};
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,40 +14,33 @@ class DataSiswaController extends Controller
     protected $SiswaModel;
     protected $UserModel;
     protected $KelasModel;
-    protected $JurusanModel;
-    protected $AngkatanModel;
 
     public function __construct()   
     {
         $this->SiswaModel = new SiswaModel;
         $this->UserModel = new UserModel;
         $this->KelasModel = new KelasModel;
-        // $this->JurusanModel = new JurusanModel;
-        // $this->AngkatanModel = new AngkatanModel;
     }
 
     public function siswa()
     {
         $user = $this->UserModel::all();
-        $kelas = $this->KelasModel::all();   
-        // $jurusan = $this->JurusanModel::all();
-        // $angkatan = $this->AngkatanModel::all();
+        $kelas = DB::table('kelas')
+        ->join('jurusan', 'jurusan.id_jurusan', '=', 'kelas.jurusan')
+        ->join('angkatan', 'angkatan.id_angkatan', '=', 'kelas.angkatan')
+        ->get(); 
         $dataSiswa = DB::table('siswa') 
         ->join('user', 'user.id_user', '=', 'siswa.user')
         ->join('kelas', 'kelas.id_kelas', '=', 'siswa.kelas')
         ->join('jurusan', 'jurusan.id_jurusan', '=', 'kelas.jurusan')
         ->join('angkatan', 'angkatan.id_angkatan', '=', 'kelas.angkatan')
         ->get(); 
-        // return view('admin.data-siswa.data-siswa', compact('dataSiswa','user','kelas','jurusan','angkatan'));
         return view('admin.data-siswa.data-siswa', compact('dataSiswa','user','kelas'));
     }
 
     public function simpan(Request $request)
     {
         try {
-            // $id_jurusan = DB::select('SELECT newidjurusan() AS id_jurusan');
-            // $array = Arr::pluck($id_jurusan, 'id_jurusan');
-            // $kode_baru = Arr::get($array, '0');
             $tambah_siswa = DB::table('siswa')->insert([
                 'nis' => $request->input('nis'),
                 'user' => $request->input('user'),
