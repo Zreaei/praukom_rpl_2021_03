@@ -14,5 +14,5 @@ class PengajuanModel extends Model
     protected $primaryKey = 'id_pengajuan';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['id_pengajuan', 'siswa', 'iduka', 'adm_keuangan', 'waka_hubin', 'kaprog', 'walas', 'tgl_pengajuan', 'konfirmasi_admkeu', 'konfirmasi_wkhubin', 'konfimasi_kaprog', 'konfirmasi_walas'];
+    protected $fillable = ['id_pengajuan', 'siswa', 'iduka', 'admkeu', 'wkhubin', 'kaprog', 'walas', 'tgl_pengajuan', 'konfirmasi_admkeu', 'konfirmasi_wkhubin', 'konfimasi_kaprog', 'konfirmasi_walas'];
 }

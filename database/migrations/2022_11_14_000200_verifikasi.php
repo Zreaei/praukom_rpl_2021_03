@@ -22,8 +22,7 @@ return new class extends Migration
             $table->char('verifikator', 6)->nullable(false);
             $table->date('tgl_verifikasi')->nullable(false);
             $table->string('bukti_verifikasi', 255)->nullable(false);
-            $table->enum('konfirmasi_verifikator', ['terima', 'tolak'])->nullable();
-
+            
             $table->foreign('siswa')->references('nis')->on('siswa')->cascadeOnDelete();
             $table->foreign('verifikator')->references('id_verifikator')->on('verifikator')->cascadeOnDelete();
         });

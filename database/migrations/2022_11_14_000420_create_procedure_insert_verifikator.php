@@ -21,10 +21,23 @@ return new class extends Migration
                 BEGIN
                 DECLARE kodeuser CHAR(6);
                 DECLARE kodeverifikator CHAR(6);
+                DECLARE pesanError CHAR(5) DEFAULT '00000';
+                DECLARE CONTINUE HANDLER FOR SQLEXCEPTION, SQLWARNING
+                BEGIN
+                GET DIAGNOSTICS CONDITION 1
+                pesanError = RETURNED_SQLSTATE;
+                END;
+                START TRANSACTION;
+                SAVEPOINT satu;
                 SELECT generate_new_kode_user() INTO kodeuser;
                 SELECT generate_new_kode_verifikator() INTO kodeverifikator;
                 INSERT INTO user (id_user, level, username, password, email, foto_user) VALUES(kodeuser, datalevel, datausername, datapassword, dataemail, datafoto_user);
+                IF pesanError != '00000' THEN ROLLBACK TO satu;
+                END IF;
                 INSERT INTO verifikator (id_verifikator, user, nip_verifikator, nama_verifikator) VALUES(kodeverifikator, kodeuser, datanip_verifikator, datanama_verifikator);
+                IF pesanError != '00000' THEN ROLLBACK TO satu;
+                END IF;
+                COMMIT;
           END;"
         );
     }

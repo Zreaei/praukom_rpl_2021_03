@@ -14,7 +14,7 @@
         <div class="px-28 py-7 w-full justify-center items-center ">
             <div class="flex justify-between">
                 <div>
-                    <h3 class="text-2xl font-bold text-[#2D5EBB]">DATA PEMBIMBING SEKOLAH</h3>
+                    <h3 class="text-2xl font-bold text-[#2D5EBB]">JUMLAH PEMBIMBING SEKOLAH = {{ $jumlah_pbsekolah}} </h3>
                 </div>
                 <div>
                     <!-- The button to open modal -->
@@ -35,15 +35,6 @@
                             </th>
                             <th scope="col" class="px-7 py-4 ">
                                 NAMA
-                            </th> 
-                            <th scope="col" class="px-7 py-4 ">
-                                NOMOR HP
-                            </th>
-                            <th scope="col" class="px-7 py-4 ">
-                                USERNAME
-                            </th>
-                            <th scope="col" class="px-7 py-4 ">
-                                EMAIL
                             </th>
                             <th scope="col" class="px-7 py-4 ">
                                 FOTO
@@ -67,15 +58,6 @@
                             </td>
                             <td class="text-sm text-item font-semibold px-7 py-4 text-center">
                                 {{ $item->nama_pbsekolah }}
-                            </td>
-                            <td class="text-sm text-item font-semibold px-7 py-4 text-center">
-                                {{ $item->telp_pbsekolah }}
-                            </td>
-                           <td class="text-sm text-item font-semibold px-7 py-4 text-center">
-                                {{ $item->username }}
-                            </td>
-                            <td class="text-sm text-item font-semibold px-7 py-4 text-center">
-                                {{ $item->email }}
                             </td>
                             <td class="text-sm text-item font-semibold px-7 py-4 text-center">
                             <img src="{{ asset('storage/' . $item->foto_user) }}" id="gambar" alt="Foto" style="width:100px">
@@ -161,7 +143,7 @@
                         </div>
 
                         <div class="flex justify-between mt-1">
-                            <div class="form-control w-full max-w-sm mr-2">
+                            <div class="form-control w-full max-w">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold">FOTO</span></label>
                                 <img class="img-preview h-full w-full">
                                 <input type="file" name="foto_user" placeholder="Masukkan Foto" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="foto_user" onchange="previewImage()" required/>
