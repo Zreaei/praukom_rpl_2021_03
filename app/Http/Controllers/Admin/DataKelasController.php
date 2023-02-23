@@ -29,21 +29,16 @@ class DataKelasController extends Controller
     
     public function kelas()
     {
+        $walas = $this->WalasModel::all();
+        $jurusan = $this->JurusanModel::all();
+        $angkatan = $this->AngkatanModel::all();
         $dataKelas = DB::table('kelas') 
-        ->join('walas', 'walas.nip_walas', '=', 'kelas.walas')
+        ->join('walas', 'walas.id_walas', '=', 'kelas.walas')
         ->join('jurusan', 'jurusan.id_jurusan', '=', 'kelas.jurusan')
         ->join('angkatan', 'angkatan.id_angkatan', '=', 'kelas.angkatan')
         ->get();    
         // dd($dataKelas);
-        return view('admin.data-kelas.data-kelas', compact('dataKelas'));
-    }
-
-    public function tambahKelas()
-    {
-        $walas = $this->WalasModel::all();
-        $jurusan = $this->JurusanModel::all();
-        $angkatan = $this->AngkatanModel::all();
-        return view('admin.data-kelas.tambahkelas', compact('walas','jurusan','angkatan'));
+        return view('admin.data-kelas.data-kelas', compact('dataKelas','walas','jurusan','angkatan'));
     }
 
     public function simpan(Request $request)
@@ -70,15 +65,15 @@ class DataKelasController extends Controller
         }
     }
 
-    public function edit($id = null)
-    {
-        $edit = $this->KelasModel->find($id);
-        $walas = $this->WalasModel::all();
-        $jurusan = $this->JurusanModel::all();
-        $angkatan = $this->AngkatanModel::all();
-        // echo json_encode($edit);
-        return view('admin.data-kelas.editkelas', compact('edit','walas','jurusan','angkatan'));
-    }
+    // public function edit($id = null)
+    // {
+    //     $edit = $this->KelasModel->find($id);
+    //     $walas = $this->WalasModel::all();
+    //     $jurusan = $this->JurusanModel::all();
+    //     $angkatan = $this->AngkatanModel::all();
+    //     // echo json_encode($edit);
+    //     return view('admin.data-kelas.editkelas', compact('edit','walas','jurusan','angkatan'));
+    // }
 
     public function simpanedit(Request $request)
     {

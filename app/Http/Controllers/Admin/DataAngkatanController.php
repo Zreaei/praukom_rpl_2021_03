@@ -24,11 +24,6 @@ class DataAngkatanController extends Controller
         return view('admin.data-angkatan.data-angkatan', compact('dataAngkatan'));
     }
 
-    public function tambahAngkatan()
-    {
-        return view('admin.data-angkatan.tambahangkatan');
-    }
-
     public function simpan(Request $request)
     {
         try {
@@ -40,21 +35,15 @@ class DataAngkatanController extends Controller
                 'tahun_angkatan' => $request->input('tahun_angkatan'),
             ]);
             if ($tambah_angkatan) {
+                sweetalert()->addSuccess('Angkatan Berhasil Ditambah');
                 return redirect('admin/data-angkatan');
             } else {
-                return "input data gagal";
+                sweetalert()->addSuccess('Angkatan Gagal Ditambah');
+                return redirect('admin/data-angkatan');
             }
         } catch (Exception $e) {
             return $e->getMessage();
         }
-    }
-
-    public function edit($id = null)
-    {
-
-        $edit = $this->AngkatanModel->find($id);
-        // echo json_encode($edit);
-        return view('admin.data-angkatan.editangkatan', compact('edit'));
     }
 
     public function simpanedit(Request $request)
@@ -68,6 +57,7 @@ class DataAngkatanController extends Controller
                         ->where('id_angkatan', $request->input('id_angkatan'))
                         ->update($data);
             if($upd){
+                sweetalert()->addSuccess('Angkatan Berhasil Di Edit');
                 return redirect('admin/data-angkatan');
             }
         } catch (Exception $e) {
@@ -82,6 +72,7 @@ class DataAngkatanController extends Controller
                             ->where('id_angkatan',$id)
                             ->delete();
             if($hapus){
+                sweetalert()->addSuccess('Angkatan Berhasil Dihapus');
                 return redirect('admin/data-angkatan');
             }
         }catch(Exception $e){

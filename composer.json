@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.1",
+        "php-flasher/flasher-laravel": "^1.13",
         "php-flasher/flasher-sweetalert-laravel": "^1.13"
     },
     "require-dev": {

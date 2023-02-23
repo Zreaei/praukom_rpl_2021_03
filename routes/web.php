@@ -28,6 +28,9 @@ use App\Http\Controllers\{
     Login\LoginController,
 };
 use App\Http\Controllers\Admin\DataLevelController;
+use App\Http\Middleware\CekUser;
+use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,67 +48,85 @@ Route::get('/', function () {
     return view('welcome.welcome');
 })->name('home');
 
-// Login - Register Siswa(Operator Only)
-Route::get('/register', [LoginController::class, 'register'])->name('register');
-Route::post('/register', [LoginController::class, 'register_action'])->name('register.action');
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::post('/login', [LoginController::class, 'login_action'])->name('login.action');
+// Login - Register
+Route::controller(LoginController::class)->group(function() {
+    Route::get('/register', 'register')->name('register');
+    Route::post('/register', 'register_action')->name('register.action');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'login_action')->name('login.action');
+});
+
+// Logout
+Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
 
 // Admin
-Route::get('/admin', [AdminController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('home');
+    // Admin - Data Level
+    Route::get('/admin/data-level', [DataLevelController::class, 'level']);
 
-// Admin - Data Level
-Route::get('/admin/data-level', [DataLevelController::class, 'level']);
+    // Admin - Kelola User
+    Route::controller(UserController::class)->group(function() {
+        Route::get('/admin/data-user','user');
+        Route::post('/admin/data-user/simpan','simpan');
+        Route::get('/admin/data-user/hapus/{id}','hapus');
+        Route::post('/admin/data-user/simpanedit','simpanedit');
+    });
 
-// Admin - Kelola User
-Route::get('/admin/data-user', [UserController::class, 'user']);
-Route::post('/admin/data-user/simpan', [UserController::class, 'simpan']);
-Route::get('/admin/data-user/hapus/{id}', [UserController::class, 'hapus']);
-Route::get('/admin/data-user/edit/{id}', [UserController::class, 'edit']);
-Route::post('/admin/data-user/edit/simpanedit', [UserController::class, 'simpanedit']);
+    // Admin - Kelola Operator
+    Route::controller(DataOperatorController::class)->group(function() {
+        Route::get('/admin/data-op','operator');
+        Route::get('/admin/data-op/tambah','tambahOpr');
+        Route::post('/admin/data-op/simpan','simpan');
+        Route::get('/admin/data-op/hapus/{id}','hapus');
+        Route::get('/admin/data-op/edit/{id}','edit');
+        Route::post('/admin/data-op/edit/simpanedit','simpanedit');
+    }); 
 
-// Admin - Kelola Operator
-Route::get('/admin/data-op', [DataOperatorController::class, 'operator']);
-Route::get('/admin/data-op/tambah', [DataOperatorController::class, 'tambahOpr']);
-Route::post('/admin/data-op/simpan', [DataOperatorController::class, 'simpan']);
-Route::get('/admin/data-op/hapus/{id}', [DataOperatorController::class, 'hapus']);
-Route::get('/admin/data-op/edit/{id}', [DataOperatorController::class, 'edit']);
-Route::post('/admin/data-op/edit/simpanedit', [DataOperatorController::class, 'simpanedit']);
+    // Admin - Kelola Angkatan
+    Route::controller(DataAngkatanController::class)->group(function() {
+        Route::get('/admin/data-angkatan','angkatan');
+        Route::post('/admin/data-angkatan/simpan','simpan');
+        Route::get('/admin/data-angkatan/hapus/{id}','hapus');
+        Route::post('/admin/data-angkatan/simpanedit','simpanedit');
+    }); 
 
-// Admin - Kelola Angkatan
-Route::get('/admin/data-angkatan', [DataAngkatanController::class, 'angkatan']);
-Route::get('/admin/data-angkatan/tambah', [DataAngkatanController::class, 'tambahAngkatan']);
-Route::post('/admin/data-angkatan/simpan', [DataAngkatanController::class, 'simpan']);
-Route::get('/admin/data-angkatan/hapus/{id}', [DataAngkatanController::class, 'hapus']);
-Route::get('/admin/data-angkatan/edit/{id}', [DataAngkatanController::class, 'edit']);
-Route::post('/admin/data-angkatan/edit/simpanedit', [DataAngkatanController::class, 'simpanedit']);
+    // Admin - Kelola Jurusan
+    Route::controller(DataJurusanController::class)->group(function() {
+        Route::get('/admin/data-jurusan','jurusan');
+        Route::post('/admin/data-jurusan/simpan','simpan');
+        Route::get('/admin/data-jurusan/hapus/{id}','hapus');
+        Route::post('/admin/data-jurusan/simpanedit','simpanedit');
+    }); 
 
-// Admin - Kelola Jurusan
-Route::get('/admin/data-jurusan', [DataJurusanController::class, 'jurusan']);
-Route::get('/admin/data-jurusan/tambah', [DataJurusanController::class, 'tambahJurusan']);
-Route::post('/admin/data-jurusan/simpan', [DataJurusanController::class, 'simpan']);
-Route::get('/admin/data-jurusan/hapus/{id}', [DataJurusanController::class, 'hapus']);
-Route::get('/admin/data-jurusan/edit/{id}', [DataJurusanController::class, 'edit']);
-Route::post('/admin/data-jurusan/edit/simpanedit', [DataJurusanController::class, 'simpanedit']);
+    // Admin - Kelola Kelas
+    Route::controller(DataKelasController::class)->group(function() {
+        Route::get('/admin/data-kelas','kelas');
+        Route::post('/admin/data-kelas/simpan','simpan');
+        Route::get('/admin/data-kelas/hapus/{id}','hapus');
+        Route::post('/admin/data-kelas/simpanedit', 'simpanedit');
+    }); 
 
-// Admin - Kelola Kelas
-Route::get('/admin/data-kelas', [DataKelasController::class, 'kelas']);
-Route::get('/admin/data-kelas/tambah', [DataKelasController::class, 'tambahKelas']);
-Route::post('/admin/data-kelas/simpan', [DataKelasController::class, 'simpan']);
-Route::get('/admin/data-kelas/hapus/{id}', [DataKelasController::class, 'hapus']);
-Route::get('/admin/data-kelas/edit/{id}', [DataKelasController::class, 'edit']);
-Route::post('/admin/data-kelas/edit/simpanedit',[DataKelasController::class,'simpanedit']);
+    // Admin - Kelola Siswa
+    Route::controller(DataSiswaController::class)->group(function() {
+        Route::get('/admin/data-siswa','siswa');
+        Route::get('/admin/data-siswa/tambah','tambahSiswa');
+        Route::post('/admin/data-siswa/simpan','simpan');
+        Route::get('/admin/data-siswa/hapus/{id}','hapus');
+        Route::get('/admin/data-siswa/edit/{id}','edit');
+        Route::post('/admin/data-siswa/edit/simpanedit','simpanedit');
+    }); 
 
-// Admin - Kelola Siswa
-Route::get('/admin/data-siswa', [DataSiswaController::class, 'siswa']);
-Route::get('/admin/data-siswa/tambah', [DataSiswaController::class, 'tambahSiswa']);
-Route::post('/admin/data-siswa/simpan', [DataSiswaController::class, 'simpan']);
-Route::get('/admin/data-siswa/hapus/{id}', [DataSiswaController::class, 'hapus']);
-Route::get('/admin/data-siswa/edit/{id}', [DataSiswaController::class, 'edit']);
-Route::post('/admin/data-siswa/edit/simpanedit',[DataSiswaController::class,'simpanedit']);
-
-// Admin - Kelola Admku
-Route::get('/admin/data-admku', [DataAdmkuController::class, 'admku']);
+    // Admin - Kelola Admku
+    Route::controller(DataAdmkuController::class)->group(function() {
+        Route::get('/admin/data-admku','admku');
+        Route::get('/admin/data-admku/tambah','tambahAdmku');
+        Route::get('/admin/data-admku/simpan','simpan');
+        Route::get('/admin/data-admku/hapus/{id}','hapus');
+        Route::get('/admin/data-admku/edit/{id}','edit');
+        Route::get('/admin/data-admku/edit/simpanedit','simpanedit');
+    });
+});
 
 // Operator - Dashboard
 Route::get('/operator/home', [OperatorMainController::class, 'home'])->name('operator.home');
@@ -159,8 +180,10 @@ Route::get('/operator/admkeu/detail/{admkeu}', [OperatorDataAdmkeuController::cl
 Route::get('/operator/admkeu/hapus/{id}', [OperatorDataAdmkeuController::class, 'hapusadmkeu']);
 
 // Siswa - home
-Route::get('/siswa/home', [SiswaController::class, 'home'])->name('siswa.home');
-Route::get('/siswa/profil', [SiswaController::class, 'profil']);
+Route::group(['middleware' => ['auth', 'level:LVL003']], function () {
+    Route::get('/siswa/home', [SiswaController::class, 'home'])->name('siswa.home');
+    Route::get('/siswa/profil', [SiswaController::class, 'profil']);
+});
 
 // Siswa - pengajuan
 Route::get('/siswa/pengajuan', [PengajuanController::class, 'pengajuan','tambahpengajuan'])->name('siswa.pengajuan');

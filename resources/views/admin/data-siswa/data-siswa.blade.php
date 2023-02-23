@@ -16,6 +16,7 @@
                 <th class="text-center bg-blue-700 text-white">NIS</th>
                 <th class="text-center bg-blue-700 text-white">Kode User</th>
                 <th class="text-center bg-blue-700 text-white">Kelas</th>
+                <th class="text-center bg-blue-700 text-white">Jurusan</th>
                 <th class="text-center bg-blue-700 text-white">Nama Siswa</th>
                 <th class="text-center bg-blue-700 text-white">Tempat Lahir</th>
                 <th class="text-center bg-blue-700 text-white">Tanggal Lahir</th>
@@ -29,32 +30,41 @@
             <tr>
                 <td class="text-center bg-white"><h1>{{ $item->nis }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->user }}</h1></td>
-                <td class="text-center bg-white"><h1>{{ $item->kelas }}</h1></td>
+                <td class="text-center bg-white"><h1>{{ $item->nama_kelas }}</h1></td>
+                <td class="text-center bg-white"><h1>{{ $item->program_keahlian }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->nama_siswa }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->tempat_lahir }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->tgl_lahir }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->telp_siswa }}</h1></td>
                 <td class="text-center bg-white">
-                    <a href="data-siswa/edit/{{ $item->nis }}"><button class="btn btn-warning">Edit</button></a>
-                    <a href="data-siswa/hapus/{{ $item->nis }}"><button class="btn btn-error">Hapus</button></a>
+                    <label for="modal-edit{{ $item->nis }}" class="btn btn-warning hover:text-opacity-50 justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                    </label>
+                    <label for="modal-hapus{{ $item->nis }}" class="btn btn-error hover:text-opacity-50 justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </label>
                 </td>
             </tr>
         </tbody>
         @endforeach
         </table>
     </div>
-    <div>
-        <div class="m-3 text-center">
-            {{-- Modal Button --}}
-            <label for="my-modal-4" class="btn">Tambah Siswa</label>
+    <div class="m-3 text-center">
+        {{-- Modal Button --}}
+        <label for="modal-tambah" class="btn btn-success hover:text-opacity-50">Tambah Siswa</label>
 
-            {{-- Modal --}}
-            <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-            <label for="my-modal-4" class="modal cursor-pointer">
-            <label class="modal-box relative" for="">
-                <h3 class="text-lg font-bold">Tambah Siswa</h3>
+        {{-- Modal --}}
+        <input type="checkbox" id="modal-tambah" class="modal-toggle" />
+        <div class="modal">
+            <div class="modal-box relative bg-[#2D5EBB]">
+                <label for="modal-tambah" class="btn btn-ghost btn-xl btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2">✕</label>
+                <h3 class="text-lg font-bold text-white">Tambah Siswa</h3>
                 <p class="py-4">
-                    <form method="POST" action="simpan">
+                    <form method="POST" action="data-siswa/simpan">
                         @csrf
                         <div class="">
                             <div class="form-control mx-auto">
@@ -67,7 +77,7 @@
                                         <span class="pr-8">User</span>
                                         <select class="select select-bordered" name="user">
                                             <option value="default">Pilih User</option>
-                                            @foreach ($dataSiswa as $item)
+                                            @foreach ($user as $item)
                                                 <option value="{{ $item->id_user }}">{{ $item->username }}</option>
                                             @endforeach
                                         </select>
@@ -76,8 +86,8 @@
                                         <span class="pr-8">Kelas</span>
                                         <select class="select select-bordered" name="kelas">
                                             <option value="default">Pilih Kelas</option>
-                                            @foreach ($dataSiswa as $item)
-                                                <option value="{{ $item->id_kelas }}">{{ $item->tingkatan }} {{ $item->program_keahlian }} {{ $item->nama_kelas }} (Angkatan : {{ $item->tahun_angkatan }})</option>
+                                            @foreach ($kelas as $item)
+                                                <option value="{{ $item->id_kelas }}">{{ $item->tingkatan }} {{ $item->program_keahlian }} {{ $item->nama_kelas }} - Angkatan Tahun : ({{ $item->tahun_angkatan }})</option>
                                             @endforeach
                                         </select>  
                                     </label>
@@ -105,9 +115,70 @@
                         </div>
                     </form>
                 </p>
-            </label>
-            </label>
+            </div>
         </div>
+    </div>
+
+    {{-- Modal Edit --}}
+    <div class="text-center">
+        @foreach ($dataSiswa as $edit)
+        <input type="checkbox" id="modal-edit{{ $edit->nis }}" class="modal-toggle" />
+        <div class="modal">
+            <div class="modal-box relative bg-[#2D5EBB]">
+                <label for="modal-edit{{ $edit->nis }}" class="btn btn-ghost btn-xl btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2">✕</label>
+                <h3 class="text-lg font-bold text-center text-white">Edit User</h3>
+                <p class="py-4">
+                    <form method="POST" action="simpanedit">
+                        @csrf
+                        <div class="form-control">
+                            <div class="mx-auto">
+                                <label class="input-group">
+                                    <span class="pr-8">User</span>
+                                    <select class="select select-bordered" name="user">
+                                        <option value="default">Pilih User</option>
+                                        @foreach ($user as $item)
+                                            <option value="{{ $item->id_user }}">{{ $item->username }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <label class="input-group">
+                                    <span class="pr-8">Kelas</span>
+                                    <select class="select select-bordered" name="kelas">
+                                        <option value="default">Pilih Kelas</option>
+                                        @foreach ($kelas as $item)
+                                            <option value="{{ $item->id_kelas }}">{{ $item->tingkatan }} {{ $item->nama_kelas }}</option>
+                                        @endforeach
+                                    </select>  
+                                </label>
+                                <label class="input-group">
+                                    <span class="pr-8">Nama Siswa</span>
+                                    <input type="text" name="nama_siswa" placeholder="Nama Siswa" value="{{ $edit->nama_siswa }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group">
+                                    <span class="pr-8">Tempat Lahir</span>
+                                    <input type="text" name="tempat_lahir" placeholder="Tempat Lahir" value="{{ $edit->tempat_lahir }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group">
+                                    <span class="pr-8">Tanggal Lahir</span>
+                                    <input type="date" name="tgl_lahir" placeholder="Tanggal Lahir" value="{{ $edit->tgl_lahir }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group">
+                                    <span class="pr-8">Telepon</span>
+                                    <input type="text" name="telp_siswa" placeholder="No Telepon" value="{{ $edit->telp_siswa }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group">
+                                    <input type="hidden" name="nis" placeholder="NIS" value="{{ $edit->nis }}" class="input input-bordered" />
+                                </label>
+                                <div class="pt-3 pb-3 grid justify-items-center">
+                                    <button type="submit" value="simpan" class="btn btn-success">Simpan</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </p>
+            </div>
+        </div>
+        @endforeach
     </div>
 </div>
 

@@ -34,66 +34,77 @@ class UserController extends Controller
 
     public function simpan(Request $request)
     {
-        try {
-        //     $data = [
-        //         'username' => $request->input('username'),
-        //         'password' => $request->input('password'),
-        //         'email' => $request->input('email'),
-        //         'level' => $request->input('level'),
-        //         // dd($request->all())
-        //     ];
+        // $data = [
+        //     'username' => $request->input('username'),
+        //     'password' => $request->input('password'),
+        //     'email' => $request->input('email'),
+        //     'level' => $request->input('level'),
+        //     // dd($request->all())
+        // ];
+
+        $validasi = $request->validate([
+            'username' => 'required|unique:user',
+            'password' => 'required',
+            'email' => 'required',
+            'level' => 'required',
+        ]);
+
+        if ($validasi) {
             $id_user = DB::select('SELECT newiduser() AS id_user');
             $array = Arr::pluck($id_user, 'id_user');
             $kode_baru = Arr::get($array, '0');
             $tambah_user = DB::table('user')->insert([
-                'id_user' => $kode_baru,
+            'id_user' => $kode_baru,
+            'username' => $request->input('username'),
+            'password' => Hash::make($request->input('password')),
+            'email' => $request->input('email'),
+            'level' => $request->input('level'),
+        ]);
+
+        //Promise 
+        if ($tambah_user) {
+            sweetalert()->addSuccess('User Berhasil Ditambah');
+            return redirect('admin/data-user');
+        } else {
+            sweetalert()->addSuccess('User Gagal Ditambah');
+            return redirect('admin/data-user');
+        }
+
+        } else {
+            sweetalert()->addSuccess('User Gagal Ditambah');
+            return redirect('admin/data-user');
+        }
+    }
+
+    public function simpanedit(Request $request)
+    {
+        $validasi = $request->validate([
+            'username' => 'required|unique:user',
+            'password' => 'required',
+            'email' => 'required',
+            'level' => 'required',
+        ]);
+
+        if($validasi) {
+            $data = [
                 'username' => $request->input('username'),
                 'password' => Hash::make($request->input('password')),
                 'email' => $request->input('email'),
                 'level' => $request->input('level'),
-            ]);
-            // $id_user = substr(md5(rand(0, 99999)), -4);
-            // $id_user = 'USR001';
-            // $data['id_user'] = $id_user;
-            // $insert = $this->UserModel->create($data);
-            //Promise 
-            if ($tambah_user) {
+                // dd($request->all())
+            ];
+            $upd = $this->UserModel
+                        ->where('id_user', $request->input('id_user'))
+                        ->update($data);
+            if($upd){
+                sweetalert()->addSuccess('User Berhasil Di Edit');
                 return redirect('admin/data-user');
             } else {
-                return "input data gagal";
+                sweetalert()->addSuccess('User Gagal Di Edit');
+                return redirect('admin/data-user');
             }
-        } catch (Exception $e) {
-            return $e->getMessage();
         }
     }
-
-    public function edit($id = null)
-    {
-        $edit = $this->UserModel->find($id);
-        // echo json_encode($edit);
-        return view('admin.data-user.data-user', compact('edit'));
-    }
-
-    // public function simpanedit(Request $request)
-    // {
-    //     try {
-    //         $data = [
-    //             'username' => $request->input('username'),
-    //             'password' => Hash::make($request->input('password')),
-    //             'email' => $request->input('email'),
-    //             'level' => $request->input('level'),
-    //             // dd($request->all())
-    //         ];
-    //         $upd = $this->UserModel
-    //                     ->where('id_user', $request->input('id_user'))
-    //                     ->update($data);
-    //         if($upd){
-    //             return redirect('admin/data-user');
-    //         }
-    //     } catch (Exception $e) {
-    //         return $e->getMessage();
-    //     }
-    // }
 
     public function hapus($id = null){
         try{
@@ -101,6 +112,7 @@ class UserController extends Controller
                             ->where('id_user',$id)
                             ->delete();
             if($hapus){
+                sweetalert()->addSuccess('User Berhasil Dihapus');
                 return redirect('admin/data-user');
             }
         }catch(Exception $e){

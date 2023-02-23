@@ -19,6 +19,11 @@ class User extends Authenticatable
     protected $primaryKey = 'id_user';
     public $keyType = 'string';
     protected $fillable = ['id_user','level','username','password','email'];
+
+    public function level_user() {
+
+        return $this->belongsTo(LevelModel::class, 'level', 'id_level');
+    }
 }
 
 // class User extends Authenticatable
