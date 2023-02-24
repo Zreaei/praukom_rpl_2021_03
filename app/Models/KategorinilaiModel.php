@@ -15,5 +15,9 @@ class KategorinilaiModel extends Model
     public $incrementing = false;
     public $keyType = 'string';
     protected $fillable = ['id_kat_nilai','jurusan','nama_nilai','nama_kategori'];
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> e01679e195840334664fe728166a85886559141a

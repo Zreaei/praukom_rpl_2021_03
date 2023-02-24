@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+<<<<<<< HEAD
 // use App\Models\LevelModel;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -9,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 // use Illuminate\Support\Str;
 
+=======
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+>>>>>>> e01679e195840334664fe728166a85886559141a
 class VerifikatorSeeder extends Seeder
 {
     /**
@@ -18,6 +25,7 @@ class VerifikatorSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
         $verifikator = [
         [
             'id_verifikator' => 'VRT001',
@@ -31,3 +39,18 @@ class VerifikatorSeeder extends Seeder
                                             
     }
 }
+=======
+        $verifikator = 
+        [
+            [
+                'id_verifikator' => 'VRK001',
+                'user' => 'USR010',
+                'nama_verifikator' => 'verifikator',
+                'nip_verifikator' => '010'
+            ]
+        ];
+
+        DB::table('verifikator')->insert($verifikator);
+    }
+}
+>>>>>>> e01679e195840334664fe728166a85886559141a

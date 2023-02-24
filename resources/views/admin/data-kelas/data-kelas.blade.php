@@ -68,53 +68,45 @@
                 <p class="py-4">
                     <form method="POST" action="data-kelas/simpan">
                         @csrf
-                        <div class="">
-                            <div class="form-control mx-auto">
-                                <div class="mx-auto">
-                                    <label class="input-group">
-                                        <span class="pr-8 bg-white">Nama Kelas</span>
-                                        <input type="text" name="nama_kelas" placeholder="Nama Kelas" class="input input-bordered" required />
-                                    </label>
-                                    <label class="input-group">
-                                        <span class="pr-8 bg-white">Tingkatan</span>
-                                        <input type="text" name="tingkatan" placeholder="Tingkatan" class="input input-bordered" required />
-                                    </label>
-                                    <div class="form-control">
-                                        <label class="input-group">
-                                            <span class="pr-8 bg-white">Jurusan</span>
-                                            <select class="select select-bordered" name="jurusan">
-                                                <option value="default">Pilih Jurusan</option>
-                                                @foreach ($jurusan as $item)
-                                                    <option value="{{ $item->id_jurusan }}">{{ $item->bidang_keahlian }}</option>
-                                                @endforeach
-                                            </select>
-                                        </label>
-                                    </div>
-                                    <div class="form-control">
-                                        <label class="input-group">
-                                            <span class="pr-8 bg-white">Angkatan</span>
-                                            <select class="select select-bordered" name="angkatan">
-                                                <option value="default">Pilih Angkatan</option>
-                                                @foreach ($angkatan as $item)
-                                                    <option value="{{ $item->id_angkatan }}">{{ $item->tahun_angkatan }}</option>
-                                                @endforeach
-                                            </select>
-                                        </label>
-                                    </div>
-                                    <div class="form-control">
-                                        <label class="input-group">
-                                            <span class="pr-8 bg-white">Walas</span>
-                                            <select class="select select-bordered" name="walas">
-                                                <option value="default">Pilih Walas</option>
-                                                @foreach ($walas as $item)
-                                                    <option value="{{ $item->id_walas }}">{{ $item->nama_walas }}</option>
-                                                @endforeach
-                                            </select>
-                                        </label>
-                                    </div>
-                                    <div class="pt-3 pb-3 grid justify-items-center">
-                                        <button type="submit" value="simpan" class="btn btn-success">Tambah</button>
-                                    </div>
+                        <div class="form-control">
+                            <div class="mx-auto">
+                                <label class="input-group m-5">
+                                    <span class="pr-5 bg-white">Nama Kelas</span>
+                                    <input type="text" name="nama_kelas" placeholder="Nama Kelas" class="input input-bordered" required />
+                                </label>
+                                <label class="input-group m-5">
+                                    <span class="pr-8 bg-white">Tingkatan</span>
+                                    <input type="text" name="tingkatan" placeholder="Tingkatan" class="input input-bordered" required />
+                                </label>
+                                <label class="input-group justify-center mt-5">
+                                    <span class="pr-12 bg-white">Jurusan</span>
+                                    <select class="select select-bordered" name="jurusan">
+                                        <option value="default">Pilih Jurusan</option>
+                                        @foreach ($jurusan as $item)
+                                            <option value="{{ $item->id_jurusan }}">{{ $item->bidang_keahlian }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <label class="input-group justify-center mt-5">
+                                    <span class="pr-8 bg-white">Angkatan</span>
+                                    <select class="select select-bordered" name="angkatan">
+                                        <option value="default">Pilih Angkatan</option>
+                                        @foreach ($angkatan as $item)
+                                            <option value="{{ $item->id_angkatan }}">{{ $item->tahun_angkatan }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <label class="input-group justify-center mt-5 mb-5">
+                                    <span class="pr-8 bg-white">Walas</span>
+                                    <select class="select select-bordered" name="walas">
+                                        <option value="default">Pilih Walas</option>
+                                        @foreach ($walas as $item)
+                                            <option value="{{ $item->id_walas }}">{{ $item->nama_walas }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <div class="pt-3 pb-3 grid justify-items-center">
+                                    <button type="submit" value="simpan" class="btn btn-success">Tambah</button>
                                 </div>
                             </div>
                         </div>
@@ -135,48 +127,46 @@
                 <p class="py-4">
                     <form method="POST" action="data-kelas/simpanedit">
                         @csrf
-                        <div class="">
-                            <div class="form-control mx-auto">
-                                <div class="mx-auto">
-                                    <label class="input-group">
-                                        <span class="pr-8 bg-white">Nama Kelas</span>
-                                        <input type="text" name="nama_kelas" placeholder="Nama Kelas" value="{{ $edit->nama_kelas }}" class="input input-bordered" />
-                                    </label>
-                                    <label class="input-group">
-                                        <span class="pr-8 bg-white">Tingkatan</span>
-                                        <input type="text" name="tingkatan" placeholder="Tingkatan" value="{{ $edit->tingkatan }}" class="input input-bordered" />
-                                    </label>
-                                    <label class="input-group">
-                                        <span class="pr-8 bg-white">Jurusan</span>
-                                        <select class="select select-bordered" name="jurusan">
-                                            <option value="default">Pilih Jurusan</option>
-                                            @foreach ($jurusan as $item)
-                                                <option value="{{ $item->id_jurusan }}">{{ $item->program_keahlian }}</option>
-                                            @endforeach
-                                        </select>
-                                    </label>
-                                    <label class="input-group">
-                                        <span class="pr-8 bg-white">angkatan</span>
-                                        <select class="select select-bordered" name="angkatan">
-                                            <option value="default">Pilih Angkatan</option>
-                                            @foreach ($angkatan as $item)
-                                                <option value="{{ $item->id_angkatan }}">{{ $item->tahun_angkatan }}</option>
-                                            @endforeach
-                                        </select>
-                                    </label>
-                                    <label class="input-group">
-                                        <span class="pr-8 bg-white">Walas</span>
-                                        <select class="select select-bordered" name="walas">
-                                            <option value="default">Pilih Walas</option>
-                                            @foreach ($walas as $item)
-                                                <option value="{{ $item->id_walas }}">{{ $item->nama_walas }}</option>
-                                            @endforeach
-                                        </select>
-                                    </label>
-                                    <input type="hidden" name="id_kelas" value="{{ $edit->id_kelas }}" />
-                                    <div class="pt-3 pb-3 grid justify-items-center">
-                                        <button type="submit" value="simpan" class="btn btn-success">Simpan</button></a>
-                                    </div>
+                        <div class="form-control mx-auto">
+                            <div class="mx-auto">
+                                <label class="input-group m-5">
+                                    <span class="pr-7 bg-white">Nama Kelas</span>
+                                    <input type="text" name="nama_kelas" placeholder="Nama Kelas" value="{{ $edit->nama_kelas }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group m-5">
+                                    <span class="pr-10 bg-white">Tingkatan</span>
+                                    <input type="text" name="tingkatan" placeholder="Tingkatan" value="{{ $edit->tingkatan }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group justify-center mt-5">
+                                    <span class="pr-14 bg-white">Jurusan</span>
+                                    <select class="select select-bordered" name="jurusan">
+                                        <option value="default">Pilih Jurusan</option>
+                                        @foreach ($jurusan as $item)
+                                            <option value="{{ $item->id_jurusan }}">{{ $item->program_keahlian }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <label class="input-group justify-center mt-5">
+                                    <span class="pr-10 bg-white">Angkatan</span>
+                                    <select class="select select-bordered" name="angkatan">
+                                        <option value="default">Pilih Angkatan</option>
+                                        @foreach ($angkatan as $item)
+                                            <option value="{{ $item->id_angkatan }}">{{ $item->tahun_angkatan }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <label class="input-group justify-center mt-5 mb-5">
+                                    <span class="pr-16 bg-white">Walas</span>
+                                    <select class="select select-bordered" name="walas">
+                                        <option value="default">Pilih Walas</option>
+                                        @foreach ($walas as $item)
+                                            <option value="{{ $item->id_walas }}">{{ $item->nama_walas }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <input type="hidden" name="id_kelas" value="{{ $edit->id_kelas }}" />
+                                <div class="pt-3 pb-3 grid justify-items-center">
+                                    <button type="submit" value="simpan" class="btn btn-success">Simpan</button></a>
                                 </div>
                             </div>
                         </div>

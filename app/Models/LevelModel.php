@@ -15,6 +15,6 @@ class LevelModel extends Model
     public function user(){
 
         // kalo relasi hasmany itu satu table memiliki one to many
-        return $this->hasMany(User::class, 'level', 'level');
+        return $this->hasOne(User::class, 'level', 'id_level');
     }
 }

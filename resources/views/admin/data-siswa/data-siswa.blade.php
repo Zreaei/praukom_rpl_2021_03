@@ -16,6 +16,7 @@
                 <th class="text-center bg-blue-700 text-white">NIS</th>
                 <th class="text-center bg-blue-700 text-white">Kode User</th>
                 <th class="text-center bg-blue-700 text-white">Kelas</th>
+                <th class="text-center bg-blue-700 text-white">Jurusan</th>
                 <th class="text-center bg-blue-700 text-white">Nama Siswa</th>
                 <th class="text-center bg-blue-700 text-white">Tempat Lahir</th>
                 <th class="text-center bg-blue-700 text-white">Tanggal Lahir</th>
@@ -29,7 +30,8 @@
             <tr>
                 <td class="text-center bg-white"><h1>{{ $item->nis }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->user }}</h1></td>
-                <td class="text-center bg-white"><h1>{{ $item->kelas }}</h1></td>
+                <td class="text-center bg-white"><h1>{{ $item->nama_kelas }}</h1></td>
+                <td class="text-center bg-white"><h1>{{ $item->program_keahlian }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->nama_siswa }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->tempat_lahir }}</h1></td>
                 <td class="text-center bg-white"><h1>{{ $item->tgl_lahir }}</h1></td>
@@ -85,7 +87,7 @@
                                         <select class="select select-bordered" name="kelas">
                                             <option value="default">Pilih Kelas</option>
                                             @foreach ($kelas as $item)
-                                                <option value="{{ $item->id_kelas }}"></option>
+                                                <option value="{{ $item->id_kelas }}">{{ $item->tingkatan }} {{ $item->program_keahlian }} {{ $item->nama_kelas }} - Angkatan Tahun : ({{ $item->tahun_angkatan }})</option>
                                             @endforeach
                                         </select>  
                                     </label>
@@ -115,6 +117,68 @@
                 </p>
             </div>
         </div>
+    </div>
+
+    {{-- Modal Edit --}}
+    <div class="text-center">
+        @foreach ($dataSiswa as $edit)
+        <input type="checkbox" id="modal-edit{{ $edit->nis }}" class="modal-toggle" />
+        <div class="modal">
+            <div class="modal-box relative bg-[#2D5EBB]">
+                <label for="modal-edit{{ $edit->nis }}" class="btn btn-ghost btn-xl btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2">✕</label>
+                <h3 class="text-lg font-bold text-center text-white">Edit User</h3>
+                <p class="py-4">
+                    <form method="POST" action="simpanedit">
+                        @csrf
+                        <div class="form-control">
+                            <div class="mx-auto">
+                                <label class="input-group">
+                                    <span class="pr-8">User</span>
+                                    <select class="select select-bordered" name="user">
+                                        <option value="default">Pilih User</option>
+                                        @foreach ($user as $item)
+                                            <option value="{{ $item->id_user }}">{{ $item->username }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <label class="input-group">
+                                    <span class="pr-8">Kelas</span>
+                                    <select class="select select-bordered" name="kelas">
+                                        <option value="default">Pilih Kelas</option>
+                                        @foreach ($kelas as $item)
+                                            <option value="{{ $item->id_kelas }}">{{ $item->tingkatan }} {{ $item->nama_kelas }}</option>
+                                        @endforeach
+                                    </select>  
+                                </label>
+                                <label class="input-group">
+                                    <span class="pr-8">Nama Siswa</span>
+                                    <input type="text" name="nama_siswa" placeholder="Nama Siswa" value="{{ $edit->nama_siswa }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group">
+                                    <span class="pr-8">Tempat Lahir</span>
+                                    <input type="text" name="tempat_lahir" placeholder="Tempat Lahir" value="{{ $edit->tempat_lahir }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group">
+                                    <span class="pr-8">Tanggal Lahir</span>
+                                    <input type="date" name="tgl_lahir" placeholder="Tanggal Lahir" value="{{ $edit->tgl_lahir }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group">
+                                    <span class="pr-8">Telepon</span>
+                                    <input type="text" name="telp_siswa" placeholder="No Telepon" value="{{ $edit->telp_siswa }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group">
+                                    <input type="hidden" name="nis" placeholder="NIS" value="{{ $edit->nis }}" class="input input-bordered" />
+                                </label>
+                                <div class="pt-3 pb-3 grid justify-items-center">
+                                    <button type="submit" value="simpan" class="btn btn-success">Simpan</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </p>
+            </div>
+        </div>
+        @endforeach
     </div>
 </div>
 

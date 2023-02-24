@@ -22,7 +22,7 @@ class User extends Authenticatable
 
     public function level_user() {
 
-        return $this->belongsTo(LevelModel::class, 'id_level','level' );
+        return $this->belongsTo(LevelModel::class, 'level', 'id_level');
     }
 }
 

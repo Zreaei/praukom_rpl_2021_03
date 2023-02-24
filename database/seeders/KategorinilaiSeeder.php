@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+<<<<<<< HEAD
 // use App\Models\LevelModel;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -9,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 // use Illuminate\Support\Str;
 
+=======
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+>>>>>>> e01679e195840334664fe728166a85886559141a
 class KategorinilaiSeeder extends Seeder
 {
     /**
@@ -18,6 +25,7 @@ class KategorinilaiSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
         $kategorinilai = [
         [
             'id_kat_nilai' => 'KTN001',
@@ -79,3 +87,23 @@ class KategorinilaiSeeder extends Seeder
                                             
     }
 }
+=======
+        $kategori_nilai = 
+        [
+            [
+                'id_kat_nilai' => 'KTN001',
+                'jurusan' => 'JRS001',
+                'nama_nilai' => 'Disiplin Waktu',
+                'nama_kategori' => 'Sikap Mental'
+            ],[
+                'id_kat_nilai' => 'KTN002',
+                'jurusan' => 'JRS001',
+                'nama_nilai' => 'Dasar Desain Grafis',
+                'nama_kategori' => 'Kompetensi Teknis'
+            ],
+        ];
+
+        DB::table('kategori_nilai')->insert($kategori_nilai);
+    }
+}
+>>>>>>> e01679e195840334664fe728166a85886559141a
