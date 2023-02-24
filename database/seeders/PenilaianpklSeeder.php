@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 // use Illuminate\Support\Str;
 
-class MonitoringSeeder extends Seeder
+class PenilaianpklSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,16 +18,15 @@ class MonitoringSeeder extends Seeder
      */
     public function run()
     {
-        $monitoring = [
+        $penilaianpkl = [
         [
-            'id_monitoring' => 'MNT001',
-            'pb_sekolah' => 'PBS001',
-            'tgl_monitoring' => '2023-02-01',
-            'laporan_monitoring' => '1',
+            'id_nilaipkl' => '001',
+            'siswa' => '327584763',
+            'pb_iduka' => '1111111111111111',
             ],
             ];
 
-                DB::table('monitoring')->insert($monitoring);
+                DB::table('penilaian_pkl')->insert($penilaianpkl);
                                             
     }
 }

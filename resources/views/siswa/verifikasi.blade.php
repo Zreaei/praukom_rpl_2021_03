@@ -51,7 +51,7 @@
                     <?php
                     $no = 1;
                     ?>
-                        @foreach ($verifikasi as $item)
+                    @forelse ($verifikasi as $item)
                         <tr class="bg-[#ffffff] text-[#000000]">
                             <td class="text-sm text-item font-semibold px-7 py-4 text-center">
                                 {{ $no++ }}
@@ -68,8 +68,11 @@
                                 </label>
                             </td>
                             <td class="text-sm text-item font-semibold px-7 py-4 text-center">
-                                <button type="button" class="text-[#ffffff] bg-[#09C4FF] hover:bg-opacity-50 focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5">Lihat</button>          
+                                <label for="validasi{{ $item->id_verifikasi }}" type="button" class="text-[#ffffff] bg-[#09C4FF] hover:bg-opacity-50 focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5">
+                                    <span>Lihat</span>         
+                                </label>
                             </td>
+                            
                             
                             <!-- icon Aksi -->
                             <td class="text-sm font-medium leading-5 text-center [#ffffff]space-no-wrap ">
@@ -88,8 +91,19 @@
                                     </div>
                                 </div>
                             </td>
+                            @empty
+                        <tr class="bg-[#ffffff] text-[#000000]">
+                            <td colspan="9">
+                                <div class="text-sm text-item font-semibold px-7 py-4 text-center w-full">
+                                    <div class="flex justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-14 h-14 opacity-50"><path fill-rule="evenodd" d="M5.478 5.559A1.5 1.5 0 016.912 4.5H9A.75.75 0 009 3H6.912a3 3 0 00-2.868 2.118l-2.411 7.838a3 3 0 00-.133.882V18a3 3 0 003 3h15a3 3 0 003-3v-4.162c0-.299-.045-.596-.133-.882l-2.412-7.838A3 3 0 0017.088 3H15a.75.75 0 000 1.5h2.088a1.5 1.5 0 011.434 1.059l2.213 7.191H17.89a3 3 0 00-2.684 1.658l-.256.513a1.5 1.5 0 01-1.342.829h-3.218a1.5 1.5 0 01-1.342-.83l-.256-.512a3 3 0 00-2.684-1.658H3.265l2.213-7.191z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v6.44l1.72-1.72a.75.75 0 111.06 1.06l-3 3a.75.75 0 01-1.06 0l-3-3a.75.75 0 011.06-1.06l1.72 1.72V3a.75.75 0 01.75-.75z" clip-rule="evenodd" /></svg>
+                                    </div>
+                                    <p class="font-semibold text-2xl opacity-50">Data Kosong</p>
+                                </div>
+                            </td>
                         </tr>
-                    @endforeach
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
@@ -178,6 +192,44 @@
                         
                 </div>
             </div> 
+            @endforeach
+
+            @foreach ($verifikasi as $validasi)
+            <input type="checkbox" id="validasi{{$validasi->id_verifikasi}}" class="modal-toggle" />
+            <div class="modal">
+                <div class="modal-box w-full max-w-2xl bg-[#2D5EBB]">
+                    <label for="validasi{{$validasi->id_verifikasi}}" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
+                    <h3 class="text-lg font-bold text-[#ffffff] text-center">DATA KONFIRMASI VERIFIKASI</h3>    
+                        <div class="flex justify-between mt-5">
+                            <div class="form-control w-full max-w-2xl">
+                            <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Pembimbing Sekolah</span></label>
+                            @switch($validasi->konfirmasi_verifikator)
+                                @case('terima')
+                                <span class="rounded-lg bg-success py-3 text-center text-white font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
+                                    <span class="text-center text-2xl px-3">Dikonfirmasi</span>
+                                </span>
+                                @break
+
+                                @case('pending')
+                                <span class="rounded-lg bg-warning py-3 text-center text-white font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" /></svg>
+                                    <span class="text-center text-2xl px-3">wait</span> 
+                                </span>
+                                @break
+
+                                @case('tolak')
+                                <span class="rounded-lg bg-error py-3 text-center text-white font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>
+                                    <span class="text-center text-2xl px-3">Ditolak</span>
+                                </span>
+                                @break
+                                
+                            @endswitch
+                            </div>
+                        </div>
+                </div>
+            </div>
             @endforeach
         </div>
     </div>

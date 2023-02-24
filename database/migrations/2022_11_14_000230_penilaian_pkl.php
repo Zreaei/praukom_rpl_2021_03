@@ -13,19 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('verifikasi', function (Blueprint $table) {
+        Schema::create('penilaian_pkl', function (Blueprint $table) {
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
-            $table->char('id_verifikasi', 6)->primary()->nullable(false);
+            $table->tinyInteger('id_nilaipkl')->primary()->nullable(false);
             $table->char('siswa', 9)->nullable(false);
-            $table->char('verifikator', 6)->nullable(false);
-            $table->date('tgl_verifikasi')->nullable(false);
-            $table->string('bukti_verifikasi', 255)->nullable(false);
-            $table->enum('konfirmasi_verifikator', ['terima', 'tolak', 'pending'])->default('pending')->nullable();
+            $table->char('pb_iduka', 16)->nullable(false);
 
             $table->foreign('siswa')->references('nis')->on('siswa')->cascadeOnDelete();
-            $table->foreign('verifikator')->references('id_verifikator')->on('verifikator')->cascadeOnDelete();
+            $table->foreign('pb_iduka')->references('nik')->on('pb_iduka')->cascadeOnDelete();
         });
     }
 
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('verifikasi');
+        Schema::dropIfExists('penilaian_pkl');
     }
 };

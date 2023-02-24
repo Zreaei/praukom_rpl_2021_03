@@ -28,11 +28,67 @@ class DataPengajuanAdmkeuController extends Controller
     }
     public function datapengajuan()
     {
-        $pengajuan = DB::table('pengajuan'); 
-        $siswa = DB::table('siswa'); 
-        $iduka = DB::table('iduka'); 
-        return view('admkeu.pengajuan', compact('pengajuan','siswa','iduka'));
+        $datapengajuan = DB::table('pengajuan')
+        ->join('siswa', 'siswa.nis', '=', 'pengajuan.siswa')
+        ->join('kelas', 'kelas.id_kelas', '=', 'siswa.kelas')
+        ->join('jurusan', 'jurusan.id_jurusan', '=', 'kelas.jurusan')
+        ->join('iduka', 'iduka.id_iduka', '=', 'pengajuan.iduka')
+        ->select('pengajuan.*','iduka.*','siswa.*','kelas.*','jurusan.*')
+        ->get();
+        return view('admkeu.pengajuan', compact('datapengajuan'));
     }
+    public function statuskonfirmasi($id = null)
+    {
+        try {
+            // $id_user = DB::table('user')
+            //     ->select('id_user')
+            //     ->where('username', Auth::user()->username)
+            //     ->get();
+            // $array = Arr::pluck($id_user, 'id_user');
+            // $approver = Arr::get($array, '0');
+            // dd($id);
+
+            $status = [
+                // 'approver' => $approver,
+                'konfirmasi_admkeu' => ('dikonfirmasi')
+            ];
+            $hapus = DB::table('pengajuan')
+                ->where('id_pengajuan', $id)
+                ->update($status);
+            if ($hapus) {
+                flash()->addSuccess('Berhasil Dikonfirmasi');
+                return redirect('/admkeu/pengajuan');
+            }
+        } catch (\Exception $e) {
+            $e->getMessage();
+        }
+    }
+    public function statustolak($id = null)
+    {
+        try {
+            // $id_user = DB::table('user')
+            //     ->select('id_user')
+            //     ->where('username', Auth::user()->username)
+            //     ->get();
+            // $array = Arr::pluck($id_user, 'id_user');
+            // $approver = Arr::get($array, '0');
+
+            $status = [
+                // 'approver' => $approver,
+                'konfirmasi_admkeu' => ('ditolak')
+            ];
+            $hapus = DB::table('pengajuan')
+                ->where('id_pengajuan', $id)
+                ->update($status);
+            if ($hapus) {
+                flash()->addSuccess('Berhasil Ditolak');
+                return redirect('/admkeu/pengajuan');
+            }
+        } catch (\Exception $e) {
+            $e->getMessage();
+        }
+
+    }    
 }
 
 

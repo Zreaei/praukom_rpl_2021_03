@@ -45,20 +45,21 @@
                     <?php
                     $no = 1;
                     ?>
+                    @foreach ($dataprakerin as $a)
                         <tr class="bg-[#ffffff] text-[#000000]">
                             <td class="text-sm text-item font-semibold  py-4 text-center">
                                 {{ $no++ }}
                             </td>
                             <td class="text-sm text-item font-semibold  py-4 text-center">
-                                <label for="detail-siswa" type="button" class="text-[#ffffff] bg-[#0029FF] hover:bg-opacity-50 focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5">Data Siswa</label>          
+                                <label for="detail-siswa{{$a->nis}}" type="button" class="text-[#ffffff] bg-[#0029FF] hover:bg-opacity-50 focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5">Data Siswa</label>          
                             </td>
                             <td class="text-sm text-item font-semibold  py-4 text-center">
-                                <a href="#">
+                                <a href="/pbiduka/presensi">
                                     <label type="button" class="text-[#ffffff] bg-[#09C4FF] hover:bg-opacity-50 focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5">Data Presensi</label>          
                                 </a>
                             </td>
                             <td class="text-sm text-item font-semibold  py-4 text-center">
-                                <a href="#">
+                                <a href="/pbiduka/kegiatan">
                                     <label type="button" class="text-[#ffffff] bg-[#FFA434] hover:bg-opacity-50 focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5">Data Kegiatan</label>          
                                 </a>
                             </td>
@@ -73,22 +74,148 @@
                                 </div>
                             </td>
                         </tr>
-                   
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Modal Detail Data Siswa -->
-        <input type="checkbox" id="detail-siswa" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box w-11/12 max-w-2xl bg-[#2D5EBB]">
-                <label for="detail-siswa" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
-                <h3 class="text-lg font-bold text-[#ffffff] text-center">DATA SISWA</h3>
+        
 
-                </form>    
-            </div>
-        </div> 
     </div>
 </div>
+@endsection
+
+@section('modal')
+    <!-- Modal Detail Data Siswa -->
+    @foreach ($dataprakerin as $item)
+        <input type="checkbox" id="detail-siswa{{$item->nis}}" class="modal-toggle" />
+        <div class="modal">
+            <div class="modal-box w-11/12 max-w-2xl bg-[#2D5EBB]">
+                <label for="detail-siswa{{$item->nis}}" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
+                <h3 class="text-lg font-bold text-[#ffffff] text-center">DATA SISWA</h3>
+            
+                <div class="flex justify-between rounded-lg bg-white mt-5 h-10 ">
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start px-16">
+                            <span class="font-bold">NIS</span>
+                        </div>
+                        
+                    </div>
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start">
+                            <span class="font-medium"> <span class="font-bold pr-10">:</span>{{ $item->nis }}</span>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+                <div class="flex justify-between rounded-lg bg-white mt-2 h-10 ">
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start px-16">
+                            <span class="font-bold">Nama</span>
+                        </div>
+                        
+                    </div>
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start">
+                            <span class="font-medium"> <span class="font-bold pr-10">:</span>{{ $item->nama_siswa }}</span>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+                <div class="flex justify-between rounded-lg bg-white mt-2 h-10 ">
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start px-16">
+                            <span class="font-bold">Tempat Lahir</span>
+                        </div>
+                        
+                    </div>
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start">
+                            <span class="font-medium"> <span class="font-bold pr-10">:</span>{{ $item->tempat_lahir }}</span>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+                <div class="flex justify-between rounded-lg bg-white mt-2 h-10 ">
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start px-16">
+                            <span class="font-bold">Tanggal Lahir</span>
+                        </div>
+                        
+                    </div>
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start">
+                            <span class="font-medium"> <span class="font-bold pr-10">:</span>{{ $item->tgl_lahir }}</span>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+                <div class="flex justify-between rounded-lg bg-white mt-2 h-10 ">
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start px-16">
+                            <span class="font-bold">Telepon</span>
+                        </div>
+                        
+                    </div>
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start">
+                            <span class="font-medium"> <span class="font-bold pr-10">:</span>{{ $item->telp_siswa }}</span>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+                <div class="flex justify-between rounded-lg bg-white mt-2 h-10 ">
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start px-16">
+                            <span class="font-bold">Kelas</span>
+                        </div>
+                        
+                    </div>
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start">
+                            <span class="font-medium"> <span class="font-bold pr-10">:</span>{{ $item->tingkatan }}</span>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+                <div class="flex justify-between rounded-lg bg-white mt-2 h-10 ">
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start px-16">
+                            <span class="font-bold">Jurusan</span>
+                        </div>
+                        
+                    </div>
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start">
+                            <span class="font-medium"> <span class="font-bold pr-10">:</span>{{ $item->program_keahlian }}</span>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+                <div class="flex justify-between rounded-lg bg-white mt-2 h-10 ">
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start px-16">
+                            <span class="font-bold">Bidang Keahlian</span>
+                        </div>
+                        
+                    </div>
+                    <div class="text-xl text-black p-1 w-4/5">
+                        <div class="grid justify-items-start">
+                            <span class="font-medium"> <span class="font-bold pr-10">:</span>{{ $item->bidang_keahlian }}</span>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+        </div> 
+    @endforeach 
 @endsection

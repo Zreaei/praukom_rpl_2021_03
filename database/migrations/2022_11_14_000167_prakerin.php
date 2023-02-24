@@ -20,14 +20,14 @@ return new class extends Migration
             $table->char('id_prakerin', 6)->primary()->nullable(false);
             $table->char('pengajuan', 6)->nullable(false);
             $table->char('siswa', 9)->nullable(false);
-            $table->char('monitoring', 6)->nullable();
+            $table->char('iduka', 6)->nullable();
             $table->enum('status_prakerin', ['belum', 'sudah'])->nullable();
             $table->date('tgl_mulai')->nullable();
             $table->date('tgl_selesai')->nullable();
 
             $table->foreign('pengajuan')->references('id_pengajuan')->on('pengajuan')->cascadeOnDelete();
             $table->foreign('siswa')->references('nis')->on('siswa')->cascadeOnDelete();
-            $table->foreign('monitoring')->references('id_monitoring')->on('monitoring')->cascadeOnDelete();
+            $table->foreign('iduka')->references('id_iduka')->on('iduka')->cascadeOnDelete();
         });
     }
 

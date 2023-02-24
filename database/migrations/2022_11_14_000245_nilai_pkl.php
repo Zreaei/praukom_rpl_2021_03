@@ -17,14 +17,13 @@ return new class extends Migration
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
-            $table->char('id_nilaipkl', 6)->primary()->nullable(false);
-            $table->char('prakerin', 6)->nullable(false);
-            $table->char('pb_iduka', 6)->nullable(false);
-            $table->tinyInteger('jml_nilaipkl')->nullable(false);
-            $table->string('predikat_nilaipkl', 2)->nullable();
+            $table->tinyInteger('id_nilaipkl')->nullable(false);
+            $table->char('kategori_nilai', 6)->nullable(false);
+            $table->tinyInteger('nilai_pkl')->nullable(false);
 
-            $table->foreign('prakerin')->references('id_prakerin')->on('prakerin')->cascadeOnDelete();
-            $table->foreign('pb_iduka')->references('nik')->on('pb_iduka')->cascadeOnDelete();
+            $table->foreign('id_nilaipkl')->references('id_nilaipkl')->on('penilaian_pkl')->cascadeOnDelete();
+            $table->foreign('kategori_nilai')->references('id_kat_nilai')->on('kategori_nilai')->cascadeOnDelete();
+            
         });
     }
 

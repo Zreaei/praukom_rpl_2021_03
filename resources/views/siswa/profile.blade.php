@@ -9,12 +9,24 @@
         </a>
     </div>
     <div class="py-5 px-32 justify-center items-center w-full">
-        
-        <div class="flex justify-between rounded-lg bg-[#2D5EBB] h-40 ">
+        <div class="card w-96 bg-gradient-to-b from-[#2D5EBB] to-[#D24E16] shadow-xl ">
+            <figure class="px-10 pt-10">
+                <img src="https://mdbootstrap.com/img/new/slides/041.jpg" alt="Shoes" class="rounded-full w-48 h-48" />
+            </figure>
+            <div class="card-body items-center text-center">
+                <h2 class="card-title font-bold">M Danar Kahfi</h2>
+                <div class="card-actions ">
+                    <div class="grid justify-items-center px-32 bg-gradient-to-b from-[#FFA434] to-[#D24E16] p-3 rounded-lg">
+                        <span class="font-bold uppercase text-white">Siswa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card justify-between rounded-lg bg-[#2D5EBB] h-40 ">
             <div class="px-10 py-2">
                 <img class="w-36 h-36 rounded-full" src="https://mdbootstrap.com/img/new/slides/041.jpg" alt="Rounded avatar">
             </div>
-            <div class="text-4xl text-white pt-5 justify-center items-center w-4/5">
+            <div class="card-body text-4xl text-white pt-5 justify-center items-center w-4/5">
                 <div class="grid justify-items-center">
                     <span class="font-bold">M Danar Kahfi</span>
                 </div>
@@ -26,83 +38,83 @@
             </div>
         
         </div>
-
-        <div class="flex justify-between rounded-lg bg-white mt-5 h-20 ">
-            <div class="text-3xl text-black pt-5 w-4/5">
-                <div class="grid justify-items-start px-16">
-                    <span class="font-bold">NIS</span>
+        <div class="card">
+            <div class="flex justify-between rounded-lg bg-white mt-5 h-20 ">
+                <div class="text-3xl text-black pt-5 w-4/5">
+                    <div class="grid justify-items-start px-16">
+                        <span class="font-bold">NIS</span>
+                    </div>
+                    
                 </div>
-                
-            </div>
-            <div class="text-3xl text-black pt-5 w-4/5">
-                <div class="grid justify-items-start">
-                    <span class="font-medium"> <span class="font-bold pr-10">:</span>021989898989</span>
+                <div class="text-3xl text-black pt-5 w-4/5">
+                    <div class="grid justify-items-start">
+                        <span class="font-medium"> <span class="font-bold pr-10">:</span>021989898989</span>
+                    </div>
+                    
                 </div>
-                
+            
             </div>
-        
-        </div>
-        <div class="flex justify-between rounded-lg bg-white mt-2 h-20 ">
-            <div class="text-3xl text-black pt-5 w-4/5">
-                <div class="grid justify-items-start px-16">
-                    <span class="font-bold">Username</span>
+            <div class="flex justify-between rounded-lg bg-white mt-2 h-20 ">
+                <div class="text-3xl text-black pt-5 w-4/5">
+                    <div class="grid justify-items-start px-16">
+                        <span class="font-bold">Username</span>
+                    </div>
+                    
                 </div>
-                
-            </div>
-            <div class="text-3xl text-black pt-5 w-4/5">
-                <div class="grid justify-items-start">
-                    <span class="font-medium"> <span class="font-bold pr-10">:</span>Danare</span>
+                <div class="text-3xl text-black pt-5 w-4/5">
+                    <div class="grid justify-items-start">
+                        <span class="font-medium"> <span class="font-bold pr-10">:</span>Danare</span>
+                    </div>
+                    
                 </div>
-                
+            
             </div>
-        
-        </div>
-        <div class="flex justify-between rounded-lg bg-white mt-2 h-20 ">
-            <div class="text-3xl text-black pt-5 w-4/5">
-                <div class="grid justify-items-start px-16">
-                    <span class="font-bold">Nama Lengkap</span>
+            <div class="flex justify-between rounded-lg bg-white mt-2 h-20 ">
+                <div class="text-3xl text-black pt-5 w-4/5">
+                    <div class="grid justify-items-start px-16">
+                        <span class="font-bold">Nama Lengkap</span>
+                    </div>
+                    
                 </div>
-                
-            </div>
-            <div class="text-3xl text-black pt-5 w-4/5">
-                <div class="grid justify-items-start">
-                    <span class="font-medium"> <span class="font-bold pr-10">:</span>M Danar Kahfi</span>
+                <div class="text-3xl text-black pt-5 w-4/5">
+                    <div class="grid justify-items-start">
+                        <span class="font-medium"> <span class="font-bold pr-10">:</span>M Danar Kahfi</span>
+                    </div>
+                    
                 </div>
-                
+            
             </div>
-        
-        </div>
-        <div class="flex justify-between rounded-lg bg-white mt-2 h-20 ">
-            <div class="text-3xl text-black pt-5 w-4/5">
-                <div class="grid justify-items-start px-16">
-                    <span class="font-bold">Email</span>
+            <div class="flex justify-between rounded-lg bg-white mt-2 h-20 ">
+                <div class="text-3xl text-black pt-5 w-4/5">
+                    <div class="grid justify-items-start px-16">
+                        <span class="font-bold">Email</span>
+                    </div>
+                    
                 </div>
-                
-            </div>
-            <div class="text-3xl text-black pt-5 w-4/5">
-                <div class="grid justify-items-start">
-                    <span class="font-medium"> <span class="font-bold pr-10">:</span>muhdankah22@gmail.com</span>
+                <div class="text-3xl text-black pt-5 w-4/5">
+                    <div class="grid justify-items-start">
+                        <span class="font-medium"> <span class="font-bold pr-10">:</span>muhdankah22@gmail.com</span>
+                    </div>
+                    
                 </div>
-                
+            
             </div>
-        
-        </div>
-        <div class="flex justify-between rounded-lg bg-white mt-2 h-20 ">
-            <div class="text-3xl text-black pt-5 w-4/5">
-                <div class="grid justify-items-start px-16">
-                    <span class="font-bold">Telepon</span>
+            <div class="flex justify-between rounded-lg bg-white mt-2 h-20 ">
+                <div class="text-3xl text-black pt-5 w-4/5">
+                    <div class="grid justify-items-start px-16">
+                        <span class="font-bold">Telepon</span>
+                    </div>
+                    
                 </div>
-                
-            </div>
-            <div class="text-3xl text-black pt-5 w-4/5">
-                <div class="grid justify-items-start">
-                    <span class="font-medium"> <span class="font-bold pr-10">:</span>087874588726</span>
+                <div class="text-3xl text-black pt-5 w-4/5">
+                    <div class="grid justify-items-start">
+                        <span class="font-medium"> <span class="font-bold pr-10">:</span>087874588726</span>
+                    </div>
+                    
                 </div>
-                
+            
             </div>
-        
-        </div>
-        
+        </div>    
         
     </div>
 

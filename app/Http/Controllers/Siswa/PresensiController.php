@@ -34,7 +34,7 @@ class PresensiController extends Controller
         $pbsekolah = $this->PbsekolahModel::all();
         $presensi = DB::table('presensi') 
         ->join('prakerin', 'prakerin.id_prakerin', '=', 'presensi.prakerin')
-        ->select('presensi.*')
+        ->select('presensi.*','prakerin.*')
         ->get();    
         return view('siswa.presensi', compact('presensi','prakerin','pbiduka','pbsekolah'),["edit" => $presensi]);
     }
@@ -65,25 +65,6 @@ class PresensiController extends Controller
         } catch (Exception $e) {
             return $e->getMessage();
         }
-
-        // $presensi = DB::select('SELECT * from agenda');
-        // $presensi = new PresensiModel();
-        // $id_agenda = DB::select('SELECT newidagenda() AS id_agenda');
-        // $array = Arr::pluck($id_agenda, 'id_agenda');
-        // $kode_baru = Arr::get($array, '0');
-        // if ($request->hasFile('foto')) {
-        //     $file = $request->file('foto');
-        //     $extention = $file->getClientOriginalExtension();
-        //     $filename = time() . '.' . $extention;
-        //     $file->move('storage/img/', $filename);
-        //     $presensi->foto = $filename;
-        // }
-        // $tambah_presensi = DB::table('agenda')->insert([
-        //     'id_agenda' => $kode_baru,
-        //     'status_agenda' => $request->input('status_agenda'),
-        //     'keterangan_agenda' => $request->input('keterangan_agenda'),
-        //     'tgl_agenda' => $request->input('tgl_agenda'),
-        //     'foto' => $presensi->foto,
             
     }
     public function editpresensi(Request $request)
