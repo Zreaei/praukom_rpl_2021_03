@@ -9,21 +9,10 @@ use App\Http\Controllers\{
     Admin\DataAngkatanController,
     Admin\DataSiswaController,
     Admin\DataAdmkuController,
-<<<<<<< HEAD
-=======
-    Operator\OperatorMainController,
-    Operator\OperatorDataAdmkeuController,
-    Operator\OperatorDataPbsekolahController,
-    Operator\OperatorDataPbidukaController,
-    Operator\OperatorDataVerifikatorController,
-    Operator\OperatorDataSiswaController,
-    Siswa\SiswaController,
->>>>>>> e01679e195840334664fe728166a85886559141a
     Siswa\PengajuanController,
     Siswa\SiswaController,
     Siswa\HomeSiswaController,
     Siswa\PresensiController,
-<<<<<<< HEAD
     Siswa\PrakerinController,
     Siswa\KegiatanController,
     Siswa\VerifikasiController,
@@ -47,15 +36,6 @@ use App\Http\Controllers\{
     Walas\WalasController,
     WkHubin\WkhubinController,
     WkHubin\DataPengajuanController,
-=======
-    AdmKeu\AdmkeuController,
-    Kaprog\KaprogMainController,
-    PbIduka\PbidukaController,
-    PbSekolah\PbsekolahMainController,
-    Verifikator\VerifikatorController,
-    Walas\WalasController,
-    WkHubin\WkhubinMainController,
->>>>>>> e01679e195840334664fe728166a85886559141a
     Login\LoginController,
 };
 use App\Http\Controllers\Admin\DataLevelController;
@@ -212,7 +192,7 @@ Route::get('/operator/admkeu/detail/{admkeu}', [OperatorDataAdmkeuController::cl
 Route::get('/operator/admkeu/hapus/{id}', [OperatorDataAdmkeuController::class, 'hapusadmkeu']);
 
 
-Route::group(['middleware' => ['auth', 'level:LVL003']], function () {
+// Route::group(['middleware' => ['auth', 'level:LVL003']], function () {
     // Siswa - home
     Route::get('/siswa/home', [HomeSiswaController::class, 'home'])->name('siswa.home');
     Route::get('/siswa/profile', [SiswaController::class, 'profile'])->name('siswa.profile');
@@ -248,7 +228,7 @@ Route::group(['middleware' => ['auth', 'level:LVL003']], function () {
     Route::post('/siswa/tambahprakerin', [PrakerinController::class, 'tambahprakerin'])->name('siswa.tambahprakerin');
     Route::post('/siswa/editprakerin', [PrakerinController::class, 'editprakerin'])->name('siswa.editprakerin');
     Route::get('/siswa/hapusprakerin/{id}', [PrakerinController::class, 'hapus']);
-});
+// });
 
 // PBIDUKA
 Route::get('/pbiduka/prakerin', [DataPrakerinPbidukaController::class, 'dataprakerin'])->name('pbiduka.prakerin');

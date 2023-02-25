@@ -39,14 +39,16 @@ class KegiatanController extends Controller
             $id_kegiatan = DB::select('SELECT generate_new_id_kegiatan() AS id_kegiatan');
             $array = Arr::pluck($id_kegiatan, 'id_kegiatan');
             $kode_baru = Arr::get($array, '0');
+            $tgl_agenda = now();
+            $jammsuk = now();
             $img = $request->file('foto_kegiatan')->store('img');
             $tambah_kegiatan = DB::table('kegiatan')->insert([
                 'id_kegiatan' => $kode_baru,
                 'prakerin' => $request->input('prakerin'),
                 'foto_kegiatan' => $img,
                 'keterangan_kegiatan' => $request->input('keterangan_kegiatan'),
-                'tgl_kegiatan' => $request->input('tgl_kegiatan'),
-                'jam_masuk' => $request->input('jam_masuk'),
+                'tgl_kegiatan' => $tgl_agenda,
+                'jam_masuk' => $jammsuk,
                 'jam_keluar' => $request->input('jam_keluar'),
                 
             ]);

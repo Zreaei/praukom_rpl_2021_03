@@ -14,9 +14,5 @@ class PrakerinModel extends Model
     protected $primaryKey = 'id_prakerin';
     public $incrementing = false;
     public $keyType = 'string';
-<<<<<<< HEAD
     protected $fillable = ['id_prakerin','pengajuan','siswa','iduka','status_prakerin','tgl_mulai','tgl_selesai'];
-=======
-    protected $fillable = ['id_prakerin','pengajuan','siswa','iduka','monitoring','status_prakerin','tgl_mulai','tgl_selesai'];
->>>>>>> e01679e195840334664fe728166a85886559141a
 }

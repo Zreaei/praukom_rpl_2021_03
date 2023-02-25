@@ -92,6 +92,41 @@ class PengajuanController extends Controller
                 sweetalert()->addError('Data Pengajuan Gagal Ditambah!');
                 return redirect('/siswa/pengajuan');
             }
+            // $request->validate(
+            //     [
+            //         'nama_iduka' => 'required',
+            //         'pimpinan_iduka' => 'required',
+            //         'alamat_iduka' => 'required',
+            //         'telp_iduka' => 'required',
+            //         'siswa' => 'required',
+            //         'admkeu' => 'required',
+            //         'wkhubin' => 'required',
+            //         'kaprog' => 'required',
+            //         'walas' => 'required',
+            //         'tgl_pengajuan' => 'required'
+            //     ]
+            // );
+    
+            // $tgl = now();
+    
+            // DB::insert("CALL procedure_insert_pengajuan(
+            //     :datanamaiduka, :datapimpinaniduka, :dataalamatiduka, :datatelpiduka, :datasiswa, :dataadmkeu, :datawkhubin, :datakaprog, :datawalas, :datatglpengajuan)",
+            //     [
+            //         'datanamaiduka' => $request->nama_iduka,
+            //         'datapimpinaniduka' => $request->pimpinan_iduka,
+            //         'dataalamatiduka' => $request->alamat_iduka,
+            //         'datatelpiduka' => $request->telp_iduka,
+            //         'datasiswa' => $request->siswa,
+            //         'dataadmkeu' => $request->admkeu,
+            //         'datawkhubin' => $request->wkhubin,
+            //         'datakaprog' => $request->kaprog,
+            //         'datawalas' => $request->walas,
+            //         'datatglpengajuan' => $tgl,
+            //     ]
+            // );
+    
+            // sweetalert()->addSuccess('Data Pengajuan Berhasil Ditambah!');
+            // return redirect('/siswa/pengajuan');
     }
 
 

@@ -30,21 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LevelSeeder::class,
             UserSeeder::class,
-<<<<<<< HEAD
-            WkhubinSeeder::class,
-            WalasSeeder::class,
-            AngkatanSeeder::class,
-            KaprogSeeder::class,
-            JurusanSeeder::class,
-            KelasSeeder::class,
-            SiswaSeeder::class,
-            AdmkeuSeeder::class,
-            PbsekolahSeeder::class,
-            PbidukaSeeder::class,
-            VerifikatorSeeder::class,
-            KategorinilaiSeeder::class,
-            PenilaianpklSeeder::class
-=======
             AdminSeeder::class,
             OperatorSeeder::class,
             AdmkeuSeeder::class,
@@ -59,20 +44,19 @@ class DatabaseSeeder extends Seeder
             AngkatanSeeder::class,
             KelasSeeder::class,
             SiswaSeeder::class,
-            PengajuanSeeder::class,
-            PrakerinSeeder::class,
-            MonitoringSeeder::class,
-            PresensiSeeder::class,
-            KegiatanSeeder::class,
-            VerifikasiSeeder::class,
-            KategorinilaiSeeder::class,
-            PenilaianverifSeeder::class,
-            NilaiverifSeeder::class,
-            SertifikatverifSeeder::class,
-            PenilaianpklSeeder::class,
-            NilaipklSeeder::class,
-            SertifikatpklSeeder::class
->>>>>>> e01679e195840334664fe728166a85886559141a
+            PengajuanSeeder::class
+            // PrakerinSeeder::class,
+            // MonitoringSeeder::class,
+            // PresensiSeeder::class,
+            // KegiatanSeeder::class,
+            // VerifikasiSeeder::class,
+            // KategorinilaiSeeder::class,
+            // PenilaianverifSeeder::class,
+            // NilaiverifSeeder::class,
+            // SertifikatverifSeeder::class,
+            // PenilaianpklSeeder::class,
+            // NilaipklSeeder::class,
+            // SertifikatpklSeeder::class
         ]);
     }
 }

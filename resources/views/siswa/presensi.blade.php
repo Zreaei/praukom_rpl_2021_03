@@ -142,7 +142,7 @@
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Prakerin</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="prakerin" required>
+                                <select class="select select-bordered bg-[#ffffff]" name="dataprakerin" required>
                                     <option disabled selected>Pilih Prakerin</option>
                                     @foreach ($prakerin as $item)
                                         <option value="{{ $item->id_prakerin }}">{{ $item->pengajuan }}</option>
@@ -151,14 +151,14 @@
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Presensi</span></label>
-                                <input type="date" name="tgl_presensi" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
+                                <input type="date" name="datatgl" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
                             </div>
                         </div>
                         
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Pembimbing Perusahaan</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="pb_iduka" required>
+                                <select class="select select-bordered bg-[#ffffff]" name="datapbiduka" required>
                                     <option disabled selected>Pilih Pembimbing Perusahaan</option>
                                     @foreach ($pbiduka as $item)
                                         <option value="{{ $item->nik }}">{{ $item->nama_pbiduka }}</option>
@@ -167,7 +167,7 @@
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Pembimbing Sekolah</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="pb_sekolah" required>
+                                <select class="select select-bordered bg-[#ffffff]" name="datapbsekolah" required>
                                     <option disabled selected>Pilih Pembimbing Sekolah</option>
                                     @foreach ($pbsekolah as $item)
                                         <option value="{{ $item->id_pbsekolah }}">{{ $item->nama_pbsekolah }}</option>
@@ -179,7 +179,7 @@
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Status</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="status_presensi" required>
+                                <select class="select select-bordered bg-[#ffffff]" name="datastatus" required>
                                     <option disabled selected>Pilih Status Presensi</option>
                                         <option value="sakit" class="form-control col-8">Sakit</option>
                                         <option value="izin" class="form-control col-8">Izin</option>
@@ -189,7 +189,7 @@
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Keterangan</span></label>
-                                <input type="text" name="keterangan_presensi" required placeholder="Jika Hadir diisi -" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
+                                <input type="text" name="dataket" required placeholder="Jika Hadir diisi -" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                         </div>
 

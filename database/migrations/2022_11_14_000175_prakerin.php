@@ -20,23 +20,15 @@ return new class extends Migration
             $table->char('id_prakerin', 6)->primary()->nullable(false);
             $table->char('pengajuan', 6)->nullable(false);
             $table->char('siswa', 9)->nullable(false);
-<<<<<<<< HEAD:database/migrations/2022_11_14_000167_prakerin.php
-            $table->char('iduka', 6)->nullable();
-            $table->enum('status_prakerin', ['belum', 'sudah'])->nullable();
-========
             $table->char('iduka', 6)->nullable(false);
             $table->enum('status_prakerin', ['belum lulus', 'sudah lulus', 'tidak lulus'])->nullable();
->>>>>>>> e01679e195840334664fe728166a85886559141a:database/migrations/2022_11_14_000175_prakerin.php
             $table->date('tgl_mulai')->nullable();
             $table->date('tgl_selesai')->nullable();
 
             $table->foreign('pengajuan')->references('id_pengajuan')->on('pengajuan')->cascadeOnDelete();
             $table->foreign('iduka')->references('id_iduka')->on('iduka')->cascadeOnDelete();
             $table->foreign('siswa')->references('nis')->on('siswa')->cascadeOnDelete();
-<<<<<<<< HEAD:database/migrations/2022_11_14_000167_prakerin.php
-            $table->foreign('iduka')->references('id_iduka')->on('iduka')->cascadeOnDelete();
-========
->>>>>>>> e01679e195840334664fe728166a85886559141a:database/migrations/2022_11_14_000175_prakerin.php
+
         });
     }
 
