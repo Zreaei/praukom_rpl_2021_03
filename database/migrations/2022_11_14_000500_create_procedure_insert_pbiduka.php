@@ -20,15 +20,30 @@ return new class extends Migration
           "CREATE PROCEDURE procedure_insert_pbiduka(
             datalevel CHAR(6), 
             datausername VARCHAR(50), 
-            datapassword VARCHAR(50), 
+            datapassword VARCHAR(255), 
             dataemail VARCHAR(50), 
-            datafoto_user VARCHAR(60), 
-            datanama_admkeu VARCHAR(50))
+            datafoto_user VARCHAR(255),
+            datanik CHAR(16),
+            datanama_pbiduka VARCHAR(50),
+            datatelp_pbiduka VARCHAR(20))
                 BEGIN
                 DECLARE kodeuser CHAR(6);
+                DECLARE pesanError CHAR(5) DEFAULT '00000';
+                DECLARE CONTINUE HANDLER FOR SQLEXCEPTION, SQLWARNING
+                BEGIN
+                GET DIAGNOSTICS CONDITION 1
+                pesanError = RETURNED_SQLSTATE;
+                END;
+                START TRANSACTION;
+                SAVEPOINT satu;
                 SELECT generate_new_kode_user() INTO kodeuser;
                 INSERT INTO user (id_user, level, username, password, email, foto_user) VALUES(kodeuser, datalevel, datausername, datapassword, dataemail, datafoto_user);
+                IF pesanError != '00000' THEN ROLLBACK TO satu;
+                END IF;
                 INSERT INTO pb_iduka (nik, user, nama_pbiduka, telp_pbiduka) VALUES(datanik, kodeuser, datanama_pbiduka, datatelp_pbiduka);
+                IF pesanError != '00000' THEN ROLLBACK TO satu;
+                END IF;
+                COMMIT;
           END;"
         );
     }

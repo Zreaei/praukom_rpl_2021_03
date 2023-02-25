@@ -29,51 +29,50 @@ class LevelSeeder extends Seeder
         // $pbiduka = 'Pbiduka';
         // $verifikator = 'Verifikator';
 
-        $level = 
-        [
+        $level = [
             [
             'id_level' => 'LVL001',
             'nama_level' => 'Admin',
             ],
             [
-            'id_level' => 'LVL002',
-            'nama_level' => 'Operator',
-            ],
-            [
-            'id_level' => 'LVL003',
-            'nama_level' => 'Siswa',
-            ],
-            [
-            'id_level' => 'LVL004',
-            'nama_level' => 'Pembimbing Sekolah',
-            ],
-            [
-            'id_level' => 'LVL005',
-            'nama_level' => 'Pembimbing IDUKA',
-            ],
-            [
-            'id_level' => 'LVL006',
-            'nama_level' => 'Wali Kelas',
-            ],
-            [
-            'id_level' => 'LVL007',
-            'nama_level' => 'Admin Keuangan',
-            ],
-            [
-            'id_level' => 'LVL008',
-            'nama_level' => 'Waka Hubin',
-            ],
-            [
-            'id_level' => 'LVL009',
-            'nama_level' => 'Kaprog',
-            ],
-            [
-            'id_level' => 'LVL010',
-            'nama_level' => 'Verifikator',
-            ],
-        ];
+                'id_level' => 'LVL002',
+                'nama_level' => 'Operator',
+                ],
+                [
+                    'id_level' => 'LVL003',
+                    'nama_level' => 'Siswa',
+                    ],
+                    [
+                        'id_level' => 'LVL004',
+                        'nama_level' => 'Pembimbing Sekolah',
+                        ],
+                        [
+                            'id_level' => 'LVL005',
+                            'nama_level' => 'Pembimbing IDUKA',
+                            ],
+                            [
+                                'id_level' => 'LVL006',
+                                'nama_level' => 'Wali Kelas',
+                                ],
+                                [
+                                    'id_level' => 'LVL007',
+                                    'nama_level' => 'Admin Keuangan',
+                                    ],
+                                    [
+                                        'id_level' => 'LVL008',
+                                        'nama_level' => 'Waka Hubin',
+                                        ],
+                                        [
+                                            'id_level' => 'LVL009',
+                                            'nama_level' => 'Kaprog',
+                                            ],
+                                            [
+                                                'id_level' => 'LVL010',
+                                                'nama_level' => 'Verifikator',
+                                                ],
+                                            ];
 
-        DB::table('level_user')->insert($level);
-            // $levelUser->each(fn ($lu) => LevelModel::create($lu));
+                                            DB::table('level_user')->insert($level);
+                                            // $levelUser->each(fn ($lu) => LevelModel::create($lu));
     }
 }

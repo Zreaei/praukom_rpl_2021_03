@@ -18,9 +18,14 @@ use App\Http\Controllers\{
     Admin\AdminAngkatanController,
     Siswa\SiswaController,
     Siswa\PengajuanController,
+    Siswa\HomeSiswaController,
     Siswa\PresensiController,
+    Siswa\PrakerinController,
+    Siswa\KegiatanController,
+    Siswa\VerifikasiController,
     Operator\OperatorController,
-    AdmKeu\AdmkeuController,
+    AdmKeu\HomeAdmkeuController,
+    AdmKeu\DataPengajuanAdmkeuController,
     Kaprog\KaprogController,
     Operator\DataAdmkeuController,
     Operator\DataWkhubinController,
@@ -30,13 +35,15 @@ use App\Http\Controllers\{
     Operator\DataPbidukaController,
     Operator\DataVerifikatorController,
     PbIduka\PbidukaController,
+    PbIduka\HomePbidukaController,
+    PbIduka\NilaipklController,
+    PbIduka\DataPrakerinPbidukaController,
     PbSekolah\PbsekolahController,
     Verifikator\VerifikatorController,
     Walas\WalasMainController,
     Walas\WalasPengajuanController,
     WkHubin\WkhubinController,
     WkHubin\DataPengajuanController,
-    HomeController,
     Login\LoginController,
 };
 
@@ -88,6 +95,7 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
         Route::get('/admin/data-user/hapus/{id}','hapus');
         Route::post('/admin/data-user/simpanedit','simpanedit');
     });
+
 
     // Admin - Kelola Operator
     Route::controller(AdminOperatorController::class)->group(function() {
@@ -193,106 +201,110 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
 });
 
 // Operator - Dashboard
-Route::get('/operator/home', [OperatorController::class, 'home'])->name('operator.home');
-Route::get('/operator/profile', [OperatorController::class, 'profile'])->name('operator.profile');
-Route::get('/operator/monitoring', [OperatorController::class, 'monitoring'])->name('operator.monitoring');
-Route::get('/operator/nilai', [OperatorController::class, 'nilai'])->name('operator.nilai');
+Route::get('/operator/home', [OperatorMainController::class, 'home'])->name('operator.home');
+Route::get('/operator/profile', [OperatorMainController::class, 'profile'])->name('operator.profile');
+Route::get('/operator/monitoring', [OperatorMainController::class, 'monitoring'])->name('operator.monitoring');
+Route::get('/operator/pengajuan', [OperatorMainController::class, 'pengajuan'])->name('operator.pengajuan');
+Route::get('/operator/pengguna', [OperatorMainController::class, 'pengguna'])->name('operator.pengguna');
+Route::get('/operator/riwayat', [OperatorMainController::class, 'riwayat'])->name('operator.riwayat');
 
-// Operator - Kelola Wkhubin
-Route::get('/operator/wkhubin', [DataWkhubinController::class, 'wkhubin']);
-Route::get('/operator/wkhubin/tambah', [DataWkhubinController::class, 'tambahwkhubin']);
-Route::post('/operator/wkhubin/tambah/tambahsimpan', [DataWkhubinController::class, 'simpanwkhubin']);
-Route::get('/operator/wkhubin/edit/{id}', [DataWkhubinController::class, 'editwkhubin']);
-Route::post('/operator/wkhubin/edit/editsimpan', [DataWkhubinController::class, 'editsimpanwkhubin']);
-Route::get('/operator/wkhubin/hapus/{id}', [DataWkhubinController::class, 'hapususer']);
+// Route::get('/operator/terima/{id}', [OperatorMainController::class, 'terima'])->name('operator.terima');
+// Route::get('/operator/tolak/{id}', [OperatorMainController::class, 'tolak'])->name('operator.tolak');
 
 // Operator - Kelola Pbsekolah
-Route::get('/operator/pbsekolah', [DataPbsekolahController::class, 'pbsekolah','tambahpbsekolah'])->name('operator.pbsekolah');
-Route::post('/operator/simpanpbsekolah', [DataPbsekolahController::class, 'tambahpbsekolah'])->name('operator.simpanpbsekolah');
-Route::get('/operator/editpbsekolah/{pbsekolah}', [DataPbsekolahController::class, 'editpbsekolah']);
-Route::put('/operator/editsimpanpbsekolah', [DataPbsekolahController::class, 'editsimpanpbsekolah']);
-Route::get('/operator/hapuspbsekolah/{id}', [DataPbsekolahController::class, 'hapuspbsekolah']);
+Route::get('/operator/pbsekolah', [OperatorDataPbsekolahController::class, 'pbsekolah','tambahpbsekolah'])->name('operator.pbsekolah');
+Route::post('/operator/simpanpbsekolah', [OperatorDataPbsekolahController::class, 'tambahpbsekolah'])->name('operator.simpanpbsekolah');
+Route::get('/operator/editpbsekolah/{pbsekolah}', [OperatorDataPbsekolahController::class, 'editpbsekolah']);
+Route::put('/operator/editsimpanpbsekolah', [OperatorDataPbsekolahController::class, 'editsimpanpbsekolah']);
+Route::get('/operator/hapuspbsekolah/{id}', [OperatorDataPbsekolahController::class, 'hapuspbsekolah']);
 
-// Operator - Kelola Pbiduka
-Route::get('/operator/pbiduka', [DataPbidukaController::class, 'pbiduka','tambahpbiduka'])->name('operator.pbiduka');
-Route::post('/operator/simpanpbiduka', [DataPbidukaController::class, 'tambahpbiduka'])->name('operator.simpanpbiduka');
-Route::put('/operator/editsimpanpbiduka', [DataPbidukaController::class, 'editpbiduka'])->name('operator.editsimpanpbiduka');
-Route::get('/operator/hapuspbiduka/{id}', [DataPbidukaController::class, 'hapususer']);
+// Operator - Kelola pbiduka
+Route::get('/operator/pbiduka', [OperatorDataPbidukaController::class, 'pbiduka','tambahpbiduka'])->name('operator.pbiduka');
+Route::post('/operator/simpanpbiduka', [OperatorDataPbidukaController::class, 'tambahpbiduka'])->name('operator.simpanpbiduka');
+Route::get('/operator/editpbiduka/{pbiduka}', [OperatorDataPbidukaController::class, 'editpbiduka']);
+Route::put('/operator/editsimpanpbiduka', [OperatorDataPbidukaController::class, 'editsimpanpbiduka']);
+Route::get('/operator/hapuspbiduka/{id}', [OperatorDataPbidukaController::class, 'hapuspbiduka']);
 
-// Operator - Kelola Siswa
-Route::get('/operator/siswa', [DataSiswaController::class, 'siswa','tambahsiswa'])->name('operator.siswa');
-Route::post('/operator/simpansiswa', [DataSiswaController::class, 'tambahsiswa'])->name('operator.simpansiswa');
-Route::put('/operator/editsimpansiswa', [DataSiswaController::class, 'editsiswa'])->name('operator.editsimpansiswa');
-Route::get('/operator/hapussiswa/{id}', [DataSiswaController::class, 'hapususer']);
+// Operator - Kelola siswa
+Route::get('/operator/siswa', [OperatorDataSiswaController::class, 'siswa','tambahsiswa'])->name('operator.siswa');
+Route::post('/operator/simpansiswa', [OperatorDataSiswaController::class, 'tambahsiswa'])->name('operator.simpansiswa');
+Route::get('/operator/editsiswa/{siswa}', [OperatorDataSiswaController::class, 'editsiswa']);
+Route::put('/operator/editsimpansiswa', [OperatorDataSiswaController::class, 'editsimpansiswa']);
+Route::get('/operator/hapussiswa/{id}', [OperatorDataSiswaController::class, 'hapussiswa']);
+Route::get('/operator/cetaksiswa/{siswa}', [OperatorDataSiswaController::class, 'cetaksiswa']);
+Route::get('/operator/nilaiverif/{siswa}', [OperatorDataSiswaController::class, 'nilaiverif']);
+Route::get('/operator/nilaipkl/{siswa}', [OperatorDataSiswaController::class, 'nilaipkl']);
 
-// Operator - Kelola Kaprog
-Route::get('/operator/kaprog', [DataKaprogController::class, 'kaprog']);
-Route::get('/operator/kaprog/tambah', [DataKaprogController::class, 'tambahkaprog']);
-Route::post('/operator/kaprog/tambah/tambahsimpan', [DataKaprogController::class, 'simpankaprog']);
-Route::get('/operator/kaprog/edit/{id}', [DataKaprogController::class, 'editkaprog']);
-Route::post('/operator/kaprog/edit/editsimpan', [DataKaprogController::class, 'editsimpankaprog']);
-Route::get('/operator/kaprog/hapus/{id}', [DataKaprogController::class, 'hapususer']);
-
-// Operator - Kelola Walas
-Route::get('/operator/walas', [DataWalasController::class, 'walas']);
-Route::get('/operator/walas/tambah', [DataWalasController::class, 'tambahwalas']);
-Route::post('/operator/walas/tambah/tambahsimpan', [DataWalasController::class, 'simpanwalas']);
-Route::get('/operator/walas/edit/{id}', [DataWalasController::class, 'editwalas']);
-Route::post('/operator/walas/edit/editsimpan', [DataWalasController::class, 'editsimpanwalas']);
-Route::get('/operator/walas/hapus/{id}', [DataWalasController::class, 'hapususer']);
-
-// Operator - Kelola Verifikator
-Route::get('/operator/verifikator', [DataVerifikatorController::class, 'verifikator']);
-Route::get('/operator/verifikator/tambah', [DataVerifikatorController::class, 'tambahverifikator']);
-Route::post('/operator/verifikator/tambah/tambahsimpan', [DataVerifikatorController::class, 'simpanverifikator']);
-Route::get('/operator/verifikator/edit/{id}', [DataVerifikatorController::class, 'editverifikator']);
-Route::post('/operator/verifikator/edit/editsimpan', [DataVerifikatorController::class, 'editsimpanverifikator']);
-Route::get('/operator/verifikator/hapus/{id}', [DataVerifikatorController::class, 'hapususer']);
+// Operator - Kelola verifikator
+Route::get('/operator/verifikator', [OperatorDataVerifikatorController::class, 'verifikator','tambahverifikator'])->name('operator.verifikator');
+Route::post('/operator/simpanverifikator', [OperatorDataVerifikatorController::class, 'tambahverifikator'])->name('operator.simpanverifikator');
+Route::get('/operator/editverifikator/{verifikator}', [OperatorDataVerifikatorController::class, 'editverifikator']);
+Route::put('/operator/editsimpanverifikator', [OperatorDataVerifikatorController::class, 'editsimpanverifikator']);
+Route::get('/operator/hapusverifikator/{id}', [OperatorDataVerifikatorController::class, 'hapusverifikator']);
 
 // Operator - Kelola ADM Keuangan
-Route::get('/operator/admkeu', [DataAdmkeuController::class, 'admkeu']);
-Route::get('/operator/admkeu/tambah', [DataAdmkeuController::class, 'tambahadmkeu']);
-Route::post('/operator/admkeu/tambah/tambahsimpan', [DataAdmkeuController::class, 'simpanadmkeu']);
-Route::get('/operator/admkeu/edit/{admkeu}', [DataAdmkeuController::class, 'editadmkeu']);
-Route::put('/operator/admkeu/edit/editsimpan', [DataAdmkeuController::class, 'editsimpanadmkeu']);
-Route::get('/operator/admkeu/detail/{admkeu}', [DataAdmkeuController::class, 'detailadmkeu']);
-Route::get('/operator/admkeu/hapus/{id}', [DataAdmkeuController::class, 'hapusadmkeu']);
+Route::get('/operator/admkeu', [OperatorDataAdmkeuController::class, 'admkeu']);
+Route::get('/operator/admkeu/tambah', [OperatorDataAdmkeuController::class, 'tambahadmkeu']);
+Route::post('/operator/admkeu/tambah/tambahsimpan', [OperatorDataAdmkeuController::class, 'simpanadmkeu']);
+Route::get('/operator/admkeu/edit/{admkeu}', [OperatorDataAdmkeuController::class, 'editadmkeu']);
+Route::put('/operator/admkeu/edit/editsimpan', [OperatorDataAdmkeuController::class, 'editsimpanadmkeu']);
+Route::get('/operator/admkeu/detail/{admkeu}', [OperatorDataAdmkeuController::class, 'detailadmkeu']);
+Route::get('/operator/admkeu/hapus/{id}', [OperatorDataAdmkeuController::class, 'hapusadmkeu']);
 
-// Route::get('/operator/siswa', [OperatorController::class, 'siswa']);
-// Route::get('/operator/siswa/tambah',[OperatorController::class,'tambahSiswa']);
-// Route::post('/operator/siswa/simpan',[OperatorController::class,'simpanSiswa']);
-// Route::get('/operator/siswa/edit/{id}',[OperatorController::class,'editSiswa']);
-// Route::post('/operator/siswa/edit/editsimpan',[OperatorController::class,'editsimpanSiswa']);
-// Route::get('/operator/siswa/hapus/{id}',[OperatorController::class,'hapusSiswa']);
 
-// Siswa - home
 Route::group(['middleware' => ['auth', 'level:LVL003']], function () {
-    Route::get('/siswa/home', [SiswaController::class, 'home'])->name('siswa.home');
-    Route::get('/siswa/profil', [SiswaController::class, 'profil']);
+    // Siswa - home
+    Route::get('/siswa/home', [HomeSiswaController::class, 'home'])->name('siswa.home');
+    Route::get('/siswa/profile', [SiswaController::class, 'profile'])->name('siswa.profile');
+
+    // Siswa - pengajuan
+    Route::get('/siswa/pengajuan', [PengajuanController::class, 'pengajuan'])->name('siswa.pengajuan');
+    Route::post('/siswa/simpanpengajuan', [PengajuanController::class, 'tambahpengajuan'])->name('siswa.simpanpengajuan');
+    Route::put('/siswa/editsimpanpengajuan', [PengajuanController::class, 'editpengajuan'])->name('siswa.editsimpanpengajuan');
+    Route::get('/siswa/hapuspengajuan/{id}', [PengajuanController::class, 'hapus']);
+
+    // Siswa - presensi
+    Route::get('/siswa/presensi', [PresensiController::class, 'presensi'])->name('siswa.presensi');
+    Route::post('/siswa/simpanpresensi', [PresensiController::class, 'tambahpresensi'])->name('siswa.simpanpresensi');
+    Route::post('/siswa/editsimpanpresensi', [PresensiController::class, 'editpresensi'])->name('siswa.editsimpanpresensi');
+    Route::get('/siswa/hapuspresensi/{id}', [PresensiController::class, 'hapus']);
+
+    // Siswa - kegiatan
+    Route::get('/siswa/kegiatan', [KegiatanController::class, 'kegiatan'])->name('siswa.kegiatan');
+    Route::post('/siswa/simpankegiatan', [KegiatanController::class, 'tambahkegiatan'])->name('siswa.simpankegiatan');
+    Route::get('/siswa/editkegiatan/{kegiatan}', [KegiatanController::class, 'editkegiatan'])->name('siswa.editkegiatan');
+    Route::put('/siswa/editsimpankegiatan', [KegiatanController::class, 'editsimpankegiatan'])->name('siswa.editsimpankegiatan');
+    Route::get('/siswa/hapuskegiatan/{id}', [KegiatanController::class, 'hapus']);
+
+    // Siswa - verifikasi
+    Route::get('/siswa/verifikasi', [VerifikasiController::class, 'verifikasi'])->name('siswa.verifikasi');
+    Route::post('/siswa/simpanverifikasi', [VerifikasiController::class, 'tambahverifikasi'])->name('siswa.simpanverifikasi');
+    Route::get('/siswa/editverifikasi/{verifikasi}', [VerifikasiController::class, 'editverifikasi'])->name('siswa.editverifikasi');
+    Route::put('/siswa/editsimpanverifikasi', [VerifikasiController::class, 'editsimpanverifikasi'])->name('siswa.editsimpanverifikasi');
+    Route::get('/siswa/hapusverifikasi/{id}', [VerifikasiController::class, 'hapus']);
+
+    // Siswa - prakerin
+    Route::get('/siswa/prakerin', [PrakerinController::class, 'prakerin'])->name('siswa.prakerin');
+    Route::post('/siswa/tambahprakerin', [PrakerinController::class, 'tambahprakerin'])->name('siswa.tambahprakerin');
+    Route::post('/siswa/editprakerin', [PrakerinController::class, 'editprakerin'])->name('siswa.editprakerin');
+    Route::get('/siswa/hapusprakerin/{id}', [PrakerinController::class, 'hapus']);
 });
 
-// Siswa - pengajuan
-Route::get('/siswa/pengajuan', [PengajuanController::class, 'pengajuan','tambahpengajuan'])->name('siswa.pengajuan');
-Route::post('/siswa/simpanpengajuan', [PengajuanController::class, 'tambahpengajuan'])->name('siswa.simpanpengajuan');
-// Route::get('/siswa/editpengajuan/{pengajuan}', [PengajuanController::class, 'editpengajuan'])->name('siswa.editpengajuan');
-Route::put('/siswa/editsimpanpengajuan', [PengajuanController::class, 'editpengajuan'])->name('siswa.editsimpanpengajuan');
-Route::get('/siswa/hapuspengajuan/{id}', [PengajuanController::class, 'hapus']);
+// PBIDUKA
+Route::get('/pbiduka/prakerin', [DataPrakerinPbidukaController::class, 'dataprakerin'])->name('pbiduka.prakerin');
+Route::get('/pbiduka/presensi', [DataPrakerinPbidukaController::class, 'datapresensi'])->name('pbiduka.presensi');
+Route::get('/pbiduka/kegiatan', [DataPrakerinPbidukaController::class, 'datakegiatan'])->name('pbiduka.kegiatan');
+Route::get('/pbiduka/setuju/{id}', [DataPrakerinPbidukaController::class, 'statuskonfirmasi'])->name('pbiduka.terimakonfirmasi');
+Route::get('/pbiduka/tolak/{id}', [DataPrakerinPbidukaController::class, 'statustolak'])->name('pbiduka.tolakkonfirmasi');
+Route::get('/pbiduka/penilaian', [NilaipklController::class, 'nilaipkl'])->name('pbiduka.penilaian');
+Route::get('/pbiduka/profile', [PbidukaController::class, 'profile'])->name('pbiduka.profile');
+Route::get('/pbiduka/home', [HomePbidukaController::class, 'home'])->name('pbiduka.home');
 
-// Siswa - presensi
-Route::get('/siswa/presensi', [PresensiController::class, 'presensi'])->name('siswa.presensi');
-Route::get('/siswa/tambahpresensi', [PresensiController::class, 'tambahpresensi'])->name('siswa.tambahpresensi');
-Route::put('/siswa/simpanpresensi', [PresensiController::class, 'simpanpresensi'])->name('siswa.simpanpresensi');
-Route::get('/siswa/editpresensi/{id}', [PresensiController::class, 'editpresensi']);
-Route::put('/siswa/editsimpanpresensi/{id}', [presensiController::class, 'editsimpan']);
-Route::get('/siswa/hapuspresensi/{id}', [PresensiController::class, 'hapus']);
-
-// Siswa - prakerin
-Route::get('/siswa/prakerin', [PrakerinController::class, 'prakerin'])->name('siswa.prakerin');
-Route::get('/siswa/tambahprakerin', [PrakerinController::class, 'tambahprakerin'])->name('siswa.tambahprakerin');
-Route::put('/siswa/simpanprakerin', [PrakerinController::class, 'simpanprakerin'])->name('siswa.simpanprakerin');
-Route::get('/siswa/editprakerin/{id}', [PrakerinController::class, 'editprakerin'])->name('siswa.editprakerin');;
-Route::put('/siswa/editsimpanprakerin/{id}', [prakerinController::class, 'editsimpan']);
-Route::get('/siswa/hapusprakerin/{id}', [PrakerinController::class, 'hapus']);
+// Admkeu
+Route::get('/admkeu/pengajuan', [DataPengajuanAdmkeuController::class, 'datapengajuan'])->name('admkeu.pengajuan');
+Route::get('/admkeu/setuju/{id}', [DataPengajuanAdmkeuController::class, 'statuskonfirmasi'])->name('admkeu.terima');
+Route::get('/admkeu/tolak/{id}', [DataPengajuanAdmkeuController::class, 'statustolak'])->name('admkeu.tolak');
+Route::get('/admkeu/home', [HomeAdmkeuController::class, 'home'])->name('admkeu.home');
 
 // // Siswa
 // Route::get('/siswa/home', [SiswaController::class, 'home']);
@@ -340,4 +352,27 @@ Route::group(['middleware' => ['auth', 'level:LVL006']], function () {
 
 // // Route::get('/adminhome', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/wkhubin/pengajuan', [DataPengajuanController::class, 'pengajuan']);
+// Wkhubin - Dashboard
+Route::get('/wkhubin/home', [WkhubinMainController::class, 'home'])->name('wkhubin.home');
+Route::get('/wkhubin/profile', [WkhubinMainController::class, 'profile'])->name('wkhubin.profile');
+Route::get('/wkhubin/pengajuan', [WkhubinMainController::class, 'pengajuan'])->name('wkhubin.pengajuan');
+Route::get('/wkhubin/terima/{id}', [WkhubinMainController::class, 'terima'])->name('wkhubin.terima');
+Route::get('/wkhubin/tolak/{id}', [WkhubinMainController::class, 'tolak'])->name('wkhubin.tolak');
+
+// Kaprog - Dashboard
+Route::get('/kaprog/home', [KaprogMainController::class, 'home'])->name('kaprog.home');
+Route::get('/kaprog/profile', [KaprogMainController::class, 'profile'])->name('kaprog.profile');
+Route::get('/kaprog/pengajuan', [KaprogMainController::class, 'pengajuan'])->name('kaprog.pengajuan');
+Route::get('/kaprog/terima/{id}', [KaprogMainController::class, 'terima'])->name('kaprog.terima');
+Route::get('/kaprog/tolak/{id}', [KaprogMainController::class, 'tolak'])->name('kaprog.tolak');
+
+// Pbsekolah - Dashboard
+Route::get('/pbsekolah/home', [PbsekolahMainController::class, 'home'])->name('pbsekolah.home');
+Route::get('/pbsekolah/profile', [PbsekolahMainController::class, 'profile'])->name('pbsekolah.profile');
+Route::get('/pbsekolah/prakerin', [PbsekolahMainController::class, 'prakerin'])->name('pbsekolah.prakerin');
+Route::get('/pbsekolah/presensi/{prakerin}', [PbsekolahMainController::class, 'presensi'])->name('pbsekolah.presensi');
+Route::get('/pbsekolah/terima/{id}', [PbsekolahMainController::class, 'terima'])->name('pbsekolah.terima');
+Route::get('/pbsekolah/tolak/{id}', [PbsekolahMainController::class, 'tolak'])->name('pbsekolah.tolak');
+Route::get('/pbsekolah/kegiatan/{prakerin}', [PbsekolahMainController::class, 'kegiatan'])->name('pbsekolah.kegiatan');
+Route::post('/pbsekolah/simpanmonitoring', [PbsekolahMainController::class, 'tambahmonitoring'])->name('pbsekolah.simpanmonitoring');
+Route::get('/pbsekolah/hapusmonitoring/{id}', [PbsekolahMainController::class, 'hapusmonitoring']);

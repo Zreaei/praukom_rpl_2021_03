@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siswa;
 use App\Models\PrakerinModel;
 use App\Models\PengajuanModel;
 use App\Models\SiswaModel;
+use App\Models\IdukaModel;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class PrakerinController extends Controller
     protected $PrakerinModel;
     protected $PengajuanModel;
     protected $SiswaModel;
+    protected $IdukaModel;
     
 
     public function __construct()
@@ -24,28 +26,31 @@ class PrakerinController extends Controller
         $this->PrakerinModel = new PrakerinModel;
         $this->PengajuanModel = new PengajuanModel;
         $this->SiswaModel = new SiswaModel;
+        $this->IdukaModel = new IdukaModel;
     }
     public function prakerin()
     {
         $pengajuan = $this->PengajuanModel::all();
         $siswa = $this->SiswaModel::all();
-        $prakerin = $this->PrakerinModel::all();
+        $iduka = $this->IdukaModel::all();
         $prakerin = DB::table('prakerin') 
         ->join('pengajuan', 'pengajuan.id_pengajuan', '=', 'prakerin.pengajuan')
-        ->join('siswa', 'siswa.nip_siswa', '=', 'prakerin.siswa')
+        ->join('siswa', 'siswa.nis', '=', 'prakerin.siswa')
+        ->join('iduka', 'iduka.id_iduka', '=', 'prakerin.iduka')
+        ->select('prakerin.*','pengajuan.*','siswa.*','iduka.*')
         ->get();    
-        return view('siswa.prakerin', compact('prakerin,siswa,pengajuan'));
+        return view('siswa.prakerin', compact('prakerin','siswa','pengajuan','iduka'),["edit" => $prakerin]);
     }
 
-    public function tambahprakerin()
-    {
-        $pengajuan = $this->PengajuanModel::all();
-        $siswa = $this->SiswaModel::all();
-        $prakerin = $this->PrakerinModel::all();
-        return view('siswa.tambahprakerin', compact('prakerin,siswa,pengajuan'));
-    }
+    // public function tambahprakerin()
+    // {
+    //     $pengajuan = $this->PengajuanModel::all();
+    //     $siswa = $this->SiswaModel::all();
+    //     $prakerin = $this->PrakerinModel::all();
+    //     return view('siswa.tambahprakerin', compact('prakerin,siswa,pengajuan'));
+    // }
     
-    public function simpanprakerin(Request $request)
+    public function tambahprakerin(Request $request)
     {
         try {
             $id_prakerin = DB::select('SELECT generate_new_id_prakerin() AS id_prakerin');
@@ -55,6 +60,7 @@ class PrakerinController extends Controller
                 'id_prakerin' => $kode_baru,
                 'pengajuan' => $request->input('pengajuan'),
                 'siswa' => $request->input('siswa'),
+                'iduka' => $request->input('iduka'),
                 'status_prakerin' => $request->input('status_prakerin'),
                 'tgl_mulai' => $request->input('tgl_mulai'),
                 'tgl_selesai' => $request->input('tgl_selesai'),
@@ -69,20 +75,10 @@ class PrakerinController extends Controller
         }
     }
 
-    public function editpresensi($id = null)
-    {
-        $prakerin = $this->PrakerinModel->find($id);
-        $pengajuan = $this->PengajuanModel::all();
-        $siswa = $this->SiswaModel::all();
-        return view('siswa.editprakerin', compact('prakerin','pengajuan','siswa'));
-        
-    }
-    public function editsimpan(Request $request)
+   public function editprakerin(Request $request)
     {
         try {
             $data = [
-                'pengajuan' => $request->input('pengajuan'),
-                'siswa' => $request->input('siswa'),
                 'status_prakerin' => $request->input('status_prakerin'),
                 'tgl_mulai' => $request->input('tgl_mulai'),
                 'tgl_selesai' => $request->input('tgl_selesai'),
