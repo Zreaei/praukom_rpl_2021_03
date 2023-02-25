@@ -25,17 +25,10 @@ return new class extends Migration
             $table->char('walas', 6)->nullable(false);
             $table->char('iduka', 6)->nullable(false);
             $table->date('tgl_pengajuan')->nullable(false);
-<<<<<<<< HEAD:database/migrations/2022_11_14_000166_pengajuan.php
-            $table->enum('konfirmasi_admkeu', ['dikonfirmasi', 'ditolak', 'pending'])->default('pending')->nullable();
-            $table->enum('konfirmasi_wkhubin', ['dikonfirmasi', 'ditolak', 'pending'])->default('pending')->nullable();
-            $table->enum('konfirmasi_kaprog', ['dikonfirmasi', 'ditolak', 'pending'])->default('pending')->nullable();
-            $table->enum('konfirmasi_walas', ['dikonfirmasi', 'ditolak', 'pending'])->default('pending')->nullable();
-========
             $table->enum('konfirmasi_admkeu', ['Belum Dikonfirmasi', 'Konfirmasi Diterima', 'Konfirmasi Ditolak'])->nullable();
             $table->enum('konfirmasi_wkhubin', ['Belum Dikonfirmasi', 'Konfirmasi Diterima', 'Konfirmasi Ditolak'])->nullable();
             $table->enum('konfirmasi_kaprog', ['Belum Dikonfirmasi', 'Konfirmasi Diterima', 'Konfirmasi Ditolak'])->nullable();
             $table->enum('konfirmasi_walas', ['Belum Dikonfirmasi', 'Konfirmasi Diterima', 'Konfirmasi Ditolak'])->nullable();
->>>>>>>> e01679e195840334664fe728166a85886559141a:database/migrations/2022_11_14_000170_pengajuan.php
 
             $table->foreign('siswa')->references('nis')->on('siswa')->cascadeOnDelete();
             $table->foreign('iduka')->references('id_iduka')->on('iduka')->cascadeOnDelete();

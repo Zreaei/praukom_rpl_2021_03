@@ -20,11 +20,7 @@ return new class extends Migration
             $table->char('id_kat_nilai', 6)->primary()->nullable(false);
             $table->char('jurusan', 6)->nullable(false);
             $table->string('nama_nilai', 50)->nullable(false);
-<<<<<<<< HEAD:database/migrations/2022_11_14_000240_kategori_nilai.php
-            $table->string('nama_kategori', 30)->nullable(false);
-========
             $table->enum('nama_kategori', ['Sikap Mental', 'Kompetensi Teknis'])->nullable(false);
->>>>>>>> e01679e195840334664fe728166a85886559141a:database/migrations/2022_11_14_000205_kategori_nilai.php
 
             $table->foreign('jurusan')->references('id_jurusan')->on('jurusan')->cascadeOnDelete();
         });
