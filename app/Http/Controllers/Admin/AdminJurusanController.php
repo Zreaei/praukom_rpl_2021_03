@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\JurusanModel;
-use App\Models\KaprogModel;
+use App\Models\{JurusanModel, KaprogModel};
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
-class DataJurusanController extends Controller
+class AdminJurusanController extends Controller
 {
     protected $JurusanModel;
     protected $KaprogModel;

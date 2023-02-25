@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\SiswaModel;
-use App\Models\{UserModel, KelasModel};
+use App\Models\{UserModel, KelasModel, SiswaModel};
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DataSiswaController extends Controller
+class AdminSiswaController extends Controller
 {
     protected $SiswaModel;
     protected $UserModel;
@@ -24,7 +23,9 @@ class DataSiswaController extends Controller
 
     public function siswa()
     {
-        $user = $this->UserModel::all();
+        $user = DB::table('user')
+        ->join('level_user', 'level_user.id_level', '=', 'user.level')
+        ->get();
         $kelas = DB::table('kelas')
         ->join('jurusan', 'jurusan.id_jurusan', '=', 'kelas.jurusan')
         ->join('angkatan', 'angkatan.id_angkatan', '=', 'kelas.angkatan')
@@ -59,16 +60,6 @@ class DataSiswaController extends Controller
             return $e->getMessage();
         }
     }
-
-    // public function edit($id = null)
-    // {
-
-    //     $edit = $this->SiswaModel->find($id);
-    //     $user = $this->UserModel::all();
-    //     $kelas = $this->KelasModel::all();
-    //     // echo json_encode($edit);
-    //     return view('admin.data-siswa.editsiswa', compact('edit','user','kelas'));
-    // }
 
     public function simpanedit(Request $request)
     {

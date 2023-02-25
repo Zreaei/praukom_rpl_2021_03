@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LevelModel;
 use Illuminate\Http\Request;
 
-class DataLevelController extends Controller
+class AdminLevelController extends Controller
 {
     protected $LevelModel;
     

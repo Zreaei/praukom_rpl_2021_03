@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\KelasModel;
-use App\Models\WalasModel;
-use App\Models\JurusanModel;
-use App\Models\AngkatanModel;
+use App\Models\{
+    KelasModel,WalasModel,
+    JurusanModel,AngkatanModel
+};
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
-class DataKelasController extends Controller
+class AdminKelasController extends Controller
 {
     protected $KelasModel;
     protected $WalasModel;

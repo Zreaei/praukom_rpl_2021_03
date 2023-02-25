@@ -9,7 +9,7 @@
 
 <div class="px-28 py-7 w-full justify-center items-center">
     <div class="flex justify-between">
-        <h3 class="text-2xl font-bold text-[#2D5EBB] mx-auto">DATA USER</h3>
+        <h3 class="text-2xl font-bold text-[#2D5EBB] mx-auto">DATA KAPROG</h3>
     </div>
 <div>
 
@@ -26,28 +26,28 @@
         <!-- head -->
         <thead>
             <tr>
-                <th class="text-center bg-blue-700 text-white">id_user</th>
-                <th class="text-center bg-blue-700 text-white">Username</th>
-                <th class="text-center bg-blue-700 text-white">Email</th>
-                <th class="text-center bg-blue-700 text-white">Level</th>
+                <th class="text-center bg-blue-700 text-white">id_kaprog</th>
+                <th class="text-center bg-blue-700 text-white">User</th>
+                <th class="text-center bg-blue-700 text-white">NIP Kaprog</th>
+                <th class="text-center bg-blue-700 text-white">Nama Kaprog</th>
                 <th class="text-center bg-blue-700 text-white">Opsi</th>
             </tr>
         </thead>
-        @foreach ($dataUser as $item)
+        @foreach ($dataKaprog as $item)
         <tbody>
             <!-- row 1 -->
             <tr>
-                <td class="text-center bg-white"><h1>{{ $item->id_user }}</h1></td>
-                <td class="text-center bg-white"><h1>{{ $item->username }}</h1></td>
-                <td class="text-center bg-white"><h1>{{ $item->email }}</h1></td>
-                <td class="text-center bg-white"><h1>{{ $item->nama_level }}</h1></td>
+                <td class="text-center bg-white"><h1>{{ $item->id_kaprog }}</h1></td>
+                <td class="text-center bg-white"><h1>{{ $item->user }}</h1></td>
+                <td class="text-center bg-white"><h1>{{ $item->nip_kaprog }}</h1></td>
+                <td class="text-center bg-white"><h1>{{ $item->nama_kaprog }}</h1></td>
                 <td class="text-center bg-white">
-                    <label for="modal-edit{{ $item->id_user }}" class="btn btn-circle btn-outline btn-xl btn-warning hover:text-opacity-50">
+                    <label for="modal-edit{{ $item->id_kaprog }}" class="btn btn-circle btn-outline btn-xl btn-warning hover:text-opacity-50">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                         </svg>
                     </label>
-                    <label for="modal-hapus{{ $item->id_user }}" class="btn btn-circle btn-outline btn-xl btn-error hover:text-opacity-50 justify-center">
+                    <label for="modal-hapus{{ $item->id_kaprog }}" class="btn btn-circle btn-outline btn-xl btn-error hover:text-opacity-50 justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                         </svg>
@@ -60,38 +60,34 @@
     </div>
     <div class="m-3 text-center">
         {{-- Modal Button --}}
-        <label for="modal-tambah" class="btn btn-success hover:text-opacity-50">Tambah User</label>
+        <label for="modal-tambah" class="btn btn-success hover:text-opacity-50">Tambah Kaprog</label>
 
         {{-- Modal Tambah --}}
         <input type="checkbox" id="modal-tambah" class="modal-toggle" />
         <div class="modal">
             <div class="modal-box relative bg-[#2D5EBB]">
                 <label for="modal-tambah" class="btn btn-ghost btn-xl btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2">✕</label>
-                <h3 class="text-lg font-bold text-white">Tambah User</h3>
+                <h3 class="text-lg font-bold text-white">Tambah Kaprog</h3>
                 <p class="py-4">
-                    <form method="POST" action="data-user/simpan">
+                    <form method="POST" action="data-kaprog/simpan">
                         @csrf
-                        <div class="form-control mx-auto">
+                        <div class="form-control">
                             <div class="mx-auto">
                                 <label class="input-group m-5">
-                                    <span class="pr-3.5 bg-white">Username</span>
-                                    <input type="text" name="username" placeholder="username" class="input input-bordered" />
+                                    <span class="pr-11 bg-white">NIP Kaprog</span>
+                                    <input type="number" name="nip_kaprog" placeholder="Nip Kaprog" class="input input-bordered" />
                                 </label>
                                 <label class="input-group m-5">
-                                    <span class="pr-5 bg-white">Password</span>
-                                    <input type="password" name="password" placeholder="password" class="input input-bordered" />
-                                </label>
-                                <label class="input-group m-5">
-                                    <span class="pr-12 bg-white">Email</span>
-                                    <input type="email" name="email" placeholder="email" class="input input-bordered" />
+                                    <span class="pr-7 bg-white">Nama Kaprog</span>
+                                    <input type="text" name="nama_kaprog" placeholder="Nama Kaprog" class="input input-bordered" />
                                 </label>
                                 <div class="form-control m-5">
                                     <label class="input-group justify-center">
-                                        <span class="pr-12 bg-white">Level</span>
-                                        <select class="select select-bordered" name="level">
-                                            <option value="default">Pilih Level</option>
-                                            @foreach ($level as $item)
-                                                <option value="{{ $item->id_level }}">{{ $item->nama_level }}</option>
+                                        <span class="pr-12 bg-white">User</span>
+                                        <select class="select select-bordered" name="user">
+                                            <option value="default">Pilih User</option>
+                                            @foreach ($user as $item)
+                                                <option value="{{ $item->id_user }}">{{ $item->username }} - {{ $item->nama_level }}</option>
                                             @endforeach
                                         </select>
                                     </label>
@@ -109,34 +105,36 @@
 
     {{-- Modal Edit --}}
     <div class="text-center">
-        @foreach ($dataUser as $edit)
-        <input type="checkbox" id="modal-edit{{ $edit->id_user }}" class="modal-toggle" />
+        @foreach ($dataKaprog as $edit)
+        <input type="checkbox" id="modal-edit{{ $edit->id_kaprog }}" class="modal-toggle" />
         <div class="modal">
             <div class="modal-box relative bg-[#2D5EBB]">
-                <label for="modal-edit{{ $edit->id_user }}" class="btn btn-ghost btn-xl btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2">✕</label>
-                <h3 class="text-lg font-bold text-center text-white">Edit User</h3>
+                <label for="modal-edit{{ $edit->id_kaprog }}" class="btn btn-ghost btn-xl btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2">✕</label>
+                <h3 class="text-lg font-bold text-center text-white">Edit Kaprog</h3>
                 <p class="py-4">
-                    <form method="POST" action="data-user/simpanedit">
+                    <form method="POST" action="data-kaprog/simpanedit">
                         @csrf
                         <div class="form-control">
                             <div class="mx-auto">
                                 <label class="input-group m-5">
-                                    <span class="pr-8 bg-white">Username</span>
-                                    <input type="text" name="username" placeholder="username" value="{{ old('username', $edit->username) }}" class="input input-bordered"/>
+                                    <span class="pr-9 bg-white">NIP Walas</span>
+                                    <input type="number" name="nip_kaprog" placeholder="NIP Walas" value="{{ old('nip_kaprog', $edit->nip_kaprog) }}" class="input input-bordered"/>
                                 </label>
                                 <label class="input-group m-5">
-                                    <span class="pr-9 bg-white">Password</span>
-                                    <input type="password" name="password" placeholder="password" value="{{ old('password', $edit->password) }}" class="input input-bordered" />
+                                    <span class="pr-5 bg-white">Nama Walas</span>
+                                    <input type="text" name="nama_kaprog" placeholder="nama_kaprog" value="{{ old('nama_kaprog', $edit->nama_kaprog) }}" class="input input-bordered" />
+                                </label>
+                                <label class="input-group justify-center">
+                                    <span class="pr-8 bg-white">User</span>
+                                    <select class="select select-bordered" name="user">
+                                        <option value="default">Pilih User</option>
+                                        @foreach ($user as $item)
+                                            <option value="{{ $item->id_user }}">{{ $item->username }} - {{ $item->nama_level }}</option>
+                                        @endforeach
+                                    </select>  
                                 </label>
                                 <label class="input-group m-5">
-                                    <span class="pr-16 bg-white">Email</span>
-                                    <input type="text" name="email" placeholder="email" value="{{ old('email', $edit->email) }}" class="input input-bordered" />
-                                </label>
-                                <label class="input-group">
-                                    <input type="hidden" name="level" placeholder="level" value="{{ old('level', $edit->level) }}" class="input input-bordered" />
-                                </label>
-                                <label class="input-group">
-                                    <input type="hidden" name="id_user" placeholder="id_user" value="{{ old('id_user', $edit->id_user) }}" class="input input-bordered" />
+                                    <input type="hidden" name="id_kaprog" placeholder="id_kaprog" value="{{ old('id_kaprog', $edit->id_kaprog) }}" class="input input-bordered" />
                                 </label>
                                 <div class="pt-3 pb-3 grid justify-items-center">
                                     <button type="submit" value="simpan" class="btn btn-success">Simpan</button></a>
@@ -152,8 +150,8 @@
 
     {{-- Modal Hapus --}}
     <div>
-        @foreach($dataUser as $hapus)
-        <input type="checkbox" id="modal-hapus{{ $hapus->id_user }}" class="modal-toggle" />
+        @foreach($dataKaprog as $hapus)
+        <input type="checkbox" id="modal-hapus{{ $hapus->id_kaprog }}" class="modal-toggle" />
         <div class="modal">
             <div class="modal-box w-11/12 max-w-xl bg-white">
                 <svg fill="none" class="text-[#E63946] w-1/4 mx-auto" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -164,9 +162,9 @@
                     <h3 class="font-bold text-2xl">Anda yakin ingin menghapus ?</h3>
                 </div>
                 <div class="flex justify-center pt-4 gap-x-20 gap-y-3">
-                    <label for="modal-hapus{{ $hapus->id_user }}" class="btn btn-ghost btn-base bg-[#2D5EBB] w-28 text-white text-base hover:bg-[#2D5EBB] hover:bg-opacity-70">Cancel</label>
+                    <label for="modal-hapus{{ $hapus->id_kaprog }}" class="btn btn-ghost btn-base bg-[#2D5EBB] w-28 text-white text-base hover:bg-[#2D5EBB] hover:bg-opacity-70">Cancel</label>
                     <label class="btn btn-ghost btn-base bg-[#E63946] w-28 text-white text-base hover:bg-[#E63946] hover:bg-opacity-70">
-                        <a href="data-user/hapus/{{ $hapus->id_user }}">
+                        <a href="data-kaprog/hapus/{{ $hapus->id_kaprog }}">
                             Delete
                         </a>
                     </label>

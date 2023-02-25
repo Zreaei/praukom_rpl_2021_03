@@ -1,14 +1,21 @@
 <?php
 
 use App\Http\Controllers\{
-    Admin\AdminController,
-    Admin\UserController,
-    Admin\DataOperatorController,
-    Admin\DataJurusanController,
-    Admin\DataKelasController,
-    Admin\DataAngkatanController,
-    Admin\DataSiswaController,
-    Admin\DataAdmkuController,
+    Admin\AdminMainController,
+    Admin\AdminLevelController,
+    Admin\AdminUserController,
+    Admin\AdminOperatorController,
+    Admin\AdminSiswaController,
+    Admin\AdminWalasController,
+    Admin\AdminKaprogController,
+    Admin\AdminAdmkeuController,
+    Admin\AdminWkhubinController,
+    Admin\AdminPbsekolahController,
+    Admin\AdminPbidukaController,
+    Admin\AdminVerifikatorController,
+    Admin\AdminKelasController,
+    Admin\AdminJurusanController,
+    Admin\AdminAngkatanController,
     Siswa\SiswaController,
     Siswa\PengajuanController,
     Siswa\PresensiController,
@@ -25,12 +32,14 @@ use App\Http\Controllers\{
     PbIduka\PbidukaController,
     PbSekolah\PbsekolahController,
     Verifikator\VerifikatorController,
-    Walas\WalasController,
+    Walas\WalasMainController,
+    Walas\WalasPengajuanController,
     WkHubin\WkhubinController,
     WkHubin\DataPengajuanController,
     HomeController,
     Login\LoginController,
 };
+
 use App\Http\Controllers\Admin\DataLevelController;
 use App\Http\Middleware\CekUser;
 use GuzzleHttp\Middleware;
@@ -50,7 +59,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome.welcome');
-})->name('home');
+});
 
 // Login - Register
 Route::controller(LoginController::class)->group(function() {
@@ -65,12 +74,15 @@ Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
 
 // Admin
 Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('home');
+
+    // Admin - Home
+    Route::get('/admin', [AdminMainController::class, 'index'])->name('admin.home');
+
     // Admin - Data Level
-    Route::get('/admin/data-level', [DataLevelController::class, 'level']);
+    Route::get('/admin/data-level', [AdminLevelController::class, 'level']);
 
     // Admin - Kelola User
-    Route::controller(UserController::class)->group(function() {
+    Route::controller(AdminUserController::class)->group(function() {
         Route::get('/admin/data-user','user');
         Route::post('/admin/data-user/simpan','simpan');
         Route::get('/admin/data-user/hapus/{id}','hapus');
@@ -78,7 +90,7 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
     });
 
     // Admin - Kelola Operator
-    Route::controller(DataOperatorController::class)->group(function() {
+    Route::controller(AdminOperatorController::class)->group(function() {
         Route::get('/admin/data-op','operator');
         Route::get('/admin/data-op/tambah','tambahOpr');
         Route::post('/admin/data-op/simpan','simpan');
@@ -88,7 +100,7 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
     }); 
 
     // Admin - Kelola Angkatan
-    Route::controller(DataAngkatanController::class)->group(function() {
+    Route::controller(AdminAngkatanController::class)->group(function() {
         Route::get('/admin/data-angkatan','angkatan');
         Route::post('/admin/data-angkatan/simpan','simpan');
         Route::get('/admin/data-angkatan/hapus/{id}','hapus');
@@ -96,7 +108,7 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
     }); 
 
     // Admin - Kelola Jurusan
-    Route::controller(DataJurusanController::class)->group(function() {
+    Route::controller(AdminJurusanController::class)->group(function() {
         Route::get('/admin/data-jurusan','jurusan');
         Route::post('/admin/data-jurusan/simpan','simpan');
         Route::get('/admin/data-jurusan/hapus/{id}','hapus');
@@ -104,7 +116,7 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
     }); 
 
     // Admin - Kelola Kelas
-    Route::controller(DataKelasController::class)->group(function() {
+    Route::controller(AdminKelasController::class)->group(function() {
         Route::get('/admin/data-kelas','kelas');
         Route::post('/admin/data-kelas/simpan','simpan');
         Route::get('/admin/data-kelas/hapus/{id}','hapus');
@@ -112,23 +124,71 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
     }); 
 
     // Admin - Kelola Siswa
-    Route::controller(DataSiswaController::class)->group(function() {
+    Route::controller(AdminSiswaController::class)->group(function() {
         Route::get('/admin/data-siswa','siswa');
         Route::get('/admin/data-siswa/tambah','tambahSiswa');
         Route::post('/admin/data-siswa/simpan','simpan');
         Route::get('/admin/data-siswa/hapus/{id}','hapus');
         Route::get('/admin/data-siswa/edit/{id}','edit');
-        Route::post('/admin/data-siswa/edit/simpanedit','simpanedit');
+        Route::post('/admin/data-siswa/simpanedit','simpanedit');
     }); 
 
-    // Admin - Kelola Admku
-    Route::controller(DataAdmkuController::class)->group(function() {
-        Route::get('/admin/data-admku','admku');
-        Route::get('/admin/data-admku/tambah','tambahAdmku');
-        Route::get('/admin/data-admku/simpan','simpan');
-        Route::get('/admin/data-admku/hapus/{id}','hapus');
-        Route::get('/admin/data-admku/edit/{id}','edit');
-        Route::get('/admin/data-admku/edit/simpanedit','simpanedit');
+    // Admin - Kelola Admkeu
+    Route::controller(AdminAdmkeuController::class)->group(function() {
+        Route::get('/admin/data-admkeu','admkeu');
+        Route::get('/admin/data-admkeu/tambah','tambahAdmkeu');
+        Route::get('/admin/data-admkeu/simpan','simpan');
+        Route::get('/admin/data-admkeu/hapus/{id}','hapus');
+        Route::get('/admin/data-admkeu/edit/{id}','edit');
+        Route::get('/admin/data-admkeu/edit/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola Walas
+    Route::controller(AdminWalasController::class)->group(function() {
+        Route::get('/admin/data-walas','walas');
+        Route::post('/admin/data-walas/simpan','simpan');
+        Route::get('/admin/data-walas/hapus/{id}','hapus');
+        Route::post('/admin/data-walas/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola Kaprog
+    Route::controller(AdminKaprogController::class)->group(function() {
+        Route::get('/admin/data-kaprog','kaprog');
+        Route::post('/admin/data-kaprog/simpan','simpan');
+        Route::get('/admin/data-kaprog/hapus/{id}','hapus');
+        Route::post('/admin/data-kaprog/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola WkHubin
+    Route::controller(AdminWkhubinController::class)->group(function() {
+        Route::get('/admin/data-wkhubin','wkhubin');
+        Route::post('/admin/data-wkhubin/simpan','simpan');
+        Route::get('/admin/data-wkhubin/hapus/{id}','hapus');
+        Route::post('/admin/data-wkhubin/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola Pembimbing Sekolah
+    Route::controller(AdminPbsekolahController::class)->group(function() {
+        Route::get('/admin/data-pbsekolah','pbsekolah');
+        Route::post('/admin/data-pbsekolah/simpan','simpan');
+        Route::get('/admin/data-pbsekolah/hapus/{id}','hapus');
+        Route::post('/admin/data-pbsekolah/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola Pembimbing IDUKA
+    Route::controller(AdminPbidukaController::class)->group(function() {
+        Route::get('/admin/data-pbiduka','pbiduka');
+        Route::post('/admin/data-pbiduka/simpan','simpan');
+        Route::get('/admin/data-pbiduka/hapus/{id}','hapus');
+        Route::post('/admin/data-pbiduka/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola Verifikator
+    Route::controller(AdminVerifikatorController::class)->group(function() {
+        Route::get('/admin/data-verifikator','verifikator');
+        Route::post('/admin/data-verifikator/simpan','simpan');
+        Route::get('/admin/data-verifikator/hapus/{id}','hapus');
+        Route::post('/admin/data-verifikator/simpanedit','simpanedit');
     });
 });
 
@@ -244,8 +304,18 @@ Route::get('/siswa/hapusprakerin/{id}', [PrakerinController::class, 'hapus']);
 // // Pbiduka
 // Route::get('/pbiduka/home', [PbidukaController::class, 'home']);
 
-// // Walas
-// Route::get('/walas/home', [WalasController::class, 'home']);
+// Walas
+Route::group(['middleware' => ['auth', 'level:LVL006']], function () {
+
+    // Walas - Home
+    Route::get('/walas/home', [WalasMainController::class, 'home'])->name('walas.home');
+
+    // Walas - Data Pengajuan
+    Route::controller(WalasPengajuanController::class)->group(function() {
+        Route::get('/walas/data-pengajuan','pengajuan');
+    });
+});
+
 
 // // Admkeu
 // Route::get('/admkeu/home', [AdmkeuController::class, 'home']);

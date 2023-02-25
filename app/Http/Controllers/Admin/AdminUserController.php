@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserModel;
-use App\Models\LevelModel;
+use App\Models\{UserModel,LevelModel};
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class AdminUserController extends Controller
 {
     protected $LevelModel;
     protected $UserModel;
@@ -24,7 +23,6 @@ class UserController extends Controller
     
     public function user()
     {
-        // $dataUser = $this->UserModel::all();
         $level = $this->LevelModel::all();
         $dataUser = DB::table('user')
         ->join('level_user', 'level_user.id_level', '=', 'user.level')

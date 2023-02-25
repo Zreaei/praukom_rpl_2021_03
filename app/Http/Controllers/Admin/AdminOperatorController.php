@@ -3,45 +3,61 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\OperatorModel;
-use App\Models\UserModel;
+use App\Models\{OperatorModel,UserModel};
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
-class AdminController extends Controller
+class AdminOperatorController extends Controller
 {
-    public function index()
+    protected $UserModel;
+    protected $OperatorModel;
+
+    public function __construct()
     {
-        return view('admin.home');
+        $this->UserModel = new UserModel;
+        $this->OperatorModel = new OperatorModel;
     }
 
-    // public function operator()
-    // {
-    //     $daftar = $this->OperatorModel::all();
-    //     return view('admin.data-op.data-op', compact('daftar'));
-    // }
+    public function operator()
+    {
+        $dataOp = DB::table('operator')
+        ->join('user', 'user.id_user', '=', 'operator.user')
+        ->get();
+        return view('admin.data-op.data-op', compact('dataOp'));
+    }
 
     // public function tambahOpr()
     // {
-    //     $user = $this->UserModel::all();
+    //     // $user = $this->UserModel::all();
+    //     $user = DB::table('user')->get(); 
     //     return view('admin.data-op.tambahop', compact('user'));
     // }
 
     // public function simpan(Request $request)
     // {
     //     try {
-    //         $data = [
-    //             'user' => $request->input('user'),
-    //             // 'user' => substr(md5(rand(0, 99999)), -4),
-    //             'nama_operator' => $request->input('nama_operator'),
-    //             // dd($request->all())
-    //         ];
+    //         // $data = [
+    //         //     'user' => $request->input('user'),
+    //         //     // 'user' => substr(md5(rand(0, 99999)), -4),
+    //         //     'nama_operator' => $request->input('nama_operator'),
+    //         //     // dd($request->all())
+    //         // ];
          
-    //         $id_operator = substr(md5(rand(0, 99999)), -4);
-    //         $data['id_operator'] = $id_operator;
-    //         $insert = $this->OperatorModel->create($data);
-    //         //Promise 
-    //         if ($insert) {
+    //         // $id_operator = substr(md5(rand(0, 99999)), -4);
+    //         // $data['id_operator'] = $id_operator;
+    //         // $insert = $this->OperatorModel->create($data);
+    //         // //Promise 
+    //         $id_operator = DB::select('SELECT newidoperator() AS id_operator');
+    //         $array = Arr::pluck($id_operator, 'id_operator');
+    //         $kode_baru = Arr::get($array, '0');
+    //         $tambah_opr = DB::table('operator')->insert([
+    //             'id_operator' => $kode_baru,
+    //             'user' => $request->input('user'),
+    //         ]);
+
+    //         if ($tambah_opr) {
     //             return redirect('admin/data-op');
     //         } else {
     //             return ('input data gagal');
@@ -62,7 +78,7 @@ class AdminController extends Controller
     // {
     //     try {
     //         $data = [
-    //             'user' => $request->input('user'),
+    //             'id_operator' => $request->input('id_operator'),
     //             'nama_operator' => $request->input('nama_operator'),
     //         ];
     //         $upd = $this->OperatorModel
@@ -71,7 +87,7 @@ class AdminController extends Controller
     //         if($upd){
     //             return redirect('admin/data-op');
     //         } else {
-    //             dd($request->all());
+    //             // dd($request->all());
     //         }
     //     } catch (Exception $e) {
     //         return $e->getMessage();
@@ -93,3 +109,4 @@ class AdminController extends Controller
     
 
 }
+

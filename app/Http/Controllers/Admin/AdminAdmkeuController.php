@@ -7,7 +7,7 @@ use App\Models\AdmkeuModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DataAdmkuController extends Controller
+class AdminAdmkeuController extends Controller
 {
     protected $AdmkeuModel; 
 
@@ -16,9 +16,11 @@ class DataAdmkuController extends Controller
         $this->AdmkeuModel = new AdmkeuModel;
     }
 
-    public function admku()
+    public function admkeu()
     {
-        $dataAdmku = DB::table('adm_keuangan')->get();
-        return view('admin.data-admku.data-admku', compact('dataAdmku'));
+        $dataAdmkeu = DB::table('adm_keuangan')
+        ->join('user', 'user.id_user', '=', 'adm_keuangan.user')
+        ->get();
+        return view('admin.data-admkeu.data-admkeu', compact('dataAdmkeu'));
     }
 }

@@ -9,7 +9,7 @@ use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
-class DataAngkatanController extends Controller
+class AdminAngkatanController extends Controller
 {
     protected $AngkatanModel;
 
