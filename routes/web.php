@@ -136,9 +136,6 @@ Route::get('/operator/pengajuan', [OperatorMainController::class, 'pengajuan'])-
 Route::get('/operator/pengguna', [OperatorMainController::class, 'pengguna'])->name('operator.pengguna');
 Route::get('/operator/riwayat', [OperatorMainController::class, 'riwayat'])->name('operator.riwayat');
 
-// Route::get('/operator/terima/{id}', [OperatorMainController::class, 'terima'])->name('operator.terima');
-// Route::get('/operator/tolak/{id}', [OperatorMainController::class, 'tolak'])->name('operator.tolak');
-
 // Operator - Kelola Pbsekolah
 Route::get('/operator/pbsekolah', [OperatorDataPbsekolahController::class, 'pbsekolah','tambahpbsekolah'])->name('operator.pbsekolah');
 Route::post('/operator/simpanpbsekolah', [OperatorDataPbsekolahController::class, 'tambahpbsekolah'])->name('operator.simpanpbsekolah');
@@ -263,8 +260,9 @@ Route::get('/pbsekolah/home', [PbsekolahMainController::class, 'home'])->name('p
 Route::get('/pbsekolah/profile', [PbsekolahMainController::class, 'profile'])->name('pbsekolah.profile');
 Route::get('/pbsekolah/prakerin', [PbsekolahMainController::class, 'prakerin'])->name('pbsekolah.prakerin');
 Route::get('/pbsekolah/presensi/{prakerin}', [PbsekolahMainController::class, 'presensi'])->name('pbsekolah.presensi');
-Route::get('/pbsekolah/terima/{id}', [PbsekolahMainController::class, 'terima'])->name('pbsekolah.terima');
-Route::get('/pbsekolah/tolak/{id}', [PbsekolahMainController::class, 'tolak'])->name('pbsekolah.tolak');
+Route::get('/pbsekolah/terima/{tgl_presensi}', [PbsekolahMainController::class, 'terima'])->name('pbsekolah.terima');
+Route::get('/pbsekolah/tolak/{tgl_presensi}', [PbsekolahMainController::class, 'tolak'])->name('pbsekolah.tolak');
 Route::get('/pbsekolah/kegiatan/{prakerin}', [PbsekolahMainController::class, 'kegiatan'])->name('pbsekolah.kegiatan');
-Route::post('/pbsekolah/simpanmonitoring', [PbsekolahMainController::class, 'tambahmonitoring'])->name('pbsekolah.simpanmonitoring');
+Route::get('/pbsekolah/monitoring/{prakerin}', [PbsekolahMainController::class, 'monitoring'])->name('pbsekolah.monitoring');
+Route::post('/pbsekolah/simpanmonitoring', [PbsekolahMainController::class, 'simpanmonitoring'])->name('pbsekolah.simpanmonitoring');
 Route::get('/pbsekolah/hapusmonitoring/{id}', [PbsekolahMainController::class, 'hapusmonitoring']);

@@ -2,11 +2,7 @@
 @section('title', 'admkeu')
 @section('container')
 
-<<<<<<< HEAD
-<form action=" {{ url('/operator/admkeu/tambah/tambahsimpan') }}" method="POST" enctype="multipart/form-data">
-=======
 <!-- <form action=" {{ url("/operator/admkeu/tambah/tambahsimpan") }} " method="POST" enctype="multipart/form-data">
->>>>>>> 7be6b6171398e8469cc955736142442135385b55
     @csrf
     <div class="pt-36">
         <div class="form-control border border-zinc-900 rounded w-1/4 mx-auto">

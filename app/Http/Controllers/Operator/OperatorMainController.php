@@ -6,22 +6,10 @@ use App\Http\Controllers\Controller;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
-// use App\Models\{PengajuanModel, MonitoringModel, SiswaModel, IdukaModel, PbsekolahModel, PrakerinModel};
 use Illuminate\Support\Facades\DB;
 
 class OperatorMainController extends Controller
 {
-    // protected $PengajuanModel, $MonitoringModel, $SiswaModel, $IdukaModel, $PbsekolahModel, $PrakerinModel;
-
-    // public function __construct()
-    // {
-    //     $this->PengajuanModel = new PengajuanModel;
-    //     $this->MonitoringModel = new MonitoringModel;
-    //     $this->SiswaModel = new SiswaModel;
-    //     $this->IdukaModel = new IdukaModel;
-    //     $this->PbsekolahModel = new PbsekolahModel;
-    //     $this->PrakerinModel = new PrakerinModel;
-    // }
 
     public function pengguna(Request $request) 
     {
@@ -35,6 +23,16 @@ class OperatorMainController extends Controller
             $pengguna = DB::table('view_join_roleuser')->paginate(5);
         }
             return view('operator.pengguna', compact('pengguna'));
+    }
+
+    public function riwayat() 
+    {
+        $riwayat_siswa = DB::table('log_operator_siswa')->get();
+        $riwayat_pbiduka = DB::table('log_operator_pbiduka')->get();
+        $riwayat_pbsekolah = DB::table('log_operator_pbsekolah')->get();
+        $riwayat_verifikator = DB::table('log_operator_verifikator')->get();
+
+            return view('operator.riwayat', compact('riwayat_siswa', 'riwayat_pbiduka', 'riwayat_pbsekolah', 'riwayat_verifikator'));
     }
 
     public function pengajuan() 

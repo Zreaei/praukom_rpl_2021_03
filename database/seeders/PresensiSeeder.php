@@ -18,15 +18,10 @@ class PresensiSeeder extends Seeder
         $presensi = 
         [
             [
-                'id_presensi' => 'PRS001',
+                'id_presensi' => '001',
                 'prakerin' => 'PRK001',
                 'pb_iduka' => '1234567812345678',
-                'pb_sekolah' => 'PBS001',
-                'tgl_presensi' => '2001-01-01',
-                'keterangan_presensi' => 'sakit hati',
-                'status_presensi' => 'sakit',
-                'konfirmasi_pbsekolah' => 'terima',
-                'konfirmasi_pbiduka' => 'terima'
+                'pb_sekolah' => 'PBS001'
             ],
         ];
 

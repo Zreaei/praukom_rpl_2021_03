@@ -13,19 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kegiatan', function (Blueprint $table) {
+        Schema::create('presensi', function (Blueprint $table) {
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
-            $table->char('id_kegiatan', 6)->primary()->nullable(false);
+            $table->tinyInteger('id_presensi')->primary()->nullable(false);
             $table->char('prakerin', 6)->nullable(false);
-            $table->string('foto_kegiatan', 255)->nullable(false);
-            $table->text('keterangan_kegiatan')->nullable(false);
-            $table->date('tgl_kegiatan')->nullable(false);
-            $table->time('jam_masuk')->nullable(false);
-            $table->time('jam_keluar')->nullable(false);
+            $table->char('pb_iduka', 16)->nullable(false);
+            $table->char('pb_sekolah', 6)->nullable(false);
 
             $table->foreign('prakerin')->references('id_prakerin')->on('prakerin')->cascadeOnDelete();
+            $table->foreign('pb_iduka')->references('nik')->on('pb_iduka')->cascadeOnDelete();
+            $table->foreign('pb_sekolah')->references('id_pbsekolah')->on('pb_sekolah')->cascadeOnDelete();
         });
     }
 

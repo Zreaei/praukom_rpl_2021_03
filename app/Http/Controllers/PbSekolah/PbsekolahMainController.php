@@ -3,13 +3,27 @@
 namespace App\Http\Controllers\pbsekolah;
 
 use App\Http\Controllers\Controller;
+use App\Models\AbsensiModel;
+use App\Models\PrakerinModel;
+use App\Models\MonitoringModel;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PbsekolahMainController extends Controller
 {
+    protected $PrakerinModel;
+    protected $MonitoringModel;
+    protected $AbsensiModel;
+
+    public function __construct()
+    {
+        $this->PrakerinModel = new PrakerinModel;
+        $this->MonitoringModel = new MonitoringModel;
+        $this->AbsensiModel = new AbsensiModel;
+    }
 
     public function prakerin() 
     {
@@ -25,27 +39,83 @@ class PbsekolahMainController extends Controller
             return view('pbsekolah.prakerin')->with('prakerin', $prakerin);
     }
 
-    public function presensi()
+    public function presensi(PrakerinModel $prakerin)
     {
-        $presensi = DB::table('presensi')
-            ->join('prakerin', 'prakerin.id_prakerin', '=', 'presensi.prakerin')
-            ->join('pb_iduka', 'pb_iduka.nik', '=', 'presensi.pb_iduka')
-            ->join('pb_sekolah', 'pb_sekolah.id_pbsekolah', '=', 'presensi.pb_sekolah')
+        $prakerin = DB::table('prakerin')
+            ->join('presensi', 'presensi.prakerin', '=', 'prakerin.id_prakerin')
+            ->join('absensi', 'absensi.id_presensi', '=', 'presensi.id_presensi')
             ->get();
 
-            return view('pbsekolah.presensi')->with('presensi', $presensi);
+            return view('pbsekolah.presensi')->with('prakerin', $prakerin);
     }
 
-    public function kegiatan()
+    public function kegiatan(PrakerinModel $prakerin)
     {
-        $kegiatan = DB::table('kegiatan')->get();
+        $prakerin = DB::table('prakerin')
+            ->join('kegiatan', 'kegiatan.prakerin', '=', 'prakerin.id_prakerin')
+            ->join('agenda', 'agenda.id_kegiatan', '=', 'kegiatan.id_kegiatan')
+            ->get();
 
-            return view('pbsekolah.kegiatan')->with('kegiatan', $kegiatan);
+            return view('pbsekolah.kegiatan')->with('prakerin', $prakerin);
+    }
+
+    public function terima(AbsensiModel $tgl_presensi)
+    {
+        dd($tgl_presensi);
+        try {
+            // $id_user = DB::table('user')
+            // ->where('username', Auth:user()->username)
+            // ->get();
+            // $array = Arr::pluck($id_user, 'id_user');
+            // $approver = Arr::get($array, '0');
+
+            $konfirmasi = [
+                'konfirmasi_pbsekolah' => ('terima')
+            ];
+            // AbsensiModel::where('id_presensi', $id)->update($konfirmasi);
+            $update = DB::table('absensi')
+                ->where('id_presensi', $id)
+                // ->where('tgl_presensi', $tgl_presensi)
+                ->update($konfirmasi);
+            if($update) {
+                return redirect('pbsekolah/prakerin');
+            }
+        } catch (\Exception $e) {
+            $e->getMessage();
+        }
+
+    }
+
+    public function tolak(AbsensiModel $id=null)
+    {
+        try {
+            // $id_user = DB::table('user')
+            // ->where('username', Auth:user()->username)
+            // ->get();
+            // $array = Arr::pluck($id_user, 'id_user');
+            // $approver = Arr::get($array, '0');
+
+            $konfirmasi = [
+                'konfirmasi_pbsekolah' => ('tolak')
+            ];
+            AbsensiModel::where('id_presensi', $id)->update($konfirmasi);
+            return redirect('pbsekolah/prakerin');
+        } catch (\Exception $e) {
+            $e->getMessage();
+        }
+
     }
 
     // LANJUT LAGI !!!
     public function monitoring()
     {
+        $prakerin = DB::table('prakerin')
+            ->join('siswa', 'siswa.nis', '=', 'prakerin.siswa')
+            ->join('iduka', 'iduka.id_iduka', '=', 'prakerin.iduka')
+            ->get();
+
+        $pbsekolah = DB::table('pb_sekolah')->get();
+
         $monitoring = DB::table('monitoring')
             ->join('pb_sekolah', 'pb_sekolah.id_pbsekolah', '=', 'monitoring.pb_sekolah')
             ->join('prakerin', 'prakerin.id_prakerin', '=', 'monitoring.prakerin')
@@ -53,110 +123,52 @@ class PbsekolahMainController extends Controller
             ->join('iduka', 'iduka.id_iduka', '=', 'prakerin.iduka')
             ->get();
 
-            return view('pbsekolah.monitoring')->with('monitoring', $monitoring);
+            return view('pbsekolah.monitoring', compact('prakerin', 'monitoring', 'pbsekolah'));
     }
 
-    // public function tambahpbsekolah(Request $request)
-    // {
-    //     $request->validate(
-    //         [
-    //             'level' => 'required',
-    //             'username' => 'required',
-    //             'password' => 'required',
-    //             'email' => 'required',
-    //             'foto_user' => 'required',
-    //             'nip_pbsekolah' => 'required',
-    //             'nama_pbsekolah' => 'required',
-    //             'telp_pbsekolah' => 'required'
-    //         ]
-    //     );
+    public function simpanmonitoring(Request $request)
+    {
+        $request->validate(
+            [
+                'pb_sekolah' => 'required',
+                'prakerin' => 'required',
+                'tgl_monitoring' => 'required',
+                'laporan_monitoring' => 'required'
+            ]
+        );
 
-    //     $img = $request->file('foto_user')->store('img');
-    //     $pass = Hash::make($request->input('password'));
 
-    //     DB::insert("CALL procedure_insert_pbsekolah(
-    //         :datalevel, :datausername, :datapassword, :dataemail, :datafoto_user, :datanip_pbsekolah, :datanama_pbsekolah, :datatelp_pbsekolah)",
-    //         [
-    //             'datalevel' => $request->level,
-    //             'datausername' => $request->username,
-    //             'datapassword' => $pass,
-    //             'dataemail' => $request->email,
-    //             'datafoto_user' => $img,
-    //             'datanip_pbsekolah' => $request->nip_pbsekolah,
-    //             'datanama_pbsekolah' => $request->nama_pbsekolah,
-    //             'datatelp_pbsekolah' => $request->telp_pbsekolah
-    //         ]
-    //     );
+        $file = $request->file('laporan_monitoring')->store('img');
 
-    //     return redirect('/operator/pbsekolah')->with('sukses', 'Data berhasil ditambah');
-    // }
+        DB::insert("CALL procedure_insert_monitoring(
+            :datapbsekolah, :dataprakerin, :datatgl, :datalaporan)",
+            [
+                'datapbsekolah' => $request->pb_sekolah,
+                'dataprakerin' => $request->prakerin,
+                'datatgl' => $request->tgl_monitoring,
+                'datalaporan' => $file
+            ]
+        );
 
-    // public function editpbsekolah(PbsekolahModel $pbsekolah)
-    // {
-    //     $edit = DB::table('pb_sekolah')
-    //         ->join('user', 'user.id_user', '=', 'pb_sekolah.user')
-    //         ->join('level_user', 'level_user.id_level', '=', 'user.level')
-    //         ->select('pb_sekolah.*', 'user.*', 'level_user.*')
-    //         ->where('id_pbsekolah', '=', $pbsekolah->id_pbsekolah)
-    //         ->get();
+        return redirect('/pbsekolah/prakerin')->with('sukses', 'Data berhasil ditambah');
+    }
 
-    //         return view('operator.pbsekolah.editpbsekolah', ["edit" => $edit]);
-    // }
-
-    // public function editsimpanpbsekolah(Request $request)
-    // {
-    //     $request->validate(
-    //         [
-    //             'username' => 'required',
-    //             'password' => 'required',
-    //             'email' => 'required',
-    //             'foto_user' => 'required',
-    //             'nip_pbsekolah' => 'required',
-    //             'nama_pbsekolah' => 'required',
-    //             'telp_pbsekolah' => 'required'
-    //         ]
-    //     );
-
-    //     $img = $request->file('foto_user')->store('img');
-    //     if($request->fotoLama) {
-    //         Storage::delete($request->fotoLama);
-    //     }
-    //     $pass = Hash::make($request->input('password'));
-
-    //     DB::select("CALL procedure_update_pbsekolah(?,?,?,?,?,?,?,?,?)",
-    //         [
-    //             $request->user,
-    //             $request->username,
-    //             $pass,
-    //             $request->email,
-    //             $img,
-    //             $request->id_pbsekolah,
-    //             $request->nip_pbsekolah,
-    //             $request->nama_pbsekolah,
-    //             $request->telp_pbsekolah
-    //         ]
-    //     );
-
-    //     return redirect('/operator/pbsekolah')->with('sukses', 'Data berhasil diubah');
-
-    // }
-
-    // public function hapuspbsekolah($id = null)
-    // {
-    //     try{
-    //         $user = $this->UserModel->where('id_user',$id)->first();
-    //         $hapuspbsekolah = $this->UserModel->where('id_user',$id)->delete();
-    //         if($user->foto_user) {
-    //             Storage::delete($user->foto_user);
-    //         }
+    public function hapusmonitoring($id = null)
+    {
+        try{
+            $monitoring = $this->MonitoringModel->where('id_monitoring',$id)->first();
+            $hapusmonitoring = $this->MonitoringModel->where('id_monitoring',$id)->delete();
+            if($monitoring->laporan_monitoring) {
+                Storage::delete($monitoring->laporan_monitoring);
+            }
             
-    //         if($hapuspbsekolah){
-    //             return redirect('/operator/pbsekolah');
-    //         }
-    //     } catch(Exception $e){
-    //         return back()->with('error', $e->getMessage());
-    //     }
-    // }
+            if($hapusmonitoring){
+                return redirect('/pbsekolah/prakerin');
+            }
+        } catch(Exception $e){
+            return back()->with('error', $e->getMessage());
+        }
+    }
 
     public function home()
     {

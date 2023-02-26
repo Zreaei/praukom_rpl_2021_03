@@ -58,7 +58,7 @@
 
                             <!-- KONFIRMASI -->
 
-                            @if($item->konfirmasi_wkhubin == "belum")
+                            @if($item->konfirmasi_wkhubin == "pending")
 
                             <td class="text-sm font-medium leading-5 text-center [#ffffff]space-no-wrap ">
                                 <div class="flex justify-center">

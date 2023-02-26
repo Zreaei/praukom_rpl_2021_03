@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create('kegiatan', function (Blueprint $table) {
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
-            $table->char('id_admin', 6)->primary()->nullable(false);
-            $table->char('user', 6)->nullable(false);
+            $table->tinyInteger('id_kegiatan')->primary()->nullable(false);
+            $table->char('prakerin', 6)->nullable(false);
 
-            $table->foreign('user')->references('id_user')->on('user')->cascadeOnDelete();
+            $table->foreign('prakerin')->references('id_prakerin')->on('prakerin')->cascadeOnDelete();
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin');
+        Schema::dropIfExists('presensi');
     }
 };
