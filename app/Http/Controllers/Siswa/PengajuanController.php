@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -43,7 +44,6 @@ class PengajuanController extends Controller
     }
     public function pengajuan()
     {
-        $pengajuan = $this->PengajuanModel::all();
         $siswa = $this->SiswaModel::all();
         $admkeu = $this->AdmkeuModel::all();
         $wkhubin = $this->WkhubinModel::all();
@@ -56,6 +56,7 @@ class PengajuanController extends Controller
         ->get();
         return view('siswa.pengajuan', compact('pengajuan','siswa','admkeu','wkhubin','kaprog','walas'), ["edit" => $pengajuan]);
     }
+
 
     public function tambahpengajuan(Request $request)
     {
@@ -85,21 +86,11 @@ class PengajuanController extends Controller
                     $validated['datawalas'],
                     $validated['datatglpengajuan']
                 ]);
-                // if ($tambah_pengajuan){
-                //     flash()->options([
-                //         'timeout' => 3000, // 3 seconds
-                //         'position' => 'top-center',
-                //     ])->addSuccess('Data berhasil disimpan.');
-                //     return redirect('/siswa/pengajuan');
-                // }else
-                //     return "input data gagal";
-                // } catch (\Exception $e) {
-                // return  $e->getMessage();
-                // }
-
-                return redirect('/siswa/pengajuan')->with('sukses', 'Data berhasil ditambah');
+                sweetalert()->addSuccess('Data Pengajuan Berhasil Ditambah!');
+                return redirect('/siswa/pengajuan');
             } catch (\Throwable $th) {
-                return redirect('/siswa/pengajuan')->with('error', 'Data gagal ditambah');
+                sweetalert()->addError('Data Pengajuan Gagal Ditambah!');
+                return redirect('/siswa/pengajuan');
             }
     }
 
@@ -141,6 +132,7 @@ class PengajuanController extends Controller
         } catch (Exception $e) {
             return $e->getMessage();
         } finally {
+            sweetalert()->addSuccess('Data Pengajuan Berhasil Diedit!');
             return redirect('/siswa/pengajuan');
         }
     }
@@ -150,6 +142,7 @@ class PengajuanController extends Controller
         try{
             $hapusiduka = $this->IdukaModel->where('id_iduka',$id)->delete();
             if($hapusiduka){
+                sweetalert()->addSuccess('Data Pengajuan Berhasil Dihapus!');
                 return redirect('siswa/pengajuan');
             }
         } catch(Exception $e){
@@ -157,66 +150,4 @@ class PengajuanController extends Controller
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // try{
-    //     $hapus = $this->PengajuanModel
-    //                     ->where('id_surat',$id)
-    //                     ->delete();
-    //     if($hapus){
-    //         return redirect('siswa');
-    //     }
-    // }catch(Exception $e){
-    //     $e->getMessage();
-    // }
-
-    // public function tambah(Request $request)
-    // {
-    //     $request->validate([
-    //         'id_pengajuan' => 'required|min:6',
-    //         'siswa' => 'required|min:9',
-    //         'iduka' => 'required|min:6',
-    //         'adm_keuangan' => 'required|min:9',
-    //         'waka_hubin' => 'required|min:9',
-    //         'kaprog' => 'required|min:9',
-    //         'walas' => 'required|min:9',
-    //         'konfirmasi_admkeu' => ['terima','Tolak'],
-    //         'konfirmasi_wkhubin' => ['terima','Tolak'],
-    //         'konfirmasi_kaprog' => ['terima','Tolak'],
-    //         'konfirmasi_walas' => ['terima','Tolak'],
-
-    //     ]);
-
-    //     $pengajuan = new pengajuan;
-    //     $pengajuan->id_pengajuan = $request->id_pengajuan;
-    //     $pengajuan->siswa = $request->siswa;
-    //     $pengajuan->iduka = $request->iduka;
-    //     $pengajuan->adm_keuangan = $request->adm_keuangan;
-    //     $pengajuan->waka_hubin = $request->waka_hubin;
-    //     $pengajuan->kaprog = $request->kaprog;
-    //     $pengajuan->walas = $request->walas;
-    //     $pengajuan->konfirmasi_admkeu = $request->konfirmasi_admkeu;
-    //     $pengajuan->konfirmasi_wkhubin = $request->konfirmasi_wkhubin;
-    //     $pengajuan->konfirmasi_kaprog = $request->konfirmasi_kaprog;
-    //     $pengajuan->konfirmasi_walas = $request->konfirmasi_walas;
-    //     $pengajuan->save();
-
-    //     return to_route('siswa.pengajuan')->with('success','Data Berhasil di Tambah');
-    // }
 }

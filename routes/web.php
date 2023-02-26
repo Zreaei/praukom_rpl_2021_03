@@ -1,32 +1,52 @@
 <?php
 
 use App\Http\Controllers\{
-    Admin\AdminController,
-    Admin\UserController,
-    Admin\DataOperatorController,
-    Admin\DataJurusanController,
-    Admin\DataKelasController,
-    Admin\DataAngkatanController,
-    Admin\DataSiswaController,
-    Admin\DataAdmkuController,
-    Operator\OperatorMainController,
-    Operator\OperatorDataAdmkeuController,
-    Operator\OperatorDataPbsekolahController,
-    Operator\OperatorDataPbidukaController,
-    Operator\OperatorDataVerifikatorController,
-    Operator\OperatorDataSiswaController,
+    Admin\AdminMainController,
+    Admin\AdminLevelController,
+    Admin\AdminUserController,
+    Admin\AdminOperatorController,
+    Admin\AdminSiswaController,
+    Admin\AdminWalasController,
+    Admin\AdminKaprogController,
+    Admin\AdminAdmkeuController,
+    Admin\AdminWkhubinController,
+    Admin\AdminPbsekolahController,
+    Admin\AdminPbidukaController,
+    Admin\AdminVerifikatorController,
+    Admin\AdminKelasController,
+    Admin\AdminJurusanController,
+    Admin\AdminAngkatanController,
     Siswa\SiswaController,
     Siswa\PengajuanController,
+    Siswa\HomeSiswaController,
     Siswa\PresensiController,
-    AdmKeu\AdmkeuController,
-    Kaprog\KaprogMainController,
+    Siswa\PrakerinController,
+    Siswa\KegiatanController,
+    Siswa\VerifikasiController,
+    Operator\OperatorController,
+    AdmKeu\HomeAdmkeuController,
+    AdmKeu\DataPengajuanAdmkeuController,
+    Kaprog\KaprogController,
+    Operator\DataAdmkeuController,
+    Operator\DataWkhubinController,
+    Operator\DataKaprogController,
+    Operator\DataWalasController,
+    Operator\DataPbsekolahController,
+    Operator\DataPbidukaController,
+    Operator\DataVerifikatorController,
     PbIduka\PbidukaController,
-    PbSekolah\PbsekolahMainController,
+    PbIduka\HomePbidukaController,
+    PbIduka\NilaipklController,
+    PbIduka\DataPrakerinPbidukaController,
+    PbSekolah\PbsekolahController,
     Verifikator\VerifikatorController,
-    Walas\WalasController,
-    WkHubin\WkhubinMainController,
+    Walas\WalasMainController,
+    Walas\WalasPengajuanController,
+    WkHubin\WkhubinController,
+    WkHubin\DataPengajuanController,
     Login\LoginController,
 };
+
 use App\Http\Controllers\Admin\DataLevelController;
 use App\Http\Middleware\CekUser;
 use GuzzleHttp\Middleware;
@@ -46,7 +66,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome.welcome');
-})->name('home');
+});
 
 // Login - Register
 Route::controller(LoginController::class)->group(function() {
@@ -61,20 +81,24 @@ Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
 
 // Admin
 Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('home');
+
+    // Admin - Home
+    Route::get('/admin', [AdminMainController::class, 'index'])->name('admin.home');
+
     // Admin - Data Level
-    Route::get('/admin/data-level', [DataLevelController::class, 'level']);
+    Route::get('/admin/data-level', [AdminLevelController::class, 'level']);
 
     // Admin - Kelola User
-    Route::controller(UserController::class)->group(function() {
+    Route::controller(AdminUserController::class)->group(function() {
         Route::get('/admin/data-user','user');
         Route::post('/admin/data-user/simpan','simpan');
         Route::get('/admin/data-user/hapus/{id}','hapus');
         Route::post('/admin/data-user/simpanedit','simpanedit');
     });
 
+
     // Admin - Kelola Operator
-    Route::controller(DataOperatorController::class)->group(function() {
+    Route::controller(AdminOperatorController::class)->group(function() {
         Route::get('/admin/data-op','operator');
         Route::get('/admin/data-op/tambah','tambahOpr');
         Route::post('/admin/data-op/simpan','simpan');
@@ -84,7 +108,7 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
     }); 
 
     // Admin - Kelola Angkatan
-    Route::controller(DataAngkatanController::class)->group(function() {
+    Route::controller(AdminAngkatanController::class)->group(function() {
         Route::get('/admin/data-angkatan','angkatan');
         Route::post('/admin/data-angkatan/simpan','simpan');
         Route::get('/admin/data-angkatan/hapus/{id}','hapus');
@@ -92,7 +116,7 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
     }); 
 
     // Admin - Kelola Jurusan
-    Route::controller(DataJurusanController::class)->group(function() {
+    Route::controller(AdminJurusanController::class)->group(function() {
         Route::get('/admin/data-jurusan','jurusan');
         Route::post('/admin/data-jurusan/simpan','simpan');
         Route::get('/admin/data-jurusan/hapus/{id}','hapus');
@@ -100,7 +124,7 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
     }); 
 
     // Admin - Kelola Kelas
-    Route::controller(DataKelasController::class)->group(function() {
+    Route::controller(AdminKelasController::class)->group(function() {
         Route::get('/admin/data-kelas','kelas');
         Route::post('/admin/data-kelas/simpan','simpan');
         Route::get('/admin/data-kelas/hapus/{id}','hapus');
@@ -108,23 +132,71 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
     }); 
 
     // Admin - Kelola Siswa
-    Route::controller(DataSiswaController::class)->group(function() {
+    Route::controller(AdminSiswaController::class)->group(function() {
         Route::get('/admin/data-siswa','siswa');
         Route::get('/admin/data-siswa/tambah','tambahSiswa');
         Route::post('/admin/data-siswa/simpan','simpan');
         Route::get('/admin/data-siswa/hapus/{id}','hapus');
         Route::get('/admin/data-siswa/edit/{id}','edit');
-        Route::post('/admin/data-siswa/edit/simpanedit','simpanedit');
+        Route::post('/admin/data-siswa/simpanedit','simpanedit');
     }); 
 
-    // Admin - Kelola Admku
-    Route::controller(DataAdmkuController::class)->group(function() {
-        Route::get('/admin/data-admku','admku');
-        Route::get('/admin/data-admku/tambah','tambahAdmku');
-        Route::get('/admin/data-admku/simpan','simpan');
-        Route::get('/admin/data-admku/hapus/{id}','hapus');
-        Route::get('/admin/data-admku/edit/{id}','edit');
-        Route::get('/admin/data-admku/edit/simpanedit','simpanedit');
+    // Admin - Kelola Admkeu
+    Route::controller(AdminAdmkeuController::class)->group(function() {
+        Route::get('/admin/data-admkeu','admkeu');
+        Route::get('/admin/data-admkeu/tambah','tambahAdmkeu');
+        Route::get('/admin/data-admkeu/simpan','simpan');
+        Route::get('/admin/data-admkeu/hapus/{id}','hapus');
+        Route::get('/admin/data-admkeu/edit/{id}','edit');
+        Route::get('/admin/data-admkeu/edit/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola Walas
+    Route::controller(AdminWalasController::class)->group(function() {
+        Route::get('/admin/data-walas','walas');
+        Route::post('/admin/data-walas/simpan','simpan');
+        Route::get('/admin/data-walas/hapus/{id}','hapus');
+        Route::post('/admin/data-walas/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola Kaprog
+    Route::controller(AdminKaprogController::class)->group(function() {
+        Route::get('/admin/data-kaprog','kaprog');
+        Route::post('/admin/data-kaprog/simpan','simpan');
+        Route::get('/admin/data-kaprog/hapus/{id}','hapus');
+        Route::post('/admin/data-kaprog/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola WkHubin
+    Route::controller(AdminWkhubinController::class)->group(function() {
+        Route::get('/admin/data-wkhubin','wkhubin');
+        Route::post('/admin/data-wkhubin/simpan','simpan');
+        Route::get('/admin/data-wkhubin/hapus/{id}','hapus');
+        Route::post('/admin/data-wkhubin/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola Pembimbing Sekolah
+    Route::controller(AdminPbsekolahController::class)->group(function() {
+        Route::get('/admin/data-pbsekolah','pbsekolah');
+        Route::post('/admin/data-pbsekolah/simpan','simpan');
+        Route::get('/admin/data-pbsekolah/hapus/{id}','hapus');
+        Route::post('/admin/data-pbsekolah/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola Pembimbing IDUKA
+    Route::controller(AdminPbidukaController::class)->group(function() {
+        Route::get('/admin/data-pbiduka','pbiduka');
+        Route::post('/admin/data-pbiduka/simpan','simpan');
+        Route::get('/admin/data-pbiduka/hapus/{id}','hapus');
+        Route::post('/admin/data-pbiduka/simpanedit','simpanedit');
+    });
+
+    // Admin - Kelola Verifikator
+    Route::controller(AdminVerifikatorController::class)->group(function() {
+        Route::get('/admin/data-verifikator','verifikator');
+        Route::post('/admin/data-verifikator/simpan','simpan');
+        Route::get('/admin/data-verifikator/hapus/{id}','hapus');
+        Route::post('/admin/data-verifikator/simpanedit','simpanedit');
     });
 });
 
@@ -176,34 +248,60 @@ Route::put('/operator/admkeu/edit/editsimpan', [OperatorDataAdmkeuController::cl
 Route::get('/operator/admkeu/detail/{admkeu}', [OperatorDataAdmkeuController::class, 'detailadmkeu']);
 Route::get('/operator/admkeu/hapus/{id}', [OperatorDataAdmkeuController::class, 'hapusadmkeu']);
 
-// Siswa - home
+
 Route::group(['middleware' => ['auth', 'level:LVL003']], function () {
-    Route::get('/siswa/home', [SiswaController::class, 'home'])->name('siswa.home');
-    Route::get('/siswa/profil', [SiswaController::class, 'profil']);
+    // Siswa - home
+    Route::get('/siswa/home', [HomeSiswaController::class, 'home'])->name('siswa.home');
+    Route::get('/siswa/profile', [SiswaController::class, 'profile'])->name('siswa.profile');
+
+    // Siswa - pengajuan
+    Route::get('/siswa/pengajuan', [PengajuanController::class, 'pengajuan'])->name('siswa.pengajuan');
+    Route::post('/siswa/simpanpengajuan', [PengajuanController::class, 'tambahpengajuan'])->name('siswa.simpanpengajuan');
+    Route::put('/siswa/editsimpanpengajuan', [PengajuanController::class, 'editpengajuan'])->name('siswa.editsimpanpengajuan');
+    Route::get('/siswa/hapuspengajuan/{id}', [PengajuanController::class, 'hapus']);
+
+    // Siswa - presensi
+    Route::get('/siswa/presensi', [PresensiController::class, 'presensi'])->name('siswa.presensi');
+    Route::post('/siswa/simpanpresensi', [PresensiController::class, 'tambahpresensi'])->name('siswa.simpanpresensi');
+    Route::post('/siswa/editsimpanpresensi', [PresensiController::class, 'editpresensi'])->name('siswa.editsimpanpresensi');
+    Route::get('/siswa/hapuspresensi/{id}', [PresensiController::class, 'hapus']);
+
+    // Siswa - kegiatan
+    Route::get('/siswa/kegiatan', [KegiatanController::class, 'kegiatan'])->name('siswa.kegiatan');
+    Route::post('/siswa/simpankegiatan', [KegiatanController::class, 'tambahkegiatan'])->name('siswa.simpankegiatan');
+    Route::get('/siswa/editkegiatan/{kegiatan}', [KegiatanController::class, 'editkegiatan'])->name('siswa.editkegiatan');
+    Route::put('/siswa/editsimpankegiatan', [KegiatanController::class, 'editsimpankegiatan'])->name('siswa.editsimpankegiatan');
+    Route::get('/siswa/hapuskegiatan/{id}', [KegiatanController::class, 'hapus']);
+
+    // Siswa - verifikasi
+    Route::get('/siswa/verifikasi', [VerifikasiController::class, 'verifikasi'])->name('siswa.verifikasi');
+    Route::post('/siswa/simpanverifikasi', [VerifikasiController::class, 'tambahverifikasi'])->name('siswa.simpanverifikasi');
+    Route::get('/siswa/editverifikasi/{verifikasi}', [VerifikasiController::class, 'editverifikasi'])->name('siswa.editverifikasi');
+    Route::put('/siswa/editsimpanverifikasi', [VerifikasiController::class, 'editsimpanverifikasi'])->name('siswa.editsimpanverifikasi');
+    Route::get('/siswa/hapusverifikasi/{id}', [VerifikasiController::class, 'hapus']);
+
+    // Siswa - prakerin
+    Route::get('/siswa/prakerin', [PrakerinController::class, 'prakerin'])->name('siswa.prakerin');
+    Route::post('/siswa/tambahprakerin', [PrakerinController::class, 'tambahprakerin'])->name('siswa.tambahprakerin');
+    Route::post('/siswa/editprakerin', [PrakerinController::class, 'editprakerin'])->name('siswa.editprakerin');
+    Route::get('/siswa/hapusprakerin/{id}', [PrakerinController::class, 'hapus']);
 });
 
-// Siswa - pengajuan
-Route::get('/siswa/pengajuan', [PengajuanController::class, 'pengajuan','tambahpengajuan'])->name('siswa.pengajuan');
-Route::post('/siswa/simpanpengajuan', [PengajuanController::class, 'tambahpengajuan'])->name('siswa.simpanpengajuan');
-// Route::get('/siswa/editpengajuan/{pengajuan}', [PengajuanController::class, 'editpengajuan'])->name('siswa.editpengajuan');
-Route::put('/siswa/editsimpanpengajuan', [PengajuanController::class, 'editpengajuan'])->name('siswa.editsimpanpengajuan');
-Route::get('/siswa/hapuspengajuan/{id}', [PengajuanController::class, 'hapus']);
+// PBIDUKA
+Route::get('/pbiduka/prakerin', [DataPrakerinPbidukaController::class, 'dataprakerin'])->name('pbiduka.prakerin');
+Route::get('/pbiduka/presensi', [DataPrakerinPbidukaController::class, 'datapresensi'])->name('pbiduka.presensi');
+Route::get('/pbiduka/kegiatan', [DataPrakerinPbidukaController::class, 'datakegiatan'])->name('pbiduka.kegiatan');
+Route::get('/pbiduka/setuju/{id}', [DataPrakerinPbidukaController::class, 'statuskonfirmasi'])->name('pbiduka.terimakonfirmasi');
+Route::get('/pbiduka/tolak/{id}', [DataPrakerinPbidukaController::class, 'statustolak'])->name('pbiduka.tolakkonfirmasi');
+Route::get('/pbiduka/penilaian', [NilaipklController::class, 'nilaipkl'])->name('pbiduka.penilaian');
+Route::get('/pbiduka/profile', [PbidukaController::class, 'profile'])->name('pbiduka.profile');
+Route::get('/pbiduka/home', [HomePbidukaController::class, 'home'])->name('pbiduka.home');
 
-// Siswa - presensi
-Route::get('/siswa/presensi', [PresensiController::class, 'presensi'])->name('siswa.presensi');
-Route::get('/siswa/tambahpresensi', [PresensiController::class, 'tambahpresensi'])->name('siswa.tambahpresensi');
-Route::put('/siswa/simpanpresensi', [PresensiController::class, 'simpanpresensi'])->name('siswa.simpanpresensi');
-Route::get('/siswa/editpresensi/{id}', [PresensiController::class, 'editpresensi']);
-Route::put('/siswa/editsimpanpresensi/{id}', [presensiController::class, 'editsimpan']);
-Route::get('/siswa/hapuspresensi/{id}', [PresensiController::class, 'hapus']);
-
-// Siswa - prakerin
-Route::get('/siswa/prakerin', [PrakerinController::class, 'prakerin'])->name('siswa.prakerin');
-Route::get('/siswa/tambahprakerin', [PrakerinController::class, 'tambahprakerin'])->name('siswa.tambahprakerin');
-Route::put('/siswa/simpanprakerin', [PrakerinController::class, 'simpanprakerin'])->name('siswa.simpanprakerin');
-Route::get('/siswa/editprakerin/{id}', [PrakerinController::class, 'editprakerin'])->name('siswa.editprakerin');;
-Route::put('/siswa/editsimpanprakerin/{id}', [prakerinController::class, 'editsimpan']);
-Route::get('/siswa/hapusprakerin/{id}', [PrakerinController::class, 'hapus']);
+// Admkeu
+Route::get('/admkeu/pengajuan', [DataPengajuanAdmkeuController::class, 'datapengajuan'])->name('admkeu.pengajuan');
+Route::get('/admkeu/setuju/{id}', [DataPengajuanAdmkeuController::class, 'statuskonfirmasi'])->name('admkeu.terima');
+Route::get('/admkeu/tolak/{id}', [DataPengajuanAdmkeuController::class, 'statustolak'])->name('admkeu.tolak');
+Route::get('/admkeu/home', [HomeAdmkeuController::class, 'home'])->name('admkeu.home');
 
 // // Siswa
 // Route::get('/siswa/home', [SiswaController::class, 'home']);
@@ -215,8 +313,18 @@ Route::get('/siswa/hapusprakerin/{id}', [PrakerinController::class, 'hapus']);
 // // Pbiduka
 // Route::get('/pbiduka/home', [PbidukaController::class, 'home']);
 
-// // Walas
-// Route::get('/walas/home', [WalasController::class, 'home']);
+// Walas
+Route::group(['middleware' => ['auth', 'level:LVL006']], function () {
+
+    // Walas - Home
+    Route::get('/walas/home', [WalasMainController::class, 'home'])->name('walas.home');
+
+    // Walas - Data Pengajuan
+    Route::controller(WalasPengajuanController::class)->group(function() {
+        Route::get('/walas/data-pengajuan','pengajuan');
+    });
+});
+
 
 // // Admkeu
 // Route::get('/admkeu/home', [AdmkeuController::class, 'home']);

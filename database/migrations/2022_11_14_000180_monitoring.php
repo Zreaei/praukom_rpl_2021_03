@@ -20,11 +20,13 @@ return new class extends Migration
             $table->char('id_monitoring', 6)->primary()->nullable(false);
             $table->char('prakerin', 6)->nullable(false);
             $table->char('pb_sekolah', 6)->nullable(false);
+            $table->char('prakerin', 6)->nullable(false);
             $table->date('tgl_monitoring')->nullable(false);
             $table->string('laporan_monitoring', 255)->nullable(false);
 
             $table->foreign('prakerin')->references('id_prakerin')->on('prakerin')->cascadeOnDelete();
             $table->foreign('pb_sekolah')->references('id_pbsekolah')->on('pb_sekolah')->cascadeOnDelete();
+            $table->foreign('prakerin')->references('id_prakerin')->on('prakerin')->cascadeOnDelete();
         });
     }
 

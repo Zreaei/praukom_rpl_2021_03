@@ -31,7 +31,7 @@ class LoginController extends Controller
         $id_user = DB::select('SELECT newiduser() AS id_user');
         $array = Arr::pluck($id_user, 'id_user');
         $kode_baru = Arr::get($array, '0');
-        $level_siswa = 'LVL003';
+        $level_siswa = 'LVL001';
         $user = new User([
             'id_user' => $kode_baru,
             'username' => $request->username,
@@ -77,7 +77,7 @@ class LoginController extends Controller
             } else if ($user->level === 'LVL005') {
                 return redirect()->intended('/pbiduka');
             } else if ($user->level === 'LVL006') {
-                return redirect()->intended('/walas');
+                return redirect()->intended('/walas/home');
             } else if ($user->level === 'LVL007') {
                 return redirect()->intended('/admkeu');
             } else if ($user->level === 'LVL008') {
@@ -85,7 +85,7 @@ class LoginController extends Controller
             } else if ($user->level === 'LVL009') {
                 return redirect()->intended('/kaprog');
             } else if ($user->level === 'LVL010') {
-                return redirect()->intended('/verifikator');
+                return redirect()->intended('/verifikator/home');
             }
             return redirect()->intended('/login');
         }

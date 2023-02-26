@@ -131,7 +131,11 @@ class OperatorDataPbsekolahController extends Controller
             }
             
             if($hapuspbsekolah){
+<<<<<<< HEAD:app/Http/Controllers/Operator/DataPbsekolahController.php
+                return redirect('/operator/admkeu');
+=======
                 return redirect('/operator/pbsekolah');
+>>>>>>> e01679e195840334664fe728166a85886559141a:app/Http/Controllers/Operator/OperatorDataPbsekolahController.php
             }
         } catch(Exception $e){
             return back()->with('error', $e->getMessage());
