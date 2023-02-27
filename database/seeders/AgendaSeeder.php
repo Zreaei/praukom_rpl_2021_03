@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class KegiatanSeeder extends Seeder
+class AgendaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,14 +15,18 @@ class KegiatanSeeder extends Seeder
      */
     public function run()
     {
-        $kegiatan = 
+        $agenda = 
         [
             [
                 'id_kegiatan' => '001',
-                'prakerin' => 'PRK001'
+                'foto_kegiatan' => 'kegiatan.jpg',
+                'keterangan_kegiatan' => 'belajar',
+                'tgl_kegiatan' => '2001-01-01',
+                'jam_masuk' => '00:00:00',
+                'jam_keluar' => '00:00:00'
             ],
         ];
 
-        DB::table('kegiatan')->insert($kegiatan);
+        DB::table('agenda')->insert($agenda);
     }
 }

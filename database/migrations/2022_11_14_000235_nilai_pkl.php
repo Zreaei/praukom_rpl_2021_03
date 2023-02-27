@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create('nilai_pkl', function (Blueprint $table) {
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
-            $table->char('id_admin', 6)->primary()->nullable(false);
-            $table->char('user', 6)->nullable(false);
+            $table->tinyInteger('id_nilaipkl')->nullable(false);
+            $table->char('kategori_nilai', 6)->nullable(false);
+            $table->tinyInteger('nilai_pkl')->nullable(false);
 
-            $table->foreign('user')->references('id_user')->on('user')->cascadeOnDelete();
+            $table->foreign('id_nilaipkl')->references('id_nilaipkl')->on('penilaian_pkl')->cascadeOnDelete();
+            $table->foreign('kategori_nilai')->references('id_kat_nilai')->on('kategori_nilai')->cascadeOnDelete();
         });
     }
 
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin');
+        Schema::dropIfExists('nilai_pkl');
     }
 };

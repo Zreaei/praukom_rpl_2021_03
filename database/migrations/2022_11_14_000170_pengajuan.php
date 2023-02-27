@@ -25,10 +25,10 @@ return new class extends Migration
             $table->char('walas', 6)->nullable(false);
             $table->char('iduka', 6)->nullable(false);
             $table->date('tgl_pengajuan')->nullable(false);
-            $table->enum('konfirmasi_admkeu', ['Belum Dikonfirmasi', 'Konfirmasi Diterima', 'Konfirmasi Ditolak'])->nullable();
-            $table->enum('konfirmasi_wkhubin', ['Belum Dikonfirmasi', 'Konfirmasi Diterima', 'Konfirmasi Ditolak'])->nullable();
-            $table->enum('konfirmasi_kaprog', ['Belum Dikonfirmasi', 'Konfirmasi Diterima', 'Konfirmasi Ditolak'])->nullable();
-            $table->enum('konfirmasi_walas', ['Belum Dikonfirmasi', 'Konfirmasi Diterima', 'Konfirmasi Ditolak'])->nullable();
+            $table->enum('konfirmasi_admkeu', ['pending', 'terima', 'tolak'])->default('pending')->nullable();
+            $table->enum('konfirmasi_wkhubin', ['pending', 'terima', 'tolak'])->default('pending')->nullable();
+            $table->enum('konfirmasi_kaprog', ['pending', 'terima', 'tolak'])->default('pending')->nullable();
+            $table->enum('konfirmasi_walas', ['pending', 'terima', 'tolak'])->default('pending')->nullable();
 
             $table->foreign('siswa')->references('nis')->on('siswa')->cascadeOnDelete();
             $table->foreign('iduka')->references('id_iduka')->on('iduka')->cascadeOnDelete();

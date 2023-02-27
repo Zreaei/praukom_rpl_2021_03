@@ -14,5 +14,5 @@ class KegiatanModel extends Model
     protected $primaryKey = 'id_kegiatan';
     public $incrementing = false;
     public $keyType = 'string';
-    protected $fillable = ['id_kegiatan','prakerin','foto_kegiatan','keterangan_kegiatan','tgl_kegiatan','jam_masuk','jam_keluar'];
+    protected $fillable = ['id_kegiatan','prakerin'];
 }

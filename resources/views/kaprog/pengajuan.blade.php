@@ -58,7 +58,7 @@
 
                             <!-- KONFIRMASI -->
 
-                            @if($item->konfirmasi_kaprog == "belum")
+                            @if($item->konfirmasi_kaprog == "pending")
 
                             <td class="text-sm font-medium leading-5 text-center [#ffffff]space-no-wrap ">
                                 <div class="flex justify-center">

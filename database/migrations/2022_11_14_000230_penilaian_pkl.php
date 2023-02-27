@@ -13,7 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-
         Schema::create('penilaian_pkl', function (Blueprint $table) {
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
@@ -24,7 +23,6 @@ return new class extends Migration
             
             $table->foreign('siswa')->references('nis')->on('siswa')->cascadeOnDelete();
             $table->foreign('pb_iduka')->references('nik')->on('pb_iduka')->cascadeOnDelete();
-
         });
     }
 
