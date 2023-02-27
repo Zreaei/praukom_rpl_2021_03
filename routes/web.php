@@ -320,7 +320,7 @@ Route::get('/admkeu/home', [HomeAdmkeuController::class, 'home'])->name('admkeu.
 // Walas
 Route::group(['middleware' => ['auth', 'level:LVL006']], function () {
 
-    // Walas - Home
+    // Walas
     Route::get('/walas/home', [WalasMainController::class, 'home'])->name('walas.home');
 
     // Walas - Data Pengajuan
