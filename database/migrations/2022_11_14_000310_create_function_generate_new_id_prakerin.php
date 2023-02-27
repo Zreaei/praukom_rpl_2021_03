@@ -25,9 +25,9 @@ return new class extends Migration {
     IF (kode_lama IS NOT NULL) THEN
         SET getangka = SUBSTRING(kode_lama, 4, 3)+1;
         SET kode_baru = LPAD(getangka, 3, 0);
-        SET getkode = CONCAT('PKR', kode_baru);
+        SET getkode = CONCAT('PRK', kode_baru);
     ELSE
-        SET getkode = 'PKR001';
+        SET getkode = 'PRK001';
     END IF;
     RETURN getkode;
     END ;"

@@ -22,16 +22,22 @@ class SiswaController extends Controller
         $this->LevelModel = new LevelModel;
         $this->UserModel = new UserModel;
     }
-    public function profile() 
+    private function getSiswa($nis)
+    {
+     // return collect(DB::select('SELECT * FROM siswa WHERE nis = ? ', [$nis]))->firstOrFail();
+     return collect(DB::table('siswa')->leftJoin('user', 'siswa.user', '=', 'user.id_user')->where('nis', $nis)->first());
+
+    }
+    public function profile($nis = null) 
    {
-        $siswa = $this->SiswaModel::all();
-        $level = $this->LevelModel::all();
-        $user = $this->UserModel::all();
-        $siswa = DB::table('siswa') 
-        ->join('user', 'user.id_user', '=', 'siswa.user')
-        ->join('level_user', 'level_user.id_level', '=', 'user.level')
-        ->select('siswa.*')
-        ->get();  
-        return view("siswa.profile", compact('siswa','level','user','siswa'));
+
+     // $asoip = $this->getSiswa($nis);
+     $asoip = DB::table('user')->leftJoin('siswa', 'user.id_user', '=', 'siswa.user')->where('siswa.nis', $nis)->first();
+     dd($asoip);
+        return view("siswa.profile", compact('asoip'));
+   }
+   public function home() 
+   {
+        return view("siswa.home");
    }
 }

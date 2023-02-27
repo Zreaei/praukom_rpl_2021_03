@@ -127,8 +127,6 @@
                                 </select>
                             </div>
                             <div class="form-control w-full max-w-sm">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold">Tanggal Verifikasi</span></label>
-                                <input type="date" name="tgl_verifikasi" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
                                 @foreach ($verifikator as $item)
                                     <input type="hidden"  name="verifikator" value="{{ $item->id_verifikator }}"required />
                                 @endforeach

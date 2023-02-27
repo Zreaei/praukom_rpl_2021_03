@@ -15,19 +15,7 @@
                 <form action="/siswa/editsimpankegiatan" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class=" mt-2">
-                    <div class="form-control w-full max-w-full">
-                        <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Kegiatan</span></label>
-                        <input type="date" name="tgl_kegiatan" value="{{ $edit[0]->tgl_kegiatan }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                        <input type="hidden"  name="id_kegiatan" value="{{$edit[0]->id_kegiatan}}" />
-                    </div>
-                </div>
-
-                <div class="flex justify-start mt-1">
-                    <div class="form-control w-36 max-w-lg">
-                        <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Jam Masuk</span></label>
-                        <input type="time" name="jam_masuk" value="{{ $edit[0]->jam_masuk }}" placeholder="Type here" class="input input-bordered w-36 max-w-lg bg-[#ffffff]" />
-                    </div>
+                <div class="mt-1">
                     <div class="form-control w-36 max-w-lg ml-2">
                         <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Jam Keluar</span></label>
                         <input type="time" name="jam_keluar" value="{{ $edit[0]->jam_keluar }}" placeholder="Type here" class="input input-bordered w-36 max-w-lg bg-[#ffffff]" />

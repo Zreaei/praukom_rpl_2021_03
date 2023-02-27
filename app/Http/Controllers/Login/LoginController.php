@@ -75,7 +75,7 @@ class LoginController extends Controller
             } else if ($user->level === 'LVL004') {
                 return redirect()->intended('/pbsekolah/home');
             } else if ($user->level === 'LVL005') {
-                return redirect()->intended('/pbiduka');
+                return redirect()->intended('/pbiduka/home');
             } else if ($user->level === 'LVL006') {
                 return redirect()->intended('/walas/home');
             } else if ($user->level === 'LVL007') {

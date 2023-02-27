@@ -35,7 +35,6 @@ use App\Http\Controllers\{
     Operator\DataPbidukaController,
     Operator\DataVerifikatorController,
     PbIduka\PbidukaController,
-    PbIduka\HomePbidukaController,
     PbIduka\NilaipklController,
     PbIduka\DataPrakerinPbidukaController,
     PbSekolah\PbsekolahMainController,
@@ -255,7 +254,7 @@ Route::get('/operator/admkeu/hapus/{id}', [OperatorDataAdmkeuController::class, 
 
 Route::group(['middleware' => ['auth', 'level:LVL003']], function () {
     // Siswa - home
-    Route::get('/siswa/home', [HomeSiswaController::class, 'home'])->name('siswa.home');
+    Route::get('/siswa/home', [SiswaController::class, 'home'])->name('siswa.home');
     Route::get('/siswa/profile', [SiswaController::class, 'profile'])->name('siswa.profile');
 
     // Siswa - pengajuan
@@ -291,15 +290,19 @@ Route::group(['middleware' => ['auth', 'level:LVL003']], function () {
     Route::get('/siswa/hapusprakerin/{id}', [PrakerinController::class, 'hapus']);
 });
 
-// PBIDUKA
-Route::get('/pbiduka/prakerin', [DataPrakerinPbidukaController::class, 'dataprakerin'])->name('pbiduka.prakerin');
-Route::get('/pbiduka/presensi', [DataPrakerinPbidukaController::class, 'datapresensi'])->name('pbiduka.presensi');
-Route::get('/pbiduka/kegiatan', [DataPrakerinPbidukaController::class, 'datakegiatan'])->name('pbiduka.kegiatan');
-Route::get('/pbiduka/setuju/{id}', [DataPrakerinPbidukaController::class, 'statuskonfirmasi'])->name('pbiduka.terimakonfirmasi');
-Route::get('/pbiduka/tolak/{id}', [DataPrakerinPbidukaController::class, 'statustolak'])->name('pbiduka.tolakkonfirmasi');
-Route::get('/pbiduka/penilaian', [NilaipklController::class, 'nilaipkl'])->name('pbiduka.penilaian');
-Route::get('/pbiduka/profile', [PbidukaController::class, 'profile'])->name('pbiduka.profile');
-Route::get('/pbiduka/home', [HomePbidukaController::class, 'home'])->name('pbiduka.home');
+Route::group(['middleware' => ['auth', 'level:LVL005']], function () {
+    // PBIDUKA
+    Route::get('/pbiduka/prakerin', [DataPrakerinPbidukaController::class, 'dataprakerin'])->name('pbiduka.prakerin');
+    Route::get('/pbiduka/presensi', [DataPrakerinPbidukaController::class, 'datapresensi'])->name('pbiduka.presensi');
+    Route::get('/pbiduka/kegiatan', [DataPrakerinPbidukaController::class, 'datakegiatan'])->name('pbiduka.kegiatan');
+    Route::get('/pbiduka/setuju/{id}', [DataPrakerinPbidukaController::class, 'statuskonfirmasi'])->name('pbiduka.terimakonfirmasi');
+    Route::get('/pbiduka/tolak/{id}', [DataPrakerinPbidukaController::class, 'statustolak'])->name('pbiduka.tolakkonfirmasi');
+    Route::get('/pbiduka/lulus/{id}', [DataPrakerinPbidukaController::class, 'statuslulus'])->name('pbiduka.sudahlulus');
+    Route::get('/pbiduka/tidaklulus/{id}', [DataPrakerinPbidukaController::class, 'statustidak'])->name('pbiduka.tidaklulus');
+    Route::get('/pbiduka/penilaian', [NilaipklController::class, 'nilaipkl'])->name('pbiduka.penilaian');
+    Route::get('/pbiduka/profile', [PbidukaController::class, 'profile'])->name('pbiduka.profile');
+    Route::get('/pbiduka/home', [PbidukaController::class, 'home'])->name('pbiduka.home');
+});
 
 // Admkeu
 Route::get('/admkeu/pengajuan', [DataPengajuanAdmkeuController::class, 'datapengajuan'])->name('admkeu.pengajuan');

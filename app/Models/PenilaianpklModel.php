@@ -15,4 +15,5 @@ class PenilaianpklModel extends Model
     public $incrementing = false;
     public $keyType = 'string';
     protected $fillable = ['id_nilaipkl','siswa','pb_iduka'];
+
 }

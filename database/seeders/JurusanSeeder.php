@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+// use App\Models\LevelModel;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
+// use Illuminate\Support\Str;
 
 class JurusanSeeder extends Seeder
 {
@@ -22,6 +25,12 @@ class JurusanSeeder extends Seeder
                 'kaprog' => 'KPR001',
                 'bidang_keahlian' => 'Informatika',
                 'program_keahlian' => 'RPL'
+            ],
+            [
+                'id_jurusan' => 'JRS002',
+                'kaprog' => 'KPR001',
+                'bidang_keahlian' => 'Informatika',
+                'program_keahlian' => 'TKJ'
             ],
         ];
 

@@ -79,7 +79,7 @@ class DataPrakerinPbidukaController extends Controller
                 ->where('id_presensi', $id)
                 ->update($status);
             if ($hapus) {
-                flash()->addSuccess('Berhasil Dikonfirmasi');
+                sweetalert()->addSuccess('Data Berhasil Dikonfirmasi!');
                 return redirect('/pbiduka/presensi');
             }
         } catch (\Exception $e) {
@@ -104,7 +104,7 @@ class DataPrakerinPbidukaController extends Controller
                 ->where('id_presensi', $id)
                 ->update($status);
             if ($hapus) {
-                flash()->addSuccess('Berhasil Ditolak');
+                sweetalert()->addSuccess('Data Berhasil Ditolak!');
                 return redirect('/pbiduka/presensi');
             }
         } catch (\Exception $e) {
@@ -112,6 +112,60 @@ class DataPrakerinPbidukaController extends Controller
         }
 
     }    
+
+    public function statuslulus($id = null)
+    {
+        try {
+            // $id_user = DB::table('user')
+            //     ->select('id_user')
+            //     ->where('username', Auth::user()->username)
+            //     ->get();
+            // $array = Arr::pluck($id_user, 'id_user');
+            // $approver = Arr::get($array, '0');
+            // dd($id);
+
+            $status = [
+                // 'approver' => $approver,
+                'status_prakerin' => ('sudah lulus')
+            ];
+            $hapus = DB::table('prakerin')
+                ->where('id_prakerin', $id)
+                ->update($status);
+            if ($hapus) {
+                sweetalert()->addSuccess('Berhasil Meluluskan!');
+                return redirect('/pbiduka/prakerin');
+            }
+        } catch (\Exception $e) {
+            $e->getMessage();
+        }
+    }
+    public function statustidak($id = null)
+    {
+        try {
+            // $id_user = DB::table('user')
+            //     ->select('id_user')
+            //     ->where('username', Auth::user()->username)
+            //     ->get();
+            // $array = Arr::pluck($id_user, 'id_user');
+            // $approver = Arr::get($array, '0');
+
+            $status = [
+                // 'approver' => $approver,
+                'status_prakerin' => ('tidak lulus')
+            ];
+            $hapus = DB::table('prakerin')
+                ->where('id_prakerin', $id)
+                ->update($status);
+            if ($hapus) {
+                sweetalert()->addSuccess('Berhasil Tidak Meluluskan!');
+                return redirect('/pbiduka/prakerin');
+            }
+        } catch (\Exception $e) {
+            $e->getMessage();
+        }
+
+    }    
+
     public function datakegiatan()
     {
         $datakegiatan = DB::table('kegiatan') 

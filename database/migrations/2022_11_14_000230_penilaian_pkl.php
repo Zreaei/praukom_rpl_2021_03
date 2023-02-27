@@ -23,6 +23,7 @@ return new class extends Migration
             
             $table->foreign('siswa')->references('nis')->on('siswa')->cascadeOnDelete();
             $table->foreign('pb_iduka')->references('nik')->on('pb_iduka')->cascadeOnDelete();
+
         });
     }
 

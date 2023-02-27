@@ -19,10 +19,10 @@ return new class extends Migration
             $table->collation = 'utf8mb4_general_ci';
             $table->tinyInteger('id_nilaipkl')->nullable(false);
             $table->char('kategori_nilai', 6)->nullable(false);
-            $table->tinyInteger('nilai_pkl')->nullable(false);
+            $table->tinyInteger('nilai_pkl')->nullable();
 
-            $table->foreign('id_nilaipkl')->references('id_nilaipkl')->on('penilaian_pkl')->cascadeOnDelete();
             $table->foreign('kategori_nilai')->references('id_kat_nilai')->on('kategori_nilai')->cascadeOnDelete();
+            $table->foreign('id_nilaipkl')->references('id_nilaipkl')->on('penilaian_pkl')->cascadeOnDelete();
         });
     }
 

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 // use Illuminate\Notifications\Notifiable;
 // use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -21,8 +23,13 @@ class User extends Authenticatable
     protected $fillable = ['id_user','level','username','password','email'];
 
     public function level_user() {
-
+        //many to one
         return $this->belongsTo(LevelModel::class, 'level', 'id_level');
+    }
+    public function asoip(): HasOne
+     {
+        //many to one
+        return $this->HasOne(SiswaModel::class, 'user', 'id_user');
     }
 }
 

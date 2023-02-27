@@ -8,6 +8,7 @@ use App\Models\SiswaModel;
 use App\Models\IdukaModel;
 use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -56,14 +57,13 @@ class PrakerinController extends Controller
             $id_prakerin = DB::select('SELECT generate_new_id_prakerin() AS id_prakerin');
             $array = Arr::pluck($id_prakerin, 'id_prakerin');
             $kode_baru = Arr::get($array, '0');
+            $tgl_awal = now();
             $tambah_prakerin = DB::table('prakerin')->insert([
                 'id_prakerin' => $kode_baru,
                 'pengajuan' => $request->input('pengajuan'),
                 'siswa' => $request->input('siswa'),
                 'iduka' => $request->input('iduka'),
-                'status_prakerin' => $request->input('status_prakerin'),
-                'tgl_mulai' => $request->input('tgl_mulai'),
-                'tgl_selesai' => $request->input('tgl_selesai'),
+                'tgl_mulai' => $tgl_awal
             ]);
             if ($tambah_prakerin) {
                 return redirect('/siswa/prakerin');
@@ -75,26 +75,7 @@ class PrakerinController extends Controller
         }
     }
 
-   public function editprakerin(Request $request)
-    {
-        try {
-            $data = [
-                'status_prakerin' => $request->input('status_prakerin'),
-                'tgl_mulai' => $request->input('tgl_mulai'),
-                'tgl_selesai' => $request->input('tgl_selesai'),
-                // dd($request->all())
-            ];
-            $upd = $this->PrakerinModel
-                        ->where('id_prakerin', $request->input('id_prakerin'))
-                        ->update($data);
-            if($upd){
-                return redirect('/siswa/prakerin');
-            }
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-        
-    }
+    
 
     public function hapus($id = null)
     {

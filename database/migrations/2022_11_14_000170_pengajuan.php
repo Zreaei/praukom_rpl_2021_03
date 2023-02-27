@@ -24,7 +24,7 @@ return new class extends Migration
             $table->char('kaprog', 6)->nullable(false);
             $table->char('walas', 6)->nullable(false);
             $table->char('iduka', 6)->nullable(false);
-            $table->date('tgl_pengajuan')->nullable(false);
+            $table->date('tgl_pengajuan')->nullable();
             $table->enum('konfirmasi_admkeu', ['pending', 'terima', 'tolak'])->default('pending')->nullable();
             $table->enum('konfirmasi_wkhubin', ['pending', 'terima', 'tolak'])->default('pending')->nullable();
             $table->enum('konfirmasi_kaprog', ['pending', 'terima', 'tolak'])->default('pending')->nullable();
