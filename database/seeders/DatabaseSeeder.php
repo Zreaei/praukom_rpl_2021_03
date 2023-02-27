@@ -44,19 +44,19 @@ class DatabaseSeeder extends Seeder
             AngkatanSeeder::class,
             KelasSeeder::class,
             SiswaSeeder::class,
-            PengajuanSeeder::class
-            // PrakerinSeeder::class,
-            // MonitoringSeeder::class,
-            // PresensiSeeder::class,
-            // KegiatanSeeder::class,
-            // VerifikasiSeeder::class,
-            // KategorinilaiSeeder::class,
-            // PenilaianverifSeeder::class,
-            // NilaiverifSeeder::class,
-            // SertifikatverifSeeder::class,
-            // PenilaianpklSeeder::class,
+            PengajuanSeeder::class,
+            PrakerinSeeder::class,
+            MonitoringSeeder::class,
+            PresensiSeeder::class,
+            KegiatanSeeder::class,
+            VerifikasiSeeder::class,
+            KategorinilaiSeeder::class,
+            PenilaianverifSeeder::class,
+            NilaiverifSeeder::class,
+            SertifikatverifSeeder::class,
+            PenilaianpklSeeder::class,
             // NilaipklSeeder::class,
-            // SertifikatpklSeeder::class
+            SertifikatpklSeeder::class
         ]);
     }
 }

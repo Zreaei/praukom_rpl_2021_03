@@ -26,6 +26,12 @@ class JurusanSeeder extends Seeder
                 'bidang_keahlian' => 'Informatika',
                 'program_keahlian' => 'RPL'
             ],
+            [
+                'id_jurusan' => 'JRS002',
+                'kaprog' => 'KPR001',
+                'bidang_keahlian' => 'Informatika',
+                'program_keahlian' => 'TKJ'
+            ],
         ];
 
         DB::table('jurusan')->insert($jurusan);

@@ -160,17 +160,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Status Prakerin</span></label>
-                                <div class="flex justify-between">
-                                    <input type="radio" value="sudah lulus" name="status_prakerin" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]"/>
-                                    <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Sudah</span></label>
-                                    <input type="radio" value="belum lulus" name="status_prakerin" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                                    <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Belum</span></label>
-                                    <input type="radio" value="tidak lulus" name="status_prakerin" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                                    <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Tidak</span></label>
-                                </div>
-                            </div>
                             
                         </div>
 

@@ -15,13 +15,8 @@
                 <form action="/siswa/editsimpanverifikasi" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class=" mt-2">
-                    <div class="form-control w-full max-w-full">
-                        <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Verifikasi</span></label>
-                        <input type="date" name="tgl_verifikasi" value="{{ $edit[0]->tgl_verifikasi }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                        <input type="hidden"  name="id_verifikasi" value="{{$edit[0]->id_verifikasi}}" />
-                    </div>
-                </div>
+    
+                <input type="hidden"  name="id_verifikasi" value="{{$edit[0]->id_verifikasi}}" />
 
                 <div class="flex justify-between mt-2">
                     <div class="form-control w-full max-w-2xl">

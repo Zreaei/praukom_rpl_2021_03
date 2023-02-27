@@ -120,7 +120,7 @@
                     <form action="{{ route('siswa.simpankegiatan') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                         <div class="flex justify-between mt-1">
-                            <div class="form-control w-full max-w-sm mr-2">
+                            <div class="form-control w-full max-w-2xl">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Prakerin</span></label>
                                 <select class="select select-bordered bg-[#ffffff]" name="prakerin" required>
                                     <option disabled selected>Pilih Prakerin</option>
@@ -129,20 +129,12 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <!-- <div class="form-control w-full max-w-sm">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Kegiatan</span></label>
-                                <input type="date" name="tgl_kegiatan" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                            </div> -->
                         </div>
                         
                         <div class="flex justify-start mt-1">
-                            <!-- <div class="form-control w-36 max-w-lg mr-1">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Jam Masuk</span></label>
-                                <input type="time" name="jam_masuk"required placeholder="Type here" class="input input-bordered w-36 max-w-lg bg-[#ffffff]" />
-                            </div> -->
-                            <div class="form-control w-36 max-w-lg ml-4">
+                            <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Jam Keluar</span></label>
-                                <input type="time" name="jam_keluar"  required placeholder="Type here" class="input input-bordered w-36 max-w-lg bg-[#ffffff]" />
+                                <input type="time" name="jam_keluar"  required placeholder="Type here" class="input input-bordered w-full max-w-sm bg-[#ffffff]" />
                             </div>
                             <div class="form-control w-full max-w-sm ml-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Keterangan Kegiatan</span></label>

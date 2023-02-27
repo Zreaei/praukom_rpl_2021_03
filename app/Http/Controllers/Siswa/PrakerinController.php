@@ -63,8 +63,7 @@ class PrakerinController extends Controller
                 'pengajuan' => $request->input('pengajuan'),
                 'siswa' => $request->input('siswa'),
                 'iduka' => $request->input('iduka'),
-                'tgl_mulai' => $tgl_awal,
-                'status_prakerin' => $request->input('status_prakerin')
+                'tgl_mulai' => $tgl_awal
             ]);
             if ($tambah_prakerin) {
                 return redirect('/siswa/prakerin');
@@ -76,26 +75,7 @@ class PrakerinController extends Controller
         }
     }
 
-   public function editprakerin(Request $request)
-    {
-        try {
-            $data = [
-                'status_prakerin' => $request->input('status_prakerin'),
-                'tgl_mulai' => $request->input('tgl_mulai'),
-                'tgl_selesai' => $request->input('tgl_selesai'),
-                // dd($request->all())
-            ];
-            $upd = $this->PrakerinModel
-                        ->where('id_prakerin', $request->input('id_prakerin'))
-                        ->update($data);
-            if($upd){
-                return redirect('/siswa/prakerin');
-            }
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-        
-    }
+    
 
     public function hapus($id = null)
     {

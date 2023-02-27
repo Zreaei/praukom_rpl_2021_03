@@ -64,7 +64,7 @@
                                 <div class="flex justify-center">
                                     <div class="px-4 py-4">
                                         <label for="validasi{{ $a->id_pengajuan }}" class="text-[#2D5EBB] hover:text-opacity-50">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                                         </label>
                                     </div>
@@ -292,21 +292,21 @@
                             <div class="form-control w-full max-w-sm mr-2">
                             <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Wali kelas</span></label>
                             @switch($validasi->konfirmasi_walas)
-                                @case('Konfirmasi Diterima')
+                                @case('terima')
                                 <span class="rounded-lg bg-success py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Dikonfirmasi</span>
                                 </span>
                                 @break
 
-                                @case('Belum Dikonfirmasi')
+                                @case('pending')
                                 <span class="rounded-lg bg-warning py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">wait</span> 
                                 </span>
                                 @break
 
-                                @case('Konfirmasi Ditolak')
+                                @case('tolak')
                                 <span class="rounded-lg bg-error py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Ditolak</span>
@@ -318,21 +318,21 @@
                             <div class="form-control w-full max-w-sm">
                             <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">ADMIN KEUANGAN</span></label>
                             @switch($validasi->konfirmasi_admkeu)
-                                @case('Konfirmasi Diterima')
+                                @case('terima')
                                 <span class="rounded-lg bg-success py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Dikonfirmasi</span>
                                 </span>
                                 @break
 
-                                @case('Belum Dikonfirmasi')
+                                @case('pending')
                                 <span class="rounded-lg bg-warning py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">wait</span> 
                                 </span>
                                 @break
 
-                                @case('Konfirmasi Ditolak')
+                                @case('tolak')
                                 <span class="rounded-lg bg-error py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Ditolak</span>
@@ -347,21 +347,21 @@
                             <div class="form-control w-full max-w-sm mr-2">
                             <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Waka hubin</span></label>
                             @switch($validasi->konfirmasi_wkhubin)
-                                @case('Konfirmasi Diterima')
+                                @case('terima')
                                 <span class="rounded-lg bg-success py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Dikonfirmasi</span>
                                 </span>
                                 @break
 
-                                @case('Belum Dikonfirmasi')
+                                @case('pending')
                                 <span class="rounded-lg bg-warning py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">wait</span> 
                                 </span>
                                 @break
 
-                                @case('Konfirmasi Ditolak')
+                                @case('tolak')
                                 <span class="rounded-lg bg-error py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Ditolak</span>
@@ -373,21 +373,21 @@
                             <div class="form-control w-full max-w-sm">
                             <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">kepala program</span></label>
                             @switch($validasi->konfirmasi_kaprog)
-                                @case('Konfirmasi Diterima')
+                                @case('terima')
                                 <span class="rounded-lg bg-success py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Dikonfirmasi</span>
                                 </span>
                                 @break
 
-                                @case('Belum Dikonfirmasi')
+                                @case('pending')
                                 <span class="rounded-lg bg-warning py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">wait</span> 
                                 </span>
                                 @break
 
-                                @case('Konfirmasi Ditolak')
+                                @case('tolak')
                                 <span class="rounded-lg bg-error py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Ditolak</span>
@@ -397,7 +397,7 @@
                                 @endswitch
                             </div>
                         </div>
-                        @if($validasi->konfirmasi_admkeu == "Belum Dikonfirmasi")
+                        @if($validasi->konfirmasi_admkeu == "pending")
                         <div class="flex justify-center mt-5">
                             <div class="form-control w-full max-w-sm">
                                 <svg fill="none" class="text-[#E63946] w-1/4 mx-auto" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

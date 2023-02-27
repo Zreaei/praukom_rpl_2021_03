@@ -130,41 +130,37 @@
                     <h3 class="text-lg font-bold text-[#ffffff] text-center">TAMBAH DATA PENGAJUAN</h3>
                     <form action="{{ route('siswa.simpanpengajuan') }}" method="POST">
                     @csrf
-                        <div class="flex justify-between mt-1">
-                            <div class="form-control w-full max-w-sm mr-2">
+                        <div class=" mt-1">
+                            <div class="form-control w-full max-w-2xl mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold uppercase ">NIS</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="datasiswa" required>
+                                <select class="select select-bordered bg-[#ffffff]" name="siswa" required>
                                     <option disabled selected>Pilih NIS</option>
                                     @foreach ($siswa as $item)
                                         <option value="{{ $item->nis }}">{{ $item->nis }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-control w-full max-w-sm">
-                                <label class="label"><span class="label-text text-[#ffffff] text-md font-bold uppercase ">Tanggal Pengajuan</span></label>
-                                <input type="date" name="datatglpengajuan" placeholder="Type here" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
-                            </div>
                         </div>
 
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold uppercase ">Nama Perusahaan</span></label>
-                                <input type="text" name="datanamaiduka" placeholder="Nama Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required />
+                                <input type="text" name="nama_iduka" placeholder="Nama Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required />
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold uppercase ">Pimpinan Perusahaan</span></label>
-                                <input type="text" name="datapimpinaniduka" placeholder="Pimpinan Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
+                                <input type="text" name="pimpinan_iduka" placeholder="Pimpinan Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
                             </div>
                         </div>
 
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold uppercase ">Alamat Perusahaan</span></label>
-                                <input type="text" name="dataalamatiduka" placeholder="Alamat Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]"required />
+                                <input type="text" name="alamat_iduka" placeholder="Alamat Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]"required />
                             </div>
                             <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold uppercase ">Telp Perusahaan</span></label>
-                                <input type="number" name="datatelpiduka" placeholder="Telp Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
+                                <input type="number" name="telp_iduka" placeholder="Telp Perusahaan" class="input input-bordered w-full max-w-sm bg-[#ffffff]" required/>
                             </div>
                         </div>
 
@@ -172,7 +168,7 @@
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-2xl">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold uppercase ">Wali Kelas</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="datawalas" required>
+                                <select class="select select-bordered bg-[#ffffff]" name="walas" required>
                                     <option disabled selected>Pilih Nama Wali Kelas</option>
                                     @foreach ($walas as $item)
                                         <option value="{{ $item->id_walas }}">{{ $item->nama_walas }}</option>
@@ -180,14 +176,14 @@
                                 </select>
                             </div>
                             @foreach ($admkeu as $item)
-                                <input type="hidden"  name="dataadmkeu" value="{{ $item->id_admkeu }}"required />
+                                <input type="hidden"  name="admkeu" value="{{ $item->id_admkeu }}"required />
                             @endforeach
                         </div>
 
                         <div class="flex justify-between mt-1">
                             <div class="form-control w-full max-w-sm mr-2">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold uppercase ">Kepala Program</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="datakaprog" required>
+                                <select class="select select-bordered bg-[#ffffff]" name="kaprog" required>
                                     <option disabled selected>Pilih Nama Kepala Program</option>
                                     @foreach ($kaprog as $item)
                                         <option value="{{ $item->id_kaprog }}">{{ $item->nama_kaprog }}</option>
@@ -196,7 +192,7 @@
                             </div>
                             <div class="form-control w-full max-w-sm ">
                                 <label class="label"><span class="label-text text-[#ffffff] text-md font-bold uppercase ">Waka Hubin</span></label>
-                                <select class="select select-bordered bg-[#ffffff]" name="datawkhubin" required>
+                                <select class="select select-bordered bg-[#ffffff]" name="wkhubin" required>
                                     <option disabled selected>Pilih Nama Waka Hubin</option>
                                     @foreach ($wkhubin as $item)
                                         <option value="{{ $item->id_wkhubin }}">{{ $item->nama_wkhubin }}</option>
@@ -233,8 +229,6 @@
                     
                         <div class=" mt-2">
                             <div class="form-control w-full max-w-full">
-                                <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Tanggal Pengajuan</span></label>
-                                <input type="date" name="tgl_pengajuan" value="{{ old('tgl_pengajuan', $edit->tgl_pengajuan) }}"required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
                                 <input type="hidden"  name="id_pengajuan" value="{{$edit->id_pengajuan}}" required/>
                                 <input type="hidden"  name="id_iduka" value="{{$edit->id_iduka }}" required/>
                             </div>
@@ -306,21 +300,21 @@
                             <div class="form-control w-full max-w-sm mr-2">
                             <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">WALI KELAS</span></label>
                             @switch($validasi->konfirmasi_walas)
-                                @case('Konfirmasi Diterima')
+                                @case('terima')
                                 <span class="rounded-lg bg-success py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Dikonfirmasi</span>
                                 </span>
                                 @break
 
-                                @case('Belum Dikonfirmasi')
+                                @case('pending')
                                 <span class="rounded-lg bg-warning py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">wait</span> 
                                 </span>
                                 @break
 
-                                @case('Konfirmasi Ditolak')
+                                @case('tolak')
                                 <span class="rounded-lg bg-error py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Ditolak</span>
@@ -332,21 +326,21 @@
                             <div class="form-control w-full max-w-sm">
                             <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">ADMIN KEUANGAN</span></label>
                             @switch($validasi->konfirmasi_admkeu)
-                                @case('Konfirmasi Diterima')
+                                @case('terima')
                                 <span class="rounded-lg bg-success py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Dikonfirmasi</span>
                                 </span>
                                 @break
 
-                                @case('Belum Dikonfirmasi')
+                                @case('pending')
                                 <span class="rounded-lg bg-warning py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">wait</span> 
                                 </span>
                                 @break
 
-                                @case('Konfirmasi Ditolak')
+                                @case('tolak')
                                 <span class="rounded-lg bg-error py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Ditolak</span>
@@ -361,21 +355,21 @@
                             <div class="form-control w-full max-w-sm mr-2">
                             <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">waka hubin</span></label>
                             @switch($validasi->konfirmasi_wkhubin)
-                                @case('Konfirmasi Diterima')
+                                @case('terima')
                                 <span class="rounded-lg bg-success py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Dikonfirmasi</span>
                                 </span>
                                 @break
 
-                                @case('Belum Dikonfirmasi')
+                                @case('pending')
                                 <span class="rounded-lg bg-warning py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">wait</span> 
                                 </span>
                                 @break
 
-                                @case('Konfirmasi Ditolak')
+                                @case('tolak')
                                 <span class="rounded-lg bg-error py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Ditolak</span>
@@ -387,21 +381,21 @@
                             <div class="form-control w-full max-w-sm">
                             <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">kepala program</span></label>
                             @switch($validasi->konfirmasi_kaprog)
-                                @case('Konfirmasi Diterima')
+                                @case('terima')
                                 <span class="rounded-lg bg-success py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Dikonfirmasi</span>
                                 </span>
                                 @break
 
-                                @case('Belum Dikonfirmasi')
+                                @case('pending')
                                 <span class="rounded-lg bg-warning py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">wait</span> 
                                 </span>
                                 @break
 
-                                @case('Konfirmasi Ditolak')
+                                @case('tolak')
                                 <span class="rounded-lg bg-error py-3 text-center text-white font-bold">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="inline-block w-10 h-10 text-white"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>
                                     <span class="text-center text-2xl px-3">Ditolak</span>

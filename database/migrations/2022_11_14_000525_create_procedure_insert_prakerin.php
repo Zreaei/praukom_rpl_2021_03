@@ -19,8 +19,8 @@ return new class extends Migration
         DB::unprepared(
           "CREATE PROCEDURE procedure_insert_prakerin(dataprakerin CHAR(6), datatgl DATE, datapbiduka CHAR(18), datapbsekolah CHAR(6), datastatus enum('hadir', 'sakit', 'izin', 'alfa'), dataket text)
                 BEGIN
-                DECLARE id_presensi CHAR(6);
-                SELECT generate_new_id_presensi() INTO id_presensi;
+                DECLARE id_prakerin CHAR(6);
+                SELECT generate_new_id_prakerin() INTO id_prakerin;
                 INSERT INTO presensi (id_presensi, prakerin, tgl_presensi, pb_iduka, pb_sekolah, status_presensi, keterangan_presensi) VALUES(id_presensi, dataprakerin, datatgl, datapbiduka, datapbsekolah, datastatus, dataket);
                 UPDATE prakerin SET tgl_selesai = datatgl
                 WHERE id_prakerin = dataprakerin;

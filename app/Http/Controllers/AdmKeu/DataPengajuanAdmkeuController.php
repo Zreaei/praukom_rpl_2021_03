@@ -50,13 +50,13 @@ class DataPengajuanAdmkeuController extends Controller
 
             $status = [
                 // 'approver' => $approver,
-                'konfirmasi_admkeu' => ('Konfirmasi Diterima')
+                'konfirmasi_admkeu' => ('terima')
             ];
             $hapus = DB::table('pengajuan')
                 ->where('id_pengajuan', $id)
                 ->update($status);
             if ($hapus) {
-                flash()->addSuccess('Berhasil Dikonfirmasi');
+                sweetalert()->addSuccess('Data Berhasil Dikonfirmasi!');
                 return redirect('/admkeu/pengajuan');
             }
         } catch (\Exception $e) {
@@ -75,13 +75,13 @@ class DataPengajuanAdmkeuController extends Controller
 
             $status = [
                 // 'approver' => $approver,
-                'konfirmasi_admkeu' => ('Konfirmasi Ditolak')
+                'konfirmasi_admkeu' => ('tolak')
             ];
             $hapus = DB::table('pengajuan')
                 ->where('id_pengajuan', $id)
                 ->update($status);
             if ($hapus) {
-                flash()->addSuccess('Berhasil Ditolak');
+                sweetalert()->addSuccess('Data Berhasil Ditolak!');
                 return redirect('/admkeu/pengajuan');
             }
         } catch (\Exception $e) {

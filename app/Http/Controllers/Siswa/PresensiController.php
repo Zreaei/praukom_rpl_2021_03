@@ -42,83 +42,36 @@ class PresensiController extends Controller
     
     public function tambahpresensi(Request $request)
     {
-        $validated = $request->validate([
-            'dataprakerin' => 'required',
-            'datatgl' => 'required',
-            'datapbiduka' => 'required',
-            'datapbsekolah' => 'required',
-            'datastatus' => 'required',
-            'dataket' => 'required',
-        ]);
+        $request->validate(
+            [
+                'prakerin' => 'required',
+                'pb_iduka' => 'required',
+                'pb_sekolah' => 'required',
+                'status_presensi' => 'required',
+                'keterangan_presensi' => 'required',
+            ]
+        );
 
-        // dd($validated);
+        $tglabsen = now();
 
-            try {
-                $tambah_presensi = DB::select('CALL procedure_insert_presensi(?,?,?,?,?,?)', [
-                    $validated['dataprakerin'],
-                    $validated['datatgl'],
-                    $validated['datapbiduka'],
-                    $validated['datapbsekolah'],
-                    $validated['datastatus'],
-                    $validated['dataket']
-                ]);
+        DB::insert("CALL procedure_insert_presensi(
+            :dataprakerin, :datatgl, :datapbiduka, :datapbsekolah, :datastatus, :dataket)",
+            [
+                'dataprakerin' => $request->prakerin,
+                'datatgl' => $tglabsen,
+                'datapbiduka' => $request->pb_iduka,
+                'datapbsekolah' => $request->pb_sekolah,
+                'datastatus' => $request->status_presensi,
+                'dataket' => $request->keterangan_presensi,
+            ]
+        );
 
-                sweetalert()->addSuccess('Data Presensi Berhasil Ditambah!');
-                return redirect('/siswa/presensi');
-            } catch (\Throwable $th) {
-                sweetalert()->addError('Data Presensi Gagal Ditambah!');
-                return redirect('/siswa/presensi');
-            }
-        // try {
-        //     $presensi = new PresensiModel();
-        //     $id_presensi = DB::select('SELECT generate_new_id_presensi() AS id_presensi');
-        //     $array = Arr::pluck($id_presensi, 'id_presensi');
-        //     $kode_baru = Arr::get($array, '0');
-        //     $tambah_presensi = DB::table('presensi')->insert([
-        //         'id_presensi' => $kode_baru,
-        //         'prakerin' => $request->input('prakerin'),
-        //         'pb_iduka' => $request->input('pb_iduka'),
-        //         'pb_sekolah' => $request->input('pb_sekolah'),
-        //         'tgl_presensi' => $request->input('tgl_presensi'),
-        //         'keterangan_presensi' => $request->input('keterangan_presensi'),
-        //         'status_presensi' => $request->input('status_presensi'),
-                
-        //     ]);
-        //     if ($tambah_presensi) {
-        //         sweetalert()->addSuccess('Data Presensi Berhasil Ditambah!');
-        //         return redirect('/siswa/presensi');
-        //     } else {
-        //         return "input data gagal";
-        //     }
-        // } catch (Exception $e) {
-        //     return $e->getMessage();
-        // }
+        sweetalert()->addSuccess('Data Presensi Berhasil Ditambah!');
+        return redirect('/siswa/presensi');
             
     }
     public function editpresensi(Request $request)
     {
-        // $validated = $request->validate([
-        //     'tgl_presensi' => 'required',
-        //     'keterangan_presensi' => 'required',
-        //     'status_presensi' => 'required',
-        // ]);
-
-        //     try {
-        //         $edit_pengajuan = DB::select('CALL procedure_update_pengajuan(?,?,?,?,?,?,?)', [
-        //             $request->idpresensi,
-        //             $validated['nama_iduka'],
-        //             $validated['pimpinan_iduka'],
-        //             $validated['alamat_iduka'],
-        //             $validated['telp_iduka'],
-        //             $request->id_pengajuan,
-        //             $validated['tgl_pengajuan']
-        //         ]);
-        // } catch (Exception $e) {
-        //     return $e->getMessage();
-        // } finally {
-        //     sweetalert()->addSuccess('Data Pengajuan Berhasil Diedit!');
-        //     return redirect('/siswa/pengajuan');
-        // }
         try {
             $data = [
                 'tgl_presensi' => $request->input('tgl_presensi'),
