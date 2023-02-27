@@ -52,7 +52,9 @@ class PengajuanController extends Controller
         $pengajuan = DB::table('pengajuan')
         ->join('iduka', 'iduka.id_iduka', '=', 'pengajuan.iduka')
         ->join('siswa', 'siswa.nis', '=', 'pengajuan.siswa')
-        ->select('pengajuan.*', 'iduka.*', 'siswa.*')
+        ->join('kelas', 'kelas.id_kelas', '=', 'siswa.kelas')
+        ->join('walas', 'walas.id_walas', '=', 'kelas.walas')
+        ->select('pengajuan.*', 'iduka.*', 'siswa.*', 'kelas.*', 'walas.*')
         ->get();
         return view('siswa.pengajuan', compact('pengajuan','siswa','admkeu','wkhubin','kaprog','walas'), ["edit" => $pengajuan]);
     }
@@ -60,55 +62,41 @@ class PengajuanController extends Controller
 
     public function tambahpengajuan(Request $request)
     {
-        $validated = $request->validate([
-            'datanamaiduka' => 'required',
-            'datapimpinaniduka' => 'required',
-            'dataalamatiduka' => 'required',
-            'datatelpiduka' => 'required',
-            'datasiswa' => 'required',
-            'dataadmkeu' => 'required',
-            'datawkhubin' => 'required',
-            'datakaprog' => 'required',
-            'datawalas' => 'required',
-            'datatglpengajuan' => 'required',
-        ]);
-
-            try {
-                $tambah_pengajuan = DB::select('CALL procedure_insert_pengajuan(?,?,?,?,?,?,?,?,?,?)', [
-                    $validated['datanamaiduka'],
-                    $validated['datapimpinaniduka'],
-                    $validated['dataalamatiduka'],
-                    $validated['datatelpiduka'],
-                    $validated['datasiswa'],
-                    $validated['dataadmkeu'],
-                    $validated['datawkhubin'],
-                    $validated['datakaprog'],
-                    $validated['datawalas'],
-                    $validated['datatglpengajuan']
-                ]);
-                sweetalert()->addSuccess('Data Pengajuan Berhasil Ditambah!');
-                return redirect('/siswa/pengajuan');
-            } catch (\Throwable $th) {
-                sweetalert()->addError('Data Pengajuan Gagal Ditambah!');
-                return redirect('/siswa/pengajuan');
-            }
+            $request->validate(
+                [
+                    'nama_iduka' => 'required',
+                    'pimpinan_iduka' => 'required',
+                    'alamat_iduka' => 'required',
+                    'telp_iduka' => 'required',
+                    'siswa' => 'required',
+                    'admkeu' => 'required',
+                    'wkhubin' => 'required',
+                    'kaprog' => 'required',
+                    'walas' => 'required',
+                ]
+            );
+    
+            $tgl = now();
+    
+            DB::insert("CALL procedure_insert_pengajuan(
+                :datanamaiduka, :datapimpinaniduka, :dataalamatiduka, :datatelpiduka, :datasiswa, :dataadmkeu, :datawkhubin, :datakaprog, :datawalas, :datatglpengajuan)",
+                [
+                    'datanamaiduka' => $request->nama_iduka,
+                    'datapimpinaniduka' => $request->pimpinan_iduka,
+                    'dataalamatiduka' => $request->alamat_iduka,
+                    'datatelpiduka' => $request->telp_iduka,
+                    'datasiswa' => $request->siswa,
+                    'dataadmkeu' => $request->admkeu,
+                    'datawkhubin' => $request->wkhubin,
+                    'datakaprog' => $request->kaprog,
+                    'datawalas' => $request->walas,
+                    'datatglpengajuan' => $tgl,
+                ]
+            );
+    
+            sweetalert()->addSuccess('Data Pengajuan Berhasil Ditambah!');
+            return redirect('/siswa/pengajuan');
     }
-
-
-    // public function editpengajuan(pengajuanModel $pengajuan)
-    // {
-    //     $edit = DB::table('pengajuan')
-    //         ->join('iduka', 'iduka.id_iduka', '=', 'pengajuan.iduka')
-    //         ->join('siswa', 'siswa.nis', '=', 'pengajuan.siswa')
-    //         ->select('pengajuan.*', 'iduka.*', 'siswa.*')
-    //         ->where('id_pengajuan', '=', $pengajuan->id_pengajuan)
-    //         ->get();
-
-
-    //         return view('siswa.editpengajuan', ["edit" => $edit]);
-
-
-    // }
     public function editpengajuan(Request $request)
     {
         $validated = $request->validate([

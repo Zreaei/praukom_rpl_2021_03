@@ -26,10 +26,6 @@ class PengajuanSeeder extends Seeder
                 'walas' => 'WLS001',
                 'iduka' => 'IDK001',
                 'tgl_pengajuan' => '2001-01-01',
-                'konfirmasi_walas' => 'pending',
-                'konfirmasi_admkeu' => 'pending',
-                'konfirmasi_wkhubin' => 'pending',
-                'konfirmasi_kaprog' => 'pending'
 
             ],
         ];

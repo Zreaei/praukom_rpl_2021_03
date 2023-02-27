@@ -149,10 +149,10 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-control w-full max-w-sm">
+                            <!-- <div class="form-control w-full max-w-sm">
                                 <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Presensi</span></label>
-                                <input type="date" name="tgl_presensi" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                            </div>
+                                <input type="date" name="datatgl" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
+                            </div> -->
                         </div>
                         
                         <div class="flex justify-between mt-1">

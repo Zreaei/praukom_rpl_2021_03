@@ -12,4 +12,8 @@ class PbidukaController extends Controller
     {
         return view("pbiduka.profile");
     }
+    public function home() 
+    {
+       return view("pbiduka.home");
+    }
 }

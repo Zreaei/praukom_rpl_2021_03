@@ -67,15 +67,21 @@
                             </td>
                             <td class="text-sm text-item font-semibold px-5 py-4 text-center">
                                 @switch($item->status_prakerin)
-                                @case('belum')
-                                <span class="rounded-lg bg-error px-5 py-3 text-white font-bold uppercase">
-                                    Belum
+                                @case('belum lulus')
+                                <span class="rounded-lg bg-warning px-5 py-3 text-white font-bold uppercase">
+                                    Proses Prakerin
                                 </span>
                                 @break
 
-                                @case('sudah')
+                                @case('sudah lulus')
                                 <span class="rounded-lg bg-success px-5 py-3 text-white font-bold uppercase">
-                                    Sudah
+                                    Lulus
+                                </span>
+                                @break
+
+                                @case('tidak lulus')
+                                <span class="rounded-lg bg-error px-5 py-3 text-white font-bold uppercase">
+                                    Tidak Lulus
                                 </span>
                                 @break
 
@@ -154,42 +160,14 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Status Prakerin</span></label>
-                                <div class="flex justify-between">
-                                    <input type="radio" value="sudah" name="status_prakerin" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]"/>
-                                    <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Sudah</span></label>
-                                    <input type="radio" value="tidak" name="status_prakerin" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                                    <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Tidak</span></label>
-                                </div>
-                            </div>
                             
-                        </div>
-                        
-                        <div class="flex justify-between mt-1">
-                            
-                            <div class="form-control w-full max-w-sm mr-2">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Mulai</span></label>
-                                <input type="date" name="tgl_mulai" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                            </div>
-                            <div class="form-control w-full max-w-sm">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Selesai</span></label>
-                                <input type="date" name="tgl_selesai" required placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                            </div>
                         </div>
 
                         <div>
                             <button type="submit" class="btn bg-gradient-to-b from-[#FFA434] to-[#D24E16] w-full mt-3 ">
                                 SUBMIT
                             </button>
-                        </div>
-
-                        <!-- <div>
-                            <button  class="btn bg-gradient-to-b from-[#FFA434] to-[#D24E16] w-full mt-3 ">
-                                SUBMIT
-                            </button>
-                        </div> -->
-                        
+                        </div>    
                     </form>
                     
                 </div>
@@ -216,20 +194,6 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="flex justify-between mt-2">
-                            <div class="form-control w-full max-w-full">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Mulai</span></label>
-                                <input type="date" name="tgl_mulai" required value="{{ old('tgl_mulai', $edit->tgl_mulai) }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                                <input type="hidden"  name="id_prakerin" required value="{{$edit->id_prakerin}}" />
-                            </div>
-                            
-                            <div class="form-control w-full max-w-full">
-                                <label class="label"><span class="label-text text-[#ffffff] text-lg font-bold uppercase ">Tanggal Selesai</span></label>
-                                <input type="date" name="tgl_selesai" required value="{{ old('tgl_selesai', $edit->tgl_selesai) }}" placeholder="Type here" class="input input-bordered w-full max-w-full bg-[#ffffff]" />
-                            </div>
-                        </div>
-
                         <div>
                             <button type="submit" class="btn bg-gradient-to-b from-[#FFA434] to-[#D24E16] w-full mt-3 ">
                                 SUBMIT 

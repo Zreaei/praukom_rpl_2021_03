@@ -45,11 +45,12 @@ class VerifikasiController extends Controller
             $array = Arr::pluck($id_verifikasi, 'id_verifikasi');
             $kode_baru = Arr::get($array, '0');
             $img = $request->file('bukti_verifikasi')->store('img');
+            $tglverif = now();
             $tambah_verifikasi = DB::table('verifikasi')->insert([
                 'id_verifikasi' => $kode_baru,
                 'siswa' => $request->input('siswa'),
                 'verifikator' => $request->input('verifikator'),
-                'tgl_verifikasi' => $request->input('tgl_verifikasi'),
+                'tgl_verifikasi' => $tglverif,
                 'bukti_verifikasi' => $img,
                 
             ]);

@@ -21,6 +21,11 @@ return new class extends Migration
             $table->char('prakerin', 6)->nullable(false);
             $table->char('pb_iduka', 16)->nullable(false);
             $table->char('pb_sekolah', 6)->nullable(false);
+            $table->date('tgl_presensi')->nullable();
+            $table->string('keterangan_presensi', 50)->nullable();
+            $table->enum('status_presensi', ['hadir', 'sakit', 'izin', 'alfa'])->nullable(false);
+            $table->enum('konfirmasi_pbsekolah', ['terima', 'tolak', 'pending'])->default('pending')->nullable();
+            $table->enum('konfirmasi_pbiduka', ['terima', 'tolak', 'pending'])->default('pending')->nullable();
 
             $table->foreign('prakerin')->references('id_prakerin')->on('prakerin')->cascadeOnDelete();
             $table->foreign('pb_iduka')->references('nik')->on('pb_iduka')->cascadeOnDelete();

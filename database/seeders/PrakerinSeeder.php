@@ -23,8 +23,8 @@ class PrakerinSeeder extends Seeder
                 'siswa' => '123456789',
                 'iduka' => 'IDK001',
                 'status_prakerin' => 'sudah lulus',
-                'tgl_mulai' => '2001-01-01',
-                'tgl_selesai' => '2001-01-01'
+                'tgl_mulai' => '2023-02-01',
+                'tgl_selesai' => '2023-02-22'
             ],
         ];
 
