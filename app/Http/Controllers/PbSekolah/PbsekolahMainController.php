@@ -3,26 +3,31 @@
 namespace App\Http\Controllers\pbsekolah;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserModel;
 use App\Models\AbsensiModel;
 use App\Models\PrakerinModel;
 use App\Models\MonitoringModel;
+use App\Models\PbsekolahModel;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\{DB,Storage,Auth};
 
 class PbsekolahMainController extends Controller
 {
     protected $PrakerinModel;
     protected $MonitoringModel;
     protected $AbsensiModel;
+    protected $UserModel;
+    protected $PbsekolahModel;
 
     public function __construct()
     {
         $this->PrakerinModel = new PrakerinModel;
         $this->MonitoringModel = new MonitoringModel;
         $this->AbsensiModel = new AbsensiModel;
+        $this->UserModel = new UserModel;
+        $this->PbsekolahModel = new PbsekolahModel;
     }
 
     public function prakerin() 
@@ -59,10 +64,37 @@ class PbsekolahMainController extends Controller
             return view('pbsekolah.kegiatan')->with('prakerin', $prakerin);
     }
 
-    public function terima(AbsensiModel $tgl_presensi)
+    // public function terima(AbsensiModel $id=null)
+    // {
+    //     try {
+    //         // $id_user = DB::table('user')
+    //         // ->where('username', Auth:user()->username)
+    //         // ->get();
+    //         // $array = Arr::pluck($id_user, 'id_user');
+    //         // $approver = Arr::get($array, '0');
+            
+    //         $konfirmasi = [
+    //             'konfirmasi_pbsekolah' => ('terima')
+    //         ];
+    //         // AbsensiModel::where('id_presensi', $id)->update($konfirmasi);
+    //         $update = DB::table('absensi')
+    //         ->where('id_absensi', $id)
+    //         // ->where('tgl_presensi', $tgl_presensi)
+    //         ->update($konfirmasi);
+    //         // dd($update);
+    //         if($update) {
+    //             return redirect('pbsekolah/prakerin');
+    //         }
+    //     } catch (\Exception $e) {
+    //         $e->getMessage();
+    //     }
+
+    // }
+
+    public function terima($id=null)
     {
-        dd($tgl_presensi);
         try {
+            // dd($id);
             // $id_user = DB::table('user')
             // ->where('username', Auth:user()->username)
             // ->get();
@@ -72,21 +104,15 @@ class PbsekolahMainController extends Controller
             $konfirmasi = [
                 'konfirmasi_pbsekolah' => ('terima')
             ];
-            // AbsensiModel::where('id_presensi', $id)->update($konfirmasi);
-            $update = DB::table('absensi')
-                ->where('id_presensi', $id)
-                // ->where('tgl_presensi', $tgl_presensi)
-                ->update($konfirmasi);
-            if($update) {
-                return redirect('pbsekolah/prakerin');
-            }
+            AbsensiModel::where('id_absensi', $id)->update($konfirmasi);
+            return redirect('pbsekolah/prakerin');
         } catch (\Exception $e) {
             $e->getMessage();
         }
 
     }
 
-    public function tolak(AbsensiModel $id=null)
+    public function tolak($id=null)
     {
         try {
             // $id_user = DB::table('user')
@@ -98,7 +124,7 @@ class PbsekolahMainController extends Controller
             $konfirmasi = [
                 'konfirmasi_pbsekolah' => ('tolak')
             ];
-            AbsensiModel::where('id_presensi', $id)->update($konfirmasi);
+            AbsensiModel::where('id_absensi', $id)->update($konfirmasi);
             return redirect('pbsekolah/prakerin');
         } catch (\Exception $e) {
             $e->getMessage();
@@ -106,7 +132,6 @@ class PbsekolahMainController extends Controller
 
     }
 
-    // LANJUT LAGI !!!
     public function monitoring()
     {
         $prakerin = DB::table('prakerin')
@@ -177,11 +202,9 @@ class PbsekolahMainController extends Controller
 
     public function profile() 
     {
-        $profile = DB::table('user')
-            ->join('level_user', 'level_user.id_level', '=', 'user.level')
-            ->join('pbsekolah', 'pbsekolah.user', '=', 'user.id_user')
-            ->get();
+        $pbsekolah = PbsekolahModel::all();
+        $user = Auth::user();
 
-        return view('pbsekolah.profile')->with('profile', $profile);
+        return view('pbsekolah.profile', compact('pbsekolah', 'user'));
     }
 }

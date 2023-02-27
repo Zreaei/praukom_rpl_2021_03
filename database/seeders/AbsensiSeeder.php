@@ -18,6 +18,7 @@ class AbsensiSeeder extends Seeder
         $absensi = 
         [
             [
+                'id_absensi' => '001',
                 'id_presensi' => '001',
                 'tgl_presensi' => '2001-01-01',
                 'keterangan_presensi' => 'sakit hati',
@@ -25,6 +26,7 @@ class AbsensiSeeder extends Seeder
                 'konfirmasi_pbsekolah' => 'pending',
                 'konfirmasi_pbiduka' => 'pending'
             ],[
+                'id_absensi' => '002',
                 'id_presensi' => '001',
                 'tgl_presensi' => '2002-02-02',
                 'keterangan_presensi' => '',

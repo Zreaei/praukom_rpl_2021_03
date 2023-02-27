@@ -17,6 +17,7 @@ return new class extends Migration
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
+            $table->tinyInteger('id_absensi')->primary()->nullable(false);
             $table->tinyInteger('id_presensi')->nullable(false);
             $table->date('tgl_presensi')->nullable(false);
             $table->string('keterangan_presensi', 50)->nullable();

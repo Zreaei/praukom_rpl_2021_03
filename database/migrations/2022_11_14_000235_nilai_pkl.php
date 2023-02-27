@@ -21,14 +21,8 @@ return new class extends Migration
             $table->char('kategori_nilai', 6)->nullable(false);
             $table->tinyInteger('nilai_pkl')->nullable(false);
 
-<<<<<<<< HEAD:database/migrations/2022_11_14_000245_nilai_pkl.php
             $table->foreign('id_nilaipkl')->references('id_nilaipkl')->on('penilaian_pkl')->cascadeOnDelete();
             $table->foreign('kategori_nilai')->references('id_kat_nilai')->on('kategori_nilai')->cascadeOnDelete();
-            
-========
-            $table->foreign('kategori_nilai')->references('id_kat_nilai')->on('kategori_nilai')->cascadeOnDelete();
-            $table->foreign('id_nilaipkl')->references('id_nilaipkl')->on('penilaian_pkl')->cascadeOnDelete();
->>>>>>>> e01679e195840334664fe728166a85886559141a:database/migrations/2022_11_14_000235_nilai_pkl.php
         });
     }
 

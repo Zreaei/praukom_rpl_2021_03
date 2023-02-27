@@ -19,18 +19,11 @@ class AdmkeuSeeder extends Seeder
     public function run()
     {
          $admkeu = [
-        [
-<<<<<<< HEAD
-            'id_admkeu' => 'ADK001',
-            'user' => 'USR004',
-            'nama_admkeu' => 'sri',
-=======
             [
                 'id_admkeu' => 'ADK001',
                 'user' => 'USR003'
->>>>>>> e01679e195840334664fe728166a85886559141a
-            ],
-            ];
+            ]
+        ];
 
                 DB::table('adm_keuangan')->insert($admkeu);
                                             
