@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'level' => 'LVL001',
             'username' => 'Admin',
             'password' => Hash::make('admin'),
-            'email' => 'Admin@1',
+            'email' => 'admin@gmail.com',
             'foto_user' => NULL,
 
             ],
