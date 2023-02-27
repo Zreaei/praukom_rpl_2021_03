@@ -18,13 +18,8 @@ class KegiatanSeeder extends Seeder
         $kegiatan = 
         [
             [
-                'id_kegiatan' => 'KGT001',
-                'prakerin' => 'PRK001',
-                'foto_kegiatan' => 'kegiatan.jpg',
-                'keterangan_kegiatan' => 'belajar',
-                'tgl_kegiatan' => '2001-01-01',
-                'jam_masuk' => '00:00:00',
-                'jam_keluar' => '00:00:00'
+                'id_kegiatan' => '001',
+                'prakerin' => 'PRK001'
             ],
         ];
 

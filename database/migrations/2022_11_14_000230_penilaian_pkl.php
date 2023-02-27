@@ -13,7 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-
         Schema::create('penilaian_pkl', function (Blueprint $table) {
             $table->engine = 'innodb';
             $table->charset = 'utf8mb4';
