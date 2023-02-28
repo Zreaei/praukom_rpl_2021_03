@@ -15,6 +15,13 @@
 
 <div class="w-2/3 rounded mt-5 border-slate-500 mx-auto">
     <div class="overflow-x-auto">
+        @if ($errors->any())
+        @foreach($errors->all() as $err)
+        <div class="w-1/2 text-center m-2 mx-auto">
+           <p class="alert alert-error">{{ $err }}</p>
+        </div>
+        @endforeach
+        @endif
         <table class="table w-full">
         <!-- head -->
         <thead>
