@@ -58,15 +58,14 @@ class AdminUserController extends Controller
             'email' => $request->input('email'),
             'level' => $request->input('level'),
         ]);
-
-        //Promise 
-        if ($tambah_user) {
-            sweetalert()->addSuccess('User Berhasil Ditambah');
-            return redirect('admin/data-user');
-        } else {
-            sweetalert()->addSuccess('User Gagal Ditambah');
-            return redirect('admin/data-user');
-        }
+        
+            if ($tambah_user) {
+                sweetalert()->addSuccess('User Berhasil Ditambah');
+                return redirect('admin/data-user');
+            } else {
+                sweetalert()->addSuccess('User Gagal Ditambah');
+                return redirect('admin/data-user');
+            }
 
         } else {
             sweetalert()->addSuccess('User Gagal Ditambah');

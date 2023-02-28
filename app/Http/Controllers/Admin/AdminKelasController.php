@@ -43,37 +43,40 @@ class AdminKelasController extends Controller
 
     public function simpan(Request $request)
     {
-        try {
+        $validasi = $request->validate([
+            'walas' => 'required',
+            'angkatan' => 'required',
+            'jurusan' => 'required',
+            'tingkatan' => 'required',
+            'nama_kelas' => 'required',
+        ]);
+        
+        if ($validasi) {
             $id_kelas = DB::select('SELECT newidkelas() AS id_kelas');
             $array = Arr::pluck($id_kelas, 'id_kelas');
             $kode_baru = Arr::get($array, '0');
             $tambah_kelas = DB::table('kelas')->insert([
-                'id_kelas' => $kode_baru,
-                'walas' => $request->input('walas'),
-                'angkatan' => $request->input('angkatan'),
-                'jurusan' => $request->input('jurusan'),
-                'tingkatan' => $request->input('tingkatan'),
-                'nama_kelas' => $request->input('nama_kelas'),
-            ]);
+            'id_kelas' => $kode_baru,
+            'walas' => $request->input('walas'),
+            'angkatan' => $request->input('angkatan'),
+            'jurusan' => $request->input('jurusan'),
+            'tingkatan' => $request->input('tingkatan'),
+            'nama_kelas' => $request->input('nama_kelas'),
+        ]);
+
             if ($tambah_kelas) {
+                sweetalert()->addSuccess('Kelas Berhasil Ditambah');
                 return redirect('admin/data-kelas');
             } else {
-                return "input data gagal";
+                sweetalert()->addSuccess('Kelas Gagal Ditambah');
+                return redirect('admin/data-kelas');
             }
-        } catch (Exception $e) {
-            return $e->getMessage();
+
+        } else {
+            sweetalert()->addSuccess('Kelas Gagal Ditambah');
+            return redirect('admin/data-kelas');
         }
     }
-
-    // public function edit($id = null)
-    // {
-    //     $edit = $this->KelasModel->find($id);
-    //     $walas = $this->WalasModel::all();
-    //     $jurusan = $this->JurusanModel::all();
-    //     $angkatan = $this->AngkatanModel::all();
-    //     // echo json_encode($edit);
-    //     return view('admin.data-kelas.editkelas', compact('edit','walas','jurusan','angkatan'));
-    // }
 
     public function simpanedit(Request $request)
     {

@@ -57,7 +57,6 @@ class DatabaseSeeder extends Seeder
             NilaiverifSeeder::class,
             PenilaianpklSeeder::class,
             NilaipklSeeder::class,
-            SertifikatpklSeeder::class
         ]);
     }
 }

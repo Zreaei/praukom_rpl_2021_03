@@ -71,11 +71,11 @@
                         <div class="mx-auto">
                             <label class="input-group m-5">
                                 <span class="pr-5 bg-white">Nama Kelas</span>
-                                <input type="text" name="nama_kelas" placeholder="Nama Kelas" class="input input-bordered" required />
+                                <input type="text" name="nama_kelas" placeholder="Nama Kelas" class="input input-bordered" />
                             </label>
                             <label class="input-group m-5">
                                 <span class="pr-8 bg-white">Tingkatan</span>
-                                <input type="text" name="tingkatan" placeholder="Tingkatan" class="input input-bordered" required />
+                                <input type="text" name="tingkatan" placeholder="Tingkatan" class="input input-bordered" />
                             </label>
                             <label class="input-group justify-center mt-5">
                                 <span class="pr-8 bg-white">Angkatan</span>
