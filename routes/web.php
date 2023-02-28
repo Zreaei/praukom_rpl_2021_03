@@ -253,6 +253,7 @@ Route::group(['middleware' => ['auth', 'level:LVL002']], function () {
 
 // Siswa
 Route::group(['middleware' => ['auth', 'level:LVL003']], function () {
+
     // Siswa - home
     Route::get('/siswa/home', [SiswaController::class, 'home'])->name('siswa.home');
     Route::get('/siswa/profile', [SiswaController::class, 'profile'])->name('siswa.profile');
@@ -333,10 +334,12 @@ Route::group(['middleware' => ['auth', 'level:LVL006']], function () {
 });
 
 // Admkeu
-Route::get('/admkeu/pengajuan', [DataPengajuanAdmkeuController::class, 'datapengajuan'])->name('admkeu.pengajuan');
-Route::get('/admkeu/setuju/{id}', [DataPengajuanAdmkeuController::class, 'statuskonfirmasi'])->name('admkeu.terima');
-Route::get('/admkeu/tolak/{id}', [DataPengajuanAdmkeuController::class, 'statustolak'])->name('admkeu.tolak');
-Route::get('/admkeu/home', [HomeAdmkeuController::class, 'home'])->name('admkeu.home');
+Route::group(['middleware' => ['auth', 'level:LVL007']], function () {
+    Route::get('/admkeu/pengajuan', [DataPengajuanAdmkeuController::class, 'datapengajuan'])->name('admkeu.pengajuan');
+    Route::get('/admkeu/setuju/{id}', [DataPengajuanAdmkeuController::class, 'statuskonfirmasi'])->name('admkeu.terima');
+    Route::get('/admkeu/tolak/{id}', [DataPengajuanAdmkeuController::class, 'statustolak'])->name('admkeu.tolak');
+    Route::get('/admkeu/home', [HomeAdmkeuController::class, 'home'])->name('admkeu.home');
+});
 
 // Wkhubin
 Route::group(['middleware' => ['auth', 'level:LVL008']], function () {
