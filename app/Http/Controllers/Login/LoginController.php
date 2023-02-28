@@ -86,8 +86,9 @@ class LoginController extends Controller
                 return redirect()->intended('/kaprog/home');
             } else if ($user->level === 'LVL010') {
                 return redirect()->intended('/verifikator/home');
+            } else {
+                return redirect()->intended('/login');
             }
-            return redirect()->intended('/login');
         }
         return back()->withErrors(['username' => 'Username atau password anda salah!']);
     }

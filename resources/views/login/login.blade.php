@@ -31,11 +31,11 @@
             @csrf
             <div class="form-control">
               <label class="pb-2 pt-3"><span class="label-text text-lg font-semibold">Username :</span></label>
-              <input type="text" class="input input-bordered bg-white" placeholder="Username" name="username" value="{{ old('username') }}" required/>
+              <input type="text" class="input input-bordered bg-white" placeholder="Username" name="username" value="{{ old('username') }}"/>
             </div>
             <div class="form-control">
               <label class="pb-2 pt-3"><span class="label-text text-lg font-semibold">Password :</span></label>
-              <input type="password" class="input input-bordered bg-white" placeholder="Password" name="password" required />
+              <input type="password" class="input input-bordered bg-white" placeholder="Password" name="password" />
             </div>
             <div class="form-control mt-6">
               <button class="btn btn-ghost bg-gradient-to-b from-[#2D5EBB] to-[#417EF2] text-lg font-bold text-white hover:bg-[#2D5EBB] hover:bg-opacity-70">Login</button>

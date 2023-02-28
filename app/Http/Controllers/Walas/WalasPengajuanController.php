@@ -32,7 +32,7 @@ class WalasPengajuanController extends Controller
         ->join('iduka', 'iduka.id_iduka', '=', 'pengajuan.iduka')
         ->select('pengajuan.*','iduka.*','siswa.*','kelas.*','jurusan.*')
         ->get();
-        return view('walas.pengajuan.pengajuan', compact('dataPengajuan'));
+        return view('walas.pengajuan', compact('dataPengajuan'));
     }
 
     public function statuskonfirmasi($id = null)

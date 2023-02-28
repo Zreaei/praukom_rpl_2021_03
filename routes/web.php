@@ -44,6 +44,8 @@ use App\Http\Controllers\{
     WkHubin\WkhubinController,
     WkHubin\DataPengajuanController,
     Login\LoginController,
+    Verifikator\VerifikatorMainController,
+    Verifikator\VerifikatorVerifikasiController,
 };
 
 use App\Http\Controllers\Admin\DataLevelController;
@@ -361,5 +363,13 @@ Route::group(['middleware' => ['auth', 'level:LVL009']], function () {
 
 // Verifikator
 Route::group(['middleware' => ['auth', 'level:LVL010']], function () {
-    Route::get('/verifikator/home', [VerifikatorController::class, 'home']);
+    // Verifikator - Home
+    Route::get('/verifikator/home',[VerifikatorMainController::class, 'home'])->name('verifikator.home');
+
+    // Verifikator - Verifikasi
+    Route::controller(VerifikatorVerifikasiController::class)->group(function() {
+        Route::get('/verifikator/verifikasi','verifikasi');
+        Route::get('/verifikator/setuju/{id}','statuskonfirmasi')->name('verifikator.terima');
+        Route::get('/verifikator/tolak/{id}','statustolak')->name('verifikator.tolak');
+    });
 });

@@ -200,7 +200,7 @@
                     <h3 class="text-lg font-bold text-[#ffffff] text-center">DATA KONFIRMASI VERIFIKASI</h3>    
                         <div class="flex justify-between mt-5">
                             <div class="form-control w-full max-w-2xl">
-                            <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Pembimbing Sekolah</span></label>
+                            <label class="label"><span class="label-text text-[#ffffff] text-sm font-bold uppercase ">Verifikator</span></label>
                             @switch($validasi->konfirmasi_verifikator)
                                 @case('terima')
                                 <span class="rounded-lg bg-success py-3 text-center text-white font-bold">
