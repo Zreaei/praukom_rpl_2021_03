@@ -34,7 +34,7 @@ class AdminKaprogController extends Controller
     public function simpan(Request $request)
     {
         $validasi = $request->validate([
-            'nip_kaprog' => 'required',
+            'nip_kaprog' => 'required|unique:kaprog',
             'nama_kaprog' => 'required',
             'user' => 'required',
         ]);
@@ -51,17 +51,16 @@ class AdminKaprogController extends Controller
             // dd($request->all())
         ]);
 
-        //Promise 
-        if ($tambah_kaprog) {
-            sweetalert()->addSuccess('Kaprog Berhasil Ditambah');
-            return redirect('admin/data-kaprog');
+            //Promise 
+            if ($tambah_kaprog) {
+                sweetalert()->addSuccess('Kaprog Berhasil Ditambah');
+                return redirect('admin/data-kaprog');
+            } else {
+                sweetalert()->addError('Kaprog Gagal Ditambah');
+                return redirect('admin/data-kaprog');
+            }
         } else {
-            sweetalert()->addSuccess('Kaprog Gagal Ditambah');
-            return redirect('admin/data-kaprog');
-        }
-
-        } else {
-            sweetalert()->addSuccess('Kaprog Gagal Ditambah');
+            sweetalert()->addError('Kaprog Gagal Ditambah');
             return redirect('admin/data-kaprog');
         }
     }
@@ -88,23 +87,25 @@ class AdminKaprogController extends Controller
                 sweetalert()->addSuccess('Kaprog Berhasil Di Edit');
                 return redirect('admin/data-kaprog');
             } else {
-                sweetalert()->addSuccess('Kaprog Gagal Di Edit');
+                sweetalert()->addError('Kaprog Gagal Di Edit');
                 return redirect('admin/data-kaprog');
             }
+        } else {
+            sweetalert()->addError('Kaprog Gagal Di Edit');
+            return redirect('admin/data-kaprog');
         }
     }
 
     public function hapus($id = null){
-        try{
-            $hapus = $this->KaprogModel
-                            ->where('id_kaprog',$id)
-                            ->delete();
-            if($hapus){
-                sweetalert()->addSuccess('Kaprog Berhasil Dihapus');
-                return redirect('admin/data-kaprog');
-            }
-        }catch(Exception $e){
-            $e->getMessage();
+        $hapus = $this->KaprogModel
+                        ->where('id_kaprog',$id)
+                        ->delete();
+        if($hapus){
+            sweetalert()->addSuccess('Kaprog Berhasil Dihapus');
+            return redirect('admin/data-kaprog');
+        } else {
+            sweetalert()->addError('Kaprog Gagal Dihapus');
+            return redirect('admin/data-kaprog');
         }
     }
 }

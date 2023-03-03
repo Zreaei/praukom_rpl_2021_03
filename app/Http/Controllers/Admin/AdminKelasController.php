@@ -49,6 +49,7 @@ class AdminKelasController extends Controller
             'jurusan' => 'required',
             'tingkatan' => 'required',
             'nama_kelas' => 'required',
+            // dd($request->all())
         ]);
         
         if ($validasi) {
@@ -68,19 +69,27 @@ class AdminKelasController extends Controller
                 sweetalert()->addSuccess('Kelas Berhasil Ditambah');
                 return redirect('admin/data-kelas');
             } else {
-                sweetalert()->addSuccess('Kelas Gagal Ditambah');
+                sweetalert()->addError('Kelas Gagal Ditambah');
                 return redirect('admin/data-kelas');
             }
 
         } else {
-            sweetalert()->addSuccess('Kelas Gagal Ditambah');
+            sweetalert()->addError('Kelas Gagal Ditambah');
             return redirect('admin/data-kelas');
         }
     }
 
     public function simpanedit(Request $request)
     {
-        try {
+        $validasi = $request->validate([
+            'walas' => 'required',
+            'angkatan' => 'required',
+            'jurusan' => 'required',
+            'tingkatan' => 'required',
+            'nama_kelas' => 'required',
+        ]);
+        
+        if ($validasi) {
             $data = [
                 'walas' => $request->input('walas'),
                 'angkatan' => $request->input('angkatan'),
@@ -93,24 +102,31 @@ class AdminKelasController extends Controller
                         ->where('id_kelas', $request->input('id_kelas'))
                         ->update($data);
             if($upd){
+                sweetalert()->addSuccess('Kelas Berhasil Di Edit');
+                return redirect('admin/data-kelas');
+            } else {
+                sweetalert()->addError('User Gagal Di Edit');
                 return redirect('admin/data-kelas');
             }
-        } catch (Exception $e) {
-            return $e->getMessage();
+            
+        } else {
+            sweetalert()->addError('User Gagal Di Edit');
+            return redirect('admin/data-kelas');
         }
     }
 
-    public function hapus($id = null){
-        try{
-            $hapus = $this->KelasModel
-                            ->where('id_kelas',$id)
-                            ->delete();
-            if($hapus){
-                return redirect('admin/data-kelas');
-            }
-        }catch(Exception $e){
-            $e->getMessage();
+    public function hapus($id = null) 
+    {
+        $hapus = $this->KelasModel
+                        ->where('id_kelas',$id)
+                        ->delete();
+        if($hapus){
+            sweetalert()->addSuccess('Kelas Berhasil DiHapus');
+            return redirect('admin/data-kelas');
+        } else {
+            sweetalert()->addError('User Gagal DiHapus');
+            return redirect('admin/data-kelas');
         }
-    }
+    } 
 }
 

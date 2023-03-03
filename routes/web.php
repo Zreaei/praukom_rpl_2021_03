@@ -46,6 +46,7 @@ use App\Http\Controllers\{
     Login\LoginController,
     Verifikator\VerifikatorMainController,
     Verifikator\VerifikatorVerifikasiController,
+    Verifikator\VerifikatorPenilaianController,
 };
 
 use App\Http\Controllers\Admin\DataLevelController;
@@ -371,5 +372,9 @@ Route::group(['middleware' => ['auth', 'level:LVL010']], function () {
         Route::get('/verifikator/verifikasi','verifikasi');
         Route::get('/verifikator/setuju/{id}','statuskonfirmasi')->name('verifikator.terima');
         Route::get('/verifikator/tolak/{id}','statustolak')->name('verifikator.tolak');
+    });
+
+    Route::controller(VerifikatorPenilaianController::class)->group(function() {
+        Route::get('/verifikator/penilaian','penilaian');
     });
 });

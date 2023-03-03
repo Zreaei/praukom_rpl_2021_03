@@ -89,7 +89,7 @@
                                     <label class="input-group justify-center">
                                         <span class="pr-12 bg-white">Level</span>
                                         <select class="select select-bordered" name="level">
-                                            <option value="default">Pilih Level</option>
+                                            <option value="">Pilih Level</option>
                                             @foreach ($level as $item)
                                                 <option value="{{ $item->id_level }}">{{ $item->nama_level }}</option>
                                             @endforeach

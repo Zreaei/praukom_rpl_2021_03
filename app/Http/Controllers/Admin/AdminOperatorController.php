@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class AdminOperatorController extends Controller
 {
     protected $UserModel;
-    protected $OperatorModel;
+    protected $OperatorModel; 
 
     public function __construct()
     {

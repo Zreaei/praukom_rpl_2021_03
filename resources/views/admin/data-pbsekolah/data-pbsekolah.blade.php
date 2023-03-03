@@ -91,7 +91,7 @@
                                     <label class="input-group justify-center">
                                         <span class="pr-12 bg-white">Pbsekolah</span>
                                         <select class="select select-bordered" name="user">
-                                            <option value="default">Pilih Pbsekolah</option>
+                                            <option value="">Pilih Pbsekolah</option>
                                             @foreach ($user as $item)
                                                 <option value="{{ $item->id_user }}">{{ $item->username }} - {{ $item->nama_level }}</option>
                                             @endforeach
@@ -137,7 +137,7 @@
                                 <label class="input-group justify-center">
                                     <span class="pr-8 bg-white">Pbsekolah</span>
                                     <select class="select select-bordered" name="user">
-                                        <option value="default">Pilih Pbsekolah</option>
+                                        <option value="">Pilih Pbsekolah</option>
                                         @foreach ($user as $item)
                                             <option value="{{ $item->id_user }}">{{ $item->username }} - {{ $item->nama_level }}</option>
                                         @endforeach

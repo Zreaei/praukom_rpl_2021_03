@@ -35,7 +35,7 @@ class AdminWalasController extends Controller
     public function simpan(Request $request)
     {
         $validasi = $request->validate([
-            'nip_walas' => 'required',
+            'nip_walas' => 'required|unique:walas',
             'nama_walas' => 'required',
             'user' => 'required',
         ]);
@@ -51,18 +51,16 @@ class AdminWalasController extends Controller
             'user' => $request->input('user'),
             // dd($request->all())
         ]);
-
-        //Promise 
-        if ($tambah_walas) {
-            sweetalert()->addSuccess('Walas Berhasil Ditambah');
-            return redirect('admin/data-walas');
+            //Promise 
+            if ($tambah_walas) {
+                sweetalert()->addSuccess('Walas Berhasil Ditambah');
+                return redirect('admin/data-walas');
+            } else {
+                sweetalert()->addError('Walas Gagal Ditambah');
+                return redirect('admin/data-walas');
+            }
         } else {
-            sweetalert()->addSuccess('Walas Gagal Ditambah');
-            return redirect('admin/data-walas');
-        }
-
-        } else {
-            sweetalert()->addSuccess('Walas Gagal Ditambah');
+            sweetalert()->addError('Walas Gagal Ditambah');
             return redirect('admin/data-walas');
         }
     }
@@ -89,23 +87,25 @@ class AdminWalasController extends Controller
                 sweetalert()->addSuccess('Walas Berhasil Di Edit');
                 return redirect('admin/data-walas');
             } else {
-                sweetalert()->addSuccess('Walas Gagal Di Edit');
+                sweetalert()->addError('Walas Gagal Di Edit');
                 return redirect('admin/data-walas');
             }
+        } else {
+            sweetalert()->addError('Walas Gagal Di Edit');
+            return redirect('admin/data-walas');
         }
     }
 
     public function hapus($id = null){
-        try{
-            $hapus = $this->WalasModel
-                            ->where('id_walas',$id)
-                            ->delete();
-            if($hapus){
-                sweetalert()->addSuccess('Walas Berhasil Dihapus');
-                return redirect('admin/data-walas');
-            }
-        }catch(Exception $e){
-            $e->getMessage();
+        $hapus = $this->WalasModel
+                        ->where('id_walas',$id)
+                        ->delete();
+        if($hapus){
+            sweetalert()->addSuccess('Walas Berhasil Dihapus');
+            return redirect('admin/data-walas');
+        } else {
+            sweetalert()->addError('Walas Gagal Dihapus');
+            return redirect('admin/data-walas');
         }
     }
 }

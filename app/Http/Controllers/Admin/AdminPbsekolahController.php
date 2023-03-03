@@ -34,7 +34,7 @@ class AdminPbsekolahController extends Controller
     public function simpan(Request $request)
     {
         $validasi = $request->validate([
-            'nip_pbsekolah' => 'required',
+            'nip_pbsekolah' => 'required|unique:pb_sekolah',
             'nama_pbsekolah' => 'required',
             'telp_pbsekolah' => 'required',
             'user' => 'required',
@@ -52,18 +52,16 @@ class AdminPbsekolahController extends Controller
             'user' => $request->input('user'),
             // dd($request->all())
         ]);
-
-        //Promise 
-        if ($tambah_pbsekolah) {
-            sweetalert()->addSuccess('Pembimbing Sekolah Berhasil Ditambah');
-            return redirect('admin/data-pbsekolah');
+            //Promise 
+            if ($tambah_pbsekolah) {
+                sweetalert()->addSuccess('Pembimbing Sekolah Berhasil Ditambah');
+                return redirect('admin/data-pbsekolah');
+            } else {
+                sweetalert()->addError('Pembimbing Sekolah Gagal Ditambah');
+                return redirect('admin/data-pbsekolah');
+            }
         } else {
-            sweetalert()->addSuccess('Pembimbing Sekolah Gagal Ditambah');
-            return redirect('admin/data-pbsekolah');
-        }
-
-        } else {
-            sweetalert()->addSuccess('Pembimbing Sekolah Gagal Ditambah');
+            sweetalert()->addError('Pembimbing Sekolah Gagal Ditambah');
             return redirect('admin/data-pbsekolah');
         }
     }
@@ -92,23 +90,25 @@ class AdminPbsekolahController extends Controller
                 sweetalert()->addSuccess('Pembimbing Sekolah Berhasil Di Edit');
                 return redirect('admin/data-pbsekolah');
             } else {
-                sweetalert()->addSuccess('Pembimbing Sekolah Gagal Di Edit');
+                sweetalert()->addError('Pembimbing Sekolah Gagal Di Edit');
                 return redirect('admin/data-pbsekolah');
             }
+        } else {
+            sweetalert()->addError('Pembimbing Sekolah Gagal Di Edit');
+            return redirect('admin/data-pbsekolah');
         }
     }
 
     public function hapus($id = null){
-        try{
-            $hapus = $this->PbsekolahModel
-                            ->where('id_pbsekolah',$id)
-                            ->delete();
-            if($hapus){
-                sweetalert()->addSuccess('Pembimbing Sekolah Berhasil Dihapus');
-                return redirect('admin/data-pbsekolah');
-            }
-        }catch(Exception $e){
-            $e->getMessage();
+        $hapus = $this->PbsekolahModel
+                        ->where('id_pbsekolah',$id)
+                        ->delete();
+        if($hapus){
+            sweetalert()->addSuccess('Pembimbing Sekolah Berhasil Dihapus');
+            return redirect('admin/data-pbsekolah');
+        } else {
+            sweetalert()->addError('Pembimbing Sekolah Gagal Dihapus');
+            return redirect('admin/data-pbsekolah');
         }
     }
 }

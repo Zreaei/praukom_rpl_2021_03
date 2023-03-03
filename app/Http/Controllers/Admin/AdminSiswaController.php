@@ -41,7 +41,17 @@ class AdminSiswaController extends Controller
 
     public function simpan(Request $request)
     {
-        try {
+        $validasi = $request->validate([
+            'nis' => 'required|unique:siswa',
+            'user' => 'required',
+            'kelas' => 'required',
+            'nama_siswa' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'telp_siswa' => 'required',
+        ]);
+
+        if ($validasi) {
             $tambah_siswa = DB::table('siswa')->insert([
                 'nis' => $request->input('nis'),
                 'user' => $request->input('user'),
@@ -52,18 +62,31 @@ class AdminSiswaController extends Controller
                 'telp_siswa' => $request->input('telp_siswa'),
             ]);
             if ($tambah_siswa) {
+                sweetalert()->addSuccess('Siswa Berhasil Ditambah');
                 return redirect('admin/data-siswa');
             } else {
-                return "input data gagal";
+                sweetalert()->addError('Siswa Gagal Ditambah');
+                return redirect('admin/data-siswa');
             }
-        } catch (Exception $e) {
-            return $e->getMessage();
+        } else {
+            sweetalert()->addError('Siswa Gagal Ditambah');
+            return redirect('admin/data-siswa');
         }
     }
 
     public function simpanedit(Request $request)
-    {
-        try {
+    {       
+        $validasi = $request->validate([
+            'nis' => 'required',
+            'user' => 'required',
+            'kelas' => 'required',
+            'nama_siswa' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'telp_siswa' => 'required',
+        ]);
+
+        if ($validasi) {
             $data = [
                 'user' => $request->input('user'),
                 'kelas' => $request->input('kelas'),
@@ -77,24 +100,29 @@ class AdminSiswaController extends Controller
                         ->where('nis', $request->input('nis'))
                         ->update($data);
             if($upd){
+                sweetalert()->addSuccess('Siswa Berhasil Diedit');
+                return redirect('admin/data-siswa');
+            } else {
+                sweetalert()->addError('Siswa Gagal Diedit');
                 return redirect('admin/data-siswa');
             }
-        } catch (Exception $e) {
-            return $e->getMessage();
+        } else {
+            sweetalert()->addError('Siswa Gagal Diedit');
+            return redirect('admin/data-siswa');
         }
     }
 
     public function hapus($id = null)
     {
-        try{
-            $hapus = $this->SiswaModel
-                            ->where('nis',$id)
-                            ->delete();
-            if($hapus){
-                return redirect('admin/data-siswa');
-            }
-        }catch(Exception $e){
-            $e->getMessage();
+        $hapus = $this->SiswaModel
+                        ->where('nis',$id)
+                        ->delete();
+        if($hapus){
+            sweetalert()->addSuccess('Siswa Berhasil Dihapus');
+            return redirect('admin/data-siswa');
+        } else {
+            sweetalert()->addError('Siswa Gagal Dihapus');
+            return redirect('admin/data-siswa');
         }
     }
 }

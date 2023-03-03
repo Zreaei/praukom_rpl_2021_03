@@ -20,7 +20,7 @@ class AdminWkhubinController extends Controller
         $this->UserModel = new UserModel;
     }
 
-    public function wkhubin()
+    public function wkhubin() 
     {
         $user = DB::table('user')
         ->join('level_user', 'level_user.id_level', '=', 'user.level')
@@ -34,7 +34,7 @@ class AdminWkhubinController extends Controller
     public function simpan(Request $request)
     {
         $validasi = $request->validate([
-            'nip_wkhubin' => 'required',
+            'nip_wkhubin' => 'required|unique:waka_hubin',
             'nama_wkhubin' => 'required',
             'user' => 'required',
         ]);
@@ -50,18 +50,16 @@ class AdminWkhubinController extends Controller
             'user' => $request->input('user'),
             // dd($request->all())
         ]);
-
-        //Promise 
-        if ($tambah_wkhubin) {
-            sweetalert()->addSuccess('Waka Hubin Berhasil Ditambah');
-            return redirect('admin/data-wkhubin');
+            //Promise 
+            if ($tambah_wkhubin) {
+                sweetalert()->addSuccess('Waka Hubin Berhasil Ditambah');
+                return redirect('admin/data-wkhubin');
+            } else {
+                sweetalert()->addError('Waka Hubin Gagal Ditambah');
+                return redirect('admin/data-wkhubin');
+            }
         } else {
-            sweetalert()->addSuccess('Waka Hubin Gagal Ditambah');
-            return redirect('admin/data-wkhubin');
-        }
-
-        } else {
-            sweetalert()->addSuccess('Waka Hubin Gagal Ditambah');
+            sweetalert()->addError('Waka Hubin Gagal Ditambah');
             return redirect('admin/data-wkhubin');
         }
     }
@@ -88,23 +86,25 @@ class AdminWkhubinController extends Controller
                 sweetalert()->addSuccess('Waka Hubin Berhasil Di Edit');
                 return redirect('admin/data-wkhubin');
             } else {
-                sweetalert()->addSuccess('Waka Hubin Gagal Di Edit');
+                sweetalert()->addError('Waka Hubin Gagal Di Edit');
                 return redirect('admin/data-wkhubin');
             }
+        } else {
+            sweetalert()->addError('Waka Hubin Gagal Di Edit');
+            return redirect('admin/data-wkhubin');
         }
     }
 
     public function hapus($id = null){
-        try{
-            $hapus = $this->WkhubinModel
-                            ->where('id_wkhubin',$id)
-                            ->delete();
-            if($hapus){
-                sweetalert()->addSuccess('Waka Hubin Berhasil Dihapus');
-                return redirect('admin/data-wkhubin');
-            }
-        }catch(Exception $e){
-            $e->getMessage();
+        $hapus = $this->WkhubinModel
+                        ->where('id_wkhubin',$id)
+                        ->delete();
+        if($hapus){
+            sweetalert()->addSuccess('Waka Hubin Berhasil Dihapus');
+            return redirect('admin/data-wkhubin');
+        } else {
+            sweetalert()->addError('Waka Hubin Gagal Dihapus');
+            return redirect('admin/data-wkhubin');
         }
     }
 }

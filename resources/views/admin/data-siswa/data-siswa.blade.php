@@ -16,6 +16,13 @@
 
 <div class="w-11/12 rounded mt-5 border-slate-500 mx-auto">
     <div class="overflow-x-auto">
+        @if ($errors->any())
+        @foreach($errors->all() as $err)
+        <div class="w-1/2 text-center m-2 mx-auto">
+           <p class="alert alert-error">{{ $err }}</p>
+        </div>
+        @endforeach
+        @endif
         <table class="table w-full">
         <!-- head -->
         <thead>
@@ -81,7 +88,7 @@
                             <label class="input-group m-3">
                                 <span class="pr-8">User</span>
                                 <select class="select select-bordered" name="user">
-                                    <option value="default">Pilih User</option>
+                                    <option value="">Pilih User</option>
                                     @foreach ($user as $item)
                                         <option value="{{ $item->id_user }}">{{ $item->username }} - {{ $item->nama_level }}</option>
                                     @endforeach
@@ -90,7 +97,7 @@
                             <label class="input-group m-3">
                                 <span class="pr-8">Kelas</span>
                                 <select class="select select-bordered" name="kelas">
-                                    <option value="default">Pilih Kelas</option>
+                                    <option value="">Pilih Kelas</option>
                                     @foreach ($kelas as $item)
                                         <option value="{{ $item->id_kelas }}">{{ $item->tingkatan }} {{ $item->program_keahlian }} {{ $item->nama_kelas }} - Angkatan Tahun : ({{ $item->tahun_angkatan }})</option>
                                     @endforeach
@@ -138,7 +145,7 @@
                                 <label class="input-group">
                                     <span class="pr-8">User</span>
                                     <select class="select select-bordered" name="user">
-                                        <option value="default">Pilih User</option>
+                                        <option value="">Pilih User</option>
                                         @foreach ($user as $item)
                                             <option value="{{ $item->id_user }}">{{ $item->username }} - {{ $item->nama_level }}</option>
                                         @endforeach
@@ -147,7 +154,7 @@
                                 <label class="input-group">
                                     <span class="pr-8">Kelas</span>
                                     <select class="select select-bordered" name="kelas">
-                                        <option value="default">Pilih Kelas</option>
+                                        <option value="">Pilih Kelas</option>
                                         @foreach ($kelas as $item)
                                             <option value="{{ $item->id_kelas }}">{{ $item->tingkatan }} {{ $item->program_keahlian }} {{ $item->nama_kelas }} - Angkatan Tahun : ({{ $item->tahun_angkatan }})
                                             </option>

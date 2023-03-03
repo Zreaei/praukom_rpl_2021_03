@@ -32,14 +32,6 @@ class AdminUserController extends Controller
 
     public function simpan(Request $request)
     {
-        // $data = [
-        //     'username' => $request->input('username'),
-        //     'password' => $request->input('password'),
-        //     'email' => $request->input('email'),
-        //     'level' => $request->input('level'),
-        //     // dd($request->all())
-        // ];
-
         $validasi = $request->validate([
             'username' => 'required|unique:user',
             'password' => 'required',
@@ -63,12 +55,12 @@ class AdminUserController extends Controller
                 sweetalert()->addSuccess('User Berhasil Ditambah');
                 return redirect('admin/data-user');
             } else {
-                sweetalert()->addSuccess('User Gagal Ditambah');
+                sweetalert()->addError('User Gagal Ditambah');
                 return redirect('admin/data-user');
             }
 
         } else {
-            sweetalert()->addSuccess('User Gagal Ditambah');
+            sweetalert()->addError('User Gagal Ditambah');
             return redirect('admin/data-user');
         }
     }
@@ -97,23 +89,23 @@ class AdminUserController extends Controller
                 sweetalert()->addSuccess('User Berhasil Di Edit');
                 return redirect('admin/data-user');
             } else {
-                sweetalert()->addSuccess('User Gagal Di Edit');
+                sweetalert()->addError('User Gagal Di Edit');
                 return redirect('admin/data-user');
             }
         }
     }
 
-    public function hapus($id = null){
-        try{
-            $hapus = $this->UserModel
-                            ->where('id_user',$id)
-                            ->delete();
-            if($hapus){
-                sweetalert()->addSuccess('User Berhasil Dihapus');
-                return redirect('admin/data-user');
-            }
-        }catch(Exception $e){
-            $e->getMessage();
+    public function hapus($id = null)
+    {
+        $hapus = $this->UserModel
+                        ->where('id_user',$id)
+                        ->delete();
+        if($hapus){
+            sweetalert()->addSuccess('User Berhasil Dihapus');
+            return redirect('admin/data-user');
+        } else {
+            sweetalert()->addError('User Gagal Dihapus');
+            return redirect('admin/data-user');
         }
     }
 }

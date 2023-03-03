@@ -80,7 +80,7 @@
                                         <label class="input-group justify-center">
                                             <span class="pr-12">Nama Kaprog</span>
                                             <select class="select select-bordered" name="kaprog">
-                                                <option value="default">Nama Kaprog</option>
+                                                <option value="">Nama Kaprog</option>
                                                 @foreach ($kaprog as $item)
                                                     <option value="{{ $item->id_kaprog }}">{{ $item->nama_kaprog }}</option>
                                                 @endforeach
@@ -123,7 +123,7 @@
                                     <label class="input-group justify-center">
                                         <span class="pr-12 bg-white">Nama Kaprog</span>
                                         <select class="select select-bordered" name="kaprog">
-                                            <option value="default">Nama Kaprog</option>
+                                            <option value="">Nama Kaprog</option>
                                             @foreach ($kaprog as $item)
                                                 <option value="{{ $item->id_kaprog }}">{{ $item->nama_kaprog }}</option>
                                             @endforeach

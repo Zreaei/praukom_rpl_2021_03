@@ -2,7 +2,7 @@
 @section('container')
 
 <div class="navbar fixed flex justify-between bg-white shadow-lg">
-    <a href="/admin" class="btn btn-ghost normal-case text-xl">Praktik.In</a>
+    <a href="/admin" class="btn btn-ghost normal-case text-xl">PRAKTIK.in</a>
     <div class="">
         @auth
             <span class="font-semibold normal-case text-xl mx-5 transition">

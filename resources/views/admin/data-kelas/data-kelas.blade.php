@@ -87,7 +87,7 @@
                             <label class="input-group justify-center mt-5">
                                 <span class="pr-8 bg-white">Angkatan</span>
                                 <select class="select select-bordered" name="angkatan">
-                                    <option value="default">Pilih Angkatan</option>
+                                    <option value="">Pilih Angkatan</option>
                                     @foreach ($angkatan as $item)
                                         <option value="{{ $item->id_angkatan }}">{{ $item->tahun_angkatan }}</option>
                                     @endforeach
@@ -96,7 +96,7 @@
                             <label class="input-group justify-center mt-5">
                                 <span class="pr-8 bg-white">Jurusan</span>
                                 <select class="select select-bordered" name="jurusan">
-                                    <option value="default">Pilih Jurusan</option>
+                                    <option value="">Pilih Jurusan</option>
                                     @foreach ($jurusan as $item)
                                         <option value="{{ $item->id_jurusan }}">{{ $item->bidang_keahlian }}</option>
                                     @endforeach
@@ -105,7 +105,7 @@
                             <label class="input-group justify-center mt-5 mb-5">
                                 <span class="pr-8 bg-white">Walas</span>
                                 <select class="select select-bordered" name="walas">
-                                    <option value="default">Pilih Walas</option>
+                                    <option value="">Pilih Walas</option>
                                     @foreach ($walas as $item)
                                         <option value="{{ $item->id_walas }}">{{ $item->nama_walas }}</option>
                                     @endforeach
@@ -144,7 +144,7 @@
                             <label class="input-group justify-center mt-5">
                                 <span class="pr-8 bg-white">Angkatan</span>
                                 <select class="select select-bordered" name="angkatan">
-                                    <option value="default">Pilih Angkatan</option>
+                                    <option value="">Pilih Angkatan</option>
                                     @foreach ($angkatan as $item)
                                         <option value="{{ $item->id_angkatan }}">{{ $item->tahun_angkatan }}</option>
                                     @endforeach
@@ -153,7 +153,7 @@
                             <label class="input-group justify-center mt-5">
                                 <span class="pr-8 bg-white">Jurusan</span>
                                 <select class="select select-bordered" name="jurusan">
-                                    <option value="default">Pilih Jurusan</option>
+                                    <option value="">Pilih Jurusan</option>
                                     @foreach ($jurusan as $item)
                                         <option value="{{ $item->id_jurusan }}">{{ $item->program_keahlian }}</option>
                                     @endforeach
@@ -162,7 +162,7 @@
                             <label class="input-group justify-center mt-5 mb-5">
                                 <span class="pr-8 bg-white">Walas</span>
                                 <select class="select select-bordered" name="walas">
-                                    <option value="default">Pilih Walas</option>
+                                    <option value="">Pilih Walas</option>
                                     @foreach ($walas as $item)
                                         <option value="{{ $item->id_walas }}">{{ $item->nama_walas }}</option>
                                     @endforeach
