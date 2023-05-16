@@ -16,6 +16,7 @@ use App\Http\Controllers\{
     Admin\AdminKelasController,
     Admin\AdminJurusanController,
     Admin\AdminAngkatanController,
+    Admin\AdminLogController,
     Siswa\SiswaController,
     Siswa\PengajuanController,
     Siswa\HomeSiswaController,
@@ -89,6 +90,9 @@ Route::group(['middleware' => ['auth', 'level:LVL001']], function () {
 
     // Admin - Data Level
     Route::get('/admin/data-level', [AdminLevelController::class, 'level']);
+
+    // Admin - Log User
+    Route::get('/admin/data-log', [AdminLogController::class, 'log']);
 
     // Admin - Kelola User
     Route::controller(AdminUserController::class)->group(function() {

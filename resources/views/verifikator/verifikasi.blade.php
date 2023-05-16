@@ -44,7 +44,7 @@
                                 {{ $item->tgl_verifikasi }}
                             </td>
                             <td class="text-sm text-item font-semibold px-5 py-4 text-center">
-                                <label for="bukti_verifikasi{{ $item->bukti_verifikasi }}" type="button" class="text-[#ffffff] bg-[#FFA434] hover:bg-opacity-50 focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5">Bukti Verifikasi</label>          
+                                <label for="image{{ $item->bukti_verifikasi }}" type="button" class="text-[#ffffff] bg-[#FFA434] hover:bg-opacity-50 focus:outline-none focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5">Bukti Verifikasi</label>          
                             </td>
                             <!-- icon Aksi -->
                             <td class="text-sm font-medium leading-5 text-center [#ffffff]space-no-wrap ">
@@ -171,6 +171,20 @@
             </div>
         </div>
         @endforeach 
+
+        @foreach ($dataVerifikasi as $image)
+            <input type="checkbox" id="image{{$image->bukti_verifikasi}}" class="modal-toggle" />
+            <div class="modal">
+                <div class="modal-box w-full max-w-2xl bg-[#2D5EBB]">
+                    <label for="image{{$image->bukti_verifikasi}}" class="btn btn-ghost btn-sm btn-circle text-[#ffffff] bg-[#2D5EBB] hover:bg-[#ffffff] hover:text-[#2D5EBB] absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></label>
+                        <div class="flex justify-between">
+                            <div class="form-control w-full max-w-2xl p-3">
+                                <img src="{{ asset('storage/' . $image->bukti_verifikasi) }}" class="rounded-lg">
+                            </div>
+                        </div>
+                </div>
+            </div>
+            @endforeach
 
         @foreach ($dataVerifikasi as $konfirmasi)
             <input type="checkbox" id="konfirmasi{{$konfirmasi->id_verifikasi}}" class="modal-toggle" />

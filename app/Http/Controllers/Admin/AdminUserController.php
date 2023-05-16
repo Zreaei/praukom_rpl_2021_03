@@ -68,7 +68,7 @@ class AdminUserController extends Controller
     public function simpanedit(Request $request)
     {
         $validasi = $request->validate([
-            'username' => 'required|unique:user',
+            'username' => 'required',
             'password' => 'required',
             'email' => 'required',
             'level' => 'required',

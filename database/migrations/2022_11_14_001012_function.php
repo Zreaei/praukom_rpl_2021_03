@@ -245,6 +245,48 @@ return new class extends Migration
             END"
         );
 
+        DB::unprepared("DROP FUNCTION IF EXISTS newidadmkeu");
+        DB::unprepared(
+            "CREATE FUNCTION newidadmkeu()
+            RETURNS char(6)
+            BEGIN
+            DECLARE id_lama CHAR(6);
+            DECLARE id_baru CHAR(6);
+            DECLARE ambil_angka INT;
+            DECLARE hasil CHAR(6);
+            SELECT MAX(id_admkeu) INTO id_lama FROM adm_keuangan;
+            IF (id_lama IS NOT NULL) THEN
+                SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
+                SET hasil = LPAD(ambil_angka,3,0);
+                SET id_baru = CONCAT('ADK',hasil);
+            ELSE
+                SET id_baru = 'ADK001';
+            END IF;
+            RETURN id_baru;
+            END"
+        );
+
+        DB::unprepared("DROP FUNCTION IF EXISTS newidloguser");
+        DB::unprepared(
+            "CREATE FUNCTION newidloguser()
+            RETURNS char(6)
+            BEGIN
+            DECLARE id_lama CHAR(6);
+            DECLARE id_baru CHAR(6);
+            DECLARE ambil_angka INT;
+            DECLARE hasil CHAR(6);
+            SELECT MAX(id_log_user) INTO id_lama FROM log_admin_user;
+            IF (id_lama IS NOT NULL) THEN
+                SET ambil_angka = SUBSTRING(id_lama,4,3) + 1;
+                SET hasil = LPAD(ambil_angka,3,0);
+                SET id_baru = CONCAT('LAU',hasil);
+            ELSE
+                SET id_baru = 'LAU001';
+            END IF;
+            RETURN id_baru;
+            END"
+        );
+
         
 
     }
